@@ -1,6 +1,6 @@
 package logico;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Personal extends Persona {
 	protected String codigo_empleado;
