@@ -4,8 +4,9 @@ public class Internet extends Servicios {
 
 	private int velocidad_conexion;
 
-	public Internet(float precio_total, String nombre, String tipo, int velocidad_conexion) {
-		super(precio_total, nombre, tipo);
+	
+	public Internet(float precio_total, String nombre, String tipo, Planes misplanes, int velocidad_conexion) {
+		super(precio_total, nombre, tipo, misplanes);
 		this.velocidad_conexion = velocidad_conexion;
 	}
 

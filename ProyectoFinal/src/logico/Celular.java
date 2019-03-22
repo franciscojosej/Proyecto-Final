@@ -4,8 +4,10 @@ public class Celular extends Servicios {
 
 	private int minutos;
 
-	public Celular(float precio_total, String nombre, String tipo, int minutos) {
-		super(precio_total, nombre, tipo);
+	
+
+	public Celular(float precio_total, String nombre, String tipo, Planes misplanes, int minutos) {
+		super(precio_total, nombre, tipo, misplanes);
 		this.minutos = minutos;
 	}
 
