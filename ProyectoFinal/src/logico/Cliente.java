@@ -14,12 +14,12 @@ public class Cliente extends Persona {
 
 	public Cliente(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
 			String ciudad, String telefono_fijo, String estado_social, String cargo, String codigo_cliente,
-			String codigo_tarjeta, ArrayList<Contrato> miscontract) {
+			String codigo_tarjeta) {
 		super(nombre, apellido, cedula, telefono, direccion, sexo, ciudad, telefono_fijo, estado_social);
 		this.cargo = cargo;
 		this.codigo_cliente = codigo_cliente;
 		this.codigo_tarjeta = codigo_tarjeta;
-		this.miscontract = miscontract;
+		this.miscontract = new ArrayList<Contrato>();
 	}
 
 	public ArrayList<Contrato> getMiscontract() {

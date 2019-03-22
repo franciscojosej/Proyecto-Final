@@ -6,8 +6,9 @@ public class Telefono extends Servicio {
 
 	
 
-	public Telefono(float precio_total, String nombre, String tipo, Plan misplanes, int tiempo_hablado) {
-		super(precio_total, nombre, tipo, misplanes);
+
+	public Telefono(float precio_total, String nombre, String tipo, int tiempo_hablado) {
+		super(precio_total, nombre, tipo);
 		this.tiempo_hablado = tiempo_hablado;
 	}
 

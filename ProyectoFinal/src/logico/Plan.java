@@ -10,12 +10,12 @@ public class Plan {
 	private Date fecha_contrato;
 	private ArrayList<Servicio> miservi;
 	
-	public Plan(String nombre, String tipo, Date fecha_contrato, ArrayList<Servicio> miservi) {
+	public Plan(String nombre, String tipo, Date fecha_contrato) {
 		super();
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.fecha_contrato = fecha_contrato;
-		this.miservi = miservi;
+		this.miservi = new ArrayList<Servicio>();
 	}
 
 	public String getNombre() {

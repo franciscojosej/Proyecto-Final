@@ -5,16 +5,16 @@ public class Servicio {
 	private float precio_total;
 	private String nombre;
 	private String tipo;
-	private Plan misplanes;
 	
-	public Servicio(float precio_total, String nombre, String tipo, Plan misplanes) {
+	
+
+
+	public Servicio(float precio_total, String nombre, String tipo) {
 		super();
 		this.precio_total = precio_total;
 		this.nombre = nombre;
 		this.tipo = tipo;
-		this.misplanes = misplanes;
 	}
-
 
 	public float getPrecio_total() {
 		return precio_total;
@@ -41,15 +41,7 @@ public class Servicio {
 	}
 
 
-	public Plan getMisplanes() {
-		return misplanes;
-	}
 
-
-	public void setMisplanes(Plan misplanes) {
-		this.misplanes = misplanes;
-	}
-	
 	
 
 }
