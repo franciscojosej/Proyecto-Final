@@ -1,12 +1,12 @@
 package logico;
 
-public class Telefono extends Servicios {
+public class Telefono extends Servicio {
 
 	private int tiempo_hablado;
 
 	
 
-	public Telefono(float precio_total, String nombre, String tipo, Planes misplanes, int tiempo_hablado) {
+	public Telefono(float precio_total, String nombre, String tipo, Plan misplanes, int tiempo_hablado) {
 		super(precio_total, nombre, tipo, misplanes);
 		this.tiempo_hablado = tiempo_hablado;
 	}

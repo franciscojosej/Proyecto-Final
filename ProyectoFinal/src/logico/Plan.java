@@ -3,14 +3,14 @@ package logico;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Planes {
+public class Plan {
 
 	private String nombre;
 	private String tipo;
 	private Date fecha_contrato;
-	private ArrayList<Servicios> miservi;
+	private ArrayList<Servicio> miservi;
 	
-	public Planes(String nombre, String tipo, Date fecha_contrato, ArrayList<Servicios> miservi) {
+	public Plan(String nombre, String tipo, Date fecha_contrato, ArrayList<Servicio> miservi) {
 		super();
 		this.nombre = nombre;
 		this.tipo = tipo;
@@ -42,11 +42,11 @@ public class Planes {
 		this.fecha_contrato = fecha_contrato;
 	}
 
-	public ArrayList<Servicios> getMiservi() {
+	public ArrayList<Servicio> getMiservi() {
 		return miservi;
 	}
 
-	public void setMiservi(ArrayList<Servicios> miservi) {
+	public void setMiservi(ArrayList<Servicio> miservi) {
 		this.miservi = miservi;
 	}
 	

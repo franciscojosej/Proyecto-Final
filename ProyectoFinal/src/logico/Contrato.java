@@ -8,14 +8,29 @@ public class Contrato {
 	private Date fecha_de_pago;
 	private Date fecha_inicio;
 	private Date fecha_vencimiento;
+	private Plan miPlan;
 	
-	public Contrato(boolean vencida, Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento) {
+
+
+	public Contrato(boolean vencida, Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento, Plan miPlan) {
 		super();
 		this.vencida = vencida;
 		this.fecha_de_pago = fecha_de_pago;
 		this.fecha_inicio = fecha_inicio;
 		this.fecha_vencimiento = fecha_vencimiento;
+		this.miPlan = miPlan;
 	}
+	
+
+	public Plan getMiPlan() {
+		return miPlan;
+	}
+
+
+	public void setMiPlan(Plan miPlan) {
+		this.miPlan = miPlan;
+	}
+
 
 	public boolean isVencida() {
 		return vencida;

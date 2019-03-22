@@ -1,13 +1,13 @@
 package logico;
 
-public class Servicios {
+public class Servicio {
 	
 	private float precio_total;
 	private String nombre;
 	private String tipo;
-	private Planes misplanes;
+	private Plan misplanes;
 	
-	public Servicios(float precio_total, String nombre, String tipo, Planes misplanes) {
+	public Servicio(float precio_total, String nombre, String tipo, Plan misplanes) {
 		super();
 		this.precio_total = precio_total;
 		this.nombre = nombre;
@@ -41,12 +41,12 @@ public class Servicios {
 	}
 
 
-	public Planes getMisplanes() {
+	public Plan getMisplanes() {
 		return misplanes;
 	}
 
 
-	public void setMisplanes(Planes misplanes) {
+	public void setMisplanes(Plan misplanes) {
 		this.misplanes = misplanes;
 	}
 	
