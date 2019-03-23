@@ -63,7 +63,7 @@ public class Prueba_Tricom_Justo {
 	}
 	
 	public void borrarCliente(Cliente cliente){
-		miCliente.add(cliente);
+		miCliente.remove(cliente);
 		code--;
 		cliente.setCodigo_cliente(code);
 		
