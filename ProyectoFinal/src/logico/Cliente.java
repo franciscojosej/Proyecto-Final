@@ -4,22 +4,22 @@ import java.util.ArrayList;
 
 public class Cliente extends Persona {
 	
-	private String cargo;
+	
 	private int codigo_cliente;
-	private String codigo_tarjeta;
+	
 	private ArrayList<Contrato> miscontract;
 	
 	
 	
 
+
+
 	public Cliente(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
-			String ciudad, String telefono_fijo, String estado_social, String cargo, int codigo_cliente,
-			String codigo_tarjeta) {
+			String ciudad, String telefono_fijo, String estado_social, int codigo_cliente,
+			ArrayList<Contrato> miscontract) {
 		super(nombre, apellido, cedula, telefono, direccion, sexo, ciudad, telefono_fijo, estado_social);
-		this.cargo = cargo;
 		this.codigo_cliente = codigo_cliente;
-		this.codigo_tarjeta = codigo_tarjeta;
-		this.miscontract = new ArrayList<Contrato>();
+		this.miscontract = miscontract;
 	}
 
 	public ArrayList<Contrato> getMiscontract() {
@@ -30,24 +30,14 @@ public class Cliente extends Persona {
 		this.miscontract = miscontract;
 	}
 	
-	public String getCargo() {
-		return cargo;
-	}
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
-	}
+
 	public int getCodigo_cliente() {
 		return codigo_cliente;
 	}
 	public void setCodigo_cliente(int codigo_cliente) {
 		this.codigo_cliente = codigo_cliente;
 	}
-	public String getCodigo_tarjeta() {
-		return codigo_tarjeta;
-	}
-	public void setCodigo_tarjeta(String codigo_tarjeta) {
-		this.codigo_tarjeta = codigo_tarjeta;
-	}
+
 	
 	
 	
