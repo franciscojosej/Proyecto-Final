@@ -2,13 +2,15 @@ package logico;
 
 import java.util.ArrayList;
 
+import logico.Facturacion;
+
 public class Tricom {
 	
-
 
 	private ArrayList<Contrato> misContrato;
 	private ArrayList<Cliente> miCliente;
 	private ArrayList<Facturacion>tuContrato;
+	private ArrayList<Facturacion> misFacturas;
 	private ArrayList<Cliente> cliConServicios;
 	private static int code;
 	private static int codeContrato;
@@ -78,6 +80,14 @@ public class Tricom {
 		this.tuContrato = tuContrato;
 	}
 	
+	public ArrayList<Facturacion> getMisFacturas() {
+		return misFacturas;
+	}
+
+	public void setMisFacturas(ArrayList<Facturacion> misFacturas) {
+		this.misFacturas = misFacturas;
+	}
+	
 	public void insertarCliente(Cliente client){
 		miCliente.add(client);
 		code++;
@@ -90,8 +100,16 @@ public class Tricom {
 		contra.setCodigoDeContrato(String.valueOf(code));
 	}
 	
+	public void insertarFactura(Facturacion fact){
+		misFacturas.add(fact);
+		
+	}
 	
-	
+	public void insertarContratoCliente(Facturacion con){
+		tuContrato.add(con);
+		
+	}
+
 	public Cliente BuscarByCedula(String cedula) {
 		Cliente client=null;
 		boolean find = false;

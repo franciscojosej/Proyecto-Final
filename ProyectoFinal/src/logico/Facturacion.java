@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class Facturacion {
 
-	private ArrayList<Contrato> micontrato;
+	private Contrato micontrato;
 
-	public Facturacion(ArrayList<Contrato> micontrato) {
+	public Facturacion(Contrato micontrato) {
 		super();
 		this.micontrato = micontrato;
 	}
 
-	public ArrayList<Contrato> getMicontrato() {
+	public Contrato getMicontrato() {
 		return micontrato;
 	}
 
-	public void setMicontrato(ArrayList<Contrato> micontrato) {
+	public void setMicontrato(Contrato micontrato) {
 		this.micontrato = micontrato;
 	}
 	
