@@ -4,15 +4,49 @@ import java.util.ArrayList;
 
 public class Tricom {
 	private ArrayList<Contrato> misContrato;
-
 	private ArrayList<Cliente> miCliente;
-	private static int code;
 	
+	private ArrayList<Cliente> cliConServicios;
+	private static int code;
+	private static int codeContrato;
+	
+
 	private Tricom (){
 		super();
 		
 		miCliente = new ArrayList<>();
-		
+		cliConServicios=new ArrayList<Cliente>();
+	}
+	public static int getCodeContrato() {
+		return codeContrato;
+	}
+
+	public static void setCodeContrato(int codeContrato) {
+		Tricom.codeContrato = codeContrato;
+	}
+
+	public ArrayList<Contrato> getMisContrato() {
+		return misContrato;
+	}
+
+	public void setMisContrato(ArrayList<Contrato> misContrato) {
+		this.misContrato = misContrato;
+	}
+
+	public ArrayList<Cliente> getCliConServicios() {
+		return cliConServicios;
+	}
+
+	public void setCliConServicios(ArrayList<Cliente> cliConServicios) {
+		this.cliConServicios = cliConServicios;
+	}
+
+	public static int getCode() {
+		return code;
+	}
+
+	public static void setCode(int code) {
+		Tricom.code = code;
 	}
 
 	public ArrayList<Cliente> getMiCliente() {
@@ -28,6 +62,11 @@ public class Tricom {
 		code++;
 		client.setCodigo_cliente(code);
 		
+	}
+	public void insertarContrato(Contrato contra){
+		misContrato.add(contra);
+		code++;
+		contra.setCodigoDeContrato(String.valueOf(code));
 	}
 	
 	
