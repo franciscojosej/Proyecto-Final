@@ -10,21 +10,36 @@ public class Contrato {
 	private Date fecha_inicio;
 	private Date fecha_vencimiento;
 	private ArrayList<Plan> misPlanes;
+	private String codigoDeContrato;
 	
 
 
 
 	
+
+
 
 	public Contrato(boolean vencida, Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento,
-			ArrayList<Plan> misPlanes) {
+			ArrayList<Plan> misPlanes, String codigoDeContrato) {
 		super();
 		this.vencida = vencida;
 		this.fecha_de_pago = fecha_de_pago;
 		this.fecha_inicio = fecha_inicio;
 		this.fecha_vencimiento = fecha_vencimiento;
 		this.misPlanes = misPlanes;
+		this.codigoDeContrato = codigoDeContrato;
 	}
+	
+
+	public String getCodigoDeContrato() {
+		return codigoDeContrato;
+	}
+
+
+	public void setCodigoDeContrato(String codigoDeContrato) {
+		this.codigoDeContrato = codigoDeContrato;
+	}
+
 
 	public boolean isVencida() {
 		return vencida;
