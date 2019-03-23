@@ -1,14 +1,15 @@
 package logico;
 
-public class Internet extends Servicio {
-
-	private int velocidad_conexion;
+public class Internet extends Plan {
 
 	
-
-	public Internet(float precio_total, String nombre, String tipo, int velocidad_conexion) {
-		super(precio_total, nombre, tipo);
-		this.velocidad_conexion = velocidad_conexion;
+	private int velocidad_conexion;
+	private float constoInternet;
+	
+	
+	public Internet(String nombre, String tipo) {
+		super(nombre, tipo);
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getVelocidad_conexion() {
@@ -19,8 +20,18 @@ public class Internet extends Servicio {
 		this.velocidad_conexion = velocidad_conexion;
 	}
 
-	
-	
-	
+	public float getConstoInternet() {
+		return constoInternet;
+	}
+
+	public void setConstoInternet(float constoInternet) {
+		this.constoInternet = constoInternet;
+	}
+
+	@Override
+	public float CalcularCosto() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

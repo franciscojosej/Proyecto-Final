@@ -1,15 +1,23 @@
 package logico;
 
-public class Celular extends Servicio {
+public class Celular extends Plan {
 
 	private int minutos;
-
+	private float costoCelular;
 	
 
 
-	public Celular(float precio_total, String nombre, String tipo, int minutos) {
-		super(precio_total, nombre, tipo);
-		this.minutos = minutos;
+	public Celular(String nombre, String tipo) {
+		super(nombre, tipo);
+		// TODO Auto-generated constructor stub
+	}
+
+	public float getCostoCelular() {
+		return costoCelular;
+	}
+
+	public void setCostoCelular(float costoCelular) {
+		this.costoCelular = costoCelular;
 	}
 
 	public int getMinutos() {
@@ -18,6 +26,11 @@ public class Celular extends Servicio {
 
 	public void setMinutos(int minutos) {
 		this.minutos = minutos;
+	}
+	@Override
+	public float CalcularCosto() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

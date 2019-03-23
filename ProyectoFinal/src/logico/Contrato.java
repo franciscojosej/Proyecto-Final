@@ -1,5 +1,6 @@
 package logico;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Contrato {
@@ -8,29 +9,22 @@ public class Contrato {
 	private Date fecha_de_pago;
 	private Date fecha_inicio;
 	private Date fecha_vencimiento;
-	private Plan miPlan;
+	private ArrayList<Plan> misPlanes;
 	
 
 
-	public Contrato(boolean vencida, Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento, Plan miPlan) {
+
+	
+
+	public Contrato(boolean vencida, Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento,
+			ArrayList<Plan> misPlanes) {
 		super();
 		this.vencida = vencida;
 		this.fecha_de_pago = fecha_de_pago;
 		this.fecha_inicio = fecha_inicio;
 		this.fecha_vencimiento = fecha_vencimiento;
-		this.miPlan = miPlan;
+		this.misPlanes = misPlanes;
 	}
-	
-
-	public Plan getMiPlan() {
-		return miPlan;
-	}
-
-
-	public void setMiPlan(Plan miPlan) {
-		this.miPlan = miPlan;
-	}
-
 
 	public boolean isVencida() {
 		return vencida;
@@ -63,6 +57,15 @@ public class Contrato {
 	public void setFecha_vencimiento(Date fecha_vencimiento) {
 		this.fecha_vencimiento = fecha_vencimiento;
 	}
+
+	public ArrayList<Plan> getMisPlanes() {
+		return misPlanes;
+	}
+
+	public void setMisPlanes(ArrayList<Plan> misPlanes) {
+		this.misPlanes = misPlanes;
+	}
+	
 	
 	
 	
