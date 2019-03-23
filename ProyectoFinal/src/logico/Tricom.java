@@ -9,6 +9,7 @@ public class Tricom {
 	private ArrayList<Cliente> cliConServicios;
 	private static int code;
 	private static int codeContrato;
+	private static Tricom tricom=null;
 	
 
 	private Tricom (){
@@ -17,6 +18,14 @@ public class Tricom {
 		miCliente = new ArrayList<>();
 		cliConServicios=new ArrayList<Cliente>();
 	}
+	
+	public static Tricom getInstance(){
+		 if(tricom == null){
+			 tricom = new Tricom();
+		 }
+		 return tricom;
+	 }
+
 	public static int getCodeContrato() {
 		return codeContrato;
 	}
