@@ -23,6 +23,7 @@ public class Tricom {
 		miCliente = new ArrayList<>();
 		cliConServicios=new ArrayList<Cliente>();
 		tuContrato = new ArrayList<>();
+		misFacturas = new ArrayList<>();
 	}
 	
 	public static Tricom getInstance(){
