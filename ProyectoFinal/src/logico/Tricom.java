@@ -3,9 +3,12 @@ package logico;
 import java.util.ArrayList;
 
 public class Tricom {
+	
+
+
 	private ArrayList<Contrato> misContrato;
 	private ArrayList<Cliente> miCliente;
-	
+	private ArrayList<Facturacion>tuContrato;
 	private ArrayList<Cliente> cliConServicios;
 	private static int code;
 	private static int codeContrato;
@@ -17,6 +20,7 @@ public class Tricom {
 		
 		miCliente = new ArrayList<>();
 		cliConServicios=new ArrayList<Cliente>();
+		tuContrato = new ArrayList<>();
 	}
 	
 	public static Tricom getInstance(){
@@ -64,6 +68,14 @@ public class Tricom {
 
 	public void setMiCliente(ArrayList<Cliente> miCliente) {
 		this.miCliente = miCliente;
+	}
+	
+	public ArrayList<Facturacion> getTuContrato() {
+		return tuContrato;
+	}
+
+	public void setTuContrato(ArrayList<Facturacion> tuContrato) {
+		this.tuContrato = tuContrato;
 	}
 	
 	public void insertarCliente(Cliente client){
