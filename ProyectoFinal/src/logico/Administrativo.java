@@ -2,7 +2,7 @@ package logico;
 
 import java.util.Date;
 
-public class Administrativo extends Personal {
+public class Administrativo extends Empleado {
 
 	public Administrativo(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
 			String ciudad, String telefono_fijo, String estado_social, String codigo_empleado, float sueldo_base,

@@ -1,3 +1,4 @@
+
 package Visual;
 
 import java.awt.BorderLayout;
@@ -12,12 +13,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
+import logico.Tricom;
+import logico.Empleado;
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
-public class ListarCliente extends JDialog {
+public class ListarEmpleados extends JDialog {
 	
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
@@ -43,7 +47,7 @@ public class ListarCliente extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListarCliente() {
+	public ListarEmpleados() {
 		setTitle("Listado de Clientes");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -101,7 +105,7 @@ public class ListarCliente extends JDialog {
 				JButton cancelButton = new JButton("Salir");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					dispose();
+						dispose();
 						
 					}
 				});

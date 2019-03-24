@@ -2,7 +2,7 @@ package logico;
 
 import java.util.Date;
 
-public class Personal extends Persona {
+public class Empleado extends Persona {
 	protected String codigo_empleado;
 	protected float sueldo_base;
 	protected String Departamento;
@@ -12,7 +12,7 @@ public class Personal extends Persona {
 	protected Date fecha_ingreso;
 	protected String num_seguro_social;
 	
-	public Personal(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
+	public Empleado(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
 			String ciudad, String telefono_fijo, String estado_social, String codigo_empleado, float sueldo_base,
 			String departamento, float sueldo, int dias_trabajados, int horas_extra, Date fecha_ingreso,
 			String num_seguro_social) {

@@ -12,7 +12,6 @@ import logico.Cliente;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -26,6 +25,7 @@ public class VisualPrincipal extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -69,7 +69,6 @@ public class VisualPrincipal extends JFrame {
 				Cliente Clien = null;
 				 RegistroDeClientes RegCliente 	= null;
 			    RegCliente = new RegistroDeClientes (Clien);	
-			    
 			    RegCliente.setModal(true);
 			    RegCliente.setLocationRelativeTo(null);
 			    RegCliente.setVisible(true);
@@ -96,11 +95,27 @@ public class VisualPrincipal extends JFrame {
 		JMenu mnNewMenu_1 = new JMenu("Empleados");
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("\u2022Registro");
-		mnNewMenu_1.add(mntmNewMenuItem_1);
+		JMenuItem mntmRegistroDeEmpleado = new JMenuItem("\u2022Registro");
+		mntmRegistroDeEmpleado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistroDeEmpleado RegEmpleado = new RegistroDeEmpleado();
+				RegEmpleado.setModal(true);
+				RegEmpleado.setLocationRelativeTo(null);
+				RegEmpleado.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmRegistroDeEmpleado);
 		
-		JMenuItem mntmlistadoDeEmpleado = new JMenuItem("\u2022Listado de Empleados");
-		mnNewMenu_1.add(mntmlistadoDeEmpleado);
+		JMenuItem mntmListarEmpleados = new JMenuItem("\u2022Listado de Empleados");
+		mntmListarEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			ListarEmpleados ListEmpleado = new ListarEmpleados();
+				ListEmpleado.setModal(true);
+				ListEmpleado.setLocationRelativeTo(null);
+				ListEmpleado.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmListarEmpleados);
 		
 		JMenu mnNewMenu_2 = new JMenu("Planes");
 		menuBar.add(mnNewMenu_2);

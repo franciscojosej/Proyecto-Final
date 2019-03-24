@@ -7,19 +7,23 @@ import logico.Facturacion;
 public class Tricom {
 	
 
+	public static int ClienteCod = 0;
+	public static int EmpleadoCod = 0;
 	private ArrayList<Contrato> misContrato;
 	private ArrayList<Cliente> miCliente;
 	private ArrayList<Facturacion>tuContrato;
 	private ArrayList<Facturacion> misFacturas;
 	private ArrayList<Cliente> cliConServicios;
+	private ArrayList<Empleado> MiPersonal;
 	private static int code;
 	private static int codeContrato;
 	private static Tricom tricom=null;
+	public static Object getEmpleados;
 	
 
 	private Tricom (){
 		super();
-		
+		MiPersonal = new ArrayList<>();
 		miCliente = new ArrayList<>();
 		cliConServicios=new ArrayList<Cliente>();
 		tuContrato = new ArrayList<>();

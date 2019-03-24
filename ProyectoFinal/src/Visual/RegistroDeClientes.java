@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import logico.Facturacion;
+import logico.Persona;
 import logico.Cliente;
 import logico.Tricom;
 import logico.Plan;
@@ -34,7 +35,7 @@ public class RegistroDeClientes extends JDialog {
 	private JTextField textFieldDireccion;
 
 	/**
-	 * Launch the application.
+	 * Launch the application. 
 	 */
 	public static void main(String[] args) {
 		try {
@@ -75,8 +76,14 @@ public class RegistroDeClientes extends JDialog {
 			panel.add(lblNewLabel);
 		}
 		{
+			
 			txtCodigo = new JTextField();
+			txtCodigo.setEditable(false);
 			txtCodigo.setBounds(10, 56, 149, 20);
+			if(cli == null) {
+				
+				 txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
+			}
 			panel.add(txtCodigo);
 			txtCodigo.setColumns(10);
 		}
