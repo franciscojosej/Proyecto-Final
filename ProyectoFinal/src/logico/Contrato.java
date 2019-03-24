@@ -6,7 +6,7 @@ import java.util.Date;
 public class Contrato {
 
 
-	private boolean estado;//abilidado
+	private boolean estado;//Habilidado
 	private Date fecha_de_pago;
 	private Date fecha_inicio;
 	private Date fecha_vencimiento;
