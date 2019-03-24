@@ -169,4 +169,9 @@ public class Tricom {
 		
 	}
 
+	public ArrayList<Plan> getPlanes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

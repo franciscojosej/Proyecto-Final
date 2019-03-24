@@ -11,8 +11,7 @@ public class Persona {
 	protected String telefono_fijo;
 	protected String estado_social;
 	
-	public Persona(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
-			String ciudad, String telefono_fijo, String estado_social) {
+	public Persona(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;

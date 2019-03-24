@@ -6,7 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logico.Cliente;
+
 import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -14,6 +20,7 @@ import javax.swing.JMenuItem;
 public class VisualPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	protected RegistroDeClientes RegCliente;
 
 	/**
 	 * Launch the application.
@@ -53,23 +60,47 @@ public class VisualPrincipal extends JFrame {
 		menuBar.setBounds(0, 0, 434, 21);
 		panel.add(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Empleado");
+		JMenu mnNewMenu = new JMenu("Cliente");
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("\u2022Registro");
-		mnNewMenu.add(mntmNewMenuItem);
+		JMenuItem mntmRegistro = new JMenuItem("\u2022Registro");
+		mntmRegistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Cliente Clien = null;
+				 RegistroDeClientes RegCliente 	= null;
+			    RegCliente = new RegistroDeClientes (Clien);	
+			    
+			    RegCliente.setModal(true);
+			    RegCliente.setLocationRelativeTo(null);
+			    RegCliente.setVisible(true);
+			    
+			
+			}
+		});
 		
-		JMenuItem mntmListadoDeEmpleados = new JMenuItem("\u2022Listado De Empleados");
-		mnNewMenu.add(mntmListadoDeEmpleados);
+		mnNewMenu.add(mntmRegistro);
 		
-		JMenu mnNewMenu_1 = new JMenu("Cliente");
+		JMenuItem mntmListadoDeCliente = new JMenuItem("\u2022Listado De Clientes");
+		mntmListadoDeCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarCliente ListCliente = new ListarCliente();
+				ListCliente.setModal(true);
+				ListCliente.setLocationRelativeTo(null);
+				ListCliente.setVisible(true);
+				
+			}
+		});
+		mnNewMenu.add(mntmListadoDeCliente);
+		
+		
+		JMenu mnNewMenu_1 = new JMenu("Empleados");
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("\u2022Registro");
 		mnNewMenu_1.add(mntmNewMenuItem_1);
 		
-		JMenuItem mntmlistadoDeClientes = new JMenuItem("\u2022Listado de Clientes");
-		mnNewMenu_1.add(mntmlistadoDeClientes);
+		JMenuItem mntmlistadoDeEmpleado = new JMenuItem("\u2022Listado de Empleados");
+		mnNewMenu_1.add(mntmlistadoDeEmpleado);
 		
 		JMenu mnNewMenu_2 = new JMenu("Planes");
 		menuBar.add(mnNewMenu_2);

@@ -17,7 +17,7 @@ public class Cliente extends Persona {
 	public Cliente(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
 			String ciudad, String telefono_fijo, String estado_social, int codigo_cliente,
 			ArrayList<Contrato> miscontract) {
-		super(nombre, apellido, cedula, telefono, direccion, sexo, ciudad, telefono_fijo, estado_social);
+		super(nombre, apellido, cedula, telefono, direccion, sexo);
 		this.codigo_cliente = codigo_cliente;
 		this.miscontract = miscontract;
 	}

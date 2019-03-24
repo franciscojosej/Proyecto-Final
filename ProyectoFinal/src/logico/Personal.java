@@ -16,7 +16,7 @@ public class Personal extends Persona {
 			String ciudad, String telefono_fijo, String estado_social, String codigo_empleado, float sueldo_base,
 			String departamento, float sueldo, int dias_trabajados, int horas_extra, Date fecha_ingreso,
 			String num_seguro_social) {
-		super(nombre, apellido, cedula, telefono, direccion, sexo, ciudad, telefono_fijo, estado_social);
+		super(nombre, apellido, cedula, telefono, direccion, sexo);
 		this.codigo_empleado = codigo_empleado;
 		this.sueldo_base = sueldo_base;
 		Departamento = departamento;
