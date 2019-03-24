@@ -28,7 +28,6 @@ public class Internet extends Plan {
 		this.constoInternet = constoInternet;
 	}
 
-	@Override
 	public float CalcularCosto() {
 		// TODO Auto-generated method stub
 		return 0;

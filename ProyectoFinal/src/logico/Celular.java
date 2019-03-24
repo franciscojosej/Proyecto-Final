@@ -9,7 +9,7 @@ public class Celular extends Plan {
 
 	public Celular(String nombre, String tipo) {
 		super(nombre, tipo);
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public float getCostoCelular() {
@@ -27,7 +27,6 @@ public class Celular extends Plan {
 	public void setMinutos(int minutos) {
 		this.minutos = minutos;
 	}
-	@Override
 	public float CalcularCosto() {
 		// TODO Auto-generated method stub
 		return 0;

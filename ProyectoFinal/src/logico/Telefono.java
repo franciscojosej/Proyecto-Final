@@ -41,7 +41,6 @@ public class Telefono extends Plan {
 
 
 
-	@Override
 	public float CalcularCosto() {
 		// TODO Auto-generated method stub
 		return 0;

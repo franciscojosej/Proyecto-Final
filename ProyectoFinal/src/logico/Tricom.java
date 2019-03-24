@@ -164,4 +164,9 @@ public class Tricom {
 		return contrato;
 	}
 
+	public void insertPlan(Plan aux) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
