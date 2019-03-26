@@ -8,7 +8,9 @@ public class Tricom {
 	
 
 	public static int ClienteCod = 0;
+	public static int PlanesCod = 0;
 	public static int EmpleadoCod = 0;
+	public static int ContratoCod = 0;
 	private ArrayList<Contrato> misContrato;
 	private ArrayList<Cliente> miCliente;
 	private ArrayList<Facturacion>tuContrato;
@@ -174,6 +176,11 @@ public class Tricom {
 	}
 
 	public ArrayList<Plan> getPlanes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Plan findplanbycode(String identificador) {
 		// TODO Auto-generated method stub
 		return null;
 	}

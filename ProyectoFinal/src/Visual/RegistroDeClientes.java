@@ -39,6 +39,7 @@ public class RegistroDeClientes extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
+			
 			RegistroDeClientes dialog = new RegistroDeClientes(cliente);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -151,6 +152,13 @@ public class RegistroDeClientes extends JDialog {
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+		
+					public void actionPerformed(ActionEvent e) {
+					dispose();
+					
+					}
+				});
 				buttonPane.add(cancelButton);
 			}
 	}

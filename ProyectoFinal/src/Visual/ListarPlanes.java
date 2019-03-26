@@ -14,13 +14,13 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
 import logico.Tricom;
-import logico.Empleado;
+import logico.Plan;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
-public class ListarEmpleados extends JDialog {
+public class ListarPlanes extends JDialog {
 	
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
@@ -46,8 +46,8 @@ public class ListarEmpleados extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListarEmpleados() {
-		setTitle("Listado de Clientes");
+	public ListarPlanes() {
+		setTitle("Lista De Planes Registrado");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,7 +73,7 @@ public class ListarEmpleados extends JDialog {
 						}
 					});
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					String[] columnNames = {"Codigo","Nombre", "Telefono"};
+					String[] columnNames = {"Codigo","Nombre", "Precio"};
 					model = new DefaultTableModel();
 					model.setColumnIdentifiers(columnNames);
 					table.setModel(model);

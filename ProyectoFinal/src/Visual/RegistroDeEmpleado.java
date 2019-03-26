@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
 public class RegistroDeEmpleado extends JDialog {
+	
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCodigo;
@@ -184,6 +185,12 @@ public class RegistroDeEmpleado extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Salir");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+						
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

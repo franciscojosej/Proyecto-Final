@@ -38,6 +38,7 @@ public class VisualPrincipal extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
@@ -117,20 +118,50 @@ public class VisualPrincipal extends JFrame {
 		});
 		mnNewMenu_1.add(mntmListarEmpleados);
 		
-		JMenu mnNewMenu_2 = new JMenu("Planes");
-		menuBar.add(mnNewMenu_2);
+		JMenu mnCrearPlanes = new JMenu("Planes");
+		menuBar.add(mnCrearPlanes);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("\u2022Crear Plan");
-		mnNewMenu_2.add(mntmNewMenuItem_2);
+		JMenuItem mntmCrearPlanes = new JMenuItem("\u2022Crear Plan");
+		mntmCrearPlanes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearPlanes CrePlanes = new CrearPlanes();
+				CrePlanes.setModal(true);
+				CrePlanes.setLocationRelativeTo(null);
+				CrePlanes.setVisible(true);
+			}
+				
+		});
+		mnCrearPlanes.add(mntmCrearPlanes);
 		
 		JMenuItem mntmlistaDePlanes = new JMenuItem("\u2022Lista De Planes");
-		mnNewMenu_2.add(mntmlistaDePlanes);
+		mntmlistaDePlanes.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				ListarPlanes ListPlanes = new ListarPlanes();
+				ListPlanes.setModal(true);
+				ListPlanes.setLocationRelativeTo(null);
+				ListPlanes.setVisible(true);
+				
+				
+			}
+		});
+		mnCrearPlanes.add(mntmlistaDePlanes);
 		
-		JMenu mnNewMenu_3 = new JMenu("Contrato");
-		menuBar.add(mnNewMenu_3);
+		JMenu mnContrato = new JMenu("Contrato");
+		menuBar.add(mnContrato);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("\u2022Realizar Contrato");
-		mnNewMenu_3.add(mntmNewMenuItem_3);
+		JMenuItem mntmContrato = new JMenuItem("\u2022Realizar Contrato");
+		mntmContrato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Contrato contratar = new Contrato();
+				
+				contratar.setModal(true);
+				contratar.setLocationRelativeTo(null);
+				contratar.setVisible(true);
+				
+			}
+		});
+		mnContrato.add(mntmContrato);
 		
 		JMenu mnNewMenu_4 = new JMenu("Facturas");
 		menuBar.add(mnNewMenu_4);
