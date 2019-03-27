@@ -44,6 +44,7 @@ public class RegistroDeClientes extends JDialog {
 	private JTextField textFieldDireccion;
 	private JButton cancelButton; 
 	private JPanel buttonPane;
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application. 
@@ -145,7 +146,7 @@ public class RegistroDeClientes extends JDialog {
 		lblNewLabel_5.setBounds(253, 36, 46, 14);
 		panel.add(lblNewLabel_5);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino"}));
 		comboBox.setBounds(253, 56, 166, 20);
 		panel.add(comboBox);
@@ -161,34 +162,20 @@ public class RegistroDeClientes extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					
-						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("")){
-						Cliente a = new Cliente(txtNombre.getText(), textFieldDireccion.getText(), textFieldnumber.getText(), textFieldCedula.getText(), null, null, null, null, null, code);
-						 Tricom.getInstance().insertarCliente(a);
+						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && Tricom.getInstance().BuscarByCedula(textFieldCedula.getText())==null
+								&& !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("") && comboBox.getSelectedIndex()!=0){
+						Cliente a = new Cliente(txtNombre.getText(), textFieldCedula.getText(), textFieldDireccion.getText(), textFieldnumber.getText(), null, null, null, null, null, code);
+						 for (int i = 0; i < 10; i++) {
+							 Tricom.getInstance().insertarCliente(a);
+						}
 						 txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
 						JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 						clear();
-						 
 						}else{
 							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
-					/*else{
-						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("")){
-							
-							cli.setNombre(txtNombre.getText());
-							cli.setCedula(textFieldCedula.getText());
-							cli.setTelefono(textFieldnumber.getText());
-							cli.setDireccion(textFieldDireccion.getText());
-							Tricom.getInstance().CargarDatosCliente(cli);
-							
-							//ListarCliente.loadCliente();
-							
-							JOptionPane.showMessageDialog(null, "Cliente fue modificado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-							dispose();
-						}else{
-							JOptionPane.showMessageDialog(null, "Verifique todos los campos", null, JOptionPane.ERROR_MESSAGE, null);
 						
-						}
-					}*/
+	
 				}
 
 					
