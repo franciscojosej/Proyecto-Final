@@ -7,30 +7,31 @@ import logico.Factura;
 public class Tricom {
 	
 
-	public static int ClienteCod = 0;
+	//public static int ClienteCod = 0;
 	public static int FacturacionCod = 0;
 	public static int PlanesCod = 0;
 	public static int EmpleadoCod = 0;
 	public static int ContratoCod = 0;
+	public static int ClienteCod=0;
 	private ArrayList<Contrato> misContrato;
 	private ArrayList<Cliente> miCliente;
-	private ArrayList<Factura>tuContrato;
+//	private ArrayList<Factura>tuContrato;
 	private ArrayList<Factura> misFacturas;
 	private ArrayList<Cliente> cliConServicios;
 	private ArrayList<Empleado> MiPersonal;
-	private static int code;
-	private static int codeContrato;
+	
+	
 	private static Tricom tricom=null;
 	public static Object getEmpleados;
 	
 
 	private Tricom (){
 		super();
-		MiPersonal = new ArrayList<>();
-		miCliente = new ArrayList<>();
+		MiPersonal = new ArrayList<Empleado>();
+		miCliente = new ArrayList<Cliente>();
 		cliConServicios=new ArrayList<Cliente>();
-		tuContrato = new ArrayList<>();
-		misFacturas = new ArrayList<>();
+		//tuContrato = new ArrayList<>();
+		misFacturas = new ArrayList<Factura>();
 	}
 	
 	public static Tricom getInstance(){
@@ -40,13 +41,7 @@ public class Tricom {
 		 return tricom;
 	 }
 
-	public static int getCodeContrato() {
-		return codeContrato;
-	}
 
-	public static void setCodeContrato(int codeContrato) {
-		Tricom.codeContrato = codeContrato;
-	}
 
 	public ArrayList<Contrato> getMisContrato() {
 		return misContrato;
@@ -65,11 +60,11 @@ public class Tricom {
 	}
 
 	public static int getCode() {
-		return code;
+		return ClienteCod;
 	}
 
 	public static void setCode(int code) {
-		Tricom.code = code;
+		Tricom.ClienteCod = code;
 	}
 
 	public ArrayList<Cliente> getMiCliente() {
@@ -80,14 +75,7 @@ public class Tricom {
 		this.miCliente = miCliente;
 	}
 	
-	public ArrayList<Factura> getTuContrato() {
-		return tuContrato;
-	}
 
-	public void setTuContrato(ArrayList<Factura> tuContrato) {
-		this.tuContrato = tuContrato;
-	}
-	
 	public ArrayList<Factura> getMisFacturas() {
 		return misFacturas;
 	}
@@ -98,25 +86,25 @@ public class Tricom {
 	
 	public void insertarCliente(Cliente client){
 		miCliente.add(client);
-		code++;
-		client.setCodigo_cliente(code);
+		ClienteCod++;
+		client.setCodigo_cliente(ClienteCod);
 		
 	}
 	public void insertarContrato(Contrato contra){
+		ContratoCod++;
+		contra.setCodigoDeContrato(String.valueOf(ContratoCod));
 		misContrato.add(contra);
-		code++;
-		contra.setCodigoDeContrato(String.valueOf(code));
+		
+		
 	}
 	
 	public void insertarFactura(Factura fact){
-		misFacturas.add(fact);
-		
+		FacturacionCod++;
+		fact.setCodiFactura(FacturacionCod);
+		misFacturas.add(fact);	
 	}
 	
-	public void insertarContratoCliente(Factura con){
-		tuContrato.add(con);
-		
-	}
+
 
 	public Cliente BuscarByCedula(String cedula) {
 		Cliente client=null;
@@ -131,6 +119,7 @@ public class Tricom {
 		}
 		return client;
 	}
+
 	
 	public void CargarDatosCliente(Cliente cli){
 		int i=0;
@@ -150,8 +139,8 @@ public class Tricom {
 	
 	public void borrarCliente(Cliente cliente){
 		miCliente.remove(cliente);
-		code--;
-		cliente.setCodigo_cliente(code);
+		ClienteCod--;
+		cliente.setCodigo_cliente(ClienteCod);
 		
 	}
 	
@@ -170,20 +159,9 @@ public class Tricom {
 		}
 		return contrato;
 	}
+	
+	
 
-	public void insertPlan(Plan aux) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public ArrayList<Plan> getPlanes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Plan findplanbycode(String identificador) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

@@ -1,34 +1,45 @@
 package logico;
 
 
-import java.util.Date;
+
 
 public class Factura {
 	private int codiFactura;
-	private String NombreCliente;
+	private String nombreCliente;
 	private int codiCliente;
 	private float recargo;
-	private Date fechaDeEmicion;
-	private Date fechaDevencimiento;
 	
+	private String fechaEmicion;
+	private String fechaDevencimiento;
+	
+	private boolean sinPagar;
+
 	private float precioBase;
 	private float totalA_Pagar;
 	
-	private Cliente factCliente;
+	
+	
+	
 
-	public Factura(int codiFactura, String nombreCliente, int codiCliente, float recargo, Date fechaDeEmicion,
-			Date fechaDevencimiento, float precioBase, float totalA_Pagar, Cliente factCliente) {
+
+
+
+
+public Factura( String nombreCliente, int codiCliente, float recargo, String fechaEmicion,
+			String fechaDevencimiento, float precioBase, float totalA_Pagar) {
 		super();
-		this.codiFactura = codiFactura;
-		NombreCliente = nombreCliente;
+		this.nombreCliente = nombreCliente;
 		this.codiCliente = codiCliente;
 		this.recargo = recargo;
-		this.fechaDeEmicion = fechaDeEmicion;
+		this.fechaEmicion = fechaEmicion;
 		this.fechaDevencimiento = fechaDevencimiento;
+		this.sinPagar = true;
 		this.precioBase = precioBase;
 		this.totalA_Pagar = totalA_Pagar;
-		this.factCliente = factCliente;
 	}
+
+//this.fechaEmicion=fechaEmicion.toString();
+
 
 	public int getCodiFactura() {
 		return codiFactura;
@@ -38,13 +49,7 @@ public class Factura {
 		this.codiFactura = codiFactura;
 	}
 
-	public String getNombreCliente() {
-		return NombreCliente;
-	}
 
-	public void setNombreCliente(String nombreCliente) {
-		NombreCliente = nombreCliente;
-	}
 
 	public int getCodiCliente() {
 		return codiCliente;
@@ -62,21 +67,7 @@ public class Factura {
 		this.recargo = recargo;
 	}
 
-	public Date getFechaDeEmicion() {
-		return fechaDeEmicion;
-	}
-
-	public void setFechaDeEmicion(Date fechaDeEmicion) {
-		this.fechaDeEmicion = fechaDeEmicion;
-	}
-
-	public Date getFechaDevencimiento() {
-		return fechaDevencimiento;
-	}
-
-	public void setFechaDevencimiento(Date fechaDevencimiento) {
-		this.fechaDevencimiento = fechaDevencimiento;
-	}
+	
 
 	public float getPrecioBase() {
 		return precioBase;
@@ -94,13 +85,39 @@ public class Factura {
 		this.totalA_Pagar = totalA_Pagar;
 	}
 
-	public Cliente getFactCliente() {
-		return factCliente;
+	public String getNombreCliente() {
+		return nombreCliente;
 	}
 
-	public void setFactCliente(Cliente factCliente) {
-		this.factCliente = factCliente;
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
 	}
+
+	public String getFechaEmicion() {
+		return fechaEmicion;
+	}
+
+	public void setFechaEmicion(String fechaEmicion) {
+		this.fechaEmicion = fechaEmicion;
+	}
+
+	public String getFechaDevencimiento() {
+		return fechaDevencimiento;
+	}
+
+	public void setFechaDevencimiento(String fechaDevencimiento) {
+		this.fechaDevencimiento = fechaDevencimiento;
+	}
+
+	public boolean isSinPagar() {
+		return sinPagar;
+	}
+
+	public void setSinPagar(boolean sinPagar) {
+		this.sinPagar = sinPagar;
+	}
+
+
 	
 	
 	
