@@ -20,6 +20,7 @@ public class Factura {
 	
 	
 	
+	
 
 
 
@@ -36,6 +37,7 @@ public Factura( String nombreCliente, int codiCliente, float recargo, String fec
 		this.sinPagar = true;
 		this.precioBase = precioBase;
 		this.totalA_Pagar = totalA_Pagar;
+		
 	}
 
 //this.fechaEmicion=fechaEmicion.toString();
@@ -109,7 +111,7 @@ public Factura( String nombreCliente, int codiCliente, float recargo, String fec
 		this.fechaDevencimiento = fechaDevencimiento;
 	}
 
-	public boolean isSinPagar() {
+	public boolean getSinPagar() {
 		return sinPagar;
 	}
 

@@ -19,6 +19,7 @@ public class ClaseDePruebas {
 		Tricom.getInstance().generaFactura();
 		Tricom.getInstance().generaFactura();
 		Tricom.getInstance().generaFactura();
+		Tricom.getInstance().generaFactura();
 	
 		//Tricom.getInstance().generaFactura();
 
@@ -45,6 +46,7 @@ public class ClaseDePruebas {
 		}
 		
 		*/
+		
 
 	}
 

@@ -8,6 +8,8 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JOptionPane;
 
+import org.omg.CORBA.DefinitionKind;
+
 import logico.Factura;
 
 public class Tricom {
@@ -28,7 +30,7 @@ public class Tricom {
 	
 	
 	private static Tricom tricom=null;
-	public static Object getEmpleados;
+
 	
 
 	private Tricom (){
@@ -273,6 +275,46 @@ public class Tricom {
 		return worker;
 		
 	}
+	public ArrayList<Factura> agruparFacturasActivas(){//sin pagar
+		ArrayList<Factura> factActivas = new ArrayList<Factura>();
+		for (Factura factura : misFacturas) {
+			
+			if (factura.getSinPagar()) {
+				factActivas.add(factura);
+				
+			}
+		}
+		return factActivas;
+	
+	}
+	public ArrayList<Factura> agruparFacturasInactiva(){// paga
+		ArrayList<Factura> factPagas = new ArrayList<Factura>();
+		for (Factura factura : misFacturas) {
+			
+			if (!factura.getSinPagar()) {
+				factPagas.add(factura);
+				
+			}
+		}
+		return factPagas;
+	
+	}
+	public ArrayList<Factura> buscarFacturasActivasByCedulaClinte(int code){//
+
+
+		ArrayList<Factura> fact = new ArrayList<Factura>();
+		for (Factura factura : misFacturas) {
+			
+			if (factura.getCodiCliente()==code &&factura.getSinPagar()==true) {
+				fact.add(factura);
+				
+			}
+		}
+		return fact;
+
+	}
+	
+	
 	
 
 }
