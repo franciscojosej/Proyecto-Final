@@ -161,17 +161,17 @@ public class RegistroDeClientes extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					
-					if(code == 0){
 						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("")){
-						
 						Cliente a = new Cliente(txtNombre.getText(), textFieldDireccion.getText(), textFieldnumber.getText(), textFieldCedula.getText(), null, null, null, null, null, code);
 						 Tricom.getInstance().insertarCliente(a);
+						 txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
 						JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 						clear();
+						 
 						}else{
 							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
-					}else{
+					/*else{
 						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("")){
 							
 							cli.setNombre(txtNombre.getText());
@@ -188,7 +188,7 @@ public class RegistroDeClientes extends JDialog {
 							JOptionPane.showMessageDialog(null, "Verifique todos los campos", null, JOptionPane.ERROR_MESSAGE, null);
 						
 						}
-					}
+					}*/
 				}
 
 					

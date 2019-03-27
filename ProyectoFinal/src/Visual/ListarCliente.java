@@ -8,6 +8,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+import logico.Cliente;
+import logico.Tricom;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -25,6 +30,7 @@ public class ListarCliente extends JDialog {
 	private JButton btnEliminar;
 	private String identificador;
 	private DefaultTableModel model;
+	private static Object[] fila;
 
 
 	/**
@@ -112,7 +118,27 @@ public class ListarCliente extends JDialog {
 	}
 
 	private void loadTable() {
-		// TODO Auto-generated method stub
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for (Cliente aux : Tricom.getInstance().getMiCliente()) {
+			fila[0] = aux.getCodigo_cliente();
+			fila[1] = aux.getNombre();
+			fila[2] = aux.getCedula();
+			fila[3] = aux.getDireccion();
+			fila[4] = aux.getTelefono();
+			model.addRow(fila);
+			
+			
+		}
+		table.setModel(model);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table.getColumnModel();
+		columnModel.getColumn(0).setPreferredWidth(60);
+		columnModel.getColumn(1).setPreferredWidth(200);
+		columnModel.getColumn(2).setPreferredWidth(150);
+		columnModel.getColumn(3).setPreferredWidth(300);
+		columnModel.getColumn(4).setPreferredWidth(177);
 		
 	}
 
