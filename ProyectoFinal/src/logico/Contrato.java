@@ -41,11 +41,12 @@ public class Contrato {
 	public void setFacturasEmitidas() {
 		
 		
-		if(FacturasEmitidas>3) {
+		if(FacturasEmitidas==3) {
 			setEstado(false);
-		}else {
-			FacturasEmitidas++;
 		}
+		FacturasEmitidas++;
+			
+		
 	}
 	public void setEstado(boolean estado) {
 		this.estado = estado;

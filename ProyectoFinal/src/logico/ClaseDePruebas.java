@@ -19,7 +19,8 @@ public class ClaseDePruebas {
 		Tricom.getInstance().generaFactura();
 		Tricom.getInstance().generaFactura();
 		Tricom.getInstance().generaFactura();
-		Tricom.getInstance().generaFactura();
+	
+		//Tricom.getInstance().generaFactura();
 
 		for (Factura misFac : Tricom.getInstance().getMisFacturas()) {
 			System.out.println("Codigo de Factura "+misFac.getCodiFactura()+" Antes de cargo"
@@ -31,7 +32,7 @@ public class ClaseDePruebas {
 		CableTV meT = new CableTV("3", "Al Otro Dia",1);
 		miContrato2.agregarServicio(meT);
 		m.agrregarcontrato(miContrato2);
-		
+		/*
 		System.out.println("\n\n");
 		Tricom.getInstance().generaFactura();
 		Tricom.getInstance().generaFactura();
@@ -43,7 +44,7 @@ public class ClaseDePruebas {
 		+misFac.getPrecioBase()+"Carfo por mes"+misFac.getRecargo()+"Total a pagar"+misFac.getTotalA_Pagar());
 		}
 		
-		
+		*/
 
 	}
 

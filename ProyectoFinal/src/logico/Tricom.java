@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.swing.JOptionPane;
+
 import logico.Factura;
 
 public class Tricom {
@@ -155,12 +157,12 @@ public class Tricom {
 
 			for (Cliente cliente_Aux : miCliente) {
 			for (Contrato contrato_Aux : cliente_Aux.getMiscontract()) {
-				if(contrato_Aux.getFacturasEmitidas()<4) {
-					
+				if(contrato_Aux.getEstado()) {
+					//contrato_Aux.getFacturasEmitidas()<4 &&
 					cliente_Aux.getMiscontract().get(cliente_Aux.getMiscontract()
 							.indexOf(contrato_Aux)).setFacturasEmitidas();//aumento la cantidad de facturas emitidas
 					
-					auxFa=modeloFactura();
+					auxFa=modeloFactura();//se Cargan fecha de inicio y fecha de pago
 					
 					auxFa.setNombreCliente(cliente_Aux.getNombre());
 					auxFa.setCodiCliente(cliente_Aux.getCodigo_cliente());
@@ -183,10 +185,15 @@ public class Tricom {
 					
 					insertarFactura(auxFa);
 					
-				}
+				} 
+					
+				
+
+				
 		
 				
 			}
+			
 			
 		}
 		
