@@ -24,6 +24,9 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+
+
+
 import javax.swing.UIManager;
 import java.awt.Color;
 
@@ -39,6 +42,8 @@ public class RegistroDeClientes extends JDialog {
 	private JTextField textFieldnumber;
 	private JTextField textFieldCedula;
 	private JTextField textFieldDireccion;
+	private JButton cancelButton; 
+	private JPanel buttonPane;
 
 	/**
 	 * Launch the application. 
@@ -58,6 +63,7 @@ public class RegistroDeClientes extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistroDeClientes(Cliente cli) {
+		final int code= 0;
 		cliente = cli;{
 			
 		}
@@ -144,18 +150,63 @@ public class RegistroDeClientes extends JDialog {
 		comboBox.setBounds(253, 56, 166, 20);
 		panel.add(comboBox);
 		{
-			JPanel buttonPane = new JPanel();
+		 buttonPane = new JPanel();
 			buttonPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton RegistrarButton = new JButton("Registrar");
+				JButton okButton = new JButton();
+				okButton.setText("Registrar");
+				
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					
+					if(code == 0){
+						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("")){
+						
+						Cliente a = new Cliente(txtNombre.getText(), textFieldDireccion.getText(), textFieldnumber.getText(), textFieldCedula.getText(), null, null, null, null, null, code);
+						 Tricom.getInstance().insertarCliente(a);
+						JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+						clear();
+						}else{
+							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+						}
+					}else{
+						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("")){
+							
+							cli.setNombre(txtNombre.getText());
+							cli.setCedula(textFieldCedula.getText());
+							cli.setTelefono(textFieldnumber.getText());
+							cli.setDireccion(textFieldDireccion.getText());
+							Tricom.getInstance().CargarDatosCliente(cli);
+							
+							//ListarCliente.loadCliente();
+							
+							JOptionPane.showMessageDialog(null, "Cliente fue modificado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+							dispose();
+						}else{
+							JOptionPane.showMessageDialog(null, "Verifique todos los campos", null, JOptionPane.ERROR_MESSAGE, null);
+						
+						}
+					}
+				}
+
+					
+				});
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+			}
+				
+				/*JButton RegistrarButton = new JButton("Registrar");
 				RegistrarButton.setActionCommand("Registrar");
 				buttonPane.add(RegistrarButton);
-				getRootPane().setDefaultButton(RegistrarButton);
+				getRootPane().setDefaultButton(RegistrarButton);*/
 			}
 			{
-				JButton cancelButton = new JButton("Salir");
+				
+				
+				cancelButton = new JButton("Salir");
 				cancelButton.addActionListener(new ActionListener() {
 	
 					public void actionPerformed(ActionEvent e) {
@@ -163,6 +214,7 @@ public class RegistroDeClientes extends JDialog {
 						
 					}
 				});
+				
 				cancelButton.setActionCommand("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 		
@@ -171,8 +223,20 @@ public class RegistroDeClientes extends JDialog {
 					
 					}
 				});
+				
 				buttonPane.add(cancelButton);
 			}
 	}
+
+
+private void clear() {
+	
+	txtNombre.setText("");
+	textFieldCedula.setText("");
+	textFieldDireccion.setText("");
+	textFieldnumber.setText("");
+	
+	
 }
+
 }

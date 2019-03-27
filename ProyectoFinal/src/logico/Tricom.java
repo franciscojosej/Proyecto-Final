@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JOptionPane;
 
-import org.omg.CORBA.DefinitionKind;
 
 import logico.Factura;
 
