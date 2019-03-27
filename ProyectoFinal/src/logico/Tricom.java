@@ -240,8 +240,39 @@ public class Tricom {
 		return contrato;
 	}
 	
-	
+	//buscar el cliente por su codiguillo...
+	public Cliente BuscarByCodigo(int code){
+		Cliente client = null;
+		int i = 0;
+		boolean found = false;
+		while (i<miCliente.size() && !found) {
+			if(miCliente.get(i).getCodigo_cliente()== code){
+				client = miCliente.get(i);
+				found = true;
+			}
+			 i++;
+		}
+		
+		return client;
+		
+	}
 
+	//buscar empleado por su codigo.
+	public Empleado BuscarPorCodigo(String identifier){
+		
+        Empleado worker=null;
+		boolean find = false;
+		int i=0;
+		while (i<MiPersonal.size()&&!find) {
+			if(MiPersonal.get(i).getCodigo_empleado().equalsIgnoreCase(identifier)){
+				worker = MiPersonal.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return worker;
+		
+	}
 	
 
 }
