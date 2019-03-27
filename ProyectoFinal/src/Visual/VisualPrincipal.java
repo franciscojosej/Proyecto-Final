@@ -44,7 +44,7 @@ public class VisualPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VisualPrincipal() {
-		setTitle("Tricom RD...");
+		setTitle("Telefonia e Internet Tricom RD...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
