@@ -30,7 +30,7 @@ public class Internet extends Plan {
 
 	public float CalcularCosto() {
 		// TODO Auto-generated method stub
-		return 0;
+		return constoInternet*100 +velocidad_conexion;
 	}
 
 }

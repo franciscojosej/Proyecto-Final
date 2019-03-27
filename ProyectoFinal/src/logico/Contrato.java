@@ -13,19 +13,20 @@ public class Contrato {
 	private ArrayList<Plan> misPlanes;
 	private String codigoDeContrato;
 	private int FacturasEmitidas;
+	
 
 
 
 	
 	
-	public Contrato(boolean estado, Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento,
-			ArrayList<Plan> misPlanes, String codigoDeContrato) {
+	public Contrato(Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento,
+			 String codigoDeContrato) {
 		super();
 		this.estado = true;
 		this.fecha_de_pago = fecha_de_pago;
 		this.fecha_inicio = fecha_inicio;
 		this.fecha_vencimiento = fecha_vencimiento;
-		this.misPlanes = misPlanes;
+		this.misPlanes = new ArrayList<Plan>();
 		this.codigoDeContrato = codigoDeContrato;
 		FacturasEmitidas = 0;
 	}
@@ -40,7 +41,7 @@ public class Contrato {
 	public void setFacturasEmitidas() {
 		
 		
-		if(FacturasEmitidas>=3) {
+		if(FacturasEmitidas>3) {
 			setEstado(false);
 		}else {
 			FacturasEmitidas++;
@@ -92,6 +93,17 @@ public class Contrato {
 
 	public void setMisPlanes(ArrayList<Plan> misPlanes) {
 		this.misPlanes = misPlanes;
+	}
+	public void agregarServicio(Plan nuevoPlan) {
+		misPlanes.add( nuevoPlan);
+	}
+	public float getPrecioDelPlan() {
+		float precio=0;
+		for (Plan plan : misPlanes) {
+			precio+=plan.CalcularCosto();
+		}
+		return precio;
+		
 	}
 
 	
