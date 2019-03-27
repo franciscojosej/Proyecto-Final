@@ -58,7 +58,7 @@ public class Contrato extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
-				JLabel lblNewLabel = new JLabel("Codigo:");
+				JLabel lblNewLabel = new JLabel("Codigo Del Contrato:");
 				lblNewLabel.setBounds(10, 28, 138, 14);
 				panel.add(lblNewLabel);
 			}
@@ -68,7 +68,7 @@ public class Contrato extends JDialog {
 
 				txtCodigo = new JTextField();
 				txtCodigo.setEditable(false);
-				txtCodigo.setBounds(10, 56, 149, 20);
+				txtCodigo.setBounds(10, 56, 50, 20);
 				if(Contra == null) {
 					
 					 txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
@@ -89,7 +89,7 @@ public class Contrato extends JDialog {
 				}
 				{
 					textField_1 = new JTextField();
-					textField_1.setBounds(10, 47, 181, 20);
+					textField_1.setBounds(10, 47, 171, 20);
 					panel_1.add(textField_1);
 					textField_1.setColumns(10);
 				}
@@ -99,7 +99,7 @@ public class Contrato extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 					}
 				});
-				btnNewButton.setBounds(201, 46, 146, 23);
+				btnNewButton.setBounds(201, 46, 136, 23);
 				panel_1.add(btnNewButton);
 				
 				JLabel lblNewLabel_2 = new JLabel("Nombre:");
@@ -107,7 +107,7 @@ public class Contrato extends JDialog {
 				panel_1.add(lblNewLabel_2);
 				
 				textField_2 = new JTextField();
-				textField_2.setBounds(10, 103, 181, 20);
+				textField_2.setBounds(10, 103, 171, 20);
 				panel_1.add(textField_2);
 				textField_2.setColumns(10);
 				
@@ -147,12 +147,12 @@ public class Contrato extends JDialog {
 			btnNewButton_2.setBounds(223, 309, 123, 23);
 			panel.add(btnNewButton_2);
 			
-			JLabel lblPrecioTotal = new JLabel("Precio Total:");
-			lblPrecioTotal.setBounds(282, 406, 118, 14);
+			JLabel lblPrecioTotal = new JLabel("Precio Total a Pagar:");
+			lblPrecioTotal.setBounds(282, 406, 169, 14);
 			panel.add(lblPrecioTotal);
 			
 			textField_4 = new JTextField();
-			textField_4.setBounds(394, 403, 108, 20);
+			textField_4.setBounds(408, 403, 94, 20);
 			panel.add(textField_4);
 			textField_4.setColumns(10);
 			

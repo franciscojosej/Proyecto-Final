@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import logico.Cliente;
+import logico.Facturacion;
 
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
@@ -163,13 +164,22 @@ public class VisualPrincipal extends JFrame {
 		});
 		mnContrato.add(mntmContrato);
 		
-		JMenu mnNewMenu_4 = new JMenu("Facturas");
-		menuBar.add(mnNewMenu_4);
+		JMenu mnFacturar = new JMenu("Facturas");
+		menuBar.add(mnFacturar);
 		
 		JMenuItem mntmfacturar = new JMenuItem("\u2022Facturar");
-		mnNewMenu_4.add(mntmfacturar);
+		mntmfacturar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FacturacionVisual factu = new FacturacionVisual();
+				factu.setModal(true);
+				factu.setLocationRelativeTo(null);
+				factu.setVisible(true);
+				
+			}
+		});
+		mnFacturar.add(mntmfacturar);
 		
 		JMenuItem mntmgenerarFactura = new JMenuItem("\u2022Generar Factura");
-		mnNewMenu_4.add(mntmgenerarFactura);
+		mnFacturar.add(mntmgenerarFactura);
 	}
 }

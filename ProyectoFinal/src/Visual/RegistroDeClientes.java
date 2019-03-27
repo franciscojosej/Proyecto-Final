@@ -20,6 +20,12 @@ import logico.Persona;
 import logico.Cliente;
 import logico.Tricom;
 import logico.Plan;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 
 
@@ -63,24 +69,20 @@ public class RegistroDeClientes extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos Del Cliente", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(0, 11, 434, 217);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		{
-			JLabel lblRegistroClientes = new JLabel("Datos Del Clientes");
-			lblRegistroClientes.setBounds(10, 0, 111, 14);
-			panel.add(lblRegistroClientes);
-		}
-		{
-			JLabel lblNewLabel = new JLabel("Codigo:");
-			lblNewLabel.setBounds(10, 36, 46, 14);
+			JLabel lblNewLabel = new JLabel("Codigo Del Cliente:");
+			lblNewLabel.setBounds(10, 36, 126, 14);
 			panel.add(lblNewLabel);
 		}
 		{
 			
 			txtCodigo = new JTextField();
+			txtCodigo.setBounds(10, 56, 33, 20);
 			txtCodigo.setEditable(false);
-			txtCodigo.setBounds(10, 56, 149, 20);
 			if(cli == null) {
 				
 				 txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
@@ -111,8 +113,8 @@ public class RegistroDeClientes extends JDialog {
 			textFieldnumber.setColumns(10);
 		}
 		{
-			JLabel lblNewLabel_3 = new JLabel("Cedula:");
-			lblNewLabel_3.setBounds(253, 87, 46, 14);
+			JLabel lblNewLabel_3 = new JLabel("Cedula de Identidad:");
+			lblNewLabel_3.setBounds(253, 87, 166, 14);
 			panel.add(lblNewLabel_3);
 		}
 		{
@@ -132,8 +134,18 @@ public class RegistroDeClientes extends JDialog {
 			panel.add(textFieldDireccion);
 			textFieldDireccion.setColumns(10);
 		}
+		
+		JLabel lblNewLabel_5 = new JLabel("Sexo:");
+		lblNewLabel_5.setBounds(253, 36, 46, 14);
+		panel.add(lblNewLabel_5);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino"}));
+		comboBox.setBounds(253, 56, 166, 20);
+		panel.add(comboBox);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

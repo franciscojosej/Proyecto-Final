@@ -8,6 +8,7 @@ public class Tricom {
 	
 
 	public static int ClienteCod = 0;
+	public static int FacturacionCod = 0;
 	public static int PlanesCod = 0;
 	public static int EmpleadoCod = 0;
 	public static int ContratoCod = 0;

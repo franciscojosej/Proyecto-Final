@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class RegistroDeEmpleado extends JDialog {
 	
@@ -64,14 +65,14 @@ public class RegistroDeEmpleado extends JDialog {
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
-				JLabel lblNewLabel = new JLabel("Codigo:");
-				lblNewLabel.setBounds(10, 34, 118, 14);
+				JLabel lblNewLabel = new JLabel("Codigo Del Empleado:");
+				lblNewLabel.setBounds(10, 34, 168, 14);
 				panel.add(lblNewLabel);
 			}
 			{
 				txtCodigo = new JTextField();
 				txtCodigo.setEditable(false);
-				txtCodigo.setBounds(10, 55, 208, 20);
+				txtCodigo.setBounds(10, 55, 36, 20);
 				if(Emple == null) {
 					
 					 txtCodigo.setText("E-" + (Tricom.ClienteCod+1));
@@ -80,7 +81,7 @@ public class RegistroDeEmpleado extends JDialog {
 				txtCodigo.setColumns(10);
 			}
 			{
-				JLabel lblNewLabel_1 = new JLabel("Nombre :");
+				JLabel lblNewLabel_1 = new JLabel("Nombre:");
 				lblNewLabel_1.setBounds(10, 86, 118, 14);
 				panel.add(lblNewLabel_1);
 			}
@@ -102,7 +103,7 @@ public class RegistroDeEmpleado extends JDialog {
 				textField_2.setColumns(10);
 			}
 			{
-				JLabel lblNewLabel_3 = new JLabel("Sueldo Base:");
+				JLabel lblNewLabel_3 = new JLabel("Telefono:");
 				lblNewLabel_3.setBounds(10, 198, 118, 14);
 				panel.add(lblNewLabel_3);
 			}
@@ -129,10 +130,19 @@ public class RegistroDeEmpleado extends JDialog {
 				panel.add(passwordField);
 			}
 			{
-				JLabel lblNewLabel_5 = new JLabel("Pagos por Horas Extra:");
-				lblNewLabel_5.setBounds(233, 198, 208, 14);
-				panel.add(lblNewLabel_5);
+				JLabel lblNewLabel_7 = new JLabel("Sexo:");
+				lblNewLabel_7.setBounds(233, 86, 112, 14);
+				panel.add(lblNewLabel_7);
 			}
+			
+			JComboBox comboBox = new JComboBox();
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino", ""}));
+			comboBox.setBounds(233, 111, 158, 20);
+			panel.add(comboBox);
+			
+			JLabel lblNewLabel_5 = new JLabel("Cedula De identidad:");
+			lblNewLabel_5.setBounds(233, 198, 158, 14);
+			panel.add(lblNewLabel_5);
 		}
 		{
 			JPanel panel = new JPanel();

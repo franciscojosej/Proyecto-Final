@@ -28,6 +28,7 @@ public class CrearPlanes extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCodigo;
 	private JTextField textField_2;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -57,13 +58,13 @@ public class CrearPlanes extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
-			JLabel lblNewLabel = new JLabel("Codigo:");
+			JLabel lblNewLabel = new JLabel("Codigo Del Plan:");
 			lblNewLabel.setBounds(10, 23, 176, 14);
 			panel.add(lblNewLabel);
 			
 			txtCodigo = new JTextField();
 			txtCodigo.setEditable(false);
-			txtCodigo.setBounds(10, 55, 42, 20);
+			txtCodigo.setBounds(10, 42, 42, 20);
 			if(Plans == null) {
 				
 				 txtCodigo.setText("P-" + (Tricom.PlanesCod+1));
@@ -85,7 +86,7 @@ public class CrearPlanes extends JDialog {
 			rdbtnNewRadioButton.setBounds(6, 39, 109, 23);
 			panel_1.add(rdbtnNewRadioButton);
 			
-			JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Cable.");
+			JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Television.");
 			rdbtnNewRadioButton_1.setBounds(127, 39, 109, 23);
 			panel_1.add(rdbtnNewRadioButton_1);
 			
@@ -125,19 +126,19 @@ public class CrearPlanes extends JDialog {
 			comboBox_2.setBounds(250, 33, 119, 20);
 			panel_2.add(comboBox_2);
 			
-			JLabel lblNewLabel_5 = new JLabel("Precio:");
-			lblNewLabel_5.setBounds(13, 381, 68, 14);
+			JLabel lblNewLabel_5 = new JLabel("Precio Total:");
+			lblNewLabel_5.setBounds(13, 381, 124, 14);
 			panel.add(lblNewLabel_5);
 			
 			textField_2 = new JTextField();
-			textField_2.setBounds(64, 378, 106, 20);
+			textField_2.setBounds(94, 378, 76, 20);
 			panel.add(textField_2);
 			textField_2.setColumns(10);
 			
-			JComboBox comboBox_3 = new JComboBox();
-			comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "Data ilimitada", "Canales Premium", "Minutos ilimitado", "Otros"}));
-			comboBox_3.setBounds(10, 112, 189, 20);
-			panel.add(comboBox_3);
+			textField = new JTextField();
+			textField.setBounds(10, 104, 181, 20);
+			panel.add(textField);
+			textField.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
