@@ -2,7 +2,7 @@ package logico;
 
 import java.util.ArrayList;
 
-import logico.Facturacion;
+import logico.Factura;
 
 public class Tricom {
 	
@@ -14,8 +14,8 @@ public class Tricom {
 	public static int ContratoCod = 0;
 	private ArrayList<Contrato> misContrato;
 	private ArrayList<Cliente> miCliente;
-	private ArrayList<Facturacion>tuContrato;
-	private ArrayList<Facturacion> misFacturas;
+	private ArrayList<Factura>tuContrato;
+	private ArrayList<Factura> misFacturas;
 	private ArrayList<Cliente> cliConServicios;
 	private ArrayList<Empleado> MiPersonal;
 	private static int code;
@@ -80,19 +80,19 @@ public class Tricom {
 		this.miCliente = miCliente;
 	}
 	
-	public ArrayList<Facturacion> getTuContrato() {
+	public ArrayList<Factura> getTuContrato() {
 		return tuContrato;
 	}
 
-	public void setTuContrato(ArrayList<Facturacion> tuContrato) {
+	public void setTuContrato(ArrayList<Factura> tuContrato) {
 		this.tuContrato = tuContrato;
 	}
 	
-	public ArrayList<Facturacion> getMisFacturas() {
+	public ArrayList<Factura> getMisFacturas() {
 		return misFacturas;
 	}
 
-	public void setMisFacturas(ArrayList<Facturacion> misFacturas) {
+	public void setMisFacturas(ArrayList<Factura> misFacturas) {
 		this.misFacturas = misFacturas;
 	}
 	
@@ -108,12 +108,12 @@ public class Tricom {
 		contra.setCodigoDeContrato(String.valueOf(code));
 	}
 	
-	public void insertarFactura(Facturacion fact){
+	public void insertarFactura(Factura fact){
 		misFacturas.add(fact);
 		
 	}
 	
-	public void insertarContratoCliente(Facturacion con){
+	public void insertarContratoCliente(Factura con){
 		tuContrato.add(con);
 		
 	}

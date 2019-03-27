@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import logico.Cliente;
-import logico.Facturacion;
+import logico.Factura;
 
 import java.awt.Panel;
 import java.awt.event.ActionEvent;

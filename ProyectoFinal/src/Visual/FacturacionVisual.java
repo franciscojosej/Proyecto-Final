@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import logico.Tricom;
-import logico.Facturacion;
+import logico.Factura;
 
 import javax.swing.UIManager;
 import java.awt.Color;

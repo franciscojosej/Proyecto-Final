@@ -2,14 +2,14 @@ package logico;
 
 import java.util.ArrayList;
 
-import logico.Facturacion;
+import logico.Factura;
 import logico.Cliente;
 
 public class Prueba_Tricom_Justo {
 
 	private ArrayList<Cliente> miCliente;
 	private static int code;
-	private ArrayList<Facturacion>tuContrato;
+	private ArrayList<Factura>tuContrato;
 	
 	private Prueba_Tricom_Justo (){
 		super();

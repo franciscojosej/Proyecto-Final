@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import logico.Facturacion;
+import logico.Factura;
 import logico.Persona;
 import logico.Cliente;
 import logico.Tricom;

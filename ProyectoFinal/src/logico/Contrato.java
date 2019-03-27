@@ -12,34 +12,40 @@ public class Contrato {
 	private Date fecha_vencimiento;
 	private ArrayList<Plan> misPlanes;
 	private String codigoDeContrato;
-	
+	private int FacturasEmitidas;
 
 
 
 	
-
-
-
-
-
-	public Contrato( Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento,
+	
+	public Contrato(boolean estado, Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento,
 			ArrayList<Plan> misPlanes, String codigoDeContrato) {
 		super();
-		
 		this.estado = true;
 		this.fecha_de_pago = fecha_de_pago;
 		this.fecha_inicio = fecha_inicio;
 		this.fecha_vencimiento = fecha_vencimiento;
 		this.misPlanes = misPlanes;
 		this.codigoDeContrato = codigoDeContrato;
+		FacturasEmitidas = 0;
 	}
-
-
-	public boolean isEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
 
+	public int getFacturasEmitidas() {
+		return FacturasEmitidas;
+	}
+	public void setFacturasEmitidas() {
+		
+		
+		if(FacturasEmitidas>=3) {
+			setEstado(false);
+		}else {
+			FacturasEmitidas++;
+		}
+	}
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
@@ -87,7 +93,7 @@ public class Contrato {
 	public void setMisPlanes(ArrayList<Plan> misPlanes) {
 		this.misPlanes = misPlanes;
 	}
-	
+
 	
 	
 	
