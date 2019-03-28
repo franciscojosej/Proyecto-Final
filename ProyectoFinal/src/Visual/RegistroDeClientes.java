@@ -161,6 +161,7 @@ public class RegistroDeClientes extends JDialog {
 				
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						if(code == 0){
 					
 						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && Tricom.getInstance().BuscarByCedula(textFieldCedula.getText())==null
 								&& !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("") && comboBox.getSelectedIndex()!=0){
@@ -177,7 +178,7 @@ public class RegistroDeClientes extends JDialog {
 						
 	
 				}
-
+					}
 					
 				});
 				okButton.setActionCommand("OK");

@@ -132,9 +132,9 @@ public class ListarCliente extends JDialog {
 		for (Cliente aux : Tricom.getInstance().getMiCliente()) {
 			fila[0] = aux.getCodigo_cliente();
 			fila[1] = aux.getNombre();
-			fila[4] = aux.getCedula();
-			fila[3] = aux.getDireccion();
-			fila[2] = aux.getTelefono();
+			fila[4] = aux.getCedula(); //Está recibiendo lo de teléfono.
+			fila[3] = aux.getApellido(); //Está recibiendo apellido en vez de dirección.
+			fila[2] = aux.getTelefono(); //Está recibiendo lo de cédula.
 			tableModel.addRow(fila);
 			
 			
@@ -148,6 +148,7 @@ public class ListarCliente extends JDialog {
 		columnModel.getColumn(2).setPreferredWidth(150);
 		columnModel.getColumn(3).setPreferredWidth(300);
 		columnModel.getColumn(4).setPreferredWidth(177);
+		
 		
 		
 	
