@@ -8,13 +8,16 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.border.TitledBorder;
 
+import logico.Control;
 import logico.Empleado;
 import logico.Tricom;
+import logico.User;
 
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -34,6 +37,8 @@ public class RegistroDeEmpleado extends JDialog {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JPasswordField passwordField;
+	private JRadioButton rdbtnAdministrativo;
+	private JRadioButton rdbtnComercial;
 
 	/**
 	 * Launch the application.
@@ -151,14 +156,14 @@ public class RegistroDeEmpleado extends JDialog {
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
-				JRadioButton rdbtnNewRadioButton = new JRadioButton("Administrativo");
-				rdbtnNewRadioButton.setBounds(98, 26, 109, 23);
-				panel.add(rdbtnNewRadioButton);
+				 rdbtnAdministrativo = new JRadioButton("Administrativo");
+				rdbtnAdministrativo.setBounds(98, 26, 109, 23);
+				panel.add(rdbtnAdministrativo);
 			}
 			{
-				JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Comercial");
-				rdbtnNewRadioButton_1.setBounds(254, 26, 109, 23);
-				panel.add(rdbtnNewRadioButton_1);
+				 rdbtnComercial = new JRadioButton("Comercial");
+				rdbtnComercial.setBounds(254, 26, 109, 23);
+				panel.add(rdbtnComercial);
 			}
 		}
 		{
@@ -187,6 +192,23 @@ public class RegistroDeEmpleado extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+					
+						if(	rdbtnAdministrativo.isSelected()	) {
+							if(rdbtnComercial.isSelected()) {
+								rdbtnComercial.setSelected(false);
+							}
+							
+							JOptionPane.showConfirmDialog(okButton, "MM");
+						}
+						if(rdbtnComercial.isSelected()) {
+							if(	rdbtnAdministrativo.isSelected()	) {
+								rdbtnAdministrativo.setSelected(false);
+							}
+								
+							JOptionPane.showConfirmDialog(okButton, "Moo");
+						}
+						//User user = new User(comboBox.getSelectedItem().toString(),textField.getText(),textField_1.getText());
+					    //Control.getInstance().regUser(user);
 					}
 				});
 				okButton.setActionCommand("OK");
