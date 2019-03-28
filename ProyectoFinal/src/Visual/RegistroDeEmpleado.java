@@ -14,6 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.border.TitledBorder;
 
+import logico.Comercial;
 import logico.Control;
 import logico.Empleado;
 import logico.Tricom;
@@ -39,6 +40,7 @@ public class RegistroDeEmpleado extends JDialog {
 	private JPasswordField txtPassword;
 	private JRadioButton rdbtnAdministrativo;
 	private JRadioButton rdbtnComercial;
+	private JComboBox cbxSexo ;
 
 	/**
 	 * Launch the application.
@@ -140,10 +142,10 @@ public class RegistroDeEmpleado extends JDialog {
 				panel.add(lblNewLabel_7);
 			}
 			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino", ""}));
-			comboBox.setBounds(233, 111, 158, 20);
-			panel.add(comboBox);
+			 cbxSexo = new JComboBox();
+			cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino", ""}));
+			cbxSexo.setBounds(233, 111, 158, 20);
+			panel.add(cbxSexo);
 			
 			JLabel lblNewLabel_5 = new JLabel("Cedula De identidad:");
 			lblNewLabel_5.setBounds(233, 198, 158, 14);
@@ -204,11 +206,14 @@ public class RegistroDeEmpleado extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						String cargo="";
-					
+					Empleado nuevoEmpleado=null;
 
 						if(rdbtnComercial.isSelected()) {
 
 								cargo="Administrativo";
+nuevoEmpleado =new Comercial(txtNombre.getText(), " ", textCedula.getText(), textTelefono.getText(), " ",  cbxSexo.getSelectedItem().toString(),
+		" ", " ", " ", " ", 2.3,	" ", 2.2,1, 1, Tricom.getFechaInicio(),	" ");
+
 							
 						}
 						else if(	rdbtnAdministrativo.isSelected()	) {
@@ -217,8 +222,14 @@ public class RegistroDeEmpleado extends JDialog {
 						}
 						User user = new User(cargo,textUsuario.getText(),
 								txtPassword.getPassword().toString() );
-						if(()) {
+						
+						if((rdbtnAdministrativo.isSelected()||rdbtnComercial.isSelected())&&!textUsuario.getText().equalsIgnoreCase("")&&
+								!txtPassword.getPassword().toString().equalsIgnoreCase("")&&!textCedula.getText().equalsIgnoreCase("")
+								&&!txtNombre.getText().equalsIgnoreCase("")&&!textTelefono.getText().equalsIgnoreCase("")) {
 							 Control.getInstance().regUser(user);
+							 JOptionPane.showMessageDialog(null, "Empleado registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+						}else {
+							JOptionPane.showMessageDialog(null, "Verifique que todos los campos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
 						
 						

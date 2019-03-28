@@ -9,12 +9,12 @@ public class Empleado extends Persona {
 	protected float sueldo;
 	protected int dias_trabajados;
 	protected int horas_extra;
-	protected Date fecha_ingreso;
+	protected String fecha_ingreso;
 	protected String num_seguro_social;
 	
 	public Empleado(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
 			String ciudad, String telefono_fijo, String estado_social, String codigo_empleado, float sueldo_base,
-			String departamento, float sueldo, int dias_trabajados, int horas_extra, Date fecha_ingreso,
+			String departamento, float sueldo, int dias_trabajados, int horas_extra, String fecha_ingreso,
 			String num_seguro_social) {
 		super(nombre, apellido, cedula, telefono, direccion, sexo);
 		this.codigo_empleado = codigo_empleado;
@@ -75,13 +75,7 @@ public class Empleado extends Persona {
 		this.horas_extra = horas_extra;
 	}
 
-	public Date getFecha_ingreso() {
-		return fecha_ingreso;
-	}
 
-	public void setFecha_ingreso(Date fecha_ingreso) {
-		this.fecha_ingreso = fecha_ingreso;
-	}
 
 	public String getNum_seguro_social() {
 		return num_seguro_social;

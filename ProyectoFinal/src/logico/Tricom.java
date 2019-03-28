@@ -92,9 +92,10 @@ public class Tricom {
 	}
 	
 	public void insertarCliente(Cliente client){
-		miCliente.add(client);
+		
 		ClienteCod++;
 		client.setCodigo_cliente(ClienteCod);
+		miCliente.add(client);
 		
 	}
 	public void insertarContrato(Contrato contra){
@@ -110,7 +111,11 @@ public class Tricom {
 		fact.setCodiFactura(FacturacionCod);
 		misFacturas.add(fact);	
 	}
-	
+	public void insertarEmpleado(Empleado nuevoEmpleado) {
+		EmpleadoCod++;
+		nuevoEmpleado.setCodigo_empleado(String.valueOf(EmpleadoCod));
+		MiPersonal.add(nuevoEmpleado);
+	}
 
 
 	public Cliente BuscarByCedula(String cedula) {
@@ -205,12 +210,12 @@ public class Tricom {
 				getFechavencimiento(), 0, 0);
 	return factura_Aux;
 	}
-	private static String getFechaInicio() {
+	public static String getFechaInicio() {
 		Calendar fecha =  new GregorianCalendar();
 		return String.valueOf((fecha.get(Calendar.MONTH)+1)+"-"+fecha.get(Calendar.DAY_OF_MONTH)+
 				"-"+fecha.get(Calendar.YEAR)+" "+fecha.get(Calendar.HOUR_OF_DAY)+ ":"+fecha.get(Calendar.MINUTE)+":"+fecha.get(Calendar.SECOND));
 	}
-	private static String getFechavencimiento() {
+	public static String getFechavencimiento() {
 		Calendar fecha =  new GregorianCalendar();
 		String fe="/ / /";
 		if(fecha.get(Calendar.MONTH)+2<12) {
