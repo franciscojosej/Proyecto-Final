@@ -54,11 +54,11 @@ public class CrearPlanes extends JDialog {
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos de los Planes ", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos De Los Planes ", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			
-			JLabel lblNewLabel = new JLabel("C\u00F3digo del Plan:");
+			JLabel lblNewLabel = new JLabel("Codigo Del Plan:");
 			lblNewLabel.setBounds(10, 23, 176, 14);
 			panel.add(lblNewLabel);
 			
@@ -72,12 +72,12 @@ public class CrearPlanes extends JDialog {
 			panel.add(txtCodigo);
 			txtCodigo.setColumns(10);
 			
-			JLabel lblNewLabel_1 = new JLabel("Nombre del Plan:");
+			JLabel lblNewLabel_1 = new JLabel("Nombre Del Plan:");
 			lblNewLabel_1.setBounds(10, 87, 176, 14);
 			panel.add(lblNewLabel_1);
 			
 			JPanel panel_1 = new JPanel();
-			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tipo de Servicio", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tipo De Servicio", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel_1.setBounds(10, 155, 379, 97);
 			panel.add(panel_1);
 			panel_1.setLayout(null);
@@ -86,11 +86,11 @@ public class CrearPlanes extends JDialog {
 			rdbtnNewRadioButton.setBounds(6, 39, 109, 23);
 			panel_1.add(rdbtnNewRadioButton);
 			
-			JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Televisión.");
+			JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Television.");
 			rdbtnNewRadioButton_1.setBounds(127, 39, 109, 23);
 			panel_1.add(rdbtnNewRadioButton_1);
 			
-			JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Teléfono.");
+			JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Telefono.");
 			rdbtnNewRadioButton_2.setBounds(249, 39, 109, 23);
 			panel_1.add(rdbtnNewRadioButton_2);
 			
@@ -122,7 +122,7 @@ public class CrearPlanes extends JDialog {
 			panel_2.add(lblNewLabel_4);
 			
 			JComboBox comboBox_2 = new JComboBox();
-		    comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"<Plan Minutos>", "50 Minutos", "100 Minutos ", "300 Minutos ", "1000 Minutos", "Minutos ilimitados"}));
+		    comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"<Plan Minutos>", "50 Minutos", "100 Minutos ", "300 Minutos ", "1000 Minutos", "Minutos ilimitado"}));
 			comboBox_2.setBounds(250, 33, 119, 20);
 			panel_2.add(comboBox_2);
 			
