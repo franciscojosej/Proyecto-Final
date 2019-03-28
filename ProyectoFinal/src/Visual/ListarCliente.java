@@ -41,6 +41,7 @@ public class ListarCliente extends JDialog {
 	private static JButton btnUpdate;
 	private static JButton btnDelete;
 	private int code;
+	private Cliente clie;
 
 	public ListarCliente() {
 		setBounds(100, 100, 934, 454);
@@ -101,7 +102,7 @@ public class ListarCliente extends JDialog {
 				btnUpdate = new JButton("Modificar");
 				btnUpdate.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						RegistroDeClientes mod = new RegistroDeClientes(null);
+						RegistroDeClientes mod = new RegistroDeClientes(clie);
 						mod.setModal(true);
 						mod.setLocationRelativeTo(null);
 						mod.setVisible(true);

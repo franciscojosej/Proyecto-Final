@@ -161,8 +161,6 @@ public class RegistroDeClientes extends JDialog {
 				
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(code == 0){
-					
 						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && Tricom.getInstance().BuscarByCedula(textFieldCedula.getText())==null
 								&& !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("") && comboBox.getSelectedIndex()!=0){
 						Cliente a = new Cliente(txtNombre.getText(), textFieldDireccion.getText(), textFieldnumber.getText(), textFieldCedula.getText(), null, null, null, null, null, code);
@@ -175,9 +173,6 @@ public class RegistroDeClientes extends JDialog {
 						}else{
 							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
-						
-	
-				}
 					}
 					
 				});

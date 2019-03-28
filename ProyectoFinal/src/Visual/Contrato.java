@@ -58,7 +58,7 @@ public class Contrato extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
-				JLabel lblNewLabel = new JLabel("Codigo Del Contrato:");
+				JLabel lblNewLabel = new JLabel("C\u00F3digo del Contrato:");
 				lblNewLabel.setBounds(10, 28, 138, 14);
 				panel.add(lblNewLabel);
 			}
@@ -78,12 +78,12 @@ public class Contrato extends JDialog {
 			}
 			{
 				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Imformacion Del Cliente", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Información del Cliente", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				panel_1.setBounds(10, 80, 541, 141);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
-					JLabel lblNewLabel_1 = new JLabel("Indentidad Del Cliente:");
+					JLabel lblNewLabel_1 = new JLabel("Identidad del Cliente:");
 					lblNewLabel_1.setBounds(10, 22, 181, 14);
 					panel_1.add(lblNewLabel_1);
 				}
@@ -111,7 +111,7 @@ public class Contrato extends JDialog {
 				panel_1.add(textField_2);
 				textField_2.setColumns(10);
 				
-				JLabel lblNewLabel_3 = new JLabel("Numero Telefonico:");
+				JLabel lblNewLabel_3 = new JLabel("N\u00FAmero Telef\u00F3nico:");
 				lblNewLabel_3.setBounds(345, 78, 146, 14);
 				panel_1.add(lblNewLabel_3);
 				
@@ -127,7 +127,7 @@ public class Contrato extends JDialog {
 			panel.add(panel_1);
 			
 			JPanel panel_2 = new JPanel();
-			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Carrito De Compras", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Carrito de Compras", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel_2.setBounds(356, 245, 182, 115);
 			panel.add(panel_2);
 			
@@ -156,12 +156,12 @@ public class Contrato extends JDialog {
 			panel.add(textField_4);
 			textField_4.setColumns(10);
 			
-			JLabel lblNewLabel_4 = new JLabel("Forma De Pago:");
+			JLabel lblNewLabel_4 = new JLabel("Forma de Pago:");
 			lblNewLabel_4.setBounds(49, 381, 150, 14);
 			panel.add(lblNewLabel_4);
 			
 			JComboBox comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Tarjeta De Credito", "Efectivo ", "Cheque "}));
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Tarjeta de Crédito", "Efectivo ", "Cheque "}));
 			comboBox.setBounds(49, 403, 154, 20);
 			panel.add(comboBox);
 		}

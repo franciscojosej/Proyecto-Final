@@ -86,7 +86,7 @@ public class FacturacionVisual extends JDialog {
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
-					JLabel lblNewLabel_1 = new JLabel("Nombre Del Cliente:");
+					JLabel lblNewLabel_1 = new JLabel("Nombre del Cliente:");
 					lblNewLabel_1.setBounds(10, 21, 115, 14);
 					panel_1.add(lblNewLabel_1);
 				}
@@ -97,7 +97,7 @@ public class FacturacionVisual extends JDialog {
 					textField_1.setColumns(10);
 				}
 				{
-					JLabel lblNewLabel_2 = new JLabel("Codigo Del Cliente:");
+					JLabel lblNewLabel_2 = new JLabel("Código del Cliente:");
 					lblNewLabel_2.setBounds(10, 68, 141, 14);
 					panel_1.add(lblNewLabel_2);
 				}
@@ -108,7 +108,7 @@ public class FacturacionVisual extends JDialog {
 					textField_2.setColumns(10);
 				}
 				
-				JLabel lblNewLabel_3 = new JLabel("Telefono:");
+				JLabel lblNewLabel_3 = new JLabel("Teléfono:");
 				lblNewLabel_3.setBounds(316, 21, 115, 14);
 				panel_1.add(lblNewLabel_3);
 				
@@ -117,7 +117,7 @@ public class FacturacionVisual extends JDialog {
 				panel_1.add(textField_3);
 				textField_3.setColumns(10);
 				
-				JLabel lblNewLabel_4 = new JLabel("Cedula de Identidad:");
+				JLabel lblNewLabel_4 = new JLabel("Cédula de Identidad:");
 				lblNewLabel_4.setBounds(316, 68, 129, 14);
 				panel_1.add(lblNewLabel_4);
 				{
@@ -148,8 +148,8 @@ public class FacturacionVisual extends JDialog {
 					panel_1.add(comboBox);
 				}
 				{
-					JLabel lblNewLabel_6 = new JLabel("Fecha De Facturacion:");
-					lblNewLabel_6.setBounds(130, 24, 150, 14);
+					JLabel lblNewLabel_6 = new JLabel("Fecha de Facturación:");
+					lblNewLabel_6.setBounds(130, 24, 110, 14);
 					panel_1.add(lblNewLabel_6);
 				}
 				{
@@ -171,7 +171,7 @@ public class FacturacionVisual extends JDialog {
 				}
 				{
 					JLabel lblNewLabel_8 = new JLabel("Precio Base:");
-					lblNewLabel_8.setBounds(396, 24, 96, 14);
+					lblNewLabel_8.setBounds(382, 24, 110, 14);
 					panel_1.add(lblNewLabel_8);
 				}
 				{
@@ -192,7 +192,7 @@ public class FacturacionVisual extends JDialog {
 			textField_8.setColumns(10);
 			
 			JTextPane txtpnParaBrindarMejor = new JTextPane();
-			txtpnParaBrindarMejor.setText("Gracias Por Preferirnos....");
+			txtpnParaBrindarMejor.setText("Gracias por Preferirnos....");
 			txtpnParaBrindarMejor.setEditable(false);
 			txtpnParaBrindarMejor.setBounds(344, 334, 168, 20);
 			panel.add(txtpnParaBrindarMejor);
