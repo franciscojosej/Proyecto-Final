@@ -33,10 +33,10 @@ public class RegistroDeEmpleado extends JDialog {
 	private JTextField txtCodigo;
 	private JTextField txtNombre;
 	private static Empleado Emple;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JPasswordField passwordField;
+	private JTextField textUsuario;
+	private JTextField textTelefono;
+	private JTextField textCedula;
+	private JPasswordField txtPassword;
 	private JRadioButton rdbtnAdministrativo;
 	private JRadioButton rdbtnComercial;
 
@@ -102,10 +102,10 @@ public class RegistroDeEmpleado extends JDialog {
 				panel.add(lblNewLabel_2);
 			}
 			{
-				textField_2 = new JTextField();
-				textField_2.setBounds(10, 167, 208, 20);
-				panel.add(textField_2);
-				textField_2.setColumns(10);
+				textUsuario = new JTextField();
+				textUsuario.setBounds(10, 167, 208, 20);
+				panel.add(textUsuario);
+				textUsuario.setColumns(10);
 			}
 			{
 				JLabel lblNewLabel_3 = new JLabel("Telefono:");
@@ -113,10 +113,10 @@ public class RegistroDeEmpleado extends JDialog {
 				panel.add(lblNewLabel_3);
 			}
 			{
-				textField_3 = new JTextField();
-				textField_3.setBounds(10, 223, 208, 20);
-				panel.add(textField_3);
-				textField_3.setColumns(10);
+				textTelefono = new JTextField();
+				textTelefono.setBounds(10, 223, 208, 20);
+				panel.add(textTelefono);
+				textTelefono.setColumns(10);
 			}
 			{
 				JLabel lblNewLabel_4 = new JLabel("Contrase\u00F1a:");
@@ -124,15 +124,15 @@ public class RegistroDeEmpleado extends JDialog {
 				panel.add(lblNewLabel_4);
 			}
 			{
-				textField_4 = new JTextField();
-				textField_4.setBounds(233, 223, 208, 20);
-				panel.add(textField_4);
-				textField_4.setColumns(10);
+				textCedula = new JTextField();
+				textCedula.setBounds(233, 223, 208, 20);
+				panel.add(textCedula);
+				textCedula.setColumns(10);
 			}
 			{
-				passwordField = new JPasswordField();
-				passwordField.setBounds(233, 167, 208, 20);
-				panel.add(passwordField);
+				txtPassword = new JPasswordField();
+				txtPassword.setBounds(233, 167, 208, 20);
+				panel.add(txtPassword);
 			}
 			{
 				JLabel lblNewLabel_7 = new JLabel("Sexo:");
@@ -151,36 +151,47 @@ public class RegistroDeEmpleado extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Tipo De Empleado", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-			panel.setBounds(10, 277, 468, 56);
+			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBounds(10, 277, 468, 73);
 			contentPanel.add(panel);
 			panel.setLayout(null);
+		}
+		{
+			JPanel panel_1 = new JPanel();
+			panel_1.setBounds(10, 356, 468, 56);
+			contentPanel.add(panel_1);
+			panel_1.setBorder(new TitledBorder(null, "Tipo De Empleado", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel_1.setLayout(null);
 			{
 				 rdbtnAdministrativo = new JRadioButton("Administrativo");
-				rdbtnAdministrativo.setBounds(98, 26, 109, 23);
-				panel.add(rdbtnAdministrativo);
+				 rdbtnAdministrativo.addActionListener(new ActionListener() {
+				 	public void actionPerformed(ActionEvent e) {
+						if(	rdbtnAdministrativo.isSelected()	) {
+							if(rdbtnComercial.isSelected()) {
+								rdbtnComercial.setSelected(false);
+							}
+							
+						}
+				 	}
+				 });
+				rdbtnAdministrativo.setBounds(91, 26, 109, 23);
+				panel_1.add(rdbtnAdministrativo);
 			}
 			{
 				 rdbtnComercial = new JRadioButton("Comercial");
+				 rdbtnComercial.addActionListener(new ActionListener() {
+				 	public void actionPerformed(ActionEvent e) {
+						if(rdbtnComercial.isSelected()) {
+							if(	rdbtnAdministrativo.isSelected()	) {
+								rdbtnAdministrativo.setSelected(false);
+							}
+								
+						
+						}
+				 	}
+				 });
 				rdbtnComercial.setBounds(254, 26, 109, 23);
-				panel.add(rdbtnComercial);
-			}
-		}
-		{
-			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel.setBounds(10, 344, 468, 73);
-			contentPanel.add(panel);
-			panel.setLayout(null);
-			{
-				JLabel lblNewLabel_6 = new JLabel("Cargo:");
-				lblNewLabel_6.setBounds(10, 35, 106, 14);
-				panel.add(lblNewLabel_6);
-			}
-			{
-				JComboBox comboBox = new JComboBox();
-				comboBox.setBounds(75, 32, 161, 20);
-				panel.add(comboBox);
+				panel_1.add(rdbtnComercial);
 			}
 		}
 		{
@@ -192,23 +203,26 @@ public class RegistroDeEmpleado extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						String cargo="";
 					
-						if(	rdbtnAdministrativo.isSelected()	) {
-							if(rdbtnComercial.isSelected()) {
-								rdbtnComercial.setSelected(false);
-							}
-							
-							JOptionPane.showConfirmDialog(okButton, "MM");
-						}
+
 						if(rdbtnComercial.isSelected()) {
-							if(	rdbtnAdministrativo.isSelected()	) {
-								rdbtnAdministrativo.setSelected(false);
-							}
-								
-							JOptionPane.showConfirmDialog(okButton, "Moo");
+
+								cargo="Administrativo";
+							
 						}
-						//User user = new User(comboBox.getSelectedItem().toString(),textField.getText(),textField_1.getText());
-					    //Control.getInstance().regUser(user);
+						else if(	rdbtnAdministrativo.isSelected()	) {
+
+							cargo="Comercial";
+						}
+						User user = new User(cargo,textUsuario.getText(),
+								txtPassword.getPassword().toString() );
+						if(()) {
+							 Control.getInstance().regUser(user);
+						}
+						
+						
+					 
 					}
 				});
 				okButton.setActionCommand("OK");
