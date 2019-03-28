@@ -19,6 +19,7 @@ import logico.Cliente;
 import logico.Tricom;
 import Visual.RegistroDeClientes;
 
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -29,205 +30,127 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class ListarCliente extends JDialog {
-	
-	private final JPanel contentPanel = new JPanel();
-	private static JTable table;
-	private static Object[] fila;
-	private static DefaultTableModel tableModel;
-	private static JButton btnEliminar;
-	private static JButton btnModificar;
-	private int code;
-	JComboBox cbxPublicType;
-
-
 
 	/**
-	 * Create the dialog.
-	 * @param fed 
+	 * 
 	 */
+	private final JPanel contentPanel = new JPanel();
+	private static JTable tableLista;
+	private static  DefaultTableModel tableModel;
+	private static Object[] fila;
+	private static JButton btnUpdate;
+	private static JButton btnDelete;
+	private int code;
+
 	public ListarCliente() {
-		setTitle("Listado de Publicaciones");
-		setBounds(100, 100, 650, 376);
-		setResizable(false);
+		setBounds(100, 100, 934, 454);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Listado de Clientes:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 624, 293);
+		panel.setOpaque(false);
+		panel.setBorder(new TitledBorder(null, "Lista de Clientes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 1090, 421);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 54, 604, 228);
+		scrollPane.setOpaque(false);
+		scrollPane.setBounds(10, 24, 890, 321);
 		panel.add(scrollPane);
 		
-		table = new JTable();
-		table.addMouseListener(new MouseAdapter() {
+		tableLista = new JTable();
+		tableLista.setOpaque(false);
+		tableLista.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-			/*String country;
-				int delivery;*/
-				if(table.getSelectedRow()>=0){
-					btnEliminar.setEnabled(true);
-					btnModificar.setEnabled(true);
-					int index = table.getSelectedRow();
-					code = (int)table.getModel().getValueAt(index, 0);
-					/*country = (String)tableSupply.getModel().getValueAt(index, 1);
-					delivery = (Integer)tableSupply.getModel().getValueAt(index, 2);
-					textFldSupplyName.setText(name);
-					spnDelivery.getModel().setValue(Integer.valueOf(delivery));
-					cbCountry.getModel().setSelectedItem(new String(country));*/
+			
+				if(tableLista.getSelectedRow()>=0){
+					btnUpdate.setEnabled(true);
+					int index = tableLista.getSelectedRow();
+					code = (int)tableLista.getModel().getValueAt(index, 0);
+					
 				}
 			}
 		});
 		tableModel = new DefaultTableModel();
 		String[] columnNames = {"Codigo", "Nombre","Cédula", "Dirección", "Teléfono"};
 		tableModel.setColumnIdentifiers(columnNames);
-		loadSportMans(0);
-		scrollPane.setViewportView(table);
+		loadCliente();
+		scrollPane.setViewportView(tableLista);
 		
-		JLabel lblTipoDePublicacin = new JLabel("Tipo de Publicaci\u00F3n:");
-		lblTipoDePublicacin.setBounds(10, 29, 116, 14);
-		panel.add(lblTipoDePublicacin);
+		JLabel label = new JLabel("");
+		label.setBounds(0, 0, 918, 382);
+		contentPanel.add(label);
 		
-		cbxPublicType = new JComboBox();
-		cbxPublicType.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int selection = cbxPublicType.getSelectedIndex();
-				loadSportMans(selection);
-			}
-		});
-		cbxPublicType.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Art\u00EDculos", "Libros", "Revistas"}));
-		cbxPublicType.setBounds(127, 26, 157, 20);
-		panel.add(cbxPublicType);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			
-			btnModificar = new JButton("Modificar");
-			btnModificar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					/*RegisterSportMan mod = new RegisterSportMan(fed,"Modificar Atleta",code);
-					mod.setModal(true);
-					mod.setLocationRelativeTo(null);
-					mod.setVisible(true);*/
-				}
-			});
-			btnModificar.setEnabled(false);
-			buttonPane.add(btnModificar);
 			{
-				btnEliminar = new JButton("Eliminar");
-				btnEliminar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						/*SportMan aux = fed.getSportManByCode(code);
-					  int delete = JOptionPane.showConfirmDialog(null, "Realmente desea Eliminar al Deportista: " + aux.getName(), null, JOptionPane.YES_NO_OPTION);
-						    if (delete == JOptionPane.YES_OPTION)
-						    {
-						       
-						    	fed.deleteSportMan(code);
-								loadSportMans();
-						    }
-						
-						
-						*/
-					}
-				});
-				btnEliminar.setEnabled(false);
-				btnEliminar.setActionCommand("OK");
-				buttonPane.add(btnEliminar);
-				getRootPane().setDefaultButton(btnEliminar);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Salir");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
-				cancelButton.setActionCommand("Cancel");
+				
+				btnUpdate = new JButton("Modificar");
+				btnUpdate.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						RegistroDeClientes mod = new RegistroDeClientes(null);
+						mod.setModal(true);
+						mod.setLocationRelativeTo(null);
+						mod.setVisible(true);
+					}
+				});
+				
+				
+				
+				JButton btnDelete = new JButton("Eliminar");
+				btnDelete.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+					}
+				});
+				buttonPane.add(btnDelete);
+				buttonPane.add(btnUpdate);
+				btnUpdate.setEnabled(false);
+				cancelButton.setActionCommand("Delete");
 				buttonPane.add(cancelButton);
 			}
 		}
+		
+		
 	}
-
-
-
-	public static void loadSportMans(int selection) {
+	public static  void loadCliente(){
 		tableModel.setRowCount(0);
 		fila = new Object[tableModel.getColumnCount()];
-		switch (selection) {
-		case 0:
-			for (Cliente aux : Tricom.getInstance().getMiCliente()) {
-				fila[0] = aux.getCodigo_cliente();
-				fila[1] = aux.getNombre();
-				fila[2] = aux.getDireccion();
-				fila[3] = aux.getDireccion();
-				fila[4] = aux.getTelefono();
-				
-				tableModel.addRow(fila);
-			}
-			break;
-		/*case 1:
-			for (Publicacion aux : Biblioteca.getInstance().getMisPublicaciones()) {
-				if(aux instanceof Articulo){
-				fila[0] = aux.getId();
-				fila[1] = aux.getTitulo();
-				fila[2] = aux.getAutor();
-				fila[3] = aux.getMateria();
-				fila[4] = "Artículo";
-				
-				tableModel.addRow(fila);
-				}
-			}
-			break;	
-		case 2:
-			for (Publicacion aux : Biblioteca.getInstance().getMisPublicaciones()) {
-				if(aux instanceof Libro){
-				fila[0] = aux.getId();
-				fila[1] = aux.getTitulo();
-				fila[2] = aux.getAutor();
-				fila[3] = aux.getMateria();
-				fila[4] = "Libro";
-				
-				tableModel.addRow(fila);
-				}
-			}
-			break;	
-		case 3:
-			for (Publicacion aux : Biblioteca.getInstance().getMisPublicaciones()) {
-				if(aux instanceof Revista){
-				fila[0] = aux.getId();
-				fila[1] = aux.getTitulo();
-				fila[2] = aux.getAutor();
-				fila[3] = aux.getMateria();
-				fila[4] = "Revista";
-				
-				tableModel.addRow(fila);
-				}
-			}
-			break;	
-		}*/
-	}
-		
-		table.setModel(tableModel);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getTableHeader().setReorderingAllowed(false);
-		TableColumnModel columnModel = table.getColumnModel();
+		for (Cliente aux : Tricom.getInstance().getMiCliente()) {
+			fila[0] = aux.getCodigo_cliente();
+			fila[1] = aux.getNombre();
+			fila[4] = aux.getCedula();
+			fila[3] = aux.getDireccion();
+			fila[2] = aux.getTelefono();
+			tableModel.addRow(fila);
+			
+			
+		}
+		tableLista.setModel(tableModel);
+		tableLista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tableLista.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = tableLista.getColumnModel();
 		columnModel.getColumn(0).setPreferredWidth(60);
-		columnModel.getColumn(1).setPreferredWidth(180);
+		columnModel.getColumn(1).setPreferredWidth(200);
 		columnModel.getColumn(2).setPreferredWidth(150);
-		columnModel.getColumn(3).setPreferredWidth(130);
-		columnModel.getColumn(4).setPreferredWidth(81);
-		/*if(tableModel.getRowCount()==0){
-			btnEliminar.setEnabled(false);
-			btnModificar.setEnabled(false);
-		}*/
+		columnModel.getColumn(3).setPreferredWidth(300);
+		columnModel.getColumn(4).setPreferredWidth(177);
 		
 		
-	}}
+	
+	}
+}
 
