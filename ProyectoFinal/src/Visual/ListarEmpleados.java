@@ -78,7 +78,7 @@ public class ListarEmpleados extends JDialog {
 			}
 		});
 		tableModel = new DefaultTableModel();
-		String[] columnNames = {"Codigo", "Nombre","Cédula", "Sexo", "Teléfono"};
+		String[] columnNames = {"Código", "Nombre","Cédula", "Sexo", "Teléfono"};
 		tableModel.setColumnIdentifiers(columnNames);
 		loadCliente();
 		scrollPane.setViewportView(tableLista);
