@@ -20,11 +20,11 @@ public class Tricom implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	//public static int ClienteCod = 0;
-	public static int FacturacionCod = 0;
-	public static int PlanesCod = 0;
-	public static int EmpleadoCod = 0;
-	public static int ContratoCod = 0;
-	public static int ClienteCod=0;
+	public static int FacturacionCod ;
+	public static int PlanesCod ;
+	public static int EmpleadoCod ;
+	public static int ContratoCod ;
+	public static int ClienteCod;
 	private ArrayList<Contrato> misContrato;
 	private ArrayList<Cliente> miCliente;
 //	private ArrayList<Factura>tuContrato;
@@ -44,6 +44,11 @@ public class Tricom implements Serializable{
 		cliConServicios=new ArrayList<Cliente>();
 		//tuContrato = new ArrayList<>();
 		misFacturas = new ArrayList<Factura>();
+		ClienteCod=0;
+		ContratoCod = 0;
+		EmpleadoCod = 0;
+		PlanesCod = 0;
+		FacturacionCod = 0;
 	}
 	
 	public static Tricom getInstance(){
@@ -98,13 +103,13 @@ public class Tricom implements Serializable{
 	
 	public void insertarCliente(Cliente client){
 		
-		ClienteCod++;
-		client.setCodigo_cliente(ClienteCod);
+		++ClienteCod;
+	//	client.setCodigo_cliente(ClienteCod);
 		miCliente.add(client);
 		
 	}
 	public void insertarContrato(Contrato contra){
-		ContratoCod++;
+		++ContratoCod;
 		contra.setCodigoDeContrato(String.valueOf(ContratoCod));
 		misContrato.add(contra);
 		

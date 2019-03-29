@@ -56,18 +56,26 @@ public class VisualPrincipal extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				//FileOutputStream empresa2;
-				//ObjectOutputStream empresaWrite;
 				FileOutputStream empresa3;
 				ObjectOutputStream empresaWrite2;
 				try {
-				//	empresa2 = new  FileOutputStream("empresa.dat");
-				//	empresaWrite = new ObjectOutputStream(empresa2);
-				//	empresaWrite.writeObject(Control.getInstance());
-					
 					empresa3 = new  FileOutputStream("miTricom.dat");
 					empresaWrite2 = new ObjectOutputStream(empresa3);
 					empresaWrite2.writeObject(Tricom.getInstance());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				FileOutputStream empresa2;
+				ObjectOutputStream empresaWrite;
+				try {
+					empresa2 = new  FileOutputStream("empresa.dat");
+					empresaWrite = new ObjectOutputStream(empresa2);
+					empresaWrite.writeObject(Control.getInstance());
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -75,8 +83,6 @@ public class VisualPrincipal extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
-
 				
 			}
 		});
