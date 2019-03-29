@@ -89,6 +89,11 @@ public class CrearPlanes extends JDialog {
 			lblNewLabel_1.setBounds(10, 87, 176, 14);
 			panel.add(lblNewLabel_1);
 			
+			textField = new JTextField();
+			textField.setBounds(10, 104, 181, 20);
+			panel.add(textField);
+			textField.setColumns(10);
+			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tipo De Servicio", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel_1.setBounds(10, 155, 379, 97);
@@ -190,10 +195,7 @@ public class CrearPlanes extends JDialog {
 			panel.add(textField_2);
 			textField_2.setColumns(10);
 			
-			textField = new JTextField();
-			textField.setBounds(10, 104, 181, 20);
-			panel.add(textField);
-			textField.setColumns(10);
+			
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -204,10 +206,10 @@ public class CrearPlanes extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						if(!textField.getText().equalsIgnoreCase("")){
+						if(!textField.getText().equalsIgnoreCase("") && !txtCodigo.getText().equalsIgnoreCase("")){
 		
 						Plan aux = null;
-						String nombre = new Integer(textField.getText());
+						String nombre = textField.getText();
 						int codigo = new Integer(txtCodigo.getText());
 						
 						if(rdbtnNewRadioButton.isSelected()){
@@ -226,10 +228,10 @@ public class CrearPlanes extends JDialog {
 							aux = new Celular(codigo, nombre, minutos);
 						}
 						Tricom.getInstance().insertarPlan(aux);
-						JOptionPane.showMessageDialog(null, "Queso registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+						JOptionPane.showMessageDialog(null, "Plan registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 						clear();
 						}else{
-							JOptionPane.showMessageDialog(null, "Verifique todos los campos", null, JOptionPane.ERROR_MESSAGE, null);
+							JOptionPane.showMessageDialog(null, "Verifique los campos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
 					}
 				});
