@@ -1,9 +1,12 @@
 package logico;
 
+import java.io.Serializable;
 
-
-
-public class Factura {
+public class Factura implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int codiFactura;
 	private String nombreCliente;
 	private int codiCliente;

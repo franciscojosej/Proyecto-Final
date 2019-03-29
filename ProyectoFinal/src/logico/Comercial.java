@@ -1,6 +1,6 @@
 package logico;
 
-import java.util.Date;
+
 
 public class Comercial extends Empleado {
 

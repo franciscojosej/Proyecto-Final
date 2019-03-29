@@ -1,5 +1,6 @@
 package logico;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,9 +12,13 @@ import javax.swing.JOptionPane;
 
 import logico.Factura;
 
-public class Tricom {
+public class Tricom implements Serializable{
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//public static int ClienteCod = 0;
 	public static int FacturacionCod = 0;
 	public static int PlanesCod = 0;
@@ -133,6 +138,14 @@ public class Tricom {
 	}
 
 	
+	public static Tricom getTricom() {
+		return tricom;
+	}
+
+	public static void setTricom(Tricom tricom) {
+		Tricom.tricom = tricom;
+	}
+
 	public void CargarDatosCliente(Cliente cli){
 		int i=0;
 		boolean found = false;

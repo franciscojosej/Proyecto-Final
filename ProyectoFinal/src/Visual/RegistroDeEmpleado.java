@@ -14,6 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.border.TitledBorder;
 
+import logico.Administrativo;
 import logico.Comercial;
 import logico.Control;
 import logico.Empleado;
@@ -211,14 +212,17 @@ public class RegistroDeEmpleado extends JDialog {
 						if(rdbtnComercial.isSelected()) {
 
 								cargo="Administrativo";
-nuevoEmpleado =new Comercial(txtNombre.getText(), " ", textCedula.getText(), textTelefono.getText(), " ",  cbxSexo.getSelectedItem().toString(),
-		" ", " ", " ", " ", 2.3,	" ", 2.2,1, 1, Tricom.getFechaInicio(),	" ");
-
-							
+								
+						nuevoEmpleado= new Administrativo(txtNombre.getText(), " ", textCedula.getText(), textTelefono.getText(), " ", 
+		cbxSexo.getSelectedItem().toString(), " ", " ", " ", " ", (float)2.3, " ", (float)2.3, 0, 
+		0,  Tricom.getFechaInicio(), " ");
+						
 						}
 						else if(	rdbtnAdministrativo.isSelected()	) {
 
 							cargo="Comercial";
+							nuevoEmpleado=new Comercial(txtNombre.getText(), " ", textCedula.getText(), textTelefono.getText(), " ",  cbxSexo.getSelectedItem().toString(),
+									" ", " ", " ", " ", (float)2.3,	" ", (float)2.2,1, 1, Tricom.getFechaInicio(),	" ");
 						}
 						User user = new User(cargo,textUsuario.getText(),
 								txtPassword.getPassword().toString() );
@@ -227,6 +231,7 @@ nuevoEmpleado =new Comercial(txtNombre.getText(), " ", textCedula.getText(), tex
 								!txtPassword.getPassword().toString().equalsIgnoreCase("")&&!textCedula.getText().equalsIgnoreCase("")
 								&&!txtNombre.getText().equalsIgnoreCase("")&&!textTelefono.getText().equalsIgnoreCase("")) {
 							 Control.getInstance().regUser(user);
+							 Tricom.getInstance().insertarEmpleado(nuevoEmpleado);
 							 JOptionPane.showMessageDialog(null, "Empleado registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 						}else {
 							JOptionPane.showMessageDialog(null, "Verifique que todos los campos", null, JOptionPane.ERROR_MESSAGE, null);

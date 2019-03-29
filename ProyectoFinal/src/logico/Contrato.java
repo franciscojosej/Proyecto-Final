@@ -1,11 +1,16 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Contrato {
+public class Contrato implements Serializable {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean estado;//Habilidado
 	private Date fecha_de_pago;
 	private Date fecha_inicio;

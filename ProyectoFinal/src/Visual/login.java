@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import logico.Control;
+import logico.Tricom;
 import logico.User;
 
 import javax.swing.JLabel;
@@ -109,11 +110,43 @@ public class login extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Control.getInstance().confirmLogin(textField.getText(),textField_1.getText())){
+					 run();				
 					VisualPrincipal frame = new VisualPrincipal();
 					dispose();
 					frame.setVisible(true);
 				};
 				
+			}
+
+			public void run() {
+				FileInputStream empresa;
+				FileOutputStream empresa2;
+				ObjectInputStream empresaRead;
+				ObjectOutputStream empresaWrite;
+				try {
+					empresa = new FileInputStream ("miTricom.dat");
+					empresaRead = new ObjectInputStream(empresa);
+					Tricom temp = (Tricom)empresaRead.readObject();
+					Tricom.setTricom(temp);
+				} catch (FileNotFoundException e) {
+					try {
+						empresa2 = new  FileOutputStream("miTricom.dat");
+						empresaWrite = new ObjectOutputStream(empresa2);
+
+						empresaWrite.writeObject(Tricom.getInstance());
+					} catch (FileNotFoundException e1) {
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+					}
+				} catch (IOException e) {
+					
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+
 			}
 		});
 		btnLogin.setBounds(37, 175, 89, 23);
