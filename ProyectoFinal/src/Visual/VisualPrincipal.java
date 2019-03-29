@@ -31,8 +31,8 @@ public class VisualPrincipal extends JFrame {
 	private JPanel contentPane;
 	protected RegistroDeClientes RegCliente;
 
-	/**
-	 * Launch the application.
+	
+	  //Launch the application.
 	
 	public static void main(String[] args) {
 		
@@ -48,7 +48,7 @@ public class VisualPrincipal extends JFrame {
 		});
 	}
 
-	 */
+	 
 	/**
 	 * Create the frame.
 	 */

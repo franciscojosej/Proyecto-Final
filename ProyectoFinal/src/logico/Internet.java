@@ -7,9 +7,12 @@ public class Internet extends Plan {
 	private float constoInternet;
 	
 	
-	public Internet(String nombre, String tipo) {
-		super(nombre, tipo);
-		// TODO Auto-generated constructor stub
+	
+
+	public Internet(int codigo, String nombre, int velocidad_conexion) {
+		super(codigo, nombre);
+		this.velocidad_conexion = velocidad_conexion;
+		//this.constoInternet = constoInternet;
 	}
 
 	public int getVelocidad_conexion() {

@@ -25,7 +25,9 @@ public class Tricom implements Serializable{
 	public static int EmpleadoCod ;
 	public static int ContratoCod ;
 	public static int ClienteCod;
+	public static int CantidadPlan;
 	private ArrayList<Contrato> misContrato;
+	private ArrayList<Plan> miPlan;
 	private ArrayList<Cliente> miCliente;
 //	private ArrayList<Factura>tuContrato;
 	private ArrayList<Factura> misFacturas;
@@ -41,6 +43,7 @@ public class Tricom implements Serializable{
 		super();
 		MiPersonal = new ArrayList<Empleado>();
 		miCliente = new ArrayList<Cliente>();
+		miPlan = new ArrayList<>();
 		cliConServicios=new ArrayList<Cliente>();
 		//tuContrato = new ArrayList<>();
 		misFacturas = new ArrayList<Factura>();
@@ -93,12 +96,28 @@ public class Tricom implements Serializable{
 	}
 	
 
+	public ArrayList<Empleado> getMiPersonal() {
+		return MiPersonal;
+	}
+
+	public void setMiPersonal(ArrayList<Empleado> miPersonal) {
+		MiPersonal = miPersonal;
+	}
+
 	public ArrayList<Factura> getMisFacturas() {
 		return misFacturas;
 	}
 
 	public void setMisFacturas(ArrayList<Factura> misFacturas) {
 		this.misFacturas = misFacturas;
+	}
+	
+	public ArrayList<Plan> getMiPlan() {
+		return miPlan;
+	}
+
+	public void setMiPlan(ArrayList<Plan> miPlan) {
+		this.miPlan = miPlan;
 	}
 	
 	public void insertarCliente(Cliente client){
@@ -108,6 +127,18 @@ public class Tricom implements Serializable{
 		miCliente.add(client);
 		
 	}
+	
+	
+public void insertarPlan(Plan aux){
+		
+		miPlan.add(aux);
+		PlanesCod++;
+		aux.setCodigo(PlanesCod);
+		CantidadPlan++;
+		aux.setUnidades_Plan(CantidadPlan);
+	}
+	
+	
 	public void insertarContrato(Contrato contra){
 		++ContratoCod;
 		contra.setCodigoDeContrato(String.valueOf(ContratoCod));

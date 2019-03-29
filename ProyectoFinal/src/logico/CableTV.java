@@ -10,16 +10,18 @@ public class CableTV extends Plan {
 
 
 
-	public CableTV(String codigo, String nombre, int cantidadCanales) {
+
+
+
+
+
+
+	public CableTV(int codigo, String nombre, int cantidadCanales) {
 		super(codigo, nombre);
 		this.cantidadCanales = cantidadCanales;
-		this.consto = 100;
+		//this.consto = 100;
 	}
-
-
-
-
-
+		
 
 	public float CalcularCosto() {
 		// TODO Auto-generated method stub

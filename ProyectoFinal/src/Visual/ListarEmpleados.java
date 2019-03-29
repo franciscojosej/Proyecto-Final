@@ -1,122 +1,157 @@
-
 package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
+
+import logico.Empleado;
+import logico.Tricom;
+import Visual.RegistroDeEmpleado;
+
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-
-import logico.Tricom;
-import logico.Empleado;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+
 public class ListarEmpleados extends JDialog {
-	
+
+	/**
+	 * 
+	 */
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
-	private JButton btnModificar;
-	private JButton btnEliminar;
-	private String identificador;
-	private DefaultTableModel model;
+	private static JTable tableLista;
+	private static  DefaultTableModel tableModel;
+	private static Object[] fila;
+	private static JButton btnUpdate;
+	private static JButton btnDelete;
+	private int code;
+	private Empleado worker;
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			ListarCliente dialog = new ListarCliente();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public ListarEmpleados() {
-		setTitle("Listado de Clientes");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 934, 454);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BorderLayout(0, 0));
-		{
-			JPanel panel = new JPanel();
-			contentPanel.add(panel, BorderLayout.CENTER);
-			panel.setLayout(new BorderLayout(0, 0));
-			{
-				JScrollPane scrollPane = new JScrollPane();
-				panel.add(scrollPane, BorderLayout.CENTER);
-				{
-					table = new JTable();
-					table.addMouseListener(new MouseAdapter() {
-						public void mouseClicked(MouseEvent e) {
-							if(table.getSelectedRow()>=0){
-								btnEliminar.setEnabled(true);
-								btnModificar.setEnabled(true);
-								int index = table.getSelectedRow();
-								identificador = (String)table.getModel().getValueAt(index, 0);				
-							}
-						}
-					});
-					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					String[] columnNames = {"Codigo","Nombre", "Telefono"};
-					model = new DefaultTableModel();
-					model.setColumnIdentifiers(columnNames);
-					table.setModel(model);
-					loadTable();
-					scrollPane.setViewportView(table);
+		contentPanel.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setOpaque(false);
+		panel.setBorder(new TitledBorder(null, "Lista de Empleados", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 1090, 421);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setOpaque(false);
+		scrollPane.setBounds(10, 24, 890, 321);
+		panel.add(scrollPane);
+		
+		tableLista = new JTable();
+		tableLista.setOpaque(false);
+		tableLista.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			
+				if(tableLista.getSelectedRow()>=0){
+					btnUpdate.setEnabled(true);
+					int index = tableLista.getSelectedRow();
+					code = (int)tableLista.getModel().getValueAt(index, 0);
+					
 				}
 			}
-		}
+		});
+		tableModel = new DefaultTableModel();
+		String[] columnNames = {"Codigo", "Nombre","Cédula", "Sexo", "Teléfono"};
+		tableModel.setColumnIdentifiers(columnNames);
+		loadCliente();
+		scrollPane.setViewportView(tableLista);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(0, 0, 918, 382);
+		contentPanel.add(label);
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Eliminar");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				{
-					JButton btnNewButton = new JButton("Modificar");
-					buttonPane.add(btnNewButton);
-				}
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
 				JButton cancelButton = new JButton("Salir");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
+					}
+				});
+				
+				btnUpdate = new JButton("Modificar");
+				btnUpdate.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						RegistroDeEmpleado mod = new RegistroDeEmpleado();
+						mod.setModal(true);
+						mod.setLocationRelativeTo(null);
+						mod.setVisible(true);
+					}
+				});
+				
+				
+				
+				JButton btnDelete = new JButton("Eliminar");
+				btnDelete.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
 						
 					}
 				});
-				cancelButton.setActionCommand("Salir");
+				buttonPane.add(btnDelete);
+				buttonPane.add(btnUpdate);
+				btnUpdate.setEnabled(false);
+				cancelButton.setActionCommand("Delete");
 				buttonPane.add(cancelButton);
 			}
 		}
-	}
-
-	private void loadTable() {
-		// TODO Auto-generated method stub
+		
 		
 	}
-
+	public static  void loadCliente(){
+		tableModel.setRowCount(0);
+		fila = new Object[tableModel.getColumnCount()];
+		for (Empleado aux : Tricom.getInstance().getMiPersonal()) {
+			fila[0] = aux.getCodigo_empleado();
+			fila[1] = aux.getNombre();
+			fila[2] = aux.getCedula();
+			fila[3] = aux.getSexo();
+			fila[4] = aux.getTelefono(); 
+			tableModel.addRow(fila);
+			
+			
+		}
+		tableLista.setModel(tableModel);
+		tableLista.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tableLista.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = tableLista.getColumnModel();
+		columnModel.getColumn(0).setPreferredWidth(60);
+		columnModel.getColumn(1).setPreferredWidth(200);
+		columnModel.getColumn(2).setPreferredWidth(150);
+		columnModel.getColumn(3).setPreferredWidth(300);
+		columnModel.getColumn(4).setPreferredWidth(177);
+		
+		
+		
+	
+	}
 }

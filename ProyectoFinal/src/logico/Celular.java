@@ -7,9 +7,11 @@ public class Celular extends Plan {
 	
 
 
-	public Celular(String nombre, String tipo) {
-		super(nombre, tipo);
 	
+	public Celular(int codigo, String nombre, int minutos) {
+		super(codigo, nombre);
+		this.minutos = minutos;
+		//this.costoCelular = costoCelular;
 	}
 
 	public float getCostoCelular() {
