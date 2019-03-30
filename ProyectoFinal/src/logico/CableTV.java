@@ -17,17 +17,28 @@ public class CableTV extends Plan implements Serializable {
 
 
 
-
-
-
-
-
 	public CableTV(int codigo, String nombre, int cantidadCanales) {
 		super(codigo, nombre);
 		this.cantidadCanales = cantidadCanales;
 		//this.consto = 100;
 	}
 		
+
+	
+	
+	public int getCantidadCanales() {
+		return cantidadCanales;
+	}
+
+
+
+
+	public void setCantidadCanales(int cantidadCanales) {
+		this.cantidadCanales = cantidadCanales;
+	}
+
+
+
 
 	public float CalcularCosto() {
 		// TODO Auto-generated method stub

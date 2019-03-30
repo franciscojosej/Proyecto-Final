@@ -77,7 +77,7 @@ public class ListarPlanes extends JDialog {
 		table = new JTable();
 		
 		tableModel = new DefaultTableModel();
-		String[] columnNames = {"#","Nombre"};
+		String[] columnNames = {"#","Nombre", "Servicio"};
 		tableModel.setColumnIdentifiers(columnNames);
 		loadListaPlanes(1);
 		scrollPane.setViewportView(table);
@@ -93,7 +93,7 @@ public class ListarPlanes extends JDialog {
 				loadListaPlanes(selection);
 			}
 		});
-		cbxQueso.setModel(new DefaultComboBoxModel(new String[] {"       <Todos:>", "Internet", "Televisión", "Teléfono"}));
+		cbxQueso.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Internet", "Televisión", "Teléfono", "Internet y Televisión", "Internet y Teléfono", "Televisión y Teléfono"}));
 		cbxQueso.setBounds(96, 22, 110, 20);
 		panel.add(cbxQueso);
 	
@@ -145,7 +145,7 @@ public class ListarPlanes extends JDialog {
 				for (Plan aux: Tricom.getInstance().getMiPlan()) {
 					fila[0] = aux.getCodigo();
 					fila[1] = aux.getNombre();
-					//fila[2] = aux.get;
+					//fila[2] = aux.getUnidades_Plan();
 					//fila[3] = aux.get;
 					//fila[4] = aux.PrecioTotal();
 					if(aux instanceof Internet)
@@ -165,10 +165,10 @@ public class ListarPlanes extends JDialog {
 					if(aux instanceof Internet){
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
-						//fila[2] = aux.getPrecio_base();
+						fila[2] = ((Internet) aux).getVelocidad_conexion();
 						//fila[3] = aux.getPrecio_uni();
 						//fila[4] = aux.PrecioTotal();
-						//fila[5] = "Esferico";
+						fila[3] = "Internet";
 						
 						tableModel.addRow(fila);
 				}
@@ -182,10 +182,10 @@ public class ListarPlanes extends JDialog {
 					if(aux instanceof CableTV){
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
-						//fila[2] = aux.getPrecio_base();
+						fila[2] = ((CableTV) aux).getCantidadCanales();
 						//fila[3] = aux.getPrecio_uni();
 						//fila[4] = aux.PrecioTotal();
-						//fila[5] = "Cilindro";
+						fila[3] = "Televisión";
 						
 						tableModel.addRow(fila);
 	
@@ -202,10 +202,10 @@ public class ListarPlanes extends JDialog {
 					if(aux instanceof Celular){
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
-						//fila[2] = aux.getPrecio_base();
+						fila[2] = ((Celular) aux).getMinutos();
 						//fila[3] = aux.getPrecio_uni();
 						//fila[4] = aux.PrecioTotal();
-						//fila[5] = "Cilindro Hueco";
+						fila[3] = "Teléfono";
 					
 						tableModel.addRow(fila);
 	
@@ -217,7 +217,31 @@ public class ListarPlanes extends JDialog {
 			}
 
 			break;
+		/*case 4:
+			
+			for (Plan aux: Tricom.getInstance().getMiPlan()) {
+				if(aux instanceof Internet && aux instanceof CableTV){
+					fila[0] = aux.getCodigo();
+					fila[1] = aux.getNombre();
+					fila[2] = ((Internet) aux).getVelocidad_conexion();
+					//fila[3] = aux.getPrecio_uni();
+					//fila[4] = aux.PrecioTotal();
+					//fila[3] = ((CableTV) aux).getCantidadCanales();
+				
+					tableModel.addRow(fila);
+
+			}
+		
+
+		
+
 		}
+
+		break;*/
+	}
+
+		
+		
 
 		table.setModel(tableModel);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -225,7 +249,7 @@ public class ListarPlanes extends JDialog {
 		TableColumnModel columnModel = table.getColumnModel();
 		columnModel.getColumn(0).setPreferredWidth(25);
 		columnModel.getColumn(1).setPreferredWidth(100);
-		//columnModel.getColumn(2).setPreferredWidth(100);
+		//columnModel.getColumn(2).setPreferredWidth(56);
 		//columnModel.getColumn(3).setPreferredWidth(100);
 		//columnModel.getColumn(4).setPreferredWidth(75);
 		//columnModel.getColumn(5).setPreferredWidth(155);
