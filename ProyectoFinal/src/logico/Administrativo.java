@@ -1,8 +1,9 @@
 package logico;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class Administrativo extends Empleado {
+
+public class Administrativo extends Empleado implements Serializable  {
 
 	/**
 	 * 
