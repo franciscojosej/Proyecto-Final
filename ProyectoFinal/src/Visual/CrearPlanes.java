@@ -87,10 +87,10 @@ public class CrearPlanes extends JDialog {
 			txtCodigo = new JTextField();
 			txtCodigo.setEditable(false);
 			txtCodigo.setBounds(10, 42, 42, 20);
-			if(Plans == null) {
+			
 				
-				 txtCodigo.setText("P-" + (Tricom.PlanesCod+1));
-			}
+		   txtCodigo.setText("P-" + (Tricom.PlanesCod+1));
+			
 			panel.add(txtCodigo);
 			txtCodigo.setColumns(10);
 			
@@ -273,15 +273,29 @@ public class CrearPlanes extends JDialog {
 							
 						String nombre = textNombre.getText();
 						int codigo = Tricom.PlanesCod;
-						;
 						
+						++Tricom.PlanesCod;
 						
 						if(rdbtnInternet.isSelected()){
 							int velocidad_conexion =0;
-									new Integer(cbxData.getName().toString());
-						//	if(cbxData.se) {
-								
-						//	}
+									
+							if(cbxData.getSelectedIndex()==1) {
+								velocidad_conexion=5;
+							}
+							if(cbxData.getSelectedIndex()==2) {
+								velocidad_conexion=15;
+							}
+							
+							if(cbxData.getSelectedIndex()==3) {
+								velocidad_conexion=50;
+							}
+							if(cbxData.getSelectedIndex()==4) {
+								velocidad_conexion=100;
+							}
+							if(cbxData.getSelectedIndex()==5) {
+								velocidad_conexion=1000;
+							}
+							
 							
 							aux = new Internet(codigo, nombre, velocidad_conexion);
 							nuevoPlan.add(aux);
@@ -289,12 +303,42 @@ public class CrearPlanes extends JDialog {
 						}
 						if(rdbtnTelevicion.isSelected()){
 							
-							int cantidadCanales = new Integer(cbxCanales.getName().toString());
+							int cantidadCanales = 0;
+							
+							
+						if(cbxCanales.getSelectedIndex()==1) {
+							cantidadCanales=200;
+							}
+						if(cbxCanales.getSelectedIndex()==2) {
+							cantidadCanales=400;
+							}	
+						if(cbxCanales.getSelectedIndex()==3) {
+							cantidadCanales=300;
+							}
+						if(cbxCanales.getSelectedIndex()==4) {
+							cantidadCanales=800;
+							}
 							aux2 = new CableTV(codigo, nombre, cantidadCanales);
 							nuevoPlan.add(aux2);
 						}
 						if(rdbtnTelefono.isSelected()){
-							int minutos = new Integer(cbxMinutos.getName().toString());
+							int minutos =0;
+									
+							if(cbxMinutos.getSelectedIndex()==1) {
+								minutos=50;
+							}
+							if(cbxMinutos.getSelectedIndex()==2) {
+								minutos=100;
+							}		
+							if(cbxMinutos.getSelectedIndex()==3) {
+								minutos=300;
+							}
+							if(cbxMinutos.getSelectedIndex()==4) {
+								minutos=1000;
+							}
+							if(cbxMinutos.getSelectedIndex()==5) {
+								minutos=2000;
+							}							
 							aux3 = new Celular(codigo, nombre, minutos);
 							nuevoPlan.add(aux3);
 						}
@@ -303,6 +347,7 @@ public class CrearPlanes extends JDialog {
 						nuevoContrato.setMisPlanes(nuevoPlan);
 					
 						Tricom.getInstance().insertarContrato(nuevoContrato);
+						
 						JOptionPane.showMessageDialog(null, "Plan registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 						clear();
 						}else{
@@ -333,12 +378,13 @@ public class CrearPlanes extends JDialog {
 	}
 	
 	private void clear() {
-		
+		//textField_2.setText("P-"+Tricom.PlanesCod+1);
 		textNombre.setText("");
-		txtCodigo.setText("");
-		cbxData.setToolTipText("");
-		cbxCanales.setToolTipText("");
-		comboBox_2.setToolTipText("");
+		txtCodigo.setText("P-"+(Tricom.PlanesCod+1));
+		cbxData.setSelectedIndex(0);
+		cbxCanales.setSelectedIndex(0);
+		cbxMinutos.setSelectedIndex(0);
+
 		
 		
 	}
