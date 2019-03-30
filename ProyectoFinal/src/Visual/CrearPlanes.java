@@ -268,7 +268,7 @@ public class CrearPlanes extends JDialog {
 							Internet 	aux =null;
 							CableTV aux2=null;
 							Celular aux3=null;
-							Contrato nuevoContrato=null;
+							
 						ArrayList< Plan> nuevoPlan = new ArrayList<Plan>();
 							
 						String nombre = textNombre.getText();
@@ -343,12 +343,13 @@ public class CrearPlanes extends JDialog {
 							nuevoPlan.add(aux3);
 						}
 		
-						nuevoContrato =new Contrato(null, null, null, null);
-						nuevoContrato.setMisPlanes(nuevoPlan);
-						for (int i = 0; i <20; i++) {
-							//Tricom.getInstance().insertarPlan(aux3);
-							Tricom.getInstance().insertarContrato(nuevoContrato);
-						}
+		
+						
+							Tricom.getInstance().insertarPlan(aux);
+							Tricom.getInstance().insertarPlan(aux2);
+							Tricom.getInstance().insertarPlan(aux3);
+							
+						
 						
 					
 					

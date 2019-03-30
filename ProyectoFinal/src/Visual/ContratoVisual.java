@@ -25,10 +25,12 @@ public class ContratoVisual extends JDialog {
 	private static final String Contra = null;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCodigo;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField texNombreCliente;
+	private JTextField textNombre;
 	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField textPrecioTotal;
+	private JTextField texFechaDeInicio;
+	private JTextField textFechaculminacion;
 
 	/**
 	 * Launch the application.
@@ -83,15 +85,15 @@ public class ContratoVisual extends JDialog {
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
-					JLabel lblNewLabel_1 = new JLabel("Identidad del Cliente:");
-					lblNewLabel_1.setBounds(10, 22, 181, 14);
-					panel_1.add(lblNewLabel_1);
+					JLabel Cedula = new JLabel("Cedula:");
+					Cedula.setBounds(10, 22, 181, 14);
+					panel_1.add(Cedula);
 				}
 				{
-					textField_1 = new JTextField();
-					textField_1.setBounds(10, 47, 171, 20);
-					panel_1.add(textField_1);
-					textField_1.setColumns(10);
+					texNombreCliente = new JTextField();
+					texNombreCliente.setBounds(10, 47, 171, 20);
+					panel_1.add(texNombreCliente);
+					texNombreCliente.setColumns(10);
 				}
 				
 				JButton btnNewButton = new JButton(" Buscar Cliente");
@@ -106,17 +108,17 @@ public class ContratoVisual extends JDialog {
 				lblNewLabel_2.setBounds(10, 78, 129, 14);
 				panel_1.add(lblNewLabel_2);
 				
-				textField_2 = new JTextField();
-				textField_2.setBounds(10, 103, 171, 20);
-				panel_1.add(textField_2);
-				textField_2.setColumns(10);
+				textNombre = new JTextField();
+				textNombre.setBounds(10, 103, 171, 20);
+				panel_1.add(textNombre);
+				textNombre.setColumns(10);
 				
 				JLabel lblNewLabel_3 = new JLabel("N\u00FAmero Telef\u00F3nico:");
 				lblNewLabel_3.setBounds(345, 78, 146, 14);
 				panel_1.add(lblNewLabel_3);
 				
 				textField_3 = new JTextField();
-				textField_3.setBounds(345, 103, 186, 20);
+				textField_3.setBounds(355, 103, 186, 20);
 				panel_1.add(textField_3);
 				textField_3.setColumns(10);
 			}
@@ -151,19 +153,30 @@ public class ContratoVisual extends JDialog {
 			lblPrecioTotal.setBounds(282, 406, 169, 14);
 			panel.add(lblPrecioTotal);
 			
-			textField_4 = new JTextField();
-			textField_4.setBounds(408, 403, 94, 20);
-			panel.add(textField_4);
-			textField_4.setColumns(10);
+			textPrecioTotal = new JTextField();
+			textPrecioTotal.setBounds(408, 403, 94, 20);
+			panel.add(textPrecioTotal);
+			textPrecioTotal.setColumns(10);
 			
-			JLabel lblNewLabel_4 = new JLabel("Forma de Pago:");
-			lblNewLabel_4.setBounds(49, 381, 150, 14);
+			JLabel lblNewLabel_4 = new JLabel("Fecha De Inicio:");
+			lblNewLabel_4.setBounds(23, 381, 150, 14);
 			panel.add(lblNewLabel_4);
 			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Tarjeta de Crédito", "Efectivo ", "Cheque "}));
-			comboBox.setBounds(49, 403, 154, 20);
-			panel.add(comboBox);
+			texFechaDeInicio = new JTextField();
+			texFechaDeInicio.setEditable(false);
+			texFechaDeInicio.setBounds(133, 378, 86, 20);
+			panel.add(texFechaDeInicio);
+			texFechaDeInicio.setColumns(10);
+			
+			JLabel lblFechaDeCulminacion = new JLabel("Fecha De Culminacion:");
+			lblFechaDeCulminacion.setBounds(23, 406, 150, 14);
+			panel.add(lblFechaDeCulminacion);
+			
+			textFechaculminacion = new JTextField();
+			textFechaculminacion.setEditable(false);
+			textFechaculminacion.setColumns(10);
+			textFechaculminacion.setBounds(133, 403, 86, 20);
+			panel.add(textFechaculminacion);
 		}
 		{
 			JPanel buttonPane = new JPanel();

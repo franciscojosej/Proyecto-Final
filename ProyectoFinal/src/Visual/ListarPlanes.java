@@ -141,8 +141,8 @@ public class ListarPlanes extends JDialog {
 		fila = new Object[tableModel.getColumnCount()];
 		switch (selection) {
 		case 0:
-			for(Contrato miCon : Tricom.getInstance().getMisContrato()) {
-				for (Plan aux: miCon.getMisPlanes()) {
+		
+				for (Plan aux: Tricom.getInstance().getMiPlan()) {
 					fila[0] = aux.getCodigo();
 					fila[1] = aux.getNombre();
 					//fila[2] = aux.get;
@@ -156,12 +156,12 @@ public class ListarPlanes extends JDialog {
 						fila[3] = "Telefono";
 					tableModel.addRow(fila);
 				}
-			}
+			
 
 			break;
 		case 1:
-			for(Contrato miCon : Tricom.getInstance().getMisContrato()) {
-				for (Plan aux: miCon.getMisPlanes()) {
+		
+				for (Plan aux: Tricom.getInstance().getMiPlan()) {
 					if(aux instanceof Internet){
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
@@ -172,13 +172,13 @@ public class ListarPlanes extends JDialog {
 						
 						tableModel.addRow(fila);
 				}
-			}
+			
 
 			}
 			break;	
 		case 2:
-			for(Contrato miCon : Tricom.getInstance().getMisContrato()) {
-				for (Plan aux: miCon.getMisPlanes()) {
+			
+				for (Plan aux: Tricom.getInstance().getMiPlan()) {
 					if(aux instanceof CableTV){
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
@@ -190,15 +190,15 @@ public class ListarPlanes extends JDialog {
 						tableModel.addRow(fila);
 	
 				}
-			}
+			
 
 			
 
 			}
 			break;	
 		case 3:
-			for(Contrato miCon : Tricom.getInstance().getMisContrato()) {
-				for (Plan aux: miCon.getMisPlanes()) {
+			
+				for (Plan aux: Tricom.getInstance().getMiPlan()) {
 					if(aux instanceof Celular){
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
@@ -210,7 +210,7 @@ public class ListarPlanes extends JDialog {
 						tableModel.addRow(fila);
 	
 				}
-			}
+			
 
 			
 
