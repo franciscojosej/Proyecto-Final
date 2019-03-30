@@ -22,6 +22,7 @@ import logico.Plan;
 import logico.Internet;
 import logico.CableTV;
 import logico.Celular;
+import logico.Contrato;
 import logico.Tricom;
 
 
@@ -56,7 +57,7 @@ public class ListarPlanes extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListarPlanes(final Plan pla) {
+	public ListarPlanes() {
 		setBounds(100, 100, 571, 321);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,7 +79,7 @@ public class ListarPlanes extends JDialog {
 		tableModel = new DefaultTableModel();
 		String[] columnNames = {"#","Nombre"};
 		tableModel.setColumnIdentifiers(columnNames);
-		loadListaPlanes(0);
+		loadListaPlanes(1);
 		scrollPane.setViewportView(table);
 		
 		JLabel lblTipoDeQueso = new JLabel("Tipo de Plan:");
@@ -140,62 +141,81 @@ public class ListarPlanes extends JDialog {
 		fila = new Object[tableModel.getColumnCount()];
 		switch (selection) {
 		case 0:
-			for (Plan aux: Tricom.getInstance().getMiPlan()) {
-				fila[0] = aux.getCodigo();
-				fila[1] = aux.getNombre();
-				//fila[2] = aux.get;
-				//fila[3] = aux.get;
-				//fila[4] = aux.PrecioTotal();
-				if(aux instanceof Internet)
-					fila[3] = "Internet";
-				if(aux instanceof CableTV)
-					fila[3] = "Television";
-				if(aux instanceof Celular)
-					fila[3] = "Telefono";
-				tableModel.addRow(fila);
+			for(Contrato miCon : Tricom.getInstance().getMisContrato()) {
+				for (Plan aux: miCon.getMisPlanes()) {
+					fila[0] = aux.getCodigo();
+					fila[1] = aux.getNombre();
+					//fila[2] = aux.get;
+					//fila[3] = aux.get;
+					//fila[4] = aux.PrecioTotal();
+					if(aux instanceof Internet)
+						fila[3] = "Internet";
+					if(aux instanceof CableTV)
+						fila[3] = "Television";
+					if(aux instanceof Celular)
+						fila[3] = "Telefono";
+					tableModel.addRow(fila);
+				}
 			}
+
 			break;
 		case 1:
-			for (Plan aux: Tricom.getInstance().getMiPlan()) {
-				if(aux instanceof Internet){
-				fila[0] = aux.getCodigo();
-				fila[1] = aux.getNombre();
-				//fila[2] = aux.getPrecio_base();
-				//fila[3] = aux.getPrecio_uni();
-				//fila[4] = aux.PrecioTotal();
-				//fila[5] = "Esferico";
-				
-				tableModel.addRow(fila);
+			for(Contrato miCon : Tricom.getInstance().getMisContrato()) {
+				for (Plan aux: miCon.getMisPlanes()) {
+					if(aux instanceof Internet){
+						fila[0] = aux.getCodigo();
+						fila[1] = aux.getNombre();
+						//fila[2] = aux.getPrecio_base();
+						//fila[3] = aux.getPrecio_uni();
+						//fila[4] = aux.PrecioTotal();
+						//fila[5] = "Esferico";
+						
+						tableModel.addRow(fila);
 				}
+			}
+
 			}
 			break;	
 		case 2:
-			for (Plan aux: Tricom.getInstance().getMiPlan()) {
-				if(aux instanceof CableTV){
-				fila[0] = aux.getCodigo();
-				fila[1] = aux.getNombre();
-				//fila[2] = aux.getPrecio_base();
-				//fila[3] = aux.getPrecio_uni();
-				//fila[4] = aux.PrecioTotal();
-				//fila[5] = "Cilindro";
-				
-				tableModel.addRow(fila);
+			for(Contrato miCon : Tricom.getInstance().getMisContrato()) {
+				for (Plan aux: miCon.getMisPlanes()) {
+					if(aux instanceof CableTV){
+						fila[0] = aux.getCodigo();
+						fila[1] = aux.getNombre();
+						//fila[2] = aux.getPrecio_base();
+						//fila[3] = aux.getPrecio_uni();
+						//fila[4] = aux.PrecioTotal();
+						//fila[5] = "Cilindro";
+						
+						tableModel.addRow(fila);
+	
 				}
+			}
+
+			
+
 			}
 			break;	
 		case 3:
-			for (Plan aux: Tricom.getInstance().getMiPlan()) {
-				if(aux instanceof Celular){
-				fila[0] = aux.getCodigo();
-				fila[1] = aux.getNombre();
-				//fila[2] = aux.getPrecio_base();
-				//fila[3] = aux.getPrecio_uni();
-				//fila[4] = aux.PrecioTotal();
-				//fila[5] = "Cilindro Hueco";
-			
-				tableModel.addRow(fila);
+			for(Contrato miCon : Tricom.getInstance().getMisContrato()) {
+				for (Plan aux: miCon.getMisPlanes()) {
+					if(aux instanceof Celular){
+						fila[0] = aux.getCodigo();
+						fila[1] = aux.getNombre();
+						//fila[2] = aux.getPrecio_base();
+						//fila[3] = aux.getPrecio_uni();
+						//fila[4] = aux.PrecioTotal();
+						//fila[5] = "Cilindro Hueco";
+					
+						tableModel.addRow(fila);
+	
 				}
 			}
+
+			
+
+			}
+
 			break;
 		}
 

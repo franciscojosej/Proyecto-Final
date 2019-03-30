@@ -345,9 +345,15 @@ public class CrearPlanes extends JDialog {
 		
 						nuevoContrato =new Contrato(null, null, null, null);
 						nuevoContrato.setMisPlanes(nuevoPlan);
-					
-						Tricom.getInstance().insertarContrato(nuevoContrato);
+						for (int i = 0; i <20; i++) {
+							//Tricom.getInstance().insertarPlan(aux3);
+							Tricom.getInstance().insertarContrato(nuevoContrato);
+						}
 						
+					
+					
+						
+					
 						JOptionPane.showMessageDialog(null, "Plan registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 						clear();
 						}else{
