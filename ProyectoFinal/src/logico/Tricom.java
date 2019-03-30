@@ -354,7 +354,6 @@ public void insertarPlan(Plan aux){
 	}
 	public ArrayList<Factura> buscarFacturasActivasByCedulaClinte(int code){//
 
-
 		ArrayList<Factura> fact = new ArrayList<Factura>();
 		for (Factura factura : misFacturas) {
 			
@@ -367,7 +366,24 @@ public void insertarPlan(Plan aux){
 
 	}
 	
+	public ArrayList<Contrato> buscarPlanesEnContratos(int code){
+		
+		ArrayList<Contrato> cont= new ArrayList<Contrato>();
+		ArrayList<Plan> plancillo= new ArrayList<Plan>();
+		
+		for (Contrato contract : misContrato) {
+			
+			for (Plan pla : miPlan) {
+				
+				if(pla.getCodigo()==code) {
+					plancillo.add(pla);
+					
+				}
+			}
+		cont.add(contract);
+		}
+		return cont;
+	}
 	
 	
-
 }

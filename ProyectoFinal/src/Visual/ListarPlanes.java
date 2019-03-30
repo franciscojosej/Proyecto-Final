@@ -1,122 +1,215 @@
-
 package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 
-import logico.Tricom;
 import logico.Plan;
+import logico.Internet;
+import logico.CableTV;
+import logico.Celular;
+import logico.Tricom;
 
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
+
 public class ListarPlanes extends JDialog {
-	
-	private final JPanel contentPanel = new JPanel();
-	private JTable table;
-	private JButton btnModificar;
-	private JButton btnEliminar;
-	private String identificador;
-	private DefaultTableModel model;
 
+	/**
+	 * 
+	 */
+	private final JPanel contentPanel = new JPanel();
+	private static JTable table;
+	private static DefaultTableModel tableModel;
+	private static Object[] fila;
+	private static JButton btnUpdate;
+	private static JButton btnDelete;
+	private int code;
+	JComboBox cbxQueso;
+	private static Plan plan;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
-			ListarCliente dialog = new ListarCliente();
+			ListaQueso dialog = new ListaQueso();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
 	 */
-	public ListarPlanes() {
-		setTitle("Lista De Planes Registrado");
-		setBounds(100, 100, 450, 300);
+	public ListarPlanes(final Plan pla) {
+		setBounds(100, 100, 571, 321);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BorderLayout(0, 0));
-		{
-			JPanel panel = new JPanel();
-			contentPanel.add(panel, BorderLayout.CENTER);
-			panel.setLayout(new BorderLayout(0, 0));
-			{
-				JScrollPane scrollPane = new JScrollPane();
-				panel.add(scrollPane, BorderLayout.CENTER);
-				{
-					table = new JTable();
-					table.addMouseListener(new MouseAdapter() {
-						public void mouseClicked(MouseEvent e) {
-							if(table.getSelectedRow()>=0){
-								btnEliminar.setEnabled(true);
-								btnModificar.setEnabled(true);
-								int index = table.getSelectedRow();
-								identificador = (String)table.getModel().getValueAt(index, 0);				
-							}
-						}
-					});
-					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					String[] columnNames = {"Codigo","Nombre", "Precio"};
-					model = new DefaultTableModel();
-					model.setColumnIdentifiers(columnNames);
-					table.setModel(model);
-					loadTable();
-					scrollPane.setViewportView(table);
-				}
+		contentPanel.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Listado de Quesos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 534, 226);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 50, 514, 165);
+		panel.add(scrollPane);
+		
+		table = new JTable();
+		
+		tableModel = new DefaultTableModel();
+		String[] columnNames = {"#","Radio","Precio Base", "Precio Unitario","Precio","Tipo"};
+		tableModel.setColumnIdentifiers(columnNames);
+		loadQuesoLista(0);
+		scrollPane.setViewportView(table);
+		
+		JLabel lblTipoDeQueso = new JLabel("Tipo de Queso:");
+		lblTipoDeQueso.setBounds(10, 25, 90, 14);
+		panel.add(lblTipoDeQueso);
+		
+		cbxQueso = new JComboBox();
+		cbxQueso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selection = cbxQueso.getSelectedIndex();
+				loadQuesoLista(selection);
 			}
-		}
+		});
+		cbxQueso.setModel(new DefaultComboBoxModel(new String[] {"       <Todos:>", "Esferico", "Cilindro", "Cilindro Hueco"}));
+		cbxQueso.setBounds(96, 22, 110, 20);
+		panel.add(cbxQueso);
+	
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Eliminar");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				{
-					JButton btnNewButton = new JButton("Modificar");
-					buttonPane.add(btnNewButton);
-				}
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
 				JButton cancelButton = new JButton("Salir");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
+					}
+				});
+				
+				btnUpdate = new JButton("Modificar");
+				btnUpdate.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						CrearPlanes modi = new CrearPlanes();
+						modi.setModal(true);
+						modi.setLocationRelativeTo(null);
+						modi.setVisible(true);
+					}
+				});
+				
+				
+				
+				JButton btnDelete = new JButton("Eliminar");
+				btnDelete.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
 						
 					}
 				});
-				cancelButton.setActionCommand("Salir");
+				buttonPane.add(btnDelete);
+				buttonPane.add(btnUpdate);
+				btnUpdate.setEnabled(false);
+				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
+	public static void loadQuesoLista(int selection) {
+		tableModel.setRowCount(0);
+		
+		fila = new Object[tableModel.getColumnCount()];
+		switch (selection) {
+		case 0:
+			for (Plan aux: Tricom.getInstance().getMiPlan()) {
+				fila[0] = aux.getCodigo();
+				fila[1] = aux.getNombre();
+				fila[2] = aux.get;
+				fila[3] = aux.get;
+				fila[4] = aux.PrecioTotal();
+				if(aux instanceof Esfera)
+					fila[5] = "Esferico";
+				if(aux instanceof Cilindro)
+					fila[5] = "Cilindro";
+				if(aux instanceof Hueco)
+					fila[5] = "CilindroHueco";
+				tableModel.addRow(fila);
+			}
+			break;
+		case 1:
+			for (Queso aux: Fabrica.getInstancia().getMisQuesos()) {
+				if(aux instanceof Esfera){
+				fila[0] = aux.getCodigo();
+				fila[1] = aux.getRadio();
+				fila[2] = aux.getPrecio_base();
+				fila[3] = aux.getPrecio_uni();
+				fila[4] = aux.PrecioTotal();
+				fila[5] = "Esferico";
+				
+				tableModel.addRow(fila);
+				}
+			}
+			break;	
+		case 2:
+			for (Queso aux: Fabrica.getInstancia().getMisQuesos()) {
+				if(aux instanceof Cilindro){
+				fila[0] = aux.getCodigo();
+				fila[1] = aux.getRadio();
+				fila[2] = aux.getPrecio_base();
+				fila[3] = aux.getPrecio_uni();
+				fila[4] = aux.PrecioTotal();
+				fila[5] = "Cilindro";
+				
+				tableModel.addRow(fila);
+				}
+			}
+			break;	
+		case 3:
+			for (Queso aux: Fabrica.getInstancia().getMisQuesos()) {
+				if(aux instanceof Hueco){
+				fila[0] = aux.getCodigo();
+				fila[1] = aux.getRadio();
+				fila[2] = aux.getPrecio_base();
+				fila[3] = aux.getPrecio_uni();
+				fila[4] = aux.PrecioTotal();
+				fila[5] = "Cilindro Hueco";
+			
+				tableModel.addRow(fila);
+				}
+			}
+			break;
+		}
 
-	private void loadTable() {
-		// TODO Auto-generated method stub
+		table.setModel(tableModel);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table.getColumnModel();
+		columnModel.getColumn(0).setPreferredWidth(25);
+		columnModel.getColumn(1).setPreferredWidth(56);
+		columnModel.getColumn(2).setPreferredWidth(100);
+		columnModel.getColumn(3).setPreferredWidth(100);
+		columnModel.getColumn(4).setPreferredWidth(75);
+		columnModel.getColumn(5).setPreferredWidth(155);
+		
 		
 	}
-
 }
