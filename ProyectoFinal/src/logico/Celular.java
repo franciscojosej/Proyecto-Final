@@ -1,7 +1,13 @@
 package logico;
 
-public class Celular extends Plan {
+import java.io.Serializable;
 
+public class Celular extends Plan implements Serializable  {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int minutos;
 	private float costoCelular;
 	

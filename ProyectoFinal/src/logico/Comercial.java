@@ -1,8 +1,13 @@
 package logico;
 
+import java.io.Serializable;
 
+public class Comercial extends Empleado implements Serializable  {
 
-public class Comercial extends Empleado {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public Comercial(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
 			String ciudad, String telefono_fijo, String estado_social, String codigo_empleado, float sueldo_base,

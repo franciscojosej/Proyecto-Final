@@ -1,7 +1,13 @@
 package logico;
 
-public class CableTV extends Plan {
+import java.io.Serializable;
 
+public class CableTV extends Plan implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int cantidadCanales;
 	private float consto;
 	

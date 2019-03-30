@@ -4,6 +4,11 @@ import java.util.Date;
 
 public class Administrativo extends Empleado {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Administrativo(String nombre, String apellido, String cedula, String telefono, String direccion, String sexo,
 			String ciudad, String telefono_fijo, String estado_social, String codigo_empleado, float sueldo_base,
 			String departamento, float sueldo, int dias_trabajados, int horas_extra, String fecha_ingreso,

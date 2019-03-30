@@ -1,8 +1,14 @@
 package logico;
 
-public class Internet extends Plan {
+import java.io.Serializable;
+
+public class Internet extends Plan implements Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int velocidad_conexion;
 	private float constoInternet;
 	
