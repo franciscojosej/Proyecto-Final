@@ -28,6 +28,10 @@ import javax.swing.JMenuItem;
 
 public class VisualPrincipal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	protected RegistroDeClientes RegCliente;
 
