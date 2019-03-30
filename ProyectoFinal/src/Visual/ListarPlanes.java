@@ -78,7 +78,7 @@ public class ListarPlanes extends JDialog {
 		tableModel = new DefaultTableModel();
 		String[] columnNames = {"#","Nombre"};
 		tableModel.setColumnIdentifiers(columnNames);
-		loadQuesoLista(0);
+		loadListaPlanes(0);
 		scrollPane.setViewportView(table);
 		
 		JLabel lblTipoDeQueso = new JLabel("Tipo de Plan:");
@@ -89,7 +89,7 @@ public class ListarPlanes extends JDialog {
 		cbxQueso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selection = cbxQueso.getSelectedIndex();
-				loadQuesoLista(selection);
+				loadListaPlanes(selection);
 			}
 		});
 		cbxQueso.setModel(new DefaultComboBoxModel(new String[] {"       <Todos:>", "Internet", "Televisión", "Teléfono"}));
@@ -134,7 +134,7 @@ public class ListarPlanes extends JDialog {
 			}
 		}
 	}
-	public static void loadQuesoLista(int selection) {
+	public static void loadListaPlanes(int selection) {
 		tableModel.setRowCount(0);
 		
 		fila = new Object[tableModel.getColumnCount()];
