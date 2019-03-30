@@ -64,7 +64,7 @@ public class ListarPlanes extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Listado de Quesos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Listado de planes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 534, 226);
 		contentPanel.add(panel);
 		panel.setLayout(null);
@@ -76,12 +76,12 @@ public class ListarPlanes extends JDialog {
 		table = new JTable();
 		
 		tableModel = new DefaultTableModel();
-		String[] columnNames = {"#","Radio","Precio Base", "Precio Unitario","Precio","Tipo"};
+		String[] columnNames = {"#","Nombre"};
 		tableModel.setColumnIdentifiers(columnNames);
 		loadQuesoLista(0);
 		scrollPane.setViewportView(table);
 		
-		JLabel lblTipoDeQueso = new JLabel("Tipo de Queso:");
+		JLabel lblTipoDeQueso = new JLabel("Tipo de Plan:");
 		lblTipoDeQueso.setBounds(10, 25, 90, 14);
 		panel.add(lblTipoDeQueso);
 		
@@ -92,7 +92,7 @@ public class ListarPlanes extends JDialog {
 				loadQuesoLista(selection);
 			}
 		});
-		cbxQueso.setModel(new DefaultComboBoxModel(new String[] {"       <Todos:>", "Esferico", "Cilindro", "Cilindro Hueco"}));
+		cbxQueso.setModel(new DefaultComboBoxModel(new String[] {"       <Todos:>", "Internet", "Televisión", "Teléfono"}));
 		cbxQueso.setBounds(96, 22, 110, 20);
 		panel.add(cbxQueso);
 	
@@ -143,55 +143,55 @@ public class ListarPlanes extends JDialog {
 			for (Plan aux: Tricom.getInstance().getMiPlan()) {
 				fila[0] = aux.getCodigo();
 				fila[1] = aux.getNombre();
-				fila[2] = aux.get;
-				fila[3] = aux.get;
-				fila[4] = aux.PrecioTotal();
-				if(aux instanceof Esfera)
-					fila[5] = "Esferico";
-				if(aux instanceof Cilindro)
-					fila[5] = "Cilindro";
-				if(aux instanceof Hueco)
-					fila[5] = "CilindroHueco";
+				//fila[2] = aux.get;
+				//fila[3] = aux.get;
+				//fila[4] = aux.PrecioTotal();
+				if(aux instanceof Internet)
+					fila[3] = "Internet";
+				if(aux instanceof CableTV)
+					fila[3] = "Television";
+				if(aux instanceof Celular)
+					fila[3] = "Telefono";
 				tableModel.addRow(fila);
 			}
 			break;
 		case 1:
-			for (Queso aux: Fabrica.getInstancia().getMisQuesos()) {
-				if(aux instanceof Esfera){
+			for (Plan aux: Tricom.getInstance().getMiPlan()) {
+				if(aux instanceof Internet){
 				fila[0] = aux.getCodigo();
-				fila[1] = aux.getRadio();
-				fila[2] = aux.getPrecio_base();
-				fila[3] = aux.getPrecio_uni();
-				fila[4] = aux.PrecioTotal();
-				fila[5] = "Esferico";
+				fila[1] = aux.getNombre();
+				//fila[2] = aux.getPrecio_base();
+				//fila[3] = aux.getPrecio_uni();
+				//fila[4] = aux.PrecioTotal();
+				//fila[5] = "Esferico";
 				
 				tableModel.addRow(fila);
 				}
 			}
 			break;	
 		case 2:
-			for (Queso aux: Fabrica.getInstancia().getMisQuesos()) {
-				if(aux instanceof Cilindro){
+			for (Plan aux: Tricom.getInstance().getMiPlan()) {
+				if(aux instanceof CableTV){
 				fila[0] = aux.getCodigo();
-				fila[1] = aux.getRadio();
-				fila[2] = aux.getPrecio_base();
-				fila[3] = aux.getPrecio_uni();
-				fila[4] = aux.PrecioTotal();
-				fila[5] = "Cilindro";
+				fila[1] = aux.getNombre();
+				//fila[2] = aux.getPrecio_base();
+				//fila[3] = aux.getPrecio_uni();
+				//fila[4] = aux.PrecioTotal();
+				//fila[5] = "Cilindro";
 				
 				tableModel.addRow(fila);
 				}
 			}
 			break;	
 		case 3:
-			for (Queso aux: Fabrica.getInstancia().getMisQuesos()) {
-				if(aux instanceof Hueco){
+			for (Plan aux: Tricom.getInstance().getMiPlan()) {
+				if(aux instanceof Celular){
 				fila[0] = aux.getCodigo();
-				fila[1] = aux.getRadio();
-				fila[2] = aux.getPrecio_base();
-				fila[3] = aux.getPrecio_uni();
-				fila[4] = aux.PrecioTotal();
-				fila[5] = "Cilindro Hueco";
+				fila[1] = aux.getNombre();
+				//fila[2] = aux.getPrecio_base();
+				//fila[3] = aux.getPrecio_uni();
+				//fila[4] = aux.PrecioTotal();
+				//fila[5] = "Cilindro Hueco";
 			
 				tableModel.addRow(fila);
 				}
@@ -204,11 +204,11 @@ public class ListarPlanes extends JDialog {
 		table.getTableHeader().setReorderingAllowed(false);
 		TableColumnModel columnModel = table.getColumnModel();
 		columnModel.getColumn(0).setPreferredWidth(25);
-		columnModel.getColumn(1).setPreferredWidth(56);
-		columnModel.getColumn(2).setPreferredWidth(100);
-		columnModel.getColumn(3).setPreferredWidth(100);
-		columnModel.getColumn(4).setPreferredWidth(75);
-		columnModel.getColumn(5).setPreferredWidth(155);
+		columnModel.getColumn(1).setPreferredWidth(100);
+		//columnModel.getColumn(2).setPreferredWidth(100);
+		//columnModel.getColumn(3).setPreferredWidth(100);
+		//columnModel.getColumn(4).setPreferredWidth(75);
+		//columnModel.getColumn(5).setPreferredWidth(155);
 		
 		
 	}

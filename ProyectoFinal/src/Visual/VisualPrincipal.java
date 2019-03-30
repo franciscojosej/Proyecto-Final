@@ -180,7 +180,7 @@ public class VisualPrincipal extends JFrame {
 		mntmlistaDePlanes.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				ListarPlanes ListPlanes = new ListarPlanes();
+				ListarPlanes ListPlanes = new ListarPlanes(null);
 				ListPlanes.setModal(true);
 				ListPlanes.setLocationRelativeTo(null);
 				ListPlanes.setVisible(true);
