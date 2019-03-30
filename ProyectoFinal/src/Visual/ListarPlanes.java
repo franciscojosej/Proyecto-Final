@@ -93,7 +93,7 @@ public class ListarPlanes extends JDialog {
 				loadListaPlanes(selection);
 			}
 		});
-		cbxQueso.setModel(new DefaultComboBoxModel(new String[] {"       <Todos:>", "Internet", "Televisión", "Teléfono"}));
+		cbxQueso.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione:>", "Internet", "Televisión", "Teléfono"}));
 		cbxQueso.setBounds(96, 22, 110, 20);
 		panel.add(cbxQueso);
 	
