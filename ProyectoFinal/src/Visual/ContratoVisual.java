@@ -6,14 +6,17 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
-
+import logico.CableTV;
+import logico.Celular;
 import logico.Cliente;
 import logico.Contrato;
+import logico.Internet;
 import logico.Plan;
 import logico.Tricom;
 
@@ -21,6 +24,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -41,9 +45,11 @@ public class ContratoVisual extends JDialog {
 	private Cliente cliente;
 	private Contrato nuevoContrato;
 	
-	private static String columnNombre[] = {"Nombre","Cedula","Numero","Direccion"};
-	private JTable table;
-
+	
+	private static String columnNombre[] = {"Nombre","Servicio","x"};
+	JTable t= new  JTable(llenararreglo(),columnNombre);
+	
+	JScrollPane scrollPane = new JScrollPane(t);
 
 	/**
 	 * Launch the application.
@@ -68,6 +74,7 @@ public class ContratoVisual extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
+			t.setEnabled(false);
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Formulario de Contrato Tricom RD", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
@@ -77,6 +84,7 @@ public class ContratoVisual extends JDialog {
 				lblNewLabel.setBounds(10, 28, 138, 14);
 				panel.add(lblNewLabel);
 			}
+			
 			{
 				
 				
@@ -141,20 +149,17 @@ public class ContratoVisual extends JDialog {
 				textNombre.setColumns(10);
 			}
 			
-			JPanel panel_1 = new JPanel();
-			panel_1.setBorder(new TitledBorder(null, "Planes Disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_1.setBounds(23, 245, 190, 115);
-			panel.add(panel_1);
-			panel_1.setLayout(null);
+			JPanel panelPlanesDisponibles = new JPanel();
+			panelPlanesDisponibles.setBorder(new TitledBorder(null, "Planes Disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panelPlanesDisponibles.setBounds(10, 219, 209, 141);
+			panel.add(panelPlanesDisponibles);
+			panelPlanesDisponibles.setLayout(null);
 			
-			table = new JTable(llenararreglo(),columnNombre);
-			//table.setBounds(10, 11, 170, 93);
-		//	panel_1.add(table);
 			
-			JScrollPane scrollPane = new JScrollPane(table);
-			scrollPane.setBounds(10, 11, 170, 93);
-			panel_1.add(scrollPane);
+			scrollPane.setBounds(10, 11, 189, 119);
+			panelPlanesDisponibles.add(scrollPane);
 			
+
 			JPanel panel_2 = new JPanel();
 			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Carrito de Compras", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel_2.setBounds(356, 245, 182, 115);
@@ -178,7 +183,7 @@ public class ContratoVisual extends JDialog {
 			
 			JLabel lblPrecioTotal = new JLabel("Precio Total a Pagar:");
 			lblPrecioTotal.setBounds(282, 406, 169, 14);
-			panel.add(lblPrecioTotal);
+			panel.add(lblPrecioTotal,BorderLayout.CENTER);
 			
 			textPrecioTotal = new JTextField();
 			textPrecioTotal.setBounds(408, 403, 94, 20);
@@ -234,17 +239,48 @@ public class ContratoVisual extends JDialog {
 
 
 	private Object[][] llenararreglo() {
-		Object[][] datofila=new Object[Tricom.getInstance().getMiPersonal().size()][4];
-		int i=0;
-		for(Plan aux : Tricom.getInstance().getMiPlan()) {
-			datofila[i][0]=aux.getNombre();
-			datofila[i][1]=aux.getCodigo();	
-			datofila[i][2]=aux.getUnidades_Plan();
-			datofila[i][3]=aux.getCodigo();
-			i++;
+		Object[][] datofila=new Object[Tricom.getPlanesCod()][3];
+		String miServ[]= {"","",""};
+		float costo=0;
+		for (int i = 0; i < Tricom.getPlanesCod(); i++) {
+			
+			ArrayList<Plan> planes=Tricom.getInstance().buscarPlanes(i);
+			
+			if(planes!=null)
+			datofila[i][0]= planes.get(0).getNombre();
+			if(planes!=null)
+			for (Plan plan : planes) {
+				if (plan instanceof Celular) {
+					miServ[0]="Cel";
+					costo+=((Celular)plan).CalcularCosto();
+				}
+				if (plan instanceof CableTV) {
+					miServ[1]=" -Tv";	
+					costo+=(( CableTV)plan).CalcularCosto();
+				}
+				if (plan instanceof Internet) {
+					miServ[2]=" -Int";	
+					costo+=((  Internet)plan).CalcularCosto();
+				}
+				
+			}
+			if(planes!=null)
+			datofila[i][1]= getString(miServ);
+			
+			if(planes!=null)
+			datofila[i][2]=costo;
+			
+			
 		}
+		
+
 		return datofila;
 		
 		
 	}
+	public String getString(String n[]) {
+		return n[0]+n[1]+n[2];
+	}
+
 }
+

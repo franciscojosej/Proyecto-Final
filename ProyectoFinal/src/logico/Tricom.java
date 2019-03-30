@@ -128,7 +128,7 @@ public class Tricom implements Serializable{
 public void insertarPlan(Plan aux){
 		
 	
-		++PlanesCod;
+		//++PlanesCod;
 		aux.setCodigo(PlanesCod);
 		miPlan.add(aux);
 	
@@ -380,6 +380,46 @@ public void insertarPlan(Plan aux){
 		}
 		return cont;
 	}
+	
+	public ArrayList<Plan> buscarPlanes(int code){
+		
+		ArrayList<Plan> plancillo= new ArrayList<Plan>();
+		
+			for (Plan pla : miPlan) {
+				
+				if(pla.getCodigo()==code) {
+					plancillo.add(pla);
+				}
+			}
+		
+		
+		return plancillo;
+	}
+	public Plan buscarPlan(int code){
+		
+		Plan plancillo= null;
+		
+			for (Plan pla : miPlan) {
+				
+				if(pla.getCodigo()==code) {
+					plancillo=pla;
+				}
+				break;
+			}
+		
+		
+		return plancillo;
+	}
+
+
+	public static int getPlanesCod() {
+		return PlanesCod;
+	}
+
+	public static void setPlanesCod(int planesCod) {
+		PlanesCod = planesCod;
+	}
+	
 	
 	
 }

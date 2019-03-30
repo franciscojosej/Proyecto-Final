@@ -33,7 +33,6 @@ public class CrearPlanes extends JDialog {
 	private static final String Plans = null;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCodigo;
-	private JTextField textField_2;
 	private JTextField textNombre;
 	private JComboBox cbxData;
 	private JComboBox cbxCanales;
@@ -51,6 +50,10 @@ public class CrearPlanes extends JDialog {
 	JPanel panel_2;
 	JPanel panel_3;
 	JPanel panel_4;
+	 private  Internet 	aux =null;
+	 private  CableTV aux2=null;
+	 private  Celular aux3=null;
+	 private  float costoTotal=0;
 
 	/**
 	 * Launch the application.
@@ -194,20 +197,11 @@ public class CrearPlanes extends JDialog {
 						panelMinutos.setVisible(false);
 					}
 					
-					 
+
 				}
 			});
 			rdbtnTelefono.setBounds(249, 39, 109, 23);
 			panel_1.add(rdbtnTelefono);
-			
-			JLabel lblNewLabel_5 = new JLabel("Precio Total:");
-			lblNewLabel_5.setBounds(13, 381, 124, 14);
-			panel.add(lblNewLabel_5);
-			
-			textField_2 = new JTextField();
-			textField_2.setBounds(94, 378, 76, 20);
-			panel.add(textField_2);
-			textField_2.setColumns(10);
 			
 			panelData = new JPanel();
 			panelData.setBounds(0, 263, 124, 97);
@@ -250,6 +244,9 @@ public class CrearPlanes extends JDialog {
 		        JLabel lblNewLabel_3 = new JLabel("Canales");
 		        lblNewLabel_3.setBounds(11, 11, 109, 14);
 		        panelCanales.add(lblNewLabel_3);
+				panelData.setVisible(false);
+				panelMinutos.setVisible(false);
+				panelCanales.setVisible(false);
 			
 			
 		}
@@ -265,40 +262,41 @@ public class CrearPlanes extends JDialog {
 						
 						if(!textNombre.getText().equalsIgnoreCase("") && !txtCodigo.getText().equalsIgnoreCase("")){
 		
-							Internet 	aux =null;
-							CableTV aux2=null;
-							Celular aux3=null;
-							
-						ArrayList< Plan> nuevoPlan = new ArrayList<Plan>();
+
+						
 							
 						String nombre = textNombre.getText();
+						
 						int codigo = Tricom.PlanesCod;
 						
-						++Tricom.PlanesCod;
+						
 						
 						if(rdbtnInternet.isSelected()){
 							int velocidad_conexion =0;
 									
 							if(cbxData.getSelectedIndex()==1) {
-								velocidad_conexion=5;
+								velocidad_conexion=50;
 							}
 							if(cbxData.getSelectedIndex()==2) {
-								velocidad_conexion=15;
+								velocidad_conexion=100;
 							}
 							
 							if(cbxData.getSelectedIndex()==3) {
-								velocidad_conexion=50;
+								velocidad_conexion=150;
 							}
 							if(cbxData.getSelectedIndex()==4) {
 								velocidad_conexion=100;
 							}
 							if(cbxData.getSelectedIndex()==5) {
-								velocidad_conexion=1000;
+								velocidad_conexion=300;
+							}
+							if(cbxData.getSelectedIndex()==6) {
+								velocidad_conexion=500;
 							}
 							
 							
 							aux = new Internet(codigo, nombre, velocidad_conexion);
-							nuevoPlan.add(aux);
+						
 							
 						}
 						if(rdbtnTelevicion.isSelected()){
@@ -319,7 +317,7 @@ public class CrearPlanes extends JDialog {
 							cantidadCanales=800;
 							}
 							aux2 = new CableTV(codigo, nombre, cantidadCanales);
-							nuevoPlan.add(aux2);
+							
 						}
 						if(rdbtnTelefono.isSelected()){
 							int minutos =0;
@@ -340,24 +338,71 @@ public class CrearPlanes extends JDialog {
 								minutos=2000;
 							}							
 							aux3 = new Celular(codigo, nombre, minutos);
-							nuevoPlan.add(aux3);
+						
 						}
-		
-		
-						if(aux!=null)
-							Tricom.getInstance().insertarPlan(aux);
-						if(aux2!=null)
-							Tricom.getInstance().insertarPlan(aux2);
-						if(aux3!=null)
-							Tricom.getInstance().insertarPlan(aux3);
+						if(aux!=null) {
 							
+							
+							costoTotal+=aux.CalcularCosto();
+						}
+							
+					
+						if(aux2!=null) {
+							
+							costoTotal+=aux2.CalcularCosto();
+						}
+							
+						if(aux3!=null) {
+							
+							costoTotal+=aux3.CalcularCosto();
+
+						
+						}
+	
+		
+						
+						
+						int  num= JOptionPane.showConfirmDialog(null, "Costo Del Plan: "+costoTotal, "Crear", JOptionPane.YES_NO_OPTION);
+
+						if(num==0)
+								 {
+
+							
+							if(aux!=null) {
+								
+								Tricom.getInstance().insertarPlan(aux);
+								
+							}
+								
+						
+							if(aux2!=null) {
+								Tricom.getInstance().insertarPlan(aux2);
+							
+							}
+								
+							if(aux3!=null) {
+								Tricom.getInstance().insertarPlan(aux3);
+							
+
+							
+							}
+						//	JOptionPane.showMessageDialog(null, "Plan registrado satisfactoriamente", 
+							//		null, JOptionPane.INFORMATION_MESSAGE, null);
+							++Tricom.PlanesCod;
+							
+						}else {
+							 	aux =null;
+							 aux2=null;
+							    aux3=null;
+						 costoTotal=0;
+						}
 						
 						
 					
 					
 						
 					
-						JOptionPane.showMessageDialog(null, "Plan registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+						
 						clear();
 						}else{
 							JOptionPane.showMessageDialog(null, "Verifique los campos", null, JOptionPane.ERROR_MESSAGE, null);

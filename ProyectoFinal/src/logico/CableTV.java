@@ -20,7 +20,7 @@ public class CableTV extends Plan implements Serializable {
 	public CableTV(int codigo, String nombre, int cantidadCanales) {
 		super(codigo, nombre);
 		this.cantidadCanales = cantidadCanales;
-		//this.consto = 100;
+		this.consto = 10;
 	}
 		
 

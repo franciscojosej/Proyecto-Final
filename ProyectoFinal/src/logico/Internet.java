@@ -18,7 +18,7 @@ public class Internet extends Plan implements Serializable {
 	public Internet(int codigo, String nombre, int velocidad_conexion) {
 		super(codigo, nombre);
 		this.velocidad_conexion = velocidad_conexion;
-		//this.constoInternet = constoInternet;
+		this.constoInternet = 35;
 	}
 
 	public int getVelocidad_conexion() {
@@ -39,7 +39,7 @@ public class Internet extends Plan implements Serializable {
 
 	public float CalcularCosto() {
 		// TODO Auto-generated method stub
-		return constoInternet*100 +velocidad_conexion;
+		return constoInternet*velocidad_conexion;
 	}
 
 }

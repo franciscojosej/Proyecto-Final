@@ -17,7 +17,7 @@ public class Celular extends Plan implements Serializable  {
 	public Celular(int codigo, String nombre, int minutos) {
 		super(codigo, nombre);
 		this.minutos = minutos;
-		//this.costoCelular = costoCelular;
+		this.costoCelular = 10;
 	}
 
 	public float getCostoCelular() {
@@ -37,7 +37,7 @@ public class Celular extends Plan implements Serializable  {
 	}
 	public float CalcularCosto() {
 		// TODO Auto-generated method stub
-		return 0;
+		return costoCelular*minutos;
 	}
 
 	
