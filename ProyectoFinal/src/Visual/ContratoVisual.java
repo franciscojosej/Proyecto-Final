@@ -8,8 +8,13 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
+
+import logico.Cliente;
+import logico.Contrato;
+import logico.Plan;
 import logico.Tricom;
 
 import javax.swing.UIManager;
@@ -19,18 +24,26 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class ContratoVisual extends JDialog {
 
 	private static final String Contra = null;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCodigo;
-	private JTextField texNombreCliente;
+	private JTextField texCedulaCleinte;
 	private JTextField textNombre;
-	private JTextField textField_3;
 	private JTextField textPrecioTotal;
 	private JTextField texFechaDeInicio;
 	private JTextField textFechaculminacion;
+	private Cliente cliente;
+	private Contrato nuevoContrato;
+	
+	private static String columnNombre[] = {"Nombre","Cedula","Numero","Direccion"};
+	private JTable table;
+
 
 	/**
 	 * Launch the application.
@@ -90,15 +103,29 @@ public class ContratoVisual extends JDialog {
 					panel_1.add(Cedula);
 				}
 				{
-					texNombreCliente = new JTextField();
-					texNombreCliente.setBounds(10, 47, 171, 20);
-					panel_1.add(texNombreCliente);
-					texNombreCliente.setColumns(10);
+					texCedulaCleinte = new JTextField();
+					texCedulaCleinte.setBounds(10, 47, 171, 20);
+					panel_1.add(texCedulaCleinte);
+					texCedulaCleinte.setColumns(10);
 				}
 				
 				JButton btnNewButton = new JButton(" Buscar Cliente");
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						
+						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null||
+								texCedulaCleinte.getText().equalsIgnoreCase("")&&textNombre.getText().equalsIgnoreCase("")) {
+							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+						}
+						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) {
+							JOptionPane.showMessageDialog(null, "Cliente no encontrado", null, JOptionPane.ERROR_MESSAGE, null);
+						}
+						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) {
+							cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
+							JOptionPane.showMessageDialog(null, "Cliente Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
+							
+						}
+						
 					}
 				});
 				btnNewButton.setBounds(201, 46, 136, 23);
@@ -112,21 +139,21 @@ public class ContratoVisual extends JDialog {
 				textNombre.setBounds(10, 103, 171, 20);
 				panel_1.add(textNombre);
 				textNombre.setColumns(10);
-				
-				JLabel lblNewLabel_3 = new JLabel("N\u00FAmero Telef\u00F3nico:");
-				lblNewLabel_3.setBounds(345, 78, 146, 14);
-				panel_1.add(lblNewLabel_3);
-				
-				textField_3 = new JTextField();
-				textField_3.setBounds(355, 103, 186, 20);
-				panel_1.add(textField_3);
-				textField_3.setColumns(10);
 			}
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(null, "Planes Disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel_1.setBounds(23, 245, 190, 115);
 			panel.add(panel_1);
+			panel_1.setLayout(null);
+			
+			table = new JTable(llenararreglo(),columnNombre);
+			//table.setBounds(10, 11, 170, 93);
+		//	panel_1.add(table);
+			
+			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.setBounds(10, 11, 170, 93);
+			panel_1.add(scrollPane);
 			
 			JPanel panel_2 = new JPanel();
 			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Carrito de Compras", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -203,5 +230,21 @@ public class ContratoVisual extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+
+	private Object[][] llenararreglo() {
+		Object[][] datofila=new Object[Tricom.getInstance().getMiPersonal().size()][4];
+		int i=0;
+		for(Plan aux : Tricom.getInstance().getMiPlan()) {
+			datofila[i][0]=aux.getNombre();
+			datofila[i][1]=aux.getCodigo();	
+			datofila[i][2]=aux.getUnidades_Plan();
+			datofila[i][3]=aux.getCodigo();
+			i++;
+		}
+		return datofila;
+		
+		
 	}
 }

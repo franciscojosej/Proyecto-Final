@@ -344,9 +344,11 @@ public class CrearPlanes extends JDialog {
 						}
 		
 		
-						
+						if(aux!=null)
 							Tricom.getInstance().insertarPlan(aux);
+						if(aux2!=null)
 							Tricom.getInstance().insertarPlan(aux2);
+						if(aux3!=null)
 							Tricom.getInstance().insertarPlan(aux3);
 							
 						
