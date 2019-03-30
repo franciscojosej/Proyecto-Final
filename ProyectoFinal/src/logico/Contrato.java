@@ -12,8 +12,8 @@ public class Contrato implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private boolean estado;//Habilidado
-	private Date fecha_de_pago;
-	private Date fecha_inicio;
+	private String fecha_de_pago;
+	private String fecha_inicio;
 	private Date fecha_vencimiento;
 	private ArrayList<Plan> misPlanes;
 	private String codigoDeContrato;
@@ -24,8 +24,8 @@ public class Contrato implements Serializable {
 
 	
 	
-	public Contrato(Date fecha_de_pago, Date fecha_inicio, Date fecha_vencimiento,
-			 String codigoDeContrato) {
+	public Contrato( String fecha_de_pago, String fecha_inicio, Date fecha_vencimiento,
+			 String codigoDeContrato ) {
 		super();
 		this.estado = true;
 		this.fecha_de_pago = fecha_de_pago;
@@ -35,6 +35,8 @@ public class Contrato implements Serializable {
 		this.codigoDeContrato = codigoDeContrato;
 		FacturasEmitidas = 0;
 	}
+
+
 	public boolean getEstado() {
 		return estado;
 	}
@@ -69,21 +71,31 @@ public class Contrato implements Serializable {
 
 
 
-	public Date getFecha_de_pago() {
+
+	public String getFecha_de_pago() {
 		return fecha_de_pago;
 	}
 
-	public void setFecha_de_pago(Date fecha_de_pago) {
+
+	public void setFecha_de_pago(String fecha_de_pago) {
 		this.fecha_de_pago = fecha_de_pago;
 	}
 
-	public Date getFecha_inicio() {
+
+	public String getFecha_inicio() {
 		return fecha_inicio;
 	}
 
-	public void setFecha_inicio(Date fecha_inicio) {
+
+	public void setFecha_inicio(String fecha_inicio) {
 		this.fecha_inicio = fecha_inicio;
 	}
+
+
+	public void setFacturasEmitidas(int facturasEmitidas) {
+		FacturasEmitidas = facturasEmitidas;
+	}
+
 
 	public Date getFecha_vencimiento() {
 		return fecha_vencimiento;

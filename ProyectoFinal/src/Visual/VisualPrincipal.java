@@ -196,7 +196,7 @@ public class VisualPrincipal extends JFrame {
 		JMenuItem mntmContrato = new JMenuItem("\u2022Realizar Contrato");
 		mntmContrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Contrato contratar = new Contrato();
+				ContratoVisual contratar = new ContratoVisual();
 				
 				contratar.setModal(true);
 				contratar.setLocationRelativeTo(null);

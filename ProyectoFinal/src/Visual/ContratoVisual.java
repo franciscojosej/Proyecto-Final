@@ -20,7 +20,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class Contrato extends JDialog {
+public class ContratoVisual extends JDialog {
 
 	private static final String Contra = null;
 	private final JPanel contentPanel = new JPanel();
@@ -35,7 +35,7 @@ public class Contrato extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Contrato dialog = new Contrato();
+			ContratoVisual dialog = new ContratoVisual();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -46,7 +46,7 @@ public class Contrato extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Contrato() {
+	public ContratoVisual() {
 		setBounds(100, 100, 587, 548);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

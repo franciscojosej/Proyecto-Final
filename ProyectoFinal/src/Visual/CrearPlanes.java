@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -13,6 +14,7 @@ import javax.swing.border.TitledBorder;
 
 import logico.CableTV;
 import logico.Celular;
+import logico.Contrato;
 import logico.Internet;
 import logico.Plan;
 import logico.Tricom;
@@ -32,13 +34,20 @@ public class CrearPlanes extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCodigo;
 	private JTextField textField_2;
-	private JTextField textField;
-	private JComboBox comboBox;
-	private JComboBox comboBox_1;
+	private JTextField textNombre;
+	private JComboBox cbxData;
+	private JComboBox cbxCanales;
 	private JComboBox comboBox_2;
-	JRadioButton rdbtnNewRadioButton;
-	JRadioButton rdbtnNewRadioButton_1;
-	JRadioButton rdbtnNewRadioButton_2;
+	   private JComboBox cbxMinutos ;
+
+	   private JPanel panelData;
+	   private JPanel panelMinutos;
+	   private JPanel panelCanales;
+	
+	   private JRadioButton rdbtnTelevicion;
+	   private JRadioButton rdbtnInternet;
+	   private JRadioButton rdbtnTelefono;
+	
 	JPanel panel_2;
 	JPanel panel_3;
 	JPanel panel_4;
@@ -60,7 +69,7 @@ public class CrearPlanes extends JDialog {
 	 * Create the dialog.
 	 */
 	public CrearPlanes() {
-		setBounds(100, 100, 425, 500);
+		setBounds(100, 100, 407, 500);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -89,10 +98,10 @@ public class CrearPlanes extends JDialog {
 			lblNewLabel_1.setBounds(10, 87, 176, 14);
 			panel.add(lblNewLabel_1);
 			
-			textField = new JTextField();
-			textField.setBounds(10, 104, 181, 20);
-			panel.add(textField);
-			textField.setColumns(10);
+			textNombre = new JTextField();
+			textNombre.setBounds(10, 104, 181, 20);
+			panel.add(textNombre);
+			textNombre.setColumns(10);
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tipo De Servicio", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -100,91 +109,96 @@ public class CrearPlanes extends JDialog {
 			panel.add(panel_1);
 			panel_1.setLayout(null);
 			
-			JRadioButton rdbtnNewRadioButton = new JRadioButton("Internet.");
-			rdbtnNewRadioButton.addActionListener(new ActionListener() {
+			 rdbtnInternet = new JRadioButton("Internet.");
+			rdbtnInternet.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					rdbtnNewRadioButton.setSelected(true);
-					rdbtnNewRadioButton_1.setSelected(false);
-					rdbtnNewRadioButton_2.setSelected(false);
-					panel_2.setVisible(true);
-					panel_3.setVisible(false);
-					panel_4.setVisible(false);
-				}
-			});
-			rdbtnNewRadioButton.setSelected(true);
-			rdbtnNewRadioButton.setBounds(6, 39, 109, 23);
-			panel_1.add(rdbtnNewRadioButton);
-			
-			JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Televisi\u00F3n.");
-			rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					rdbtnNewRadioButton.setSelected(false);
-					rdbtnNewRadioButton_1.setSelected(true);
-					rdbtnNewRadioButton_2.setSelected(false);
-					panel_2.setVisible(false);
-					panel_3.setVisible(true);
-					panel_4.setVisible(false);
+					//panelData.setVisible(false);
+				//	panelCanales.setVisible(false);
+				//	panelMinutos.setVisible(false);
+					
+					
+					if(rdbtnTelefono.isSelected()) {
+						panelMinutos.setVisible(true);
+					}else {
+						panelMinutos.setVisible(false);
+					}
+					if(rdbtnTelevicion.isSelected()) {
+						panelCanales.setVisible(true);
+					}else {
+						panelCanales.setVisible(false);
+					}
+					if(rdbtnInternet.isSelected()) {
+						panelData.setVisible(true);
+					}else {
+						panelData.setVisible(false);	
+					}
+					
 					
 				}
 			});
-			rdbtnNewRadioButton_1.setBounds(127, 39, 109, 23);
-			panel_1.add(rdbtnNewRadioButton_1);
+			rdbtnInternet.setBounds(6, 39, 109, 23);
+			panel_1.add(rdbtnInternet);
 			
-			JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Tel\u00E9fono.");
-			rdbtnNewRadioButton_2.addActionListener(new ActionListener() {
+			 rdbtnTelevicion = new JRadioButton("Televisi\u00F3n.");
+			rdbtnTelevicion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					rdbtnNewRadioButton.setSelected(false);
-					rdbtnNewRadioButton_1.setSelected(false);
-					rdbtnNewRadioButton_2.setSelected(true);
-					panel_2.setVisible(false);
-					panel_3.setVisible(false);
-					panel_4.setVisible(true);
+
+					//panelData.setVisible(false);
+					//panelCanales.setVisible(false);
+					//panelMinutos.setVisible(false);
+					
+					if(rdbtnInternet.isSelected()) {
+						panelData.setVisible(true);
+					}else {
+						panelData.setVisible(false);	
+					}
+					if(rdbtnTelefono.isSelected()) {
+						panelMinutos.setVisible(true);
+					}else {
+						panelMinutos.setVisible(false);
+					}
+					if(rdbtnTelevicion.isSelected()) {
+						panelCanales.setVisible(true);
+					}else {
+						panelCanales.setVisible(false);
+					}
+					
+					
+					
 				}
 			});
-			rdbtnNewRadioButton_2.setBounds(249, 39, 109, 23);
-			panel_1.add(rdbtnNewRadioButton_2);
+			rdbtnTelevicion.setBounds(127, 39, 109, 23);
+			panel_1.add(rdbtnTelevicion);
 			
-			JPanel panel_2 = new JPanel();
-			panel_2.setBounds(10, 263, 379, 97);
-			panel.add(panel_2);
-			panel_2.setLayout(null);
-			
-			JLabel lblNewLabel_2 = new JLabel("Data(MB)");
-			lblNewLabel_2.setBounds(10, 11, 110, 14);
-			panel_2.add(lblNewLabel_2);
-			
-		    comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Cantidad>", "5MB", "15MB", "50MB", "100MB", "1GB", "ilimitado"}));
-			comboBox.setBounds(10, 33, 110, 20);
-			panel_2.add(comboBox);
-			
-			JPanel panel_3 = new JPanel();
-			panel_3.setBounds(10, 263, 379, 97);
-			panel.add(panel_3);
-			panel_3.setLayout(null);
-			
-			JLabel lblNewLabel_3 = new JLabel("Canales");
-			lblNewLabel_3.setBounds(130, 11, 110, 14);
-			panel_3.add(lblNewLabel_3);
-			
-			 comboBox_1 = new JComboBox();
-			comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"<Variedad>", "Canales Premium ", "Paquete de Adultos", "Entretenimiento", "Otros"}));
-			comboBox_1.setBounds(130, 33, 110, 20);
-			panel_3.add(comboBox_1);
-			
-			JPanel panel_4 = new JPanel();
-			panel_4.setBounds(10, 263, 379, 97);
-			panel.add(panel_4);
-			panel_4.setLayout(null);
-			
-			JLabel lblNewLabel_4 = new JLabel("Minutos");
-			lblNewLabel_4.setBounds(250, 11, 104, 14);
-			panel_4.add(lblNewLabel_4);
-			
-			JComboBox comboBox_2 = new JComboBox();
-		    comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"<Plan Minutos>", "50 Minutos", "100 Minutos ", "300 Minutos ", "1000 Minutos", "Minutos ilimitado"}));
-			comboBox_2.setBounds(250, 33, 119, 20);
-			panel_4.add(comboBox_2);
+			 rdbtnTelefono = new JRadioButton("Tel\u00E9fono.");
+			rdbtnTelefono.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					////panelData.setVisible(false);
+					//panelCanales.setVisible(false);
+					//panelMinutos.setVisible(false);
+					
+					if(rdbtnInternet.isSelected()) {
+						panelData.setVisible(true);
+					}else {
+						panelData.setVisible(false);	
+					}
+					
+					if(rdbtnTelevicion.isSelected()) {
+						panelCanales.setVisible(true);
+					}else {
+						panelCanales.setVisible(false);
+					}
+					if(rdbtnTelefono.isSelected()) {
+						panelMinutos.setVisible(true);
+					}else {
+						panelMinutos.setVisible(false);
+					}
+					
+					 
+				}
+			});
+			rdbtnTelefono.setBounds(249, 39, 109, 23);
+			panel_1.add(rdbtnTelefono);
 			
 			JLabel lblNewLabel_5 = new JLabel("Precio Total:");
 			lblNewLabel_5.setBounds(13, 381, 124, 14);
@@ -194,6 +208,48 @@ public class CrearPlanes extends JDialog {
 			textField_2.setBounds(94, 378, 76, 20);
 			panel.add(textField_2);
 			textField_2.setColumns(10);
+			
+			panelData = new JPanel();
+			panelData.setBounds(0, 263, 124, 97);
+			panel.add(panelData);
+			panelData.setLayout(null);
+			
+			JLabel lblNewLabel_2 = new JLabel("Data(MB)");
+			lblNewLabel_2.setBounds(10, 11, 110, 14);
+			panelData.add(lblNewLabel_2);
+		    
+		    cbxData = new JComboBox();
+		    cbxData.setBounds(10, 36, 110, 20);
+		    panelData.add(cbxData);
+		    cbxData.setModel(new DefaultComboBoxModel(new String[] {"<Cantidad>", "5MB", "15MB", "50MB", "100MB", "1GB", "ilimitado"}));
+		      
+		       panelMinutos = new JPanel();
+		       panelMinutos.setBounds(245, 263, 132, 97);
+		       panel.add(panelMinutos);
+		       panelMinutos.setLayout(null);
+		       
+		     cbxMinutos = new JComboBox();
+		       cbxMinutos.setBounds(10, 36, 119, 20);
+		       panelMinutos.add(cbxMinutos);
+		       cbxMinutos.setModel(new DefaultComboBoxModel(new String[] {"<Plan Minutos>", "50 Minutos", "100 Minutos ", "300 Minutos ", "1000 Minutos", "Minutos ilimitado"}));
+		       
+		       JLabel lblNewLabel_4 = new JLabel("Minutos");
+		       lblNewLabel_4.setBounds(10, 11, 104, 14);
+		       panelMinutos.add(lblNewLabel_4);
+		       
+		       panelCanales = new JPanel();
+		       panelCanales.setBounds(123, 263, 124, 97);
+		       panel.add(panelCanales);
+		       panelCanales.setLayout(null);
+		       
+		        cbxCanales = new JComboBox();
+		        cbxCanales.setModel(new DefaultComboBoxModel(new String[] {"<Variedad>", "Canales Premium ", "Paquete de Adultos", "Entretenimiento", "Otros"}));
+		        cbxCanales.setBounds(10, 36, 110, 20);
+		        panelCanales.add(cbxCanales);
+		        
+		        JLabel lblNewLabel_3 = new JLabel("Canales");
+		        lblNewLabel_3.setBounds(11, 11, 109, 14);
+		        panelCanales.add(lblNewLabel_3);
 			
 			
 		}
@@ -205,35 +261,56 @@ public class CrearPlanes extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+
 						
-						if(!textField.getText().equalsIgnoreCase("") && !txtCodigo.getText().equalsIgnoreCase("")){
+						if(!textNombre.getText().equalsIgnoreCase("") && !txtCodigo.getText().equalsIgnoreCase("")){
 		
-						Plan aux = null;
-						String nombre = textField.getText();
-						int codigo = new Integer(txtCodigo.getText());
+							Internet 	aux =null;
+							CableTV aux2=null;
+							Celular aux3=null;
+							Contrato nuevoContrato=null;
+						ArrayList< Plan> nuevoPlan = new ArrayList<Plan>();
+							
+						String nombre = textNombre.getText();
+						int codigo = Tricom.PlanesCod;
+						;
 						
-						if(rdbtnNewRadioButton.isSelected()){
-							int velocidad_conexion = new Integer(comboBox.getName().toString());
+						
+						if(rdbtnInternet.isSelected()){
+							int velocidad_conexion =0;
+									new Integer(cbxData.getName().toString());
+						//	if(cbxData.se) {
+								
+						//	}
+							
 							aux = new Internet(codigo, nombre, velocidad_conexion);
+							nuevoPlan.add(aux);
 							
 						}
-						if(rdbtnNewRadioButton_1.isSelected()){
+						if(rdbtnTelevicion.isSelected()){
 							
-							int cantidadCanales = new Integer(comboBox_1.getName().toString());
-							aux = new CableTV(codigo, nombre, cantidadCanales);
-							
+							int cantidadCanales = new Integer(cbxCanales.getName().toString());
+							aux2 = new CableTV(codigo, nombre, cantidadCanales);
+							nuevoPlan.add(aux2);
 						}
-						if(rdbtnNewRadioButton_2.isSelected()){
-							int minutos = new Integer(comboBox_2.getName().toString());
-							aux = new Celular(codigo, nombre, minutos);
+						if(rdbtnTelefono.isSelected()){
+							int minutos = new Integer(cbxMinutos.getName().toString());
+							aux3 = new Celular(codigo, nombre, minutos);
+							nuevoPlan.add(aux3);
 						}
-						Tricom.getInstance().insertarPlan(aux);
+		
+						nuevoContrato =new Contrato(null, null, null, null);
+						nuevoContrato.setMisPlanes(nuevoPlan);
+					
+						Tricom.getInstance().insertarContrato(nuevoContrato);
 						JOptionPane.showMessageDialog(null, "Plan registrado satisfactoriamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 						clear();
 						}else{
 							JOptionPane.showMessageDialog(null, "Verifique los campos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
+						
 					}
+					
 				});
 				okButton.setActionCommand("Registrar");
 				buttonPane.add(okButton);
@@ -257,10 +334,10 @@ public class CrearPlanes extends JDialog {
 	
 	private void clear() {
 		
-		textField.setText("");
+		textNombre.setText("");
 		txtCodigo.setText("");
-		comboBox.setToolTipText("");
-		comboBox_1.setToolTipText("");
+		cbxData.setToolTipText("");
+		cbxCanales.setToolTipText("");
 		comboBox_2.setToolTipText("");
 		
 		
