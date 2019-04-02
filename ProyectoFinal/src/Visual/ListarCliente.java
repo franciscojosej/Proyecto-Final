@@ -78,7 +78,7 @@ public class ListarCliente extends JDialog {
 			}
 		});
 		tableModel = new DefaultTableModel();
-		String[] columnNames = {"Codigo", "Nombre","Cédula", "Dirección", "Teléfono"};
+		String[] columnNames = {"Código", "Nombre","Cédula", "Dirección", "Teléfono"};
 		tableModel.setColumnIdentifiers(columnNames);
 		loadCliente();
 		scrollPane.setViewportView(tableLista);
