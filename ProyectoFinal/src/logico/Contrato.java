@@ -14,9 +14,9 @@ public class Contrato implements Serializable {
 	private boolean estado;//Habilidado
 	private String fecha_de_pago;
 	private String fecha_inicio;
-	private Date fecha_vencimiento;
+	private String fecha_vencimiento;
 	private ArrayList<Plan> misPlanes;
-	private String codigoDeContrato;
+	private int codigoDeContrato;
 	private int FacturasEmitidas;
 	
 
@@ -24,8 +24,8 @@ public class Contrato implements Serializable {
 
 	
 	
-	public Contrato( String fecha_de_pago, String fecha_inicio, Date fecha_vencimiento,
-			 String codigoDeContrato ) {
+	public Contrato( String fecha_de_pago, String fecha_inicio, String fecha_vencimiento,
+			 int codigoDeContrato ) {
 		super();
 		this.estado = true;
 		this.fecha_de_pago = fecha_de_pago;
@@ -60,14 +60,16 @@ public class Contrato implements Serializable {
 	}
 
 
-	public String getCodigoDeContrato() {
-		return codigoDeContrato;
+	public String getFecha_vencimiento() {
+		return fecha_vencimiento;
 	}
 
 
-	public void setCodigoDeContrato(String codigoDeContrato) {
-		this.codigoDeContrato = codigoDeContrato;
+	public void setFecha_vencimiento(String fecha_vencimiento) {
+		this.fecha_vencimiento = fecha_vencimiento;
 	}
+
+
 
 
 
@@ -97,13 +99,6 @@ public class Contrato implements Serializable {
 	}
 
 
-	public Date getFecha_vencimiento() {
-		return fecha_vencimiento;
-	}
-
-	public void setFecha_vencimiento(Date fecha_vencimiento) {
-		this.fecha_vencimiento = fecha_vencimiento;
-	}
 
 	public ArrayList<Plan> getMisPlanes() {
 		return misPlanes;
@@ -123,6 +118,18 @@ public class Contrato implements Serializable {
 		return precio;
 		
 	}
+
+
+	public int getCodigoDeContrato() {
+		return codigoDeContrato;
+	}
+
+
+	public void setCodigoDeContrato(int codigoDeContrato) {
+		this.codigoDeContrato = codigoDeContrato;
+	}
+
+
 
 	
 	

@@ -7,7 +7,7 @@ public class ClaseDePruebas {
 		int i=1;
 		Cliente m= new Cliente("pepe", "gom", " ", " ", " ", " ", " "," ", " ", i);
 		
-		Contrato miContrato =new Contrato(null, null, null, "1");
+	
 		//CableTV meTv = new CableTV("3", "Al Otro Dia",11);
 	//	miContrato.agregarServicio(meTv);
 	//	m.agrregarcontrato(miContrato);
@@ -29,7 +29,7 @@ public class ClaseDePruebas {
 		+"Total a pagar"+misFac.getTotalA_Pagar()+"Estado");
 		}
 		
-		Contrato miContrato2 =new Contrato(null, null, null, "2");
+
 	//	CableTV meT = new CableTV("3", "Al Otro Dia",1);
 	//	miContrato2.agregarServicio(meT);
 	//	m.agrregarcontrato(miContrato2);

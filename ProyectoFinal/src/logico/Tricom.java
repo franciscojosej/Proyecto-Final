@@ -276,13 +276,13 @@ public void insertarPlan(Plan aux){
 	
 	
 	//buscar Contrato por codiog , retorna el contrato si existe de lo contrario null
-	private Contrato findC0ntratoByCode(String id) {
+	private Contrato findC0ntratoByCode(int id) {
 		Contrato contrato=null;
 		
 		boolean find = false;
 		int i=0;
 		while (i<misContrato.size()&&!find) {
-			if(misContrato.get(i).getCodigoDeContrato().equalsIgnoreCase(id)){
+			if(misContrato.get(i).getCodigoDeContrato()==id){
 				contrato = misContrato.get(i);
 				find = true;
 			}

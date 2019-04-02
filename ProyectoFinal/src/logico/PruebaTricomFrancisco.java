@@ -60,14 +60,14 @@ public class PruebaTricomFrancisco {
 	public void setMisContrato(ArrayList<Contrato> misContrato) {
 		this.misContrato = misContrato;
 	} 
-	//buscar Contrato por codiog , retorna el contrato si existe de lo contrario null
-	private Contrato findCintratoByCode(String id) {
+	//buscar Contrato por codiog , retorstna el contrato si existe de lo contrario null
+	private Contrato findCintratoByCode(int id) {
 		Contrato contrato=null;
 		
 		boolean find = false;
 		int i=0;
 		while (i<misContrato.size()&&!find) {
-			if(misContrato.get(i).getCodigoDeContrato().equalsIgnoreCase(id)){
+			if(misContrato.get(i).getCodigoDeContrato()==i){
 				contrato = misContrato.get(i);
 				find = true;
 			}

@@ -203,6 +203,11 @@ public class ContratoVisual extends JDialog {
 					int row= t.getSelectedRow();
 					//int column=t.getSelectedColumn();
 					int codigo =(int) t.getValueAt(row, 2);
+				ArrayList<Plan> nuevoPlan=null;
+					Contrato nuevoContrato=new Contrato(" ", Tricom.getFechaInicio(), "", 1);
+					nuevoPlan=Tricom.getInstance().buscarPlanes(codigo);
+					if(nuevoPlan!=null)
+					nuevoContrato.setMisPlanes(nuevoPlan);
 					
 				JOptionPane.showConfirmDialog(null, codigo);
 				
@@ -221,7 +226,8 @@ public class ContratoVisual extends JDialog {
 							"Crear", JOptionPane.YES_NO_OPTION);
 
 					if(num==0) {
-						
+						JOptionPane.showMessageDialog(null, "Contrato registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+						cliente.agrregarcontrato(nuevoContrato);
 					}
 					
 					
@@ -300,7 +306,7 @@ public class ContratoVisual extends JDialog {
 
 
 	private Object[][] llenararreglo() {
-		Object[][] datofila=new Object[Tricom.getInstance().getMiPlan().size()][3];
+		Object[][] datofila=new Object[Tricom.getPlanesCod()][3];
 		String miServ[]= {"","",""};
 		float costo=0;
 		for (int i = 0; i < Tricom.getPlanesCod(); i++) {
