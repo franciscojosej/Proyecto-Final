@@ -77,7 +77,7 @@ public class ListarPlanes extends JDialog {
 		table = new JTable();
 		
 		tableModel = new DefaultTableModel();
-		String[] columnNames = {"#","Nombre", "Servicio","Costo (RD$)"};
+		String[] columnNames = {"#","Nombre", "Servicio","Tipo de Servicio","Costo (RD$)"};
 		tableModel.setColumnIdentifiers(columnNames);
 		loadListaPlanes(1);
 		scrollPane.setViewportView(table);
@@ -145,14 +145,20 @@ public class ListarPlanes extends JDialog {
 				for (Plan aux: Tricom.getInstance().getMiPlan()) {
 					fila[0] = aux.getCodigo();
 					fila[1] = aux.getNombre();
-					//fila[2] = aux.getUnidades_Plan();
-					//fila[3] = aux.get;
+					//fila[2] = aux.get;
+					//fila[4] = aux.get;
 					//fila[4] = aux.PrecioTotal();
 					if(aux instanceof Internet)
+						fila[2] = ((Internet) aux).getVelocidad_conexion();
+						fila[4] = aux.CalcularCosto();
 						fila[3] = "Internet";
 					if(aux instanceof CableTV)
+						fila[2] = ((CableTV) aux).getCantidadCanales();
+						fila[4] = aux.CalcularCosto();
 						fila[3] = "Television";
 					if(aux instanceof Celular)
+						fila[2] = ((Celular) aux).getMinutos();
+						fila[4] = aux.CalcularCosto();
 						fila[3] = "Telefono";
 					tableModel.addRow(fila);
 				}
@@ -166,9 +172,9 @@ public class ListarPlanes extends JDialog {
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
 						fila[2] = ((Internet) aux).getVelocidad_conexion();
-						fila[3] = aux.CalcularCosto();
+						fila[4] = aux.CalcularCosto();
 						//fila[4] = aux.PrecioTotal();
-						//fila[3] = "Internet";
+						fila[3] = "Internet";
 						
 						tableModel.addRow(fila);
 				}
@@ -183,9 +189,9 @@ public class ListarPlanes extends JDialog {
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
 						fila[2] = ((CableTV) aux).getCantidadCanales();
-						fila[3] = aux.CalcularCosto();
+						fila[4] = aux.CalcularCosto();
 						//fila[4] = aux.PrecioTotal();
-						//fila[3] = "Televisión";
+						fila[3] = "Televisión";
 						
 						tableModel.addRow(fila);
 	
@@ -203,9 +209,9 @@ public class ListarPlanes extends JDialog {
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
 						fila[2] = ((Celular) aux).getMinutos();
-						fila[3] = aux.CalcularCosto();
+						fila[4] = aux.CalcularCosto();
 						//fila[4] = aux.PrecioTotal();
-						//fila[3] = "Teléfono";
+						fila[3] = "Teléfono";
 					
 						tableModel.addRow(fila);
 	
@@ -226,8 +232,8 @@ public class ListarPlanes extends JDialog {
 		columnModel.getColumn(0).setPreferredWidth(25);
 		columnModel.getColumn(1).setPreferredWidth(100);
 		columnModel.getColumn(2).setPreferredWidth(75);
-		//columnModel.getColumn(3).setPreferredWidth(100);
-		//columnModel.getColumn(4).setPreferredWidth(75);
+		columnModel.getColumn(3).setPreferredWidth(100);
+		columnModel.getColumn(4).setPreferredWidth(75);
 		//columnModel.getColumn(5).setPreferredWidth(155);
 		
 		

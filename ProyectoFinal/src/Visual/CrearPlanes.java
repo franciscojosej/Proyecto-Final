@@ -275,23 +275,23 @@ public class CrearPlanes extends JDialog {
 							int velocidad_conexion =0;
 									
 							if(cbxData.getSelectedIndex()==1) {
-								velocidad_conexion=50;
+								velocidad_conexion=5;
 							}
 							if(cbxData.getSelectedIndex()==2) {
-								velocidad_conexion=100;
+								velocidad_conexion=15;
 							}
 							
 							if(cbxData.getSelectedIndex()==3) {
-								velocidad_conexion=150;
+								velocidad_conexion=50;
 							}
 							if(cbxData.getSelectedIndex()==4) {
 								velocidad_conexion=100;
 							}
 							if(cbxData.getSelectedIndex()==5) {
-								velocidad_conexion=300;
+								velocidad_conexion=1000;
 							}
 							if(cbxData.getSelectedIndex()==6) {
-								velocidad_conexion=500;
+								velocidad_conexion=5000;
 							}
 							
 							
