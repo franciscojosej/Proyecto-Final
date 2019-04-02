@@ -38,7 +38,7 @@ public class ListarPlanes extends JDialog {
 	private static JButton btnUpdate;
 	private static JButton btnDelete;
 	private int code;
-	JComboBox cbxQueso;
+	JComboBox cbxPlan;
 	private static Plan plan;
 
 	/**
@@ -46,7 +46,7 @@ public class ListarPlanes extends JDialog {
 	 */
 	/*public static void main(String[] args) {
 		try {
-			ListaQueso dialog = new ListaQueso();
+			ListarPlanes dialog = new ListarPlanes();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -77,25 +77,25 @@ public class ListarPlanes extends JDialog {
 		table = new JTable();
 		
 		tableModel = new DefaultTableModel();
-		String[] columnNames = {"#","Nombre", "Servicio"};
+		String[] columnNames = {"#","Nombre", "Servicio","Costo (RD$)"};
 		tableModel.setColumnIdentifiers(columnNames);
 		loadListaPlanes(1);
 		scrollPane.setViewportView(table);
 		
-		JLabel lblTipoDeQueso = new JLabel("Tipo de Plan:");
-		lblTipoDeQueso.setBounds(10, 25, 90, 14);
-		panel.add(lblTipoDeQueso);
+		JLabel lblTipoDePlan = new JLabel("Tipo de Plan:");
+		lblTipoDePlan.setBounds(10, 25, 90, 14);
+		panel.add(lblTipoDePlan);
 		
-		cbxQueso = new JComboBox();
-		cbxQueso.addActionListener(new ActionListener() {
+		cbxPlan = new JComboBox();
+		cbxPlan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selection = cbxQueso.getSelectedIndex();
+				int selection = cbxPlan.getSelectedIndex();
 				loadListaPlanes(selection);
 			}
 		});
-		cbxQueso.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione:>", "Internet", "Televisión", "Teléfono"}));
-		cbxQueso.setBounds(96, 22, 110, 20);
-		panel.add(cbxQueso);
+		cbxPlan.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione:>", "Internet", "Televisión", "Teléfono"}));
+		cbxPlan.setBounds(96, 22, 110, 20);
+		panel.add(cbxPlan);
 	
 		{
 			JPanel buttonPane = new JPanel();
@@ -166,7 +166,7 @@ public class ListarPlanes extends JDialog {
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
 						fila[2] = ((Internet) aux).getVelocidad_conexion();
-						//fila[3] = aux.getPrecio_uni();
+						fila[3] = aux.CalcularCosto();
 						//fila[4] = aux.PrecioTotal();
 						//fila[3] = "Internet";
 						
@@ -183,7 +183,7 @@ public class ListarPlanes extends JDialog {
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
 						fila[2] = ((CableTV) aux).getCantidadCanales();
-						//fila[3] = aux.getPrecio_uni();
+						fila[3] = aux.CalcularCosto();
 						//fila[4] = aux.PrecioTotal();
 						//fila[3] = "Televisión";
 						
@@ -203,7 +203,7 @@ public class ListarPlanes extends JDialog {
 						fila[0] = aux.getCodigo();
 						fila[1] = aux.getNombre();
 						fila[2] = ((Celular) aux).getMinutos();
-						//fila[3] = aux.getPrecio_uni();
+						fila[3] = aux.CalcularCosto();
 						//fila[4] = aux.PrecioTotal();
 						//fila[3] = "Teléfono";
 					
@@ -225,7 +225,7 @@ public class ListarPlanes extends JDialog {
 		TableColumnModel columnModel = table.getColumnModel();
 		columnModel.getColumn(0).setPreferredWidth(25);
 		columnModel.getColumn(1).setPreferredWidth(100);
-		//columnModel.getColumn(2).setPreferredWidth(56);
+		columnModel.getColumn(2).setPreferredWidth(75);
 		//columnModel.getColumn(3).setPreferredWidth(100);
 		//columnModel.getColumn(4).setPreferredWidth(75);
 		//columnModel.getColumn(5).setPreferredWidth(155);
