@@ -163,9 +163,11 @@ public class RegistroDeClientes extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && Tricom.getInstance().BuscarByCedula(textFieldCedula.getText())==null
 								&& !textFieldDireccion.getText().equalsIgnoreCase("") && !textFieldnumber.getText().equalsIgnoreCase("") && comboBox.getSelectedIndex()!=0){
-						Cliente a = new Cliente(txtNombre.getText(), textFieldDireccion.getText(), textFieldnumber.getText(), textFieldCedula.getText(), null, null, null, null, null, code);
-						a.setCodigo_cliente(Tricom.ClienteCod+1);
-							 Tricom.getInstance().insertarCliente(a);
+						//Cliente a = new Cliente(txtNombre.getText(), textFieldDireccion.getText(), textFieldnumber.getText(), textFieldCedula.getText(), null, null, null, null, null, code);
+						Cliente b = new Cliente(txtNombre.getText(), null, textFieldCedula.getText(), textFieldnumber.getText(), textFieldnumber.getText(), null, null, null, 
+								null, code);
+					//	a.setCodigo_cliente(Tricom.ClienteCod+1);
+							 Tricom.getInstance().insertarCliente(b);
 						
 						 txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
 						JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);

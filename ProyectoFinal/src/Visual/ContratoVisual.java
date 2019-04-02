@@ -11,6 +11,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import logico.CableTV;
 import logico.Celular;
@@ -22,9 +25,12 @@ import logico.Tricom;
 
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -44,12 +50,34 @@ public class ContratoVisual extends JDialog {
 	private JTextField textFechaculminacion;
 	private Cliente cliente;
 	private Contrato nuevoContrato;
+	private  Object[][] datofila=llenararreglo();	
 	
 	
 	private static String columnNombre[] = {"Nombre","Servicio","x"};
-	JTable t= new  JTable(llenararreglo(),columnNombre);
+
+	
+	final Class[] columnClass = new Class[] {
+		    Integer.class, String.class, Double.class, Boolean.class
+		};
+	//create table model with data
+	DefaultTableModel model = new DefaultTableModel(datofila,  columnNombre) {
+	    @Override
+	    public boolean isCellEditable(int row, int column)
+	    {
+	        return false;
+	    }
+	    @Override
+	    public Class<?> getColumnClass(int columnIndex)
+	    {
+	        return columnClass[columnIndex];
+	    }
+	    
+	};
+	
+	JTable t= new  JTable(model);//llenararreglo(),columnNombre
 	
 	JScrollPane scrollPane = new JScrollPane(t);
+	
 
 	/**
 	 * Launch the application.
@@ -68,13 +96,17 @@ public class ContratoVisual extends JDialog {
 	 * Create the dialog.
 	 */
 	public ContratoVisual() {
+	//	t.setDefaultRenderer(Object.class, new MiRender());
+
+		//int  m=(int) datofila[t.getSelectedColumn()][0];
+		
 		setBounds(100, 100, 587, 548);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
-			t.setEnabled(false);
+		//	t.setSelectionBackground(getBackground());
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Formulario de Contrato Tricom RD", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
@@ -121,16 +153,16 @@ public class ContratoVisual extends JDialog {
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null||
-								texCedulaCleinte.getText().equalsIgnoreCase("")&&textNombre.getText().equalsIgnoreCase("")) {
+						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) {
 							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
-						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) {
-							JOptionPane.showMessageDialog(null, "Cliente no encontrado", null, JOptionPane.ERROR_MESSAGE, null);
-						}
+
 						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) {
 							cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
 							JOptionPane.showMessageDialog(null, "Cliente Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
+							
+
+							
 							
 						}
 						
@@ -156,7 +188,7 @@ public class ContratoVisual extends JDialog {
 			panelPlanesDisponibles.setLayout(null);
 			
 			
-			scrollPane.setBounds(10, 11, 189, 119);
+			scrollPane.setBounds(10, 21, 189, 109);
 			panelPlanesDisponibles.add(scrollPane);
 			
 
@@ -168,6 +200,35 @@ public class ContratoVisual extends JDialog {
 			JButton btnNewButton_1 = new JButton("Seleccionar ");
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					int row= t.getSelectedRow();
+					//int column=t.getSelectedColumn();
+					int codigo =(int) t.getValueAt(row, 2);
+					
+				JOptionPane.showConfirmDialog(null, codigo);
+				
+				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null||
+						texCedulaCleinte.getText().equalsIgnoreCase("")&&textNombre.getText().equalsIgnoreCase("")) {
+					JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+				}
+				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) {
+					JOptionPane.showMessageDialog(null, "Cliente no encontrado", null, JOptionPane.ERROR_MESSAGE, null);
+				}
+				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) {
+					cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
+					
+					//JOptionPane.showMessageDialog(null, " Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
+					int  num= JOptionPane.showConfirmDialog(null, "Costo Del Plan: "+Tricom.getInstance().calcularCostopordode(codigo), 
+							"Crear", JOptionPane.YES_NO_OPTION);
+
+					if(num==0) {
+						
+					}
+					
+					
+					
+				}
+				cliente=null;
+					
 				}
 			});
 			btnNewButton_1.setBounds(223, 257, 123, 23);
@@ -239,7 +300,7 @@ public class ContratoVisual extends JDialog {
 
 
 	private Object[][] llenararreglo() {
-		Object[][] datofila=new Object[Tricom.getPlanesCod()][3];
+		Object[][] datofila=new Object[Tricom.getInstance().getMiPlan().size()][3];
 		String miServ[]= {"","",""};
 		float costo=0;
 		for (int i = 0; i < Tricom.getPlanesCod(); i++) {
@@ -268,7 +329,9 @@ public class ContratoVisual extends JDialog {
 			datofila[i][1]= getString(miServ);
 			
 			if(planes!=null)
-			datofila[i][2]=costo;
+			datofila[i][2]=planes.get(0).getCodigo();
+
+	
 			
 			
 		}
@@ -281,6 +344,44 @@ public class ContratoVisual extends JDialog {
 	public String getString(String n[]) {
 		return n[0]+n[1]+n[2];
 	}
+	public class MiRender extends DefaultTableCellRenderer {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public Component getTableCellRendererComponent(JTable table,
+				Object value, boolean isSelected, boolean hasFocus, int row,
+				int column) {
+			Component cell = super.getTableCellRendererComponent(table, value,
+					isSelected, hasFocus, row, column);
+
+				//cell.setBackground(Color.RED);
+			
+				cell.setForeground(Color.WHITE);
+				///Establecemos las filas que queremos cambiar el color. == 0 para pares y != 0 para impares
+				        boolean oddRow = true;//(row % 2 == 0);
+				 
+				        //Creamos un color para las filas. El 200, 200, 200 en RGB es un color gris
+				        Color c = new Color(200, 200, 200);
+				 
+				        //Si las filas son pares, se cambia el color a gris
+				        if (oddRow) {
+				            setBackground(c);
+				            
+				        }
+				      
+			
+			return cell;// cell;
+		}
+	}
+
+
+   
+
+
+
 
 }
 

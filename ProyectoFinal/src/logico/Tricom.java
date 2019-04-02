@@ -420,6 +420,32 @@ public void insertarPlan(Plan aux){
 		PlanesCod = planesCod;
 	}
 	
+	public float calcularCostopordode(int Code) {
+		ArrayList<Plan> planes=Tricom.getInstance().buscarPlanes(Code);
+		float costo=0;
+	
+		
+		if(planes!=null)
+		for (Plan plan : planes) {
+			if (plan instanceof Celular) {
+				
+				costo+=((Celular)plan).CalcularCosto();
+			}
+			if (plan instanceof CableTV) {
+				
+				costo+=(( CableTV)plan).CalcularCosto();
+			}
+			if (plan instanceof Internet) {
+				
+				costo+=((  Internet)plan).CalcularCosto();
+			}
+			
+		}
+		return costo;
+		
+	}
+	
+	
 	
 	
 }
