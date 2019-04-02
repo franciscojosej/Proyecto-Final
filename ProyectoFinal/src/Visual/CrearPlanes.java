@@ -308,7 +308,7 @@ public class CrearPlanes extends JDialog {
 							cantidadCanales=200;
 							}
 						if(cbxCanales.getSelectedIndex()==2) {
-							cantidadCanales=400;
+							cantidadCanales=300;
 							}	
 						if(cbxCanales.getSelectedIndex()==3) {
 							cantidadCanales=100;
