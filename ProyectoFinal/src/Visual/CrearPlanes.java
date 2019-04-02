@@ -311,10 +311,10 @@ public class CrearPlanes extends JDialog {
 							cantidadCanales=400;
 							}	
 						if(cbxCanales.getSelectedIndex()==3) {
-							cantidadCanales=300;
+							cantidadCanales=100;
 							}
 						if(cbxCanales.getSelectedIndex()==4) {
-							cantidadCanales=800;
+							cantidadCanales=400;
 							}
 							aux2 = new CableTV(codigo, nombre, cantidadCanales);
 							
