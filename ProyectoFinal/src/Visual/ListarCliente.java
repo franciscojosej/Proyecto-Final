@@ -133,9 +133,9 @@ public class ListarCliente extends JDialog {
 		for (Cliente aux : Tricom.getInstance().getMiCliente()) {
 			fila[0] = aux.getCodigo_cliente();
 			fila[1] = aux.getNombre();
-			fila[4] = aux.getCedula(); //Está recibiendo lo de teléfono.
-			fila[3] = aux.getApellido(); //Está recibiendo apellido en vez de dirección.
-			fila[2] = aux.getTelefono(); //Está recibiendo lo de cédula.
+			fila[2] = aux.getCedula(); //Está recibiendo lo de teléfono.
+			fila[3] = aux.getDireccion(); //Está recibiendo apellido en vez de dirección.
+			fila[4] = aux.getTelefono(); //Está recibiendo lo de cédula.
 			tableModel.addRow(fila);
 			
 			
