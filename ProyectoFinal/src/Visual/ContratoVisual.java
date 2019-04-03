@@ -31,27 +31,35 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
 
 public class ContratoVisual extends JDialog {
 
 	private static final String Contra = null;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCodigo;
-	private JTextField texCedulaCleinte;
+	private JTextField texCedulaCleinte=new JTextField();;
 	private JTextField textNombre;
-	private JTextField textPrecioTotal;
-	private JTextField texFechaDeInicio;
-	private JTextField textFechaculminacion;
 	private Cliente cliente;
 	private Contrato nuevoContrato;
+	private JLabel  lblTotalApagat = new JLabel("0.0");
 	private  Object[][] datofila=llenararreglo();	
-	
+	private  Object[][] datofilaCa=llenararregloCarrito();	
 	
 	private static String columnNombre[] = {"Nombre","Servicio","x"};
 
@@ -73,10 +81,37 @@ public class ContratoVisual extends JDialog {
 	    }
 	    
 	};
+	DefaultTableModel model2 = new DefaultTableModel(datofilaCa,  columnNombre) {
+	    @Override
+	    public boolean isCellEditable(int row, int column)
+	    {
+	        return false;
+	    }
+	    @Override
+	    public Class<?> getColumnClass(int columnIndex)
+	    {
+	        return columnClass[columnIndex];
+	    }
+	    
+	};
 	
-	JTable t= new  JTable(model);//llenararreglo(),columnNombre
+	private JTable t= new  JTable(model);//llenararreglo(),columnNombre
 	
-	JScrollPane scrollPane = new JScrollPane(t);
+	private JScrollPane scrollPane = new JScrollPane(t);
+	
+	private JTable t2= new  JTable(model2);//llenararreglo(),columnNombre
+	
+	private JScrollPane scrollPaneCarrito = new JScrollPane(t2);
+	//private Runnable label =new  PrecioL(lblTotalApagat, t);//:)
+	
+	PrecioL tarea = new PrecioL(lblTotalApagat, t);
+    Timer temporizador = new Timer();
+    Integer segundos = 1;
+
+   
+	
+
+	
 	
 
 	/**
@@ -95,7 +130,19 @@ public class ContratoVisual extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	
 	public ContratoVisual() {
+		
+	//	hilo.start();
+			
+		
+			try {
+				 temporizador.scheduleAtFixedRate(tarea, 0, 1000*segundos);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+
 	//	t.setDefaultRenderer(Object.class, new MiRender());
 
 		//int  m=(int) datofila[t.getSelectedColumn()][0];
@@ -108,6 +155,9 @@ public class ContratoVisual extends JDialog {
 		{
 		//	t.setSelectionBackground(getBackground());
 			JPanel panel = new JPanel();
+			panel.addMouseListener(new MouseAdapter() {
+
+			});
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Formulario de Contrato Tricom RD", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
@@ -143,7 +193,7 @@ public class ContratoVisual extends JDialog {
 					panel_1.add(Cedula);
 				}
 				{
-					texCedulaCleinte = new JTextField();
+					
 					texCedulaCleinte.setBounds(10, 47, 171, 20);
 					panel_1.add(texCedulaCleinte);
 					texCedulaCleinte.setColumns(10);
@@ -186,6 +236,64 @@ public class ContratoVisual extends JDialog {
 			panelPlanesDisponibles.setBounds(10, 219, 209, 141);
 			panel.add(panelPlanesDisponibles);
 			panelPlanesDisponibles.setLayout(null);
+			scrollPane.addMouseWheelListener(new MouseWheelListener() {
+				public void mouseWheelMoved(MouseWheelEvent e) {
+					int codigo=-1,row=0;
+					if(Tricom.getInstance().getMiPlan().size()>=1 ) 
+					{
+						 row= t.getSelectedRow();	
+					}
+				
+					//int column=t.getSelectedColumn();
+					if(Tricom.getInstance().getMiPlan().size()>=1&&(row != -1) ) {
+						codigo =(int) t.getValueAt(row, 2);
+					}
+					
+					
+					lblTotalApagat.setText(String.valueOf(Tricom.getInstance().calcularCostopordode(codigo)));
+					
+				}
+			});
+			scrollPane.addFocusListener(new FocusAdapter() {
+
+			});
+			scrollPane.addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+				//	JOptionPane.showConfirmDialog(null, "mmmmmg");
+					int codigo=-1,row=0;
+					if(Tricom.getInstance().getMiPlan().size()>=1 ) 
+					{
+						 row= t.getSelectedRow();	
+					}
+				
+					//int column=t.getSelectedColumn();
+					if(Tricom.getInstance().getMiPlan().size()>=1&&(row != -1) ) {
+						codigo =(int) t.getValueAt(row, 2);
+					}
+					
+					
+					lblTotalApagat.setText(String.valueOf(Tricom.getInstance().calcularCostopordode(codigo)));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					
+					int codigo=-1,row=0;
+					if(Tricom.getInstance().getMiPlan().size()>=1 ) 
+					{
+						 row= t.getSelectedRow();	
+					}
+				
+					//int column=t.getSelectedColumn();
+					if(Tricom.getInstance().getMiPlan().size()>=1&&(row != -1) ) {
+						codigo =(int) t.getValueAt(row, 2);
+					}
+					
+					
+					lblTotalApagat.setText(String.valueOf(Tricom.getInstance().calcularCostopordode(codigo)));
+				}
+			});
 			
 			
 			scrollPane.setBounds(10, 21, 189, 109);
@@ -194,50 +302,83 @@ public class ContratoVisual extends JDialog {
 
 			JPanel panel_2 = new JPanel();
 			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Carrito de Compras", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_2.setBounds(356, 245, 182, 115);
+			panel_2.setBounds(338, 219, 213, 141);
 			panel.add(panel_2);
+			panel_2.setLayout(null);
+			scrollPaneCarrito.addMouseListener(new MouseAdapter() {
+
+			});
+			
+			
+			scrollPaneCarrito.setBounds(10, 21, 189, 109);
+			panel_2.add(scrollPaneCarrito);
 			
 			JButton btnNewButton_1 = new JButton("Seleccionar ");
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					int row= t.getSelectedRow();
+					int codigo=-1,row=0;
+					if(Tricom.getInstance().getMiPlan().size()>=1 ) 
+					{
+						 row= t.getSelectedRow();	
+					}
+				
 					//int column=t.getSelectedColumn();
-					int codigo =(int) t.getValueAt(row, 2);
-				ArrayList<Plan> nuevoPlan=null;
-					Contrato nuevoContrato=new Contrato(" ", Tricom.getFechaInicio(), "", 1);
-					nuevoPlan=Tricom.getInstance().buscarPlanes(codigo);
-					if(nuevoPlan!=null)
-					nuevoContrato.setMisPlanes(nuevoPlan);
+					if(Tricom.getInstance().getMiPlan().size()>=1&&(row != -1) ) {
+						codigo =(int) t.getValueAt(row, 2);
+					}
+					 
 					
-				JOptionPane.showConfirmDialog(null, codigo);
+				ArrayList<Plan> nuevoPlan=null;
+
+					
+				//JOptionPane.showConfirmDialog(null, codigo);
 				
 				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null||
 						texCedulaCleinte.getText().equalsIgnoreCase("")&&textNombre.getText().equalsIgnoreCase("")) {
 					JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
 				}
-				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) {
+				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) 
+				{
 					JOptionPane.showMessageDialog(null, "Cliente no encontrado", null, JOptionPane.ERROR_MESSAGE, null);
 				}
-				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) {
-					cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
-					
-					//JOptionPane.showMessageDialog(null, " Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
-					int  num= JOptionPane.showConfirmDialog(null, "Costo Del Plan: "+Tricom.getInstance().calcularCostopordode(codigo), 
-							"Crear", JOptionPane.YES_NO_OPTION);
+				
+				if(Tricom.getInstance().getMiPlan().size()>=1&&codigo!=-1)
+				{
+					if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) 
+					{
+						cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
+						
+					//	JOptionPane.showMessageDialog(null, " Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
+						int  num= JOptionPane.showConfirmDialog(null, "Costo Del Plan: "+Tricom.getInstance().calcularCostopordode(codigo), 
+								"Crear", JOptionPane.YES_NO_OPTION);
+	
+						if(num==0) {
+							
+							JOptionPane.showMessageDialog(null, "Contrato registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+							Contrato nuevoContrato=new Contrato(" ", Tricom.getFechaInicio(), "", 1);
+							
 
-					if(num==0) {
-						JOptionPane.showMessageDialog(null, "Contrato registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-						cliente.agrregarcontrato(nuevoContrato);
-					}
-					
-					
-					
+							
+							nuevoPlan=Tricom.getInstance().buscarPlanes(codigo);
+							
+							
+							if(nuevoPlan!=null)
+							nuevoContrato.setMisPlanes(nuevoPlan);
+							//if(cliente!=null)
+							Tricom.getInstance().getMiCliente().get(Tricom.getInstance()
+							.getMiCliente().indexOf(cliente)).agrregarcontrato(nuevoContrato);
+							
+							
+						}
+						
+					}				
 				}
+	
 				cliente=null;
 					
 				}
 			});
-			btnNewButton_1.setBounds(223, 257, 123, 23);
+			btnNewButton_1.setBounds(223, 257, 96, 20);
 			panel.add(btnNewButton_1);
 			
 			JButton btnNewButton_2 = new JButton("Borrar");
@@ -245,37 +386,32 @@ public class ContratoVisual extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btnNewButton_2.setBounds(223, 309, 123, 23);
+			btnNewButton_2.setBounds(223, 309, 96, 20);
 			panel.add(btnNewButton_2);
 			
-			JLabel lblPrecioTotal = new JLabel("Precio Total a Pagar:");
-			lblPrecioTotal.setBounds(282, 406, 169, 14);
-			panel.add(lblPrecioTotal,BorderLayout.CENTER);
-			
-			textPrecioTotal = new JTextField();
-			textPrecioTotal.setBounds(408, 403, 94, 20);
-			panel.add(textPrecioTotal);
-			textPrecioTotal.setColumns(10);
+			JLabel lbllabel = new JLabel("Precio Total a Pagar:");
+			lbllabel.setBounds(282, 406, 169, 14);
+			panel.add(lbllabel,BorderLayout.CENTER);
 			
 			JLabel lblNewLabel_4 = new JLabel("Fecha De Inicio:");
 			lblNewLabel_4.setBounds(23, 381, 150, 14);
 			panel.add(lblNewLabel_4);
 			
-			texFechaDeInicio = new JTextField();
-			texFechaDeInicio.setEditable(false);
-			texFechaDeInicio.setBounds(133, 378, 86, 20);
-			panel.add(texFechaDeInicio);
-			texFechaDeInicio.setColumns(10);
-			
 			JLabel lblFechaDeCulminacion = new JLabel("Fecha De Culminacion:");
 			lblFechaDeCulminacion.setBounds(23, 406, 150, 14);
 			panel.add(lblFechaDeCulminacion);
 			
-			textFechaculminacion = new JTextField();
-			textFechaculminacion.setEditable(false);
-			textFechaculminacion.setColumns(10);
-			textFechaculminacion.setBounds(133, 403, 86, 20);
-			panel.add(textFechaculminacion);
+			JLabel labelFechaInicio = new JLabel("");
+			labelFechaInicio.setBounds(155, 381, 81, 14);
+			panel.add(labelFechaInicio);
+			
+			JLabel labelFechaFinalizacion = new JLabel("");
+			labelFechaFinalizacion.setBounds(155, 406, 81, 14);
+			panel.add(labelFechaFinalizacion);
+			
+			
+			lblTotalApagat.setBounds(416, 406, 81, 14);
+			panel.add(lblTotalApagat);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -302,6 +438,7 @@ public class ContratoVisual extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+
 	}
 
 
@@ -350,6 +487,63 @@ public class ContratoVisual extends JDialog {
 	public String getString(String n[]) {
 		return n[0]+n[1]+n[2];
 	}
+	private Object[][] llenararregloCarrito() {
+		Cliente cliente = Tricom.getInstance().BuscarByCedula("3");
+		int tama=0;
+		if(cliente!=null) {
+		tama=	cliente.getMiscontract().size();
+		}
+		
+	Object[][] datofila=new Object[10][3];
+	
+		String miServ[]= {"","",""};
+		float costo=0;
+		int i=0;
+		ArrayList<Plan> planes=null;
+		if(cliente!=null)
+		for (Contrato aux : cliente.getMiscontract()) {
+			
+			//datofila[i][0]= aux.getCodigoDeContrato();
+			
+				 planes = aux.getMisPlanes();
+						if(planes!=null)
+							datofila[i][0]= planes.get(0).getNombre();
+							if(planes!=null)
+							for (Plan plan : planes) {
+								if (plan instanceof Celular) {
+									miServ[0]="Cel";
+									costo+=((Celular)plan).CalcularCosto();
+								}
+								if (plan instanceof CableTV) {
+									miServ[1]=" -Tv";	
+									costo+=(( CableTV)plan).CalcularCosto();
+								}
+								if (plan instanceof Internet) {
+									miServ[2]=" -Int";	
+									costo+=((  Internet)plan).CalcularCosto();
+								}
+								
+							}
+							if(planes!=null)
+							datofila[i][1]= getString(miServ);
+							if(planes!=null)
+							datofila[i][2]=aux.getCodigoDeContrato();
+							++i;
+							
+							JOptionPane.showConfirmDialog(null, cliente.getCedula());
+
+				
+			}
+
+			
+		JOptionPane.showConfirmDialog(null, "mm");
+			
+			
+
+		return datofila;
+		
+		
+	}
 	public class MiRender extends DefaultTableCellRenderer {
 
 		/**
@@ -382,11 +576,53 @@ public class ContratoVisual extends JDialog {
 			return cell;// cell;
 		}
 	}
+}
+
+ class PrecioL extends TimerTask{
+	 //static private final Logger LOGGER = Logger.getLogger("mx.com.hash.tareaprogramada.Tarea");
+	   // private Integer contador;    
+	    
+	private  int codigo=-1;
+	private int  row=0;
+	private JLabel lblTotalApagat;
+	private JTable t;
+	
+	public PrecioL(  JLabel lblTotalApagat, JTable t) {
+		super();
+		this.codigo = 0;
+		this.row = -1;
+		this.lblTotalApagat = lblTotalApagat;
+		this.t = t;
+	//	contador=0;
+	}
 
 
-   
+	
 
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		if(Tricom.getInstance().getMiPlan().size()>=1 ) {
+			 row= t.getSelectedRow();	
+		}
+			
+	
 
+		//int column=t.getSelectedColumn();
+		if(Tricom.getInstance().getMiPlan().size()>=1&&(row != -1) ) {
+			codigo =(int) t.getValueAt(row, 2);
+			lblTotalApagat.setText(String.valueOf(Tricom.getInstance().calcularCostopordode(codigo)));
+		}
+		//JOptionPane.showConfirmDialog(null, "mm");
+		
+     //   LOGGER.log(Level.INFO, "Numero de ejecución {0}", contador);
+        //contador++;
+		
+	}
+	
+	
+	
+	
 
 
 }
