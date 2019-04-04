@@ -1,9 +1,13 @@
 package Visual;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -88,8 +92,9 @@ public class VisualPrincipal extends JFrame {
 		});
 		setTitle("Telefonia e Internet Tricom RD...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 438, 309);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -100,14 +105,18 @@ public class VisualPrincipal extends JFrame {
 		panel.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(Color.WHITE);
 		menuBar.setToolTipText("Empleado");
-		menuBar.setBounds(0, 0, 434, 21);
+		menuBar.setBounds(0, 0, 410, 21);
 		panel.add(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Cliente");
+		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmRegistro = new JMenuItem("\u2022Registro");
+		JMenuItem mntmRegistro = new JMenuItem("Registro");
+		Image imag = new ImageIcon(this.getClass().getResource("/RegCliente.png")).getImage();
+		mntmRegistro.setIcon(new ImageIcon(imag));
 		mntmRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Cliente Clien = null;
@@ -123,7 +132,9 @@ public class VisualPrincipal extends JFrame {
 		
 		mnNewMenu.add(mntmRegistro);
 		
-		JMenuItem mntmListadoDeCliente = new JMenuItem("\u2022Listado De Clientes");
+		JMenuItem mntmListadoDeCliente = new JMenuItem("Listado De Clientes");
+		Image img = new ImageIcon(this.getClass().getResource("/ListCliente.png")).getImage();
+		mntmListadoDeCliente.setIcon(new ImageIcon(img));
 		mntmListadoDeCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarCliente ListCliente = new ListarCliente();
@@ -137,9 +148,12 @@ public class VisualPrincipal extends JFrame {
 		
 		
 		JMenu mnNewMenu_1 = new JMenu("Empleados");
+		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmRegistroDeEmpleado = new JMenuItem("\u2022Registro");
+		JMenuItem mntmRegistroDeEmpleado = new JMenuItem("Registro");
+		Image image = new ImageIcon(this.getClass().getResource("/RegCliente.png")).getImage();
+		mntmRegistroDeEmpleado.setIcon(new ImageIcon(image));
 		mntmRegistroDeEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistroDeEmpleado RegEmpleado = new RegistroDeEmpleado();
@@ -150,7 +164,9 @@ public class VisualPrincipal extends JFrame {
 		});
 		mnNewMenu_1.add(mntmRegistroDeEmpleado);
 		
-		JMenuItem mntmListarEmpleados = new JMenuItem("\u2022Listado de Empleados");
+		JMenuItem mntmListarEmpleados = new JMenuItem("Listado de Empleados");
+		Image im = new ImageIcon(this.getClass().getResource("/ListCliente.png")).getImage();
+		mntmListarEmpleados.setIcon(new ImageIcon(im));
 		mntmListarEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			ListarEmpleados ListEmpleado = new ListarEmpleados();
@@ -162,9 +178,12 @@ public class VisualPrincipal extends JFrame {
 		mnNewMenu_1.add(mntmListarEmpleados);
 		
 		JMenu mnCrearPlanes = new JMenu("Planes");
+		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnCrearPlanes);
 		
-		JMenuItem mntmCrearPlanes = new JMenuItem("\u2022Crear Plan");
+		JMenuItem mntmCrearPlanes = new JMenuItem("Crear Plan");
+		Image fot = new ImageIcon(this.getClass().getResource("/add.png")).getImage();
+		mntmCrearPlanes.setIcon(new ImageIcon(fot));
 		mntmCrearPlanes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CrearPlanes CrePlanes = new CrearPlanes();
@@ -176,7 +195,9 @@ public class VisualPrincipal extends JFrame {
 		});
 		mnCrearPlanes.add(mntmCrearPlanes);
 		
-		JMenuItem mntmlistaDePlanes = new JMenuItem("\u2022Lista De Planes");
+		JMenuItem mntmlistaDePlanes = new JMenuItem("Lista De Planes");
+		Image foto = new ImageIcon(this.getClass().getResource("/list.png")).getImage();
+		mntmlistaDePlanes.setIcon(new ImageIcon(foto));
 		mntmlistaDePlanes.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -191,9 +212,12 @@ public class VisualPrincipal extends JFrame {
 		mnCrearPlanes.add(mntmlistaDePlanes);
 		
 		JMenu mnContrato = new JMenu("Contrato");
+		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnContrato);
 		
-		JMenuItem mntmContrato = new JMenuItem("\u2022Realizar Contrato");
+		JMenuItem mntmContrato = new JMenuItem("Realizar Contrato");
+		Image pic = new ImageIcon(this.getClass().getResource("/contrato.png")).getImage();
+		mntmContrato.setIcon(new ImageIcon(pic));
 		mntmContrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ContratoVisual contratar = new ContratoVisual();
@@ -207,9 +231,12 @@ public class VisualPrincipal extends JFrame {
 		mnContrato.add(mntmContrato);
 		
 		JMenu mnFacturar = new JMenu("Facturas");
+		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnFacturar);
 		
-		JMenuItem mntmfacturar = new JMenuItem("\u2022Facturar");
+		JMenuItem mntmfacturar = new JMenuItem("Facturar");
+		Image pict = new ImageIcon(this.getClass().getResource("/add.png")).getImage();
+		mntmfacturar.setIcon(new ImageIcon(pict));
 		mntmfacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FacturacionVisual factu = new FacturacionVisual();
@@ -221,7 +248,16 @@ public class VisualPrincipal extends JFrame {
 		});
 		mnFacturar.add(mntmfacturar);
 		
-		JMenuItem mntmgenerarFactura = new JMenuItem("\u2022Generar Factura");
+		JMenuItem mntmgenerarFactura = new JMenuItem("Generar Factura");
+		Image pictu = new ImageIcon(this.getClass().getResource("/fact.png")).getImage();
+		mntmgenerarFactura.setIcon(new ImageIcon(pictu));
 		mnFacturar.add(mntmgenerarFactura);
+		
+		
+		JLabel lblNewLabel = new JLabel("");
+		Image ima = new ImageIcon(this.getClass().getResource("/comu.jpg")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(ima));
+		lblNewLabel.setBounds(10, 31, 410, 220);
+		panel.add(lblNewLabel);
 	}
 }

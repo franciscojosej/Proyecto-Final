@@ -3,6 +3,7 @@ package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import logico.Tricom;
 import logico.Plan;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
@@ -69,15 +71,16 @@ public class RegistroDeClientes extends JDialog {
 			
 		}
 		setTitle("Registro de Clientes");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 417);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos Del Cliente", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(0, 11, 434, 217);
+		panel.setBounds(0, 11, 434, 333);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		{
@@ -151,6 +154,13 @@ public class RegistroDeClientes extends JDialog {
 		comboBox.setBounds(253, 56, 166, 20);
 		panel.add(comboBox);
 		{
+			JLabel lblNewLabel_6 = new JLabel("");
+			Image img = new ImageIcon(this.getClass().getResource("/Client.png")).getImage();
+			lblNewLabel_6.setIcon(new ImageIcon(img));
+			lblNewLabel_6.setBounds(253, 190, 166, 131);
+			panel.add(lblNewLabel_6);
+		}
+		{
 		 buttonPane = new JPanel();
 			buttonPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -158,7 +168,8 @@ public class RegistroDeClientes extends JDialog {
 			{
 				JButton okButton = new JButton();
 				okButton.setText("Registrar");
-				
+				Image ima = new ImageIcon(this.getClass().getResource("/ok.png")).getImage();
+				okButton.setIcon(new ImageIcon(ima));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(!txtNombre.getText().equalsIgnoreCase("") && !textFieldCedula.getText().equalsIgnoreCase("") && Tricom.getInstance().BuscarByCedula(textFieldCedula.getText())==null
@@ -193,6 +204,8 @@ public class RegistroDeClientes extends JDialog {
 				
 				
 				cancelButton = new JButton("Salir");
+				Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
+				cancelButton.setIcon(new ImageIcon(imagn));
 				cancelButton.addActionListener(new ActionListener() {
 	
 					public void actionPerformed(ActionEvent e) {

@@ -2,6 +2,7 @@ package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class CrearPlanes extends JDialog {
 
@@ -42,7 +44,9 @@ public class CrearPlanes extends JDialog {
 	   private JPanel panelData;
 	   private JPanel panelMinutos;
 	   private JPanel panelCanales;
-	
+	   private JLabel lblNewLabel_5;
+		 private JLabel lblNewLabel_6;
+		 private JLabel lblNewLabel_7;
 	   private JRadioButton rdbtnTelevicion;
 	   private JRadioButton rdbtnInternet;
 	   private JRadioButton rdbtnTelefono;
@@ -72,13 +76,14 @@ public class CrearPlanes extends JDialog {
 	 * Create the dialog.
 	 */
 	public CrearPlanes() {
-		setBounds(100, 100, 407, 500);
+		setBounds(100, 100, 483, 502);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(Color.WHITE);
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos De Los Planes ", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
@@ -88,6 +93,7 @@ public class CrearPlanes extends JDialog {
 			panel.add(lblNewLabel);
 			
 			txtCodigo = new JTextField();
+			txtCodigo.setBackground(UIManager.getColor("Button.disabledShadow"));
 			txtCodigo.setEditable(false);
 			txtCodigo.setBounds(10, 42, 42, 20);
 			
@@ -102,17 +108,20 @@ public class CrearPlanes extends JDialog {
 			panel.add(lblNewLabel_1);
 			
 			textNombre = new JTextField();
+			textNombre.setBackground(Color.LIGHT_GRAY);
 			textNombre.setBounds(10, 104, 181, 20);
 			panel.add(textNombre);
 			textNombre.setColumns(10);
 			
 			JPanel panel_1 = new JPanel();
+			panel_1.setBackground(Color.WHITE);
 			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tipo De Servicio", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_1.setBounds(10, 155, 379, 97);
+			panel_1.setBounds(35, 155, 379, 97);
 			panel.add(panel_1);
 			panel_1.setLayout(null);
 			
 			 rdbtnInternet = new JRadioButton("Internet.");
+			 rdbtnInternet.setBackground(UIManager.getColor("Button.disabledShadow"));
 			rdbtnInternet.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//panelData.setVisible(false);
@@ -143,6 +152,7 @@ public class CrearPlanes extends JDialog {
 			panel_1.add(rdbtnInternet);
 			
 			 rdbtnTelevicion = new JRadioButton("Televisi\u00F3n.");
+			 rdbtnTelevicion.setBackground(UIManager.getColor("Button.disabledShadow"));
 			rdbtnTelevicion.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -174,6 +184,7 @@ public class CrearPlanes extends JDialog {
 			panel_1.add(rdbtnTelevicion);
 			
 			 rdbtnTelefono = new JRadioButton("Tel\u00E9fono.");
+			 rdbtnTelefono.setBackground(UIManager.getColor("Button.disabledShadow"));
 			rdbtnTelefono.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					////panelData.setVisible(false);
@@ -204,7 +215,8 @@ public class CrearPlanes extends JDialog {
 			panel_1.add(rdbtnTelefono);
 			
 			panelData = new JPanel();
-			panelData.setBounds(0, 263, 124, 97);
+			panelData.setBackground(Color.WHITE);
+			panelData.setBounds(0, 263, 137, 69);
 			panel.add(panelData);
 			panelData.setLayout(null);
 			
@@ -213,16 +225,19 @@ public class CrearPlanes extends JDialog {
 			panelData.add(lblNewLabel_2);
 		    
 		    cbxData = new JComboBox();
+		    cbxData.setBackground(UIManager.getColor("Button.background"));
 		    cbxData.setBounds(10, 36, 110, 20);
 		    panelData.add(cbxData);
 		    cbxData.setModel(new DefaultComboBoxModel(new String[] {"<Cantidad>", "5MB", "15MB", "50MB", "100MB", "1GB", "ilimitado"}));
 		      
 		       panelMinutos = new JPanel();
-		       panelMinutos.setBounds(245, 263, 132, 97);
+		       panelMinutos.setBackground(Color.WHITE);
+		       panelMinutos.setBounds(310, 263, 137, 69);
 		       panel.add(panelMinutos);
 		       panelMinutos.setLayout(null);
 		       
 		     cbxMinutos = new JComboBox();
+		     cbxMinutos.setBackground(UIManager.getColor("Button.background"));
 		       cbxMinutos.setBounds(10, 36, 119, 20);
 		       panelMinutos.add(cbxMinutos);
 		       cbxMinutos.setModel(new DefaultComboBoxModel(new String[] {"<Plan Minutos>", "50 Minutos", "100 Minutos ", "300 Minutos ", "1000 Minutos", "Minutos ilimitado"}));
@@ -232,23 +247,51 @@ public class CrearPlanes extends JDialog {
 		       panelMinutos.add(lblNewLabel_4);
 		       
 		       panelCanales = new JPanel();
-		       panelCanales.setBounds(123, 263, 124, 97);
+		       panelCanales.setBackground(Color.WHITE);
+		       panelCanales.setBounds(155, 263, 137, 69);
 		       panel.add(panelCanales);
 		       panelCanales.setLayout(null);
 		       
 		        cbxCanales = new JComboBox();
+		        cbxCanales.setBackground(UIManager.getColor("Button.background"));
 		        cbxCanales.setModel(new DefaultComboBoxModel(new String[] {"<Variedad>", "Canales Premium ", "Paquete de Adultos", "Entretenimiento", "Otros"}));
 		        cbxCanales.setBounds(10, 36, 110, 20);
 		        panelCanales.add(cbxCanales);
 		        
 		        JLabel lblNewLabel_3 = new JLabel("Canales");
+		        lblNewLabel_3.setBackground(Color.WHITE);
 		        lblNewLabel_3.setBounds(11, 11, 109, 14);
 		        panelCanales.add(lblNewLabel_3);
 				panelData.setVisible(false);
 				panelMinutos.setVisible(false);
 				panelCanales.setVisible(false);
 			
+				  lblNewLabel_5 = new JLabel("");
+			        Image img = new ImageIcon(this.getClass().getResource("/wi.png")).getImage();
+					lblNewLabel_5.setIcon(new ImageIcon(img));
+			        lblNewLabel_5.setBounds(30, 343, 76, 69);
+			        panel.add(lblNewLabel_5);
+			        
+			        lblNewLabel_6 = new JLabel("");
+			        Image imag = new ImageIcon(this.getClass().getResource("/telev.png")).getImage();
+					lblNewLabel_6.setIcon(new ImageIcon(imag));
+			        lblNewLabel_6.setBounds(185, 343, 76, 69);
+			        panel.add(lblNewLabel_6);
+			        
+			        lblNewLabel_7 = new JLabel("");
+			        Image image = new ImageIcon(this.getClass().getResource("/phone.png")).getImage();
+					lblNewLabel_7.setIcon(new ImageIcon(image));
+			        lblNewLabel_7.setBounds(340, 343, 76, 69);
+			        panel.add(lblNewLabel_7);
 			
+			        JLabel LabelTricom = new JLabel("New label");
+			        Image fotico = new ImageIcon(this.getClass().getResource("/Tricom.png")).getImage();
+					LabelTricom.setIcon(new ImageIcon(fotico));
+			        LabelTricom.setBounds(272, 23, 175, 113);
+			        panel.add(LabelTricom);
+					panelData.setVisible(false);
+					panelMinutos.setVisible(false);
+					panelCanales.setVisible(false);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -256,6 +299,8 @@ public class CrearPlanes extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Registrar");
+				Image imagen = new ImageIcon(this.getClass().getResource("/ok.png")).getImage();
+				okButton.setIcon(new ImageIcon(imagen));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
@@ -417,6 +462,8 @@ public class CrearPlanes extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Salir");
+				Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
+				cancelButton.setIcon(new ImageIcon(imagn));
 				cancelButton.addActionListener(new ActionListener() {
 					
 				

@@ -2,6 +2,7 @@ package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,6 +20,7 @@ import logico.User;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -107,6 +109,8 @@ public class login extends JFrame {
 		textField_1.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
+		Image imag = new ImageIcon(this.getClass().getResource("/ok.png")).getImage();
+		btnLogin.setIcon(new ImageIcon(imag));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Control.getInstance().confirmLogin(textField.getText(),textField_1.getText())){
@@ -151,5 +155,11 @@ public class login extends JFrame {
 		});
 		btnLogin.setBounds(37, 175, 89, 23);
 		panel.add(btnLogin);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		Image img = new ImageIcon(this.getClass().getResource("/login.png")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(img));
+		lblNewLabel.setBounds(278, 64, 116, 131);
+		panel.add(lblNewLabel);
 	}
 }
