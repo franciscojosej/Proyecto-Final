@@ -57,6 +57,7 @@ public class ContratoVisual extends JDialog {
 	private JTextField textNombre;
 	private Cliente cliente;
 	private Contrato nuevoContrato;
+	private ArrayList<Plan> nuevoPlan=null;
 	private JLabel  lblTotalApagat = new JLabel("0.0");
 	private  Object[][] datofila=llenararreglo();	
 	private  Object[][] datofilaCa=llenararregloCarrito();	
@@ -176,7 +177,7 @@ public class ContratoVisual extends JDialog {
 				txtCodigo.setBounds(10, 56, 50, 20);
 				if(Contra == null) {
 					
-					 txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
+					 txtCodigo.setText("C-" + (Tricom.ContratoCod+1));
 				}
 				panel.add(txtCodigo);
 				txtCodigo.setColumns(10);
@@ -205,16 +206,20 @@ public class ContratoVisual extends JDialog {
 						
 						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) {
 							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+						
 						}
 
 						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) {
 							cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
 							JOptionPane.showMessageDialog(null, "Cliente Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
-							
+							datofilaCa=llenararregloCarrito();
+							DefaultTableModel model3= new DefaultTableModel(datofilaCa,  columnNombre);
+							t2.setModel(model3);
 
 							
 							
 						}
+						
 						
 					}
 				});
@@ -328,7 +333,7 @@ public class ContratoVisual extends JDialog {
 					}
 					 
 					
-				ArrayList<Plan> nuevoPlan=null;
+				
 
 					
 				//JOptionPane.showConfirmDialog(null, codigo);
@@ -354,27 +359,26 @@ public class ContratoVisual extends JDialog {
 	
 						if(num==0) {
 							
-							JOptionPane.showMessageDialog(null, "Contrato registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-							Contrato nuevoContrato=new Contrato(" ", Tricom.getFechaInicio(), "", 1);
 							
-
-							
+						 nuevoContrato=new Contrato(" ", Tricom.getFechaInicio(), "", Tricom.ContratoCod);
+						
 							nuevoPlan=Tricom.getInstance().buscarPlanes(codigo);
-							
 							
 							if(nuevoPlan!=null)
 							nuevoContrato.setMisPlanes(nuevoPlan);
 							//if(cliente!=null)
 							Tricom.getInstance().getMiCliente().get(Tricom.getInstance()
-							.getMiCliente().indexOf(cliente)).agrregarcontrato(nuevoContrato);
-							
-							
+									.getMiCliente().indexOf(cliente)).agrregarcontrato(nuevoContrato);
+							++Tricom.ContratoCod;
+
+							datofilaCa=llenararregloCarrito();
+							DefaultTableModel model3= new DefaultTableModel(datofilaCa,  columnNombre);
+							t2.setModel(model3);
 						}
 						
 					}				
 				}
-	
-				cliente=null;
+				
 					
 				}
 			});
@@ -417,12 +421,6 @@ public class ContratoVisual extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("Contratar\r\n");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
 			{
 				JButton cancelButton = new JButton("Salir");
 			    cancelButton.addActionListener(new ActionListener() {
@@ -474,9 +472,6 @@ public class ContratoVisual extends JDialog {
 			if(planes!=null)
 			datofila[i][2]=planes.get(0).getCodigo();
 
-	
-			
-			
 		}
 		
 
@@ -488,13 +483,14 @@ public class ContratoVisual extends JDialog {
 		return n[0]+n[1]+n[2];
 	}
 	private Object[][] llenararregloCarrito() {
-		Cliente cliente = Tricom.getInstance().BuscarByCedula("3");
+		
+		Cliente cliente = Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
 		int tama=0;
 		if(cliente!=null) {
 		tama=	cliente.getMiscontract().size();
 		}
 		
-	Object[][] datofila=new Object[10][3];
+	Object[][] datofila=new Object[ tama][3];
 	
 		String miServ[]= {"","",""};
 		float costo=0;
@@ -530,13 +526,13 @@ public class ContratoVisual extends JDialog {
 							datofila[i][2]=aux.getCodigoDeContrato();
 							++i;
 							
-							JOptionPane.showConfirmDialog(null, cliente.getCedula());
+							//JOptionPane.showConfirmDialog(null, cliente.getCedula());
 
 				
 			}
 
 			
-		JOptionPane.showConfirmDialog(null, "mm");
+		//JOptionPane.showConfirmDialog(null, "mm");
 			
 			
 

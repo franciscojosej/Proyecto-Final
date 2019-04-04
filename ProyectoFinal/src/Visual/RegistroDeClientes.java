@@ -166,7 +166,7 @@ public class RegistroDeClientes extends JDialog {
 						//Cliente a = new Cliente(txtNombre.getText(), textFieldDireccion.getText(), textFieldnumber.getText(), textFieldCedula.getText(), null, null, null, null, null, code);
 	//Cliente b = new Cliente(txtNombre.getText(), null, textFieldCedula.getText(), textFieldnumber.getText(), 
 		//	textFieldnumber.getText(), null, null, null, null, code);
-	Cliente g= new Cliente(txtNombre.getText(), null, textFieldCedula.getText(), textFieldnumber.getText(), textFieldDireccion.getText(), null, null,null, null,code);
+	Cliente g= new Cliente(txtNombre.getText(), null, textFieldCedula.getText(), textFieldnumber.getText(), textFieldDireccion.getText(), null, null,null, null,Tricom.ClienteCod);
 					//	a.setCodigo_cliente(Tricom.ClienteCod+1);
 							 Tricom.getInstance().insertarCliente(g);
 						
@@ -206,7 +206,6 @@ public class RegistroDeClientes extends JDialog {
 		
 					public void actionPerformed(ActionEvent e) {
 					dispose();
-					
 					}
 				});
 				
@@ -221,8 +220,6 @@ private void clear() {
 	textFieldCedula.setText("");
 	textFieldDireccion.setText("");
 	textFieldnumber.setText("");
-	
-	
 }
 
 }

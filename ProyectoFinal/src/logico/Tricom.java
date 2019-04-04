@@ -65,6 +65,14 @@ public class Tricom implements Serializable{
 
 
 
+	public static int getClienteCod() {
+		return ClienteCod;
+	}
+
+	public static void setClienteCod(int clienteCod) {
+		ClienteCod = clienteCod;
+	}
+
 	public ArrayList<Contrato> getMisContrato() {
 		return misContrato;
 	}
