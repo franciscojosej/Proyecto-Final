@@ -209,8 +209,6 @@ public void insertarPlan(Plan aux){
 		
 	}
 	public void generaFactura() {
-		
-		
 		Factura auxFa=null;
 		float recargo=0;
 
@@ -240,29 +238,74 @@ public void insertarPlan(Plan aux){
 					}
 					auxFa.setRecargo(recargo);
 					auxFa.setTotalA_Pagar(recargo+contrato_Aux.getPrecioDelPlan());
-					
-					
 					insertarFactura(auxFa);
 					
 				} 
 					
-				
-
-				
-		
-				
 			}
 			
 			
 		}
 		
 	}
+	public void generarFactura(Cliente cliente_Aux,Contrato contrato_Aux ) {
+		Factura auxFa=null;
+		float recargo=0;
+
+				if(contrato_Aux.getEstado()) {
+					//contrato_Aux.getFacturasEmitidas()<4 &&
+					cliente_Aux.getMiscontract().get(cliente_Aux.getMiscontract()
+							.indexOf(contrato_Aux)).setFacturasEmitidas();//aumento la cantidad de facturas emitidas
+					
+					auxFa=modeloFactura();//se Cargan fecha de inicio y fecha de pago
+					
+					auxFa.setNombreCliente(cliente_Aux.getNombre());
+					auxFa.setCodiCliente(cliente_Aux.getCodigo_cliente());
+					auxFa.setPrecioBase(contrato_Aux.getPrecioDelPlan());
+					if(contrato_Aux.getFacturasEmitidas()==1) {
+						//recargo=(float) ((contrato_Aux.getPrecioDelPlan())*0.1);
+					}
+					if(contrato_Aux.getFacturasEmitidas()==2) {
+						recargo=(float) ((contrato_Aux.getPrecioDelPlan())*0.1);
+					}
+					if(contrato_Aux.getFacturasEmitidas()==3) {
+						recargo=(float) ((contrato_Aux.getPrecioDelPlan())*0.2);
+					}
+					if(contrato_Aux.getFacturasEmitidas()==4) {
+						recargo=(float) ((contrato_Aux.getPrecioDelPlan())*0.3);
+					}
+					auxFa.setRecargo(recargo);
+					auxFa.setTotalA_Pagar(recargo+contrato_Aux.getPrecioDelPlan());
+					insertarFactura(auxFa);
+				} 
+	
+	}
+	
 	public Factura modeloFactura() {
 	
 		Factura factura_Aux= new Factura(" ", 1, 0, getFechaInicio() ,
 				getFechavencimiento(), 0, 0);
 	return factura_Aux;
 	}
+	public static String getFechaInicio() {
+		Calendar fecha =  new GregorianCalendar();
+		return String.valueOf((fecha.get(Calendar.MONTH)+1)+"-"+fecha.get(Calendar.DAY_OF_MONTH)+
+				"-"+fecha.get(Calendar.YEAR));
+	}
+	private static String getFechavencimiento() {
+		Calendar fecha =  new GregorianCalendar();
+		String fe="/ / /";
+		if(fecha.get(Calendar.MONTH)+2<12) {
+		fe	= String.valueOf((fecha.get(Calendar.MONTH)+2)+"-"+fecha.get(Calendar.DAY_OF_MONTH)+"-"+fecha.get(Calendar.YEAR));
+		}else {
+			fe	= String.valueOf((fecha.get(Calendar.MONTH))+"-"+fecha.get(Calendar.DAY_OF_MONTH)+
+					"-"+fecha.get(Calendar.YEAR));
+		}
+			
+		return fe;
+	}
+
+	/*
 	public static String getFechaInicio() {
 		Calendar fecha =  new GregorianCalendar();
 		return String.valueOf((fecha.get(Calendar.MONTH)+1)+"-"+fecha.get(Calendar.DAY_OF_MONTH)+
@@ -282,7 +325,7 @@ public void insertarPlan(Plan aux){
 		return fe;
 	}
 	
-	
+	*/
 	//buscar Contrato por codiog , retorna el contrato si existe de lo contrario null
 	private Contrato findC0ntratoByCode(int id) {
 		Contrato contrato=null;
