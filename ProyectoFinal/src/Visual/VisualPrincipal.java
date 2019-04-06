@@ -261,8 +261,8 @@ public class VisualPrincipal extends JFrame {
 		lblNewLabel.setBounds(0, 45, 400, 206);
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Bienvenido a Tricom Dominicana");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		JLabel lblNewLabel_1 = new JLabel("TRICOM DOMINICANA");
+		lblNewLabel_1.setFont(new Font("Tempus Sans ITC", Font.BOLD | Font.ITALIC, 13));
 		lblNewLabel_1.setBounds(10, 32, 242, 14);
 		panel.add(lblNewLabel_1);
 	}
