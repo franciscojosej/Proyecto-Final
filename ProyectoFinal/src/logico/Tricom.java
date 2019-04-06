@@ -248,8 +248,8 @@ public void insertarPlan(Plan aux){
 		}
 		
 	}
-	public void generarFactura(Cliente cliente_Aux,Contrato contrato_Aux ) {
-		Factura auxFa=null;
+	public boolean generarFactura2(Cliente cliente_Aux,Contrato contrato_Aux ,Factura auxFa) {
+		boolean registrad0= true;
 		float recargo=0;
 
 				if(contrato_Aux.getEstado()) {
@@ -257,7 +257,7 @@ public void insertarPlan(Plan aux){
 					cliente_Aux.getMiscontract().get(cliente_Aux.getMiscontract()
 							.indexOf(contrato_Aux)).setFacturasEmitidas();//aumento la cantidad de facturas emitidas
 					
-					auxFa=modeloFactura();//se Cargan fecha de inicio y fecha de pago
+				//	auxFa=modeloFactura();//se Cargan fecha de inicio y fecha de pago
 					
 					auxFa.setNombreCliente(cliente_Aux.getNombre());
 					auxFa.setCodiCliente(cliente_Aux.getCodigo_cliente());
@@ -277,8 +277,10 @@ public void insertarPlan(Plan aux){
 					auxFa.setRecargo(recargo);
 					auxFa.setTotalA_Pagar(recargo+contrato_Aux.getPrecioDelPlan());
 					insertarFactura(auxFa);
-				} 
-	
+				}else {
+				registrad0=false;
+				}
+	return registrad0;
 	}
 	
 	public Factura modeloFactura() {
@@ -327,21 +329,30 @@ public void insertarPlan(Plan aux){
 	
 	*/
 	//buscar Contrato por codiog , retorna el contrato si existe de lo contrario null
-	private Contrato findC0ntratoByCode(int id) {
+	public Contrato findContratoByCode(int id) {
 		Contrato contrato=null;
 		
-		boolean find = false;
-		int i=0;
-		while (i<misContrato.size()&&!find) {
-			if(misContrato.get(i).getCodigoDeContrato()==id){
-				contrato = misContrato.get(i);
-				find = true;
+
+		for (Cliente cli : miCliente) {
+			for(Contrato conTra:cli.getMiscontract()) {
+				if(conTra.getCodigoDeContrato()==id) {
+					contrato=conTra;
+					break;
+				}
 			}
-			i++;
+		
 		}
 		return contrato;
 	}
 	
+	public static int getFacturacionCod() {
+		return FacturacionCod;
+	}
+
+	public static void setFacturacionCod() {
+		++FacturacionCod ;
+	}
+
 	//buscar el cliente por su codiguillo...
 	public Cliente BuscarByCodigo(int code){
 		Cliente client = null;

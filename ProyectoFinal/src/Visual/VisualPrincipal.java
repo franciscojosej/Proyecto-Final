@@ -239,7 +239,8 @@ public class VisualPrincipal extends JFrame {
 		mntmfacturar.setIcon(new ImageIcon(pict));
 		mntmfacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FacturacionVisual factu = new FacturacionVisual();
+				
+				FacturaGenerar factu = new FacturaGenerar();
 				factu.setModal(true);
 				factu.setLocationRelativeTo(null);
 				factu.setVisible(true);

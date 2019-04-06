@@ -213,8 +213,8 @@ public class ContratoVisual extends JDialog {
 							cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
 							JOptionPane.showMessageDialog(null, "Cliente Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
 							datofilaCa=llenararregloCarrito();
-							DefaultTableModel model3= new DefaultTableModel(datofilaCa,  columnNombre);
-							t2.setModel(model3);
+							 model= new DefaultTableModel(datofilaCa,  columnNombre);
+							t2.setModel(model);
 
 							
 							
@@ -372,8 +372,8 @@ public class ContratoVisual extends JDialog {
 							++Tricom.ContratoCod;
 
 							datofilaCa=llenararregloCarrito();
-							DefaultTableModel model3= new DefaultTableModel(datofilaCa,  columnNombre);
-							t2.setModel(model3);
+							model2= new DefaultTableModel(datofilaCa,  columnNombre);
+							t2.setModel(model2);
 						}
 						
 					}				

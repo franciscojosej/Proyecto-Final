@@ -19,6 +19,7 @@ import logico.CableTV;
 import logico.Celular;
 import logico.Cliente;
 import logico.Contrato;
+import logico.Factura;
 import logico.Internet;
 import logico.Plan;
 import logico.Tricom;
@@ -30,6 +31,8 @@ import java.awt.Component;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,7 +49,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseWheelListener;
+import java.text.SimpleDateFormat;
 import java.awt.event.MouseWheelEvent;
+import com.toedter.calendar.JDateChooser;
 
 public class FacturaGenerar extends JDialog {
 
@@ -59,11 +64,12 @@ public class FacturaGenerar extends JDialog {
 	private Contrato nuevoContrato;
 	private ArrayList<Plan> nuevoPlan=null;
 	private JLabel  lblTotalApagat = new JLabel("0.0");
-	private  Object[][] datofila=llenararreglo();	
-	private  Object[][] datofilaCa=llenararregloCarrito();	
+	private  Object[][] datofila=llenararregloCarrito();	
+	private  Object[][] datofilaCa=llenararregloFactura();	
+	private JDateChooser dateChooser = new JDateChooser();
 	
 	private static String columnNombre[] = {"Nombre","Servicio","x"};
-
+	private static String columnNombreFacturas[] = {"Nombre","Servicio","x","y"};
 	
 	final Class[] columnClass = new Class[] {
 		    Integer.class, String.class, Double.class, Boolean.class
@@ -82,7 +88,7 @@ public class FacturaGenerar extends JDialog {
 	    }
 	    
 	};
-	DefaultTableModel model2 = new DefaultTableModel(datofilaCa,  columnNombre) {
+	DefaultTableModel model2 = new DefaultTableModel(datofilaCa,  columnNombreFacturas) {
 	    @Override
 	    public boolean isCellEditable(int row, int column)
 	    {
@@ -108,7 +114,7 @@ public class FacturaGenerar extends JDialog {
 	PrecioL tarea = new PrecioL(lblTotalApagat, t);
     Timer temporizador = new Timer();
     Integer segundos = 1;
-
+    private  JLabel labelFechaInicio = new JLabel("");
    
 	
 
@@ -142,7 +148,7 @@ public class FacturaGenerar extends JDialog {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			
 
 	//	t.setDefaultRenderer(Object.class, new MiRender());
 
@@ -177,7 +183,7 @@ public class FacturaGenerar extends JDialog {
 				txtCodigo.setBounds(10, 56, 50, 20);
 				if(Contra == null) {
 					
-					 txtCodigo.setText("C-" + (Tricom.ContratoCod+1));
+					 txtCodigo.setText("C-" + (Tricom.FacturacionCod+1));
 				}
 				panel.add(txtCodigo);
 				txtCodigo.setColumns(10);
@@ -212,12 +218,12 @@ public class FacturaGenerar extends JDialog {
 						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) {
 							cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
 							JOptionPane.showMessageDialog(null, "Cliente Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
-							datofilaCa=llenararregloCarrito();
-							DefaultTableModel model3= new DefaultTableModel(datofilaCa,  columnNombre);
-							t2.setModel(model3);
+						
 
-							
-							
+							datofila=llenararregloCarrito();
+							 model= new DefaultTableModel(datofila,  columnNombre);
+							t.setModel(model);
+	
 						}
 						
 						
@@ -326,14 +332,37 @@ public class FacturaGenerar extends JDialog {
 					{
 						 row= t.getSelectedRow();	
 					}
+					int tam=0;
 				
 					//int column=t.getSelectedColumn();
-					if(Tricom.getInstance().getMiPlan().size()>=1&&(row != -1) ) {
+					Cliente cli = Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
+					if(cli!=null) {
+						tam=cli.getMiscontract().size();
+					}
+					if(tam>=1&&(row != -1) ) {
 						codigo =(int) t.getValueAt(row, 2);
 					}
 					 
-					
+					 Date m =dateChooser.getDate();
+					 int dia;
+					 int mes;
+					 int an;
+					if(m!=null) {
+						  dia=dateChooser.getDate().getDate();
+						  mes= dateChooser.getDate().getMonth()+1;
+						 an=m.getYear()+1900;
+					}else {
+						 dia=0;
+					 mes= 0;
+					an=0;
+					}
+
+			
 				
+					
+				//	JOptionPane.showConfirmDialog(null, dia+" "+mes+" "+an);
+			Factura factura_Aux= new Factura(" ", 1, 0, labelFechaInicio.getText() ,
+					String.valueOf(dia+"-"+mes+"-"+an), 0, 0);
 
 					
 				//JOptionPane.showConfirmDialog(null, codigo);
@@ -341,42 +370,46 @@ public class FacturaGenerar extends JDialog {
 				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null||
 						texCedulaCleinte.getText().equalsIgnoreCase("")&&textNombre.getText().equalsIgnoreCase("")) {
 					JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+				
 				}
 				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) 
 				{
 					JOptionPane.showMessageDialog(null, "Cliente no encontrado", null, JOptionPane.ERROR_MESSAGE, null);
 				}
-				
-				if(Tricom.getInstance().getMiPlan().size()>=1&&codigo!=-1)
+				//control
+				cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
+				nuevoContrato=Tricom.getInstance().findContratoByCode(codigo);
+				if(codigo!=-1 && nuevoContrato.getEstado()&&Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null)
 				{
-					if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) 
-					{
-						cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
+					factura_Aux.setCodiFactura(Tricom.getFacturacionCod());
+
 						
 					//	JOptionPane.showMessageDialog(null, " Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
-						int  num= JOptionPane.showConfirmDialog(null, "Costo Del Plan: "+Tricom.getInstance().calcularCostopordode(codigo), 
-								"Crear", JOptionPane.YES_NO_OPTION);
-	
-						if(num==0) {
-							
-							
-						 nuevoContrato=new Contrato(" ", Tricom.getFechaInicio(), "", Tricom.ContratoCod);
-						
-							nuevoPlan=Tricom.getInstance().buscarPlanes(codigo);
-							
-							if(nuevoPlan!=null)
-							nuevoContrato.setMisPlanes(nuevoPlan);
-							//if(cliente!=null)
-							Tricom.getInstance().getMiCliente().get(Tricom.getInstance()
-									.getMiCliente().indexOf(cliente)).agrregarcontrato(nuevoContrato);
-							++Tricom.ContratoCod;
 
-							datofilaCa=llenararregloCarrito();
-							DefaultTableModel model3= new DefaultTableModel(datofilaCa,  columnNombre);
-							t2.setModel(model3);
+						 
+						if(cliente.getMiscontract().indexOf(nuevoContrato)!=-1) {
+
+							if(Tricom.getInstance().generarFactura2(cliente, nuevoContrato,factura_Aux )) {
+								JOptionPane.showMessageDialog(null, "Factura realizada", null, JOptionPane.INFORMATION_MESSAGE, null);
+						//	Tricom.setFacturacionCod();//aumentar code Factura
+							}else {
+								JOptionPane.showMessageDialog(null, "No se pudo realizar factura", null, JOptionPane.INFORMATION_MESSAGE, null);
+							}
+							
+
+
+						}else{
+							JOptionPane.showMessageDialog(null, "No Encontradoff", null, JOptionPane.INFORMATION_MESSAGE, null);
 						}
 						
-					}				
+					
+					datofilaCa=llenararregloFactura();
+					 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
+					t2.setModel(model2);
+				}
+				if(nuevoContrato!=null)
+				if(nuevoContrato.getEstado()==false) {
+					JOptionPane.showMessageDialog(null, "ContraroCancelado", null, JOptionPane.ERROR_MESSAGE, null);
 				}
 				
 					
@@ -405,17 +438,21 @@ public class FacturaGenerar extends JDialog {
 			lblFechaDeCulminacion.setBounds(23, 406, 150, 14);
 			panel.add(lblFechaDeCulminacion);
 			
-			JLabel labelFechaInicio = new JLabel("");
+			labelFechaInicio.setText(Tricom.getFechaInicio());
 			labelFechaInicio.setBounds(155, 381, 81, 14);
 			panel.add(labelFechaInicio);
-			
-			JLabel labelFechaFinalizacion = new JLabel("");
-			labelFechaFinalizacion.setBounds(155, 406, 81, 14);
-			panel.add(labelFechaFinalizacion);
 			
 			
 			lblTotalApagat.setBounds(416, 406, 81, 14);
 			panel.add(lblTotalApagat);
+			dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			
+			
+			dateChooser.setBounds(132, 400, 104, 20);
+			panel.add(dateChooser);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -440,41 +477,43 @@ public class FacturaGenerar extends JDialog {
 	}
 
 
-	private Object[][] llenararreglo() {
-		Object[][] datofila=new Object[Tricom.getPlanesCod()][3];
-		String miServ[]= {"","",""};
-		float costo=0;
-		for (int i = 0; i < Tricom.getPlanesCod(); i++) {
-			
-			ArrayList<Plan> planes=Tricom.getInstance().buscarPlanes(i);
-			
-			if(planes!=null)
-			datofila[i][0]= planes.get(0).getNombre();
-			if(planes!=null)
-			for (Plan plan : planes) {
-				if (plan instanceof Celular) {
-					miServ[0]="Cel";
-					costo+=((Celular)plan).CalcularCosto();
-				}
-				if (plan instanceof CableTV) {
-					miServ[1]=" -Tv";	
-					costo+=(( CableTV)plan).CalcularCosto();
-				}
-				if (plan instanceof Internet) {
-					miServ[2]=" -Int";	
-					costo+=((  Internet)plan).CalcularCosto();
-				}
-				
-			}
-			if(planes!=null)
-			datofila[i][1]= getString(miServ);
-			
-			if(planes!=null)
-			datofila[i][2]=planes.get(0).getCodigo();
-
+	private Object[][] llenararregloFactura() {
+		Cliente cliente = Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
+		ArrayList<Factura> misF=null;
+		int tama=0;
+		if(cliente!=null) {
+		
+		misF=Tricom.getInstance().buscarFacturasActivasByCedulaClinte(cliente.getCodigo_cliente());
+		if(misF.size()>=1) {
+			tama=misF.size();
+		}
 		}
 		
+	Object[][] datofila=new Object[ tama][4];
+	
+		
+		int i=0;
+	
+		if(misF!=null)
+		for (Factura aux : misF) {
+			
+			datofila[i][0]= aux.getCodiFactura();
+			
+				 
+			
+							datofila[i][1]= aux.getFechaDevencimiento();
+			
+							datofila[i][2]=aux.getRecargo();
+							datofila[i][3]=aux.getTotalA_Pagar();
+							++i;
+							
+							//JOptionPane.showConfirmDialog(null, cliente.getCedula());
 
+				
+			}
+	
+		//JOptionPane.showConfirmDialog(null, "mm");
+			
 		return datofila;
 		
 		
