@@ -1,9 +1,13 @@
 package Visual;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -46,20 +50,21 @@ public class ListarEmpleados extends JDialog {
 	public ListarEmpleados() {
 		setBounds(100, 100, 934, 454);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setOpaque(false);
-		panel.setBorder(new TitledBorder(null, "Lista de Empleados", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 1090, 421);
+		panel.setBackground(Color.WHITE);
+		//panel.setBorder(new TitledBorder(null, "Lista de Clientes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 908, 410);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setOpaque(false);
-		scrollPane.setBounds(10, 24, 890, 321);
+		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setBounds(109, 91, 678, 209);
 		panel.add(scrollPane);
 		
 		tableLista = new JTable();
@@ -83,16 +88,20 @@ public class ListarEmpleados extends JDialog {
 		loadCliente();
 		scrollPane.setViewportView(tableLista);
 		
-		JLabel label = new JLabel("");
-		label.setBounds(0, 0, 918, 382);
-		contentPanel.add(label);
+		JLabel lblNewLabel = new JLabel("Listado de Empleados");
+		lblNewLabel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD | Font.ITALIC, 15));
+		lblNewLabel.setBounds(10, 11, 190, 14);
+		panel.add(lblNewLabel);
 		
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Salir");
+				Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
+				cancelButton.setIcon(new ImageIcon(imagn));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

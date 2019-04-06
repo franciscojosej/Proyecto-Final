@@ -15,6 +15,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -24,6 +25,9 @@ import logico.CableTV;
 import logico.Celular;
 import logico.Contrato;
 import logico.Tricom;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 
 
 public class ListarPlanes extends JDialog {
@@ -58,15 +62,17 @@ public class ListarPlanes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarPlanes() {
-		setBounds(100, 100, 571, 321);
+		setBounds(100, 100, 571, 432);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Listado de planes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 534, 226);
+		panel.setBackground(Color.WHITE);
+	//panel.setBorder(new TitledBorder(null, "Listado de planes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 121, 534, 226);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -96,13 +102,27 @@ public class ListarPlanes extends JDialog {
 		cbxPlan.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione:>", "Internet", "Televisión", "Teléfono"}));
 		cbxPlan.setBounds(96, 22, 110, 20);
 		panel.add(cbxPlan);
+		
+		JLabel lblNewLabel = new JLabel("Listado de Planes");
+		lblNewLabel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD | Font.ITALIC, 16));
+		lblNewLabel.setBounds(10, 58, 203, 14);
+		contentPanel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		Image fotico = new ImageIcon(this.getClass().getResource("/Tricom.png")).getImage();
+		lblNewLabel_1.setIcon(new ImageIcon(fotico));
+		lblNewLabel_1.setBounds(347, 11, 165, 110);
+		contentPanel.add(lblNewLabel_1);
 	
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Salir");
+				Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
+				cancelButton.setIcon(new ImageIcon(imagn));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

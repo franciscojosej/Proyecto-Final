@@ -29,6 +29,7 @@ import java.io.ObjectOutputStream;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.Font;
 
 public class VisualPrincipal extends JFrame {
 
@@ -239,8 +240,7 @@ public class VisualPrincipal extends JFrame {
 		mntmfacturar.setIcon(new ImageIcon(pict));
 		mntmfacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				FacturaGenerar factu = new FacturaGenerar();
+				FacturacionVisual factu = new FacturacionVisual();
 				factu.setModal(true);
 				factu.setLocationRelativeTo(null);
 				factu.setVisible(true);
@@ -258,7 +258,12 @@ public class VisualPrincipal extends JFrame {
 		JLabel lblNewLabel = new JLabel("");
 		Image ima = new ImageIcon(this.getClass().getResource("/comu.jpg")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(ima));
-		lblNewLabel.setBounds(10, 31, 410, 220);
+		lblNewLabel.setBounds(0, 45, 400, 206);
 		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Bienvenido a Tricom Dominicana");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lblNewLabel_1.setBounds(10, 32, 242, 14);
+		panel.add(lblNewLabel_1);
 	}
 }
