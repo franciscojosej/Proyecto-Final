@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -28,6 +29,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Color;
 
 public class ListarCliente extends JDialog {
 
@@ -44,22 +48,22 @@ public class ListarCliente extends JDialog {
 	private Cliente clie;
 
 	public ListarCliente() {
-		setBounds(100, 100, 934, 454);
+		setBounds(100, 100, 571, 371);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setOpaque(false);
-		panel.setBorder(new TitledBorder(null, "Lista de Clientes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 1090, 421);
+		panel.setBackground(Color.WHITE);
+		//panel.setBorder(new TitledBorder(null, "Lista de Clientes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 114, 534, 184);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setOpaque(false);
-		scrollPane.setBounds(10, 24, 890, 321);
+		scrollPane.setBounds(10, 11, 514, 165);
 		panel.add(scrollPane);
 		
 		tableLista = new JTable();
@@ -82,46 +86,60 @@ public class ListarCliente extends JDialog {
 		tableModel.setColumnIdentifiers(columnNames);
 		loadCliente();
 		scrollPane.setViewportView(tableLista);
+		JPanel buttonPane = new JPanel();
+		buttonPane.setBounds(0, 300, 555, 35);
+		contentPanel.add(buttonPane);
+		buttonPane.setBackground(Color.WHITE);
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		JButton cancelButton = new JButton("Salir");
+		Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
+		cancelButton.setIcon(new ImageIcon(imagn));
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
-		JLabel label = new JLabel("");
-		label.setBounds(0, 0, 918, 382);
-		contentPanel.add(label);
+		btnUpdate = new JButton("Modificar");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistroDeClientes mod = new RegistroDeClientes(clie);
+				mod.setModal(true);
+				mod.setLocationRelativeTo(null);
+				mod.setVisible(true);
+			}
+		});
+		
+		
+		
+		JButton btnDelete_1 = new JButton("Eliminar");
+		btnDelete_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		buttonPane.add(btnDelete_1);
+		buttonPane.add(btnUpdate);
+		btnUpdate.setEnabled(false);
+		cancelButton.setActionCommand("Delete");
+		buttonPane.add(cancelButton);
+		
+		JLabel lblNewLabel = new JLabel("Listado de Clientes");
+		lblNewLabel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD | Font.ITALIC, 16));
+		lblNewLabel.setBounds(10, 58, 203, 14);
+		contentPanel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		Image fotico = new ImageIcon(this.getClass().getResource("/Tricom.png")).getImage();
+		lblNewLabel_1.setIcon(new ImageIcon(fotico));
+		lblNewLabel_1.setBounds(347, 11, 165, 110);
+		contentPanel.add(lblNewLabel_1);
+
+		
 		
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton cancelButton = new JButton("Salir");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				
-				btnUpdate = new JButton("Modificar");
-				btnUpdate.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						RegistroDeClientes mod = new RegistroDeClientes(clie);
-						mod.setModal(true);
-						mod.setLocationRelativeTo(null);
-						mod.setVisible(true);
-					}
-				});
-				
-				
-				
-				JButton btnDelete = new JButton("Eliminar");
-				btnDelete.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-					}
-				});
-				buttonPane.add(btnDelete);
-				buttonPane.add(btnUpdate);
-				btnUpdate.setEnabled(false);
-				cancelButton.setActionCommand("Delete");
-				buttonPane.add(cancelButton);
+				//Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
 			}
 		}
 		
@@ -155,4 +173,3 @@ public class ListarCliente extends JDialog {
 	
 	}
 }
-
