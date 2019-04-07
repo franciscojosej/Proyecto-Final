@@ -2,6 +2,7 @@ package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Image;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -41,6 +42,7 @@ import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -154,14 +156,16 @@ public class FacturaGenerar extends JDialog {
 
 		//int  m=(int) datofila[t.getSelectedColumn()][0];
 		
-		setBounds(100, 100, 587, 548);
+		setBounds(100, 100, 612, 548);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 		//	t.setSelectionBackground(getBackground());
 			JPanel panel = new JPanel();
+			panel.setBackground(Color.WHITE);
 			panel.addMouseListener(new MouseAdapter() {
 
 			});
@@ -190,8 +194,9 @@ public class FacturaGenerar extends JDialog {
 			}
 			{
 				JPanel panel_1 = new JPanel();
+				panel_1.setBackground(Color.WHITE);
 				panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Información del Cliente", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_1.setBounds(10, 80, 541, 141);
+				panel_1.setBounds(22, 80, 541, 141);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
@@ -207,6 +212,8 @@ public class FacturaGenerar extends JDialog {
 				}
 				
 				JButton btnNewButton = new JButton(" Buscar Cliente");
+				Image ima = new ImageIcon(this.getClass().getResource("/search.png")).getImage();
+				btnNewButton.setIcon(new ImageIcon(ima));
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -229,7 +236,7 @@ public class FacturaGenerar extends JDialog {
 						
 					}
 				});
-				btnNewButton.setBounds(201, 46, 136, 23);
+				btnNewButton.setBounds(201, 46, 162, 23);
 				panel_1.add(btnNewButton);
 				
 				JLabel lblNewLabel_2 = new JLabel("Nombre:");
@@ -240,9 +247,16 @@ public class FacturaGenerar extends JDialog {
 				textNombre.setBounds(10, 103, 171, 20);
 				panel_1.add(textNombre);
 				textNombre.setColumns(10);
+				
+				JLabel lblNewLabel_1 = new JLabel("");
+				Image fotico = new ImageIcon(this.getClass().getResource("/cli.png")).getImage();
+				lblNewLabel_1.setIcon(new ImageIcon(fotico));
+				lblNewLabel_1.setBounds(394, 5, 108, 125);
+				panel_1.add(lblNewLabel_1);
 			}
 			
 			JPanel panelPlanesDisponibles = new JPanel();
+			panelPlanesDisponibles.setBackground(Color.WHITE);
 			panelPlanesDisponibles.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Contratos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelPlanesDisponibles.setBounds(10, 219, 209, 141);
 			panel.add(panelPlanesDisponibles);
@@ -312,8 +326,9 @@ public class FacturaGenerar extends JDialog {
 			
 
 			JPanel panel_2 = new JPanel();
+			panel_2.setBackground(Color.WHITE);
 			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Facturas Emitidas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_2.setBounds(338, 219, 213, 141);
+			panel_2.setBounds(338, 219, 238, 141);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			scrollPaneCarrito.addMouseListener(new MouseAdapter() {
@@ -321,10 +336,12 @@ public class FacturaGenerar extends JDialog {
 			});
 			
 			
-			scrollPaneCarrito.setBounds(10, 21, 189, 109);
+			scrollPaneCarrito.setBounds(10, 21, 218, 109);
 			panel_2.add(scrollPaneCarrito);
 			
 			JButton btnNewButton_1 = new JButton("Facturar");
+			Image im = new ImageIcon(this.getClass().getResource("/bil.png")).getImage();
+			btnNewButton_1.setIcon(new ImageIcon(im));
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int codigo=-1,row=0;
@@ -415,19 +432,21 @@ public class FacturaGenerar extends JDialog {
 					
 				}
 			});
-			btnNewButton_1.setBounds(223, 257, 96, 20);
+			btnNewButton_1.setBounds(223, 257, 111, 20);
 			panel.add(btnNewButton_1);
 			
 			JButton btnNewButton_2 = new JButton("Pagar");
+			Image foto = new ImageIcon(this.getClass().getResource("/pay.png")).getImage();
+			btnNewButton_2.setIcon(new ImageIcon(foto));
 			btnNewButton_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btnNewButton_2.setBounds(223, 309, 96, 20);
+			btnNewButton_2.setBounds(223, 308, 111, 20);
 			panel.add(btnNewButton_2);
 			
 			JLabel lbllabel = new JLabel("Precio Total a Pagar:");
-			lbllabel.setBounds(282, 406, 169, 14);
+			lbllabel.setBounds(295, 406, 169, 14);
 			panel.add(lbllabel,BorderLayout.CENTER);
 			
 			JLabel lblNewLabel_4 = new JLabel("Fecha De Inicio:");
@@ -435,7 +454,7 @@ public class FacturaGenerar extends JDialog {
 			panel.add(lblNewLabel_4);
 			
 			JLabel lblFechaDeCulminacion = new JLabel("Fecha De Culminacion:");
-			lblFechaDeCulminacion.setBounds(23, 406, 150, 14);
+			lblFechaDeCulminacion.setBounds(23, 406, 138, 14);
 			panel.add(lblFechaDeCulminacion);
 			
 			labelFechaInicio.setText(Tricom.getFechaInicio());
@@ -451,15 +470,18 @@ public class FacturaGenerar extends JDialog {
 			});
 			
 			
-			dateChooser.setBounds(132, 400, 104, 20);
+			dateChooser.setBounds(168, 405, 104, 20);
 			panel.add(dateChooser);
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Salir");
+				Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
+				cancelButton.setIcon(new ImageIcon(imagn));
 			    cancelButton.addActionListener(new ActionListener() {
 				
 					public void actionPerformed(ActionEvent e) {

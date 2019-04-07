@@ -2,6 +2,7 @@ package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Image;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -37,7 +38,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.AbstractButton;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -148,14 +151,16 @@ public class ContratoVisual extends JDialog {
 
 		//int  m=(int) datofila[t.getSelectedColumn()][0];
 		
-		setBounds(100, 100, 587, 548);
+		setBounds(100, 100, 612, 548);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 		//	t.setSelectionBackground(getBackground());
 			JPanel panel = new JPanel();
+			panel.setBackground(Color.WHITE);
 			panel.addMouseListener(new MouseAdapter() {
 
 			});
@@ -184,8 +189,9 @@ public class ContratoVisual extends JDialog {
 			}
 			{
 				JPanel panel_1 = new JPanel();
+				panel_1.setBackground(Color.WHITE);
 				panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Información del Cliente", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_1.setBounds(10, 80, 541, 141);
+				panel_1.setBounds(22, 82, 541, 141);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
@@ -201,6 +207,8 @@ public class ContratoVisual extends JDialog {
 				}
 				
 				JButton btnNewButton = new JButton(" Buscar Cliente");
+				Image ima = new ImageIcon(this.getClass().getResource("/search.png")).getImage();
+				btnNewButton.setIcon(new ImageIcon(ima));
 				btnNewButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -223,7 +231,7 @@ public class ContratoVisual extends JDialog {
 						
 					}
 				});
-				btnNewButton.setBounds(201, 46, 136, 23);
+				btnNewButton.setBounds(201, 46, 157, 23);
 				panel_1.add(btnNewButton);
 				
 				JLabel lblNewLabel_2 = new JLabel("Nombre:");
@@ -234,11 +242,20 @@ public class ContratoVisual extends JDialog {
 				textNombre.setBounds(10, 103, 171, 20);
 				panel_1.add(textNombre);
 				textNombre.setColumns(10);
+				
+				JLabel lblNewLabel_1 = new JLabel("");
+				Image fotico = new ImageIcon(this.getClass().getResource("/cli.png")).getImage();
+				lblNewLabel_1.setIcon(new ImageIcon(fotico));
+				lblNewLabel_1.setBounds(394, 5, 108, 125);
+				panel_1.add(lblNewLabel_1);
+				
+				
 			}
 			
 			JPanel panelPlanesDisponibles = new JPanel();
+			panelPlanesDisponibles.setBackground(Color.WHITE);
 			panelPlanesDisponibles.setBorder(new TitledBorder(null, "Planes Disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panelPlanesDisponibles.setBounds(10, 219, 209, 141);
+			panelPlanesDisponibles.setBounds(10, 229, 209, 141);
 			panel.add(panelPlanesDisponibles);
 			panelPlanesDisponibles.setLayout(null);
 			scrollPane.addMouseWheelListener(new MouseWheelListener() {
@@ -306,8 +323,9 @@ public class ContratoVisual extends JDialog {
 			
 
 			JPanel panel_2 = new JPanel();
+			panel_2.setBackground(Color.WHITE);
 			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Carrito de Compras", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_2.setBounds(338, 219, 213, 141);
+			panel_2.setBounds(363, 229, 213, 141);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			scrollPaneCarrito.addMouseListener(new MouseAdapter() {
@@ -319,6 +337,8 @@ public class ContratoVisual extends JDialog {
 			panel_2.add(scrollPaneCarrito);
 			
 			JButton btnNewButton_1 = new JButton("Seleccionar ");
+			Image im = new ImageIcon(this.getClass().getResource("/select.png")).getImage();
+			btnNewButton_1.setIcon(new ImageIcon(im));
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int codigo=-1,row=0;
@@ -382,15 +402,17 @@ public class ContratoVisual extends JDialog {
 					
 				}
 			});
-			btnNewButton_1.setBounds(223, 257, 96, 20);
+			btnNewButton_1.setBounds(223, 257, 130, 20);
 			panel.add(btnNewButton_1);
 			
 			JButton btnNewButton_2 = new JButton("Borrar");
+			Image imag = new ImageIcon(this.getClass().getResource("/del.png")).getImage();
+			btnNewButton_2.setIcon(new ImageIcon(imag));
 			btnNewButton_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btnNewButton_2.setBounds(223, 309, 96, 20);
+			btnNewButton_2.setBounds(223, 309, 130, 20);
 			panel.add(btnNewButton_2);
 			
 			JLabel lbllabel = new JLabel("Precio Total a Pagar:");
@@ -419,10 +441,13 @@ public class ContratoVisual extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Salir");
+				Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
+				cancelButton.setIcon(new ImageIcon(imagn));
 			    cancelButton.addActionListener(new ActionListener() {
 				
 					public void actionPerformed(ActionEvent e) {
