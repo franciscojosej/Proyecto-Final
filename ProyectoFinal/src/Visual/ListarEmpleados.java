@@ -48,7 +48,7 @@ public class ListarEmpleados extends JDialog {
 	private Empleado worker;
 
 	public ListarEmpleados() {
-		setBounds(100, 100, 571, 371);
+		setBounds(100, 100, 957, 430);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,12 +58,12 @@ public class ListarEmpleados extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		//panel.setBorder(new TitledBorder(null, "Lista de Clientes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 114, 534, 184);
+		panel.setBounds(10, 114, 921, 241);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 514, 165);
+		scrollPane.setBounds(10, 11, 890, 219);
 		panel.add(scrollPane);
 		
 		tableLista = new JTable();
@@ -91,7 +91,7 @@ public class ListarEmpleados extends JDialog {
 		
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(0, 300, 555, 35);
+			buttonPane.setBounds(20, 353, 911, 35);
 			contentPanel.add(buttonPane);
 			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -132,14 +132,14 @@ public class ListarEmpleados extends JDialog {
 		}
 		
 		JLabel lblNewLabel = new JLabel("Listado de Empleados");
-		lblNewLabel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel.setBounds(10, 58, 203, 14);
+		lblNewLabel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD | Font.ITALIC, 26));
+		lblNewLabel.setBounds(10, 45, 330, 35);
 		contentPanel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		Image fotico = new ImageIcon(this.getClass().getResource("/Tricom.png")).getImage();
 		lblNewLabel_1.setIcon(new ImageIcon(fotico));
-		lblNewLabel_1.setBounds(347, 11, 165, 110);
+		lblNewLabel_1.setBounds(748, 12, 165, 110);
 		contentPanel.add(lblNewLabel_1);
 		
 	}
