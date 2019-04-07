@@ -62,7 +62,7 @@ public class ListarPlanes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarPlanes() {
-		setBounds(100, 100, 571, 432);
+		setBounds(100, 100, 571, 396);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,12 +72,12 @@ public class ListarPlanes extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 	//panel.setBorder(new TitledBorder(null, "Listado de planes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 121, 534, 226);
+		panel.setBounds(10, 114, 534, 209);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 50, 514, 165);
+		scrollPane.setBounds(10, 39, 514, 165);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -89,7 +89,7 @@ public class ListarPlanes extends JDialog {
 		scrollPane.setViewportView(table);
 		
 		JLabel lblTipoDePlan = new JLabel("Tipo de Plan:");
-		lblTipoDePlan.setBounds(10, 25, 90, 14);
+		lblTipoDePlan.setBounds(10, 14, 90, 14);
 		panel.add(lblTipoDePlan);
 		
 		cbxPlan = new JComboBox();
@@ -100,7 +100,7 @@ public class ListarPlanes extends JDialog {
 			}
 		});
 		cbxPlan.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione:>", "Internet", "Televisión", "Teléfono"}));
-		cbxPlan.setBounds(96, 22, 110, 20);
+		cbxPlan.setBounds(96, 11, 110, 20);
 		panel.add(cbxPlan);
 		
 		JLabel lblNewLabel = new JLabel("Listado de Planes");
@@ -113,45 +113,47 @@ public class ListarPlanes extends JDialog {
 		lblNewLabel_1.setIcon(new ImageIcon(fotico));
 		lblNewLabel_1.setBounds(347, 11, 165, 110);
 		contentPanel.add(lblNewLabel_1);
+		JPanel buttonPane = new JPanel();
+		buttonPane.setBounds(0, 322, 555, 35);
+		contentPanel.add(buttonPane);
+		buttonPane.setBackground(Color.WHITE);
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		JButton cancelButton = new JButton("Salir");
+		Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
+		cancelButton.setIcon(new ImageIcon(imagn));
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		
+		btnUpdate = new JButton("Modificar");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearPlanes modi = new CrearPlanes();
+				modi.setModal(true);
+				modi.setLocationRelativeTo(null);
+				modi.setVisible(true);
+			}
+		});
+		
+		
+		
+		JButton btnDelete_1 = new JButton("Eliminar");
+		btnDelete_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		buttonPane.add(btnDelete_1);
+		buttonPane.add(btnUpdate);
+		btnUpdate.setEnabled(false);
+		cancelButton.setActionCommand("Cancel");
+		buttonPane.add(cancelButton);
 	
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(Color.WHITE);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton cancelButton = new JButton("Salir");
-				Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
-				cancelButton.setIcon(new ImageIcon(imagn));
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				
-				btnUpdate = new JButton("Modificar");
-				btnUpdate.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						CrearPlanes modi = new CrearPlanes();
-						modi.setModal(true);
-						modi.setLocationRelativeTo(null);
-						modi.setVisible(true);
-					}
-				});
-				
-				
-				
-				JButton btnDelete = new JButton("Eliminar");
-				btnDelete.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-					}
-				});
-				buttonPane.add(btnDelete);
-				buttonPane.add(btnUpdate);
-				btnUpdate.setEnabled(false);
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				//Image imagn = new ImageIcon(this.getClass().getResource("/cancel.png")).getImage();
 			}
 		}
 	}
