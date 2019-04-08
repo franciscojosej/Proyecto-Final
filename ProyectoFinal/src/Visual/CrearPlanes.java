@@ -34,7 +34,6 @@ public class CrearPlanes extends JDialog {
 
 	private static final String Plans = null;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCodigo;
 	private JTextField textNombre;
 	private JComboBox cbxData;
 	private JComboBox cbxCanales;
@@ -58,6 +57,7 @@ public class CrearPlanes extends JDialog {
 	 private  CableTV aux2=null;
 	 private  Celular aux3=null;
 	 private  float costoTotal=0;
+	 private JLabel lbCodigoPlan;
 
 	/**
 	 * Launch the application.
@@ -76,7 +76,9 @@ public class CrearPlanes extends JDialog {
 	 * Create the dialog.
 	 */
 	public CrearPlanes() {
-		setBounds(100, 100, 483, 502);
+		setResizable(false);
+		setBounds(5, 59, 483, 502);
+		//setBounds(100, 100, 483, 502);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -91,17 +93,6 @@ public class CrearPlanes extends JDialog {
 			JLabel lblNewLabel = new JLabel("C\u00F3digo Del Plan:");
 			lblNewLabel.setBounds(10, 23, 176, 14);
 			panel.add(lblNewLabel);
-			
-			txtCodigo = new JTextField();
-			txtCodigo.setBackground(UIManager.getColor("Button.disabledShadow"));
-			txtCodigo.setEditable(false);
-			txtCodigo.setBounds(10, 42, 42, 20);
-			
-				
-		   txtCodigo.setText("P-" + (Tricom.PlanesCod+1));
-			
-			panel.add(txtCodigo);
-			txtCodigo.setColumns(10);
 			
 			JLabel lblNewLabel_1 = new JLabel("Nombre Del Plan:");
 			lblNewLabel_1.setBounds(10, 87, 176, 14);
@@ -184,6 +175,7 @@ public class CrearPlanes extends JDialog {
 			panel_1.add(rdbtnTelevicion);
 			
 			 rdbtnTelefono = new JRadioButton("Tel\u00E9fono.");
+			
 			 rdbtnTelefono.setBackground(UIManager.getColor("Button.disabledShadow"));
 			rdbtnTelefono.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -292,6 +284,17 @@ public class CrearPlanes extends JDialog {
 					panelData.setVisible(false);
 					panelMinutos.setVisible(false);
 					panelCanales.setVisible(false);
+					
+					 //rdbtnInternet.setSelected(true);
+					// panelMinutos.setVisible(true);
+					 
+					 rdbtnTelevicion.setSelected(true);
+					 
+					 lbCodigoPlan = new JLabel("New label");
+					 lbCodigoPlan.setBounds(10, 48, 46, 14);
+					 lbCodigoPlan.setText("P"+"-"+(Tricom.PlanesCod+1));
+					 panel.add(lbCodigoPlan);
+					 panelCanales.setVisible(true);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -305,7 +308,7 @@ public class CrearPlanes extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 
 						
-						if(!textNombre.getText().equalsIgnoreCase("") && !txtCodigo.getText().equalsIgnoreCase("")){
+						if(!textNombre.getText().equalsIgnoreCase("") ){
 		
 
 						
@@ -318,7 +321,9 @@ public class CrearPlanes extends JDialog {
 						
 						if(rdbtnInternet.isSelected()){
 							int velocidad_conexion =0;
-									
+							if(cbxData.getSelectedIndex()==0) {
+								velocidad_conexion=2;
+							}		
 							if(cbxData.getSelectedIndex()==1) {
 								velocidad_conexion=5;
 							}
@@ -347,7 +352,9 @@ public class CrearPlanes extends JDialog {
 						if(rdbtnTelevicion.isSelected()){
 							
 							int cantidadCanales = 0;
-							
+							if(cbxCanales.getSelectedIndex()==0) {
+								cantidadCanales=50;
+								}	
 							
 						if(cbxCanales.getSelectedIndex()==1) {
 							cantidadCanales=200;
@@ -366,7 +373,9 @@ public class CrearPlanes extends JDialog {
 						}
 						if(rdbtnTelefono.isSelected()){
 							int minutos =0;
-									
+							if(cbxMinutos.getSelectedIndex()==0) {
+								minutos=25;
+							}		
 							if(cbxMinutos.getSelectedIndex()==1) {
 								minutos=50;
 							}
@@ -401,7 +410,6 @@ public class CrearPlanes extends JDialog {
 							
 							costoTotal+=aux3.CalcularCosto();
 
-						
 						}
 	
 		
@@ -441,18 +449,14 @@ public class CrearPlanes extends JDialog {
 							    aux3=null;
 						 costoTotal=0;
 						}
-						
-						
-					
-					
-						
-					
+
 						
 						clear();
 						}else{
 							JOptionPane.showMessageDialog(null, "Verifique los campos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
-						
+
+						 
 					}
 					
 				});
@@ -481,11 +485,19 @@ public class CrearPlanes extends JDialog {
 	private void clear() {
 		//textField_2.setText("P-"+Tricom.PlanesCod+1);
 		textNombre.setText("");
-		txtCodigo.setText("P-"+(Tricom.PlanesCod+1));
+	//	txtCodigo.setText("P-"+(Tricom.PlanesCod+1));
 		cbxData.setSelectedIndex(0);
 		cbxCanales.setSelectedIndex(0);
 		cbxMinutos.setSelectedIndex(0);
-
+		
+	//	panelCanales.setVisible(false);
+		panelData.setVisible(false);
+		panelMinutos.setVisible(false);
+		
+		 lbCodigoPlan.setText("P"+"-"+(Tricom.PlanesCod+1));
+		 rdbtnInternet.setSelected(false);
+		 rdbtnTelefono.setSelected(false);
+		 rdbtnTelevicion.setSelected(true);
 		
 		
 	}

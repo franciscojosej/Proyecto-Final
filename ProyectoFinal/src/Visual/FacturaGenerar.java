@@ -155,8 +155,9 @@ public class FacturaGenerar extends JDialog {
 	//	t.setDefaultRenderer(Object.class, new MiRender());
 
 		//int  m=(int) datofila[t.getSelectedColumn()][0];
-		
-		setBounds(100, 100, 612, 548);
+			setResizable(false);
+			setBounds(5, 59, 612, 548);
+		//setBounds(100, 100, 612, 548);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

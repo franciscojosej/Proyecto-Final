@@ -37,7 +37,6 @@ import java.awt.Color;
 public class RegistroDeClientes extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCodigo;
 	private JTextField txtNombre;
 	private JFormattedTextField formattedTextField;
 	private static Cliente cliente;
@@ -47,6 +46,7 @@ public class RegistroDeClientes extends JDialog {
 	private JButton cancelButton; 
 	private JPanel buttonPane;
 	private JComboBox comboBox;
+	private JLabel lblCodeCli;
 
 	/**
 	 * Launch the application. 
@@ -71,7 +71,9 @@ public class RegistroDeClientes extends JDialog {
 			
 		}
 		setTitle("Registro de Clientes");
-		setBounds(100, 100, 450, 417);
+		setResizable(false);
+		setBounds(5, 59, 450, 417);
+		//setBounds(100, 100, 450, 417);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -89,16 +91,7 @@ public class RegistroDeClientes extends JDialog {
 			panel.add(lblNewLabel);
 		}
 		{
-			
-			txtCodigo = new JTextField();
-			txtCodigo.setBounds(10, 56, 33, 20);
-			txtCodigo.setEditable(false);
-			if(cli == null) {
-				
-				 txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
-			}
-			panel.add(txtCodigo);
-			txtCodigo.setColumns(10);
+
 		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("Nombre:");
@@ -161,6 +154,12 @@ public class RegistroDeClientes extends JDialog {
 			panel.add(lblNewLabel_6);
 		}
 		{
+			 lblCodeCli = new JLabel("New label");
+			lblCodeCli.setBounds(10, 61, 46, 14);
+			lblCodeCli.setText("C-" + (Tricom.ClienteCod+1));
+			panel.add(lblCodeCli);
+		}
+		{
 		 buttonPane = new JPanel();
 			buttonPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -181,7 +180,7 @@ public class RegistroDeClientes extends JDialog {
 					//	a.setCodigo_cliente(Tricom.ClienteCod+1);
 							 Tricom.getInstance().insertarCliente(g);
 						
-						 txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
+						// txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
 						JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
 						clear();
 						}else{
@@ -233,6 +232,9 @@ private void clear() {
 	textFieldCedula.setText("");
 	textFieldDireccion.setText("");
 	textFieldnumber.setText("");
+	lblCodeCli.setText("C"+"-"+(Tricom.ClienteCod+1));
+	comboBox.setSelectedIndex(0);
+	
 }
 
 }

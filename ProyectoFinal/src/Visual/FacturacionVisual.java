@@ -52,7 +52,9 @@ public class FacturacionVisual extends JDialog {
 	 * Create the dialog.
 	 */
 	public FacturacionVisual() {
-		setBounds(100, 100, 548, 447);
+		setResizable(false);
+		setBounds(5, 59, 548, 447);
+	//	setBounds(100, 100, 548, 447);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

@@ -2,6 +2,7 @@ package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Image;
 
@@ -35,6 +36,8 @@ public class VisualPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	protected RegistroDeClientes RegCliente;
+	private Dimension dm;
+	
 
 	
 	  //Launch the application.
@@ -91,9 +94,12 @@ public class VisualPrincipal extends JFrame {
 				
 			}
 		});
+		dm= getToolkit().getScreenSize();///
+		setResizable(false);
 		setTitle("Telefonia e Internet Tricom RD...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 438, 309);
+		super.setSize(dm.width,dm.height);///
+		//setBounds(100, 100, 438, 309);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -122,9 +128,10 @@ public class VisualPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Cliente Clien = null;
 				 RegistroDeClientes RegCliente 	= null;
-			    RegCliente = new RegistroDeClientes (Clien);	
+			    RegCliente = new RegistroDeClientes (Clien);
+			  //  RegCliente.setLocation(5, 5);
 			    RegCliente.setModal(true);
-			    RegCliente.setLocationRelativeTo(null);
+			  // RegCliente.setLocationRelativeTo(mnNewMenu );
 			    RegCliente.setVisible(true);
 			    
 			
@@ -159,7 +166,7 @@ public class VisualPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				RegistroDeEmpleado RegEmpleado = new RegistroDeEmpleado();
 				RegEmpleado.setModal(true);
-				RegEmpleado.setLocationRelativeTo(null);
+				//RegEmpleado.setLocationRelativeTo(null);
 				RegEmpleado.setVisible(true);
 			}
 		});
@@ -189,7 +196,7 @@ public class VisualPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CrearPlanes CrePlanes = new CrearPlanes();
 				CrePlanes.setModal(true);
-				CrePlanes.setLocationRelativeTo(null);
+				//CrePlanes.setLocationRelativeTo(null);
 				CrePlanes.setVisible(true);
 			}
 				
@@ -224,7 +231,7 @@ public class VisualPrincipal extends JFrame {
 				ContratoVisual contratar = new ContratoVisual();
 				
 				contratar.setModal(true);
-				contratar.setLocationRelativeTo(null);
+				//contratar.setLocationRelativeTo(null);
 				contratar.setVisible(true);
 				
 			}
@@ -242,7 +249,7 @@ public class VisualPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				FacturaGenerar factu = new FacturaGenerar();
 				factu.setModal(true);
-				factu.setLocationRelativeTo(null);
+			//	factu.setLocationRelativeTo(null);
 				factu.setVisible(true);
 				
 			}

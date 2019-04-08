@@ -34,7 +34,6 @@ public class RegistroDeEmpleado extends JDialog {
 	
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCodigo;
 	private JTextField txtNombre;
 	private static Empleado Emple;
 	private JTextField textUsuario;
@@ -44,7 +43,7 @@ public class RegistroDeEmpleado extends JDialog {
 	private JRadioButton rdbtnAdministrativo;
 	private JRadioButton rdbtnComercial;
 	private JComboBox cbxSexo ;
-
+	private JLabel lbCodeEmpl ;
 	/**
 	 * Launch the application.
 	 */
@@ -62,18 +61,23 @@ public class RegistroDeEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistroDeEmpleado() {
-		setBounds(100, 100, 504, 500);
+		setResizable(false);
+		setBounds(5, 59, 504, 500);
+	//	setBounds(100, 100, 504, 500);
+	
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setToolTipText(" Datos Del Empleado");
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		contentPanel.setLayout(null);//null
 		{
 			JPanel panel = new JPanel();
 			panel.setBackground(Color.WHITE);
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos Del Empleado", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel.setBounds(10, 11, 468, 338);
+		//	panel.setBounds(5, 50, 468, 338);
+			
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
@@ -82,15 +86,10 @@ public class RegistroDeEmpleado extends JDialog {
 				panel.add(lblNewLabel);
 			}
 			{
-				txtCodigo = new JTextField();
-				txtCodigo.setEditable(false);
-				txtCodigo.setBounds(10, 139, 36, 20);
 				if(Emple == null) {
 					
-					 txtCodigo.setText("E-" + (Tricom.ClienteCod+1));
+					// lbCodeEmpl.setText("E-" + (Tricom.ClienteCod+1));
 				}
-				panel.add(txtCodigo);
-				txtCodigo.setColumns(10);
 			}
 			{
 				JLabel lblNewLabel_1 = new JLabel("Nombre:");
@@ -163,6 +162,10 @@ public class RegistroDeEmpleado extends JDialog {
 				lblNewLabel_6.setBounds(260, 26, 151, 133);
 				panel.add(lblNewLabel_6);
 			}
+			
+			 lbCodeEmpl = new JLabel("E"+"-"+(Tricom.EmpleadoCod+1));
+			lbCodeEmpl.setBounds(20, 139, 46, 14);
+			panel.add(lbCodeEmpl);
 		}
 		
 		{
@@ -251,6 +254,7 @@ public class RegistroDeEmpleado extends JDialog {
 							 Control.getInstance().regUser(user);
 							 Tricom.getInstance().insertarEmpleado(nuevoEmpleado);
 							 JOptionPane.showMessageDialog(null, "Empleado registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+							 clear();
 						}else {
 							JOptionPane.showMessageDialog(null, "Verifique que todos los campos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
@@ -275,7 +279,22 @@ public class RegistroDeEmpleado extends JDialog {
 				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
+				
+
 			}
 		}
+		
+	}
+
+	private void clear() {
+		
+		txtNombre.setText("");
+		textTelefono.setText("");
+		textUsuario.setText("");
+		textCedula.setText("");
+		txtPassword.setText("");
+		cbxSexo.setSelectedIndex(0);
+		lbCodeEmpl.setText("E"+"-"+(1+Tricom.EmpleadoCod));
+	
 	}
 }
