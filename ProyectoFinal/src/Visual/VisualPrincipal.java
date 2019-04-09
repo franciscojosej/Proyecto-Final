@@ -271,6 +271,20 @@ public class VisualPrincipal extends JFrame {
 		mntmgenerarFactura.setIcon(new ImageIcon(pictu));
 		mnFacturar.add(mntmgenerarFactura);
 		
+		JMenu mnGraficos = new JMenu("Graficos");
+		menuBar.add(mnGraficos);
+		
+		JMenuItem mntmMasUsado = new JMenuItem("Mas Usado");
+		mntmMasUsado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GraCircular v1 = new GraCircular();
+				
+				v1.setVisible(true);
+				
+			}
+		});
+		mnGraficos.add(mntmMasUsado);
+		
 		
 		//JLabel lblNewLabel = new JLabel("");
 		//Image ima = new ImageIcon(this.getClass().getResource("/Tele.jpg")).getImage();
