@@ -61,6 +61,7 @@ public class VisualPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VisualPrincipal() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -94,8 +95,7 @@ public class VisualPrincipal extends JFrame {
 				
 			}
 		});
-		dm= getToolkit().getScreenSize();///
-		setResizable(false);
+		dm= getToolkit().getScreenSize();
 		setTitle("Telefonia e Internet Tricom RD...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.setSize(dm.width,dm.height);///
@@ -107,7 +107,7 @@ public class VisualPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		
 		Panel panel = new Panel();
-		panel.setBounds(0, 10, 434, 251);
+		panel.setBounds(0, 10, 1045, 553);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -156,6 +156,7 @@ public class VisualPrincipal extends JFrame {
 		
 		
 		JMenu mnNewMenu_1 = new JMenu("Empleados");
+		mnNewMenu_1.setForeground(Color.BLACK);
 		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnNewMenu_1);
 		
@@ -186,6 +187,7 @@ public class VisualPrincipal extends JFrame {
 		mnNewMenu_1.add(mntmListarEmpleados);
 		
 		JMenu mnCrearPlanes = new JMenu("Planes");
+		mnCrearPlanes.setForeground(Color.BLACK);
 		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnCrearPlanes);
 		
@@ -220,6 +222,7 @@ public class VisualPrincipal extends JFrame {
 		mnCrearPlanes.add(mntmlistaDePlanes);
 		
 		JMenu mnContrato = new JMenu("Contrato");
+		mnContrato.setForeground(Color.BLACK);
 		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnContrato);
 		
@@ -239,6 +242,7 @@ public class VisualPrincipal extends JFrame {
 		mnContrato.add(mntmContrato);
 		
 		JMenu mnFacturar = new JMenu("Facturas");
+		mnFacturar.setForeground(Color.BLACK);
 		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnFacturar);
 		
@@ -263,9 +267,9 @@ public class VisualPrincipal extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("");
-		Image ima = new ImageIcon(this.getClass().getResource("/comu.jpg")).getImage();
+		Image ima = new ImageIcon(this.getClass().getResource("/Tele.jpg")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(ima));
-		lblNewLabel.setBounds(0, 45, 400, 206);
+		lblNewLabel.setBounds(0, 21, 1045, 553);//(0, 21, 1045, 549);
 		panel.add(lblNewLabel);
 	}
 }
