@@ -31,6 +31,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.Font;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class VisualPrincipal extends JFrame {
 
@@ -101,18 +103,21 @@ public class VisualPrincipal extends JFrame {
 		super.setSize(dm.width,dm.height);///
 		//setBounds(100, 100, 438, 309);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setForeground(UIManager.getColor("Button.light"));
+		contentPane.setBackground(UIManager.getColor("Button.light"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		Panel panel = new Panel();
+		panel.setForeground(UIManager.getColor("Button.light"));
 		panel.setBounds(0, 10, 1045, 553);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBackground(Color.WHITE);
+		menuBar.setForeground(UIManager.getColor("Button.light"));
+		menuBar.setBackground(UIManager.getColor("Button.light"));
 		menuBar.setToolTipText("Empleado");
 		menuBar.setBounds(0, 0, 410, 21);
 		panel.add(menuBar);
@@ -266,10 +271,10 @@ public class VisualPrincipal extends JFrame {
 		mnFacturar.add(mntmgenerarFactura);
 		
 		
-		JLabel lblNewLabel = new JLabel("");
-		Image ima = new ImageIcon(this.getClass().getResource("/Tele.jpg")).getImage();
-		lblNewLabel.setIcon(new ImageIcon(ima));
-		lblNewLabel.setBounds(0, 21, 1045, 553);//(0, 21, 1045, 549);
-		panel.add(lblNewLabel);
+		//JLabel lblNewLabel = new JLabel("");
+		//Image ima = new ImageIcon(this.getClass().getResource("/Tele.jpg")).getImage();
+		//lblNewLabel.setIcon(new ImageIcon(ima));
+		//lblNewLabel.setBounds(0, -11, 1045, 553);//(0, 21, 1045, 549);
+		//panel.add(lblNewLabel);
 	}
 }
