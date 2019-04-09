@@ -52,9 +52,19 @@ public class Contrato implements Serializable {
 			setEstado(false);
 		}
 		FacturasEmitidas++;
-			
-		
+
 	}
+	public void reducirFacturasEmitidas() {
+		
+		
+		if(FacturasEmitidas==0) {
+			setEstado(true);
+		}
+		if(FacturasEmitidas!=0)
+		FacturasEmitidas--;
+
+	}
+	
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}

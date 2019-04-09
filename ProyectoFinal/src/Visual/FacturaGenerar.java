@@ -72,7 +72,7 @@ public class FacturaGenerar extends JDialog {
 	private JDateChooser dateChooser = new JDateChooser();
 	
 	private static String columnNombre[] = {"Nombre","Servicio","x"};
-	private static String columnNombreFacturas[] = {"Nombre","Servicio","x","y"};
+	private static String columnNombreFacturas[] = {"Codigo","Fecha","%","Costo"};
 	
 	final Class[] columnClass = new Class[] {
 		    Integer.class, String.class, Double.class, Boolean.class
@@ -469,6 +469,46 @@ public class FacturaGenerar extends JDialog {
 			btnNewButton_2.setIcon(new ImageIcon(foto));
 			btnNewButton_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					int codigo=-1,row=0;
+					if(Tricom.getInstance().getMisFacturas().size()>=1 ) 
+					{
+						 row= t2.getSelectedRow();	
+					}
+					int tam=0;
+				
+					//int column=t.getSelectedColumn();
+				tam= Tricom.getInstance().getMisFacturas().size();
+
+					if(tam>=1&&(row != -1) ) {
+						JOptionPane.showConfirmDialog(null, codigo);
+						codigo = (int) t2.getValueAt(row, 0);
+						JOptionPane.showConfirmDialog(null, codigo);
+					}
+					Factura cli = Tricom.getInstance().buscarFacturasByCode(codigo);
+					if(cli!=null) {
+						
+				 int index=Tricom.getInstance().getMisFacturas().indexOf(cli);
+				 if(index>=0) {
+					  Tricom.getInstance().getMisFacturas().get(index).setSinPagar(false);
+				 }
+				 int codeC= Tricom.getInstance().getMisFacturas().get(index).getCodigoContrato();
+				
+				 Contrato  nuevCon= Tricom.getInstance().findContratoByCode(codeC);
+				 if(codeC!=-1)
+				 if(nuevCon!=null) {
+					int indexCon= Tricom.getInstance().getMisContrato().indexOf(nuevCon);
+					
+					Tricom.getInstance().getMisContrato().get(indexCon).reducirFacturasEmitidas();
+				 }
+				
+					datofilaCa=llenararregloFactura();
+					 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
+					t2.setModel(model2);
+					JOptionPane.showConfirmDialog(null, "paga");
+				 
+					}
+					
+					
 				}
 			});
 			btnNewButton_2.setBounds(223, 308, 111, 20);

@@ -437,6 +437,20 @@ public void insertarPlan(Plan aux){
 		return fact;
 
 	}
+	public Factura buscarFacturasByCode(int code){//
+
+		Factura d =null;
+		for (Factura factura : misFacturas) {
+			
+			if (factura.getCodiFactura()==code) {
+				d=factura;
+				break;
+			}
+		}
+		
+		return d;
+
+	}
 	
 	public ArrayList<Contrato> buscarPlanesEnContratos(int code){
 		
