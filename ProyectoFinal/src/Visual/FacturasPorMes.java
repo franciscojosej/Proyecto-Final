@@ -23,6 +23,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import logico.CableTV;
 import logico.Celular;
 import logico.Control;
+import logico.Factura;
 import logico.Internet;
 import logico.Plan;
 import logico.Tricom;
@@ -81,16 +82,20 @@ public class FacturasPorMes extends JFrame{
         panel = new JPanel();
         getContentPane().add(panel);
         // Fuente de Datos
-      int internet=10;
-      int TV=0;
-      int celular=0;
+      //int internet=10;
+      //int TV=0;
+      //int celular=0;
+        int cant=0;
         Tricom.getInstance().getMisFacturas();
         	for (int i = 0; i < Tricom.FacturacionCod; i++) {
 			
-			ArrayList<Plan> planes=Tricom.getInstance().buscar;
+			Factura fact=Tricom.getInstance().buscarFacturasByCode(i);
 			
-			if(planes!=null)
-			for (Plan plan : planes) {
+			if(fact!=null) {
+				
+				cant++;
+			}
+			/*for (Plan plan : planes) {
 				if (plan instanceof Celular) {
 				
 					celular++;
@@ -102,29 +107,31 @@ public class FacturasPorMes extends JFrame{
 					internet++;
 				}
 				
-			}
+			}*/
 			
 		
 		
 			
 
 		}
-            DefaultPieDataset data = new DefaultPieDataset();
-		data.setValue("Telefono", celular);
-        data.setValue("Internet", internet);
-        data.setValue("TV", TV);
+        	 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+             dataset.setValue(cant, "Pagada", "Enero");
+             dataset.setValue(cant, "No paga", "Enero");
+             dataset.setValue(cant, "Pagada", "Febrero");
+             dataset.setValue(cant, "No paga", "Febrero");
+
  
-        // Creando el Grafico
-        JFreeChart chart = ChartFactory.createPieChart(
-         "Porcentaje de Planes Utilizados", 
-         data, 
-         true, 
-         true, 
-         false);
- 
-        // Crear el Panel del Grafico con ChartPanel
-        ChartPanel chartPanel = new ChartPanel(chart);
-        panel.add(chartPanel);
+        JFreeChart chart = ChartFactory.createBarChart3D
+                ("Facturas por Mes","Estados", "Mes", 
+                dataset, PlotOrientation.VERTICAL, true,true, false);
+                chart.setBackgroundPaint(Color.cyan);
+                chart.getTitle().setPaint(Color.black); 
+                CategoryPlot p = chart.getCategoryPlot(); 
+                p.setRangeGridlinePaint(Color.red); 
+                
+                // Mostrar Grafico
+                ChartPanel chartPanel = new ChartPanel(chart);
+                panel.add(chartPanel);
     }
     
     //public static void main(String args[]){
