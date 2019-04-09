@@ -271,7 +271,7 @@ public class VisualPrincipal extends JFrame {
 		mntmgenerarFactura.setIcon(new ImageIcon(pictu));
 		mnFacturar.add(mntmgenerarFactura);
 		
-		JMenu mnGraficos = new JMenu("Graficos");
+		JMenu mnGraficos = new JMenu("Gráficos");
 		menuBar.add(mnGraficos);
 		
 		JMenuItem mntmMasUsado = new JMenuItem("Mas Usado");
@@ -285,6 +285,16 @@ public class VisualPrincipal extends JFrame {
 		});
 		mnGraficos.add(mntmMasUsado);
 		
+		JMenuItem mntmFacMes = new JMenuItem("Facturas por Mes");
+		mntmFacMes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FacturasPorMes v2 = new FacturasPorMes();
+				
+				v2.setVisible(true);
+				
+			}
+		});
+		mnGraficos.add(mntmFacMes);
 		
 		//JLabel lblNewLabel = new JLabel("");
 		//Image ima = new ImageIcon(this.getClass().getResource("/Tele.jpg")).getImage();

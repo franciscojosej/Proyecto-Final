@@ -1,5 +1,6 @@
 package Visual;
 
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -14,6 +15,9 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 import logico.CableTV;
@@ -23,14 +27,14 @@ import logico.Internet;
 import logico.Plan;
 import logico.Tricom;
 
-public class GraCircular extends JFrame{
+public class FacturasPorMes extends JFrame{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel panel;
-    public GraCircular(){
-        setTitle("Planes Utilizados");
+    public FacturasPorMes(){
+        setTitle("Facturas por Mes");
         setSize(800,600);
         setLocationRelativeTo(null);
        // setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,6 +49,34 @@ public class GraCircular extends JFrame{
 		});
     }
  
+    /*private void init() {
+        panel = new JPanel();
+        getContentPane().add(panel);
+        // Fuente de Datos
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(8, "Pagada", "Enero");
+        dataset.setValue(7, "No paga", "Enero");
+        dataset.setValue(9, "Pagada", "Febrero");
+        dataset.setValue(4, "No paga", "Febrero");
+        dataset.setValue(4, "Pagada", "Marzo");
+        dataset.setValue(5, "No paga", "Marzo");
+        dataset.setValue(8, "Pagada", "Abril");
+        dataset.setValue(9, "No paga", "Abril");
+        dataset.setValue(7, "Pagada", "Mayo");
+        dataset.setValue(8, "No paga", "Mayo");
+        // Creando el Grafico
+        JFreeChart chart = ChartFactory.createBarChart3D
+        ("Facturas por Mes","Estados", "Mes", 
+        dataset, PlotOrientation.VERTICAL, true,true, false);
+        chart.setBackgroundPaint(Color.cyan);
+        chart.getTitle().setPaint(Color.black); 
+        CategoryPlot p = chart.getCategoryPlot(); 
+        p.setRangeGridlinePaint(Color.red); 
+        // Mostrar Grafico
+        ChartPanel chartPanel = new ChartPanel(chart);
+        panel.add(chartPanel);
+    }*/
+    
     private void init() {
         panel = new JPanel();
         getContentPane().add(panel);
@@ -52,10 +84,10 @@ public class GraCircular extends JFrame{
       int internet=10;
       int TV=0;
       int celular=0;
-        Tricom.getInstance().getMisContrato();
-        	for (int i = 0; i < Tricom.getPlanesCod(); i++) {
+        Tricom.getInstance().getMisFacturas();
+        	for (int i = 0; i < Tricom.FacturacionCod; i++) {
 			
-			ArrayList<Plan> planes=Tricom.getInstance().buscarPlanes(i);
+			ArrayList<Plan> planes=Tricom.getInstance().buscar;
 			
 			if(planes!=null)
 			for (Plan plan : planes) {
