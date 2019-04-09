@@ -110,7 +110,7 @@ public class VisualPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		
 		Panel panel = new Panel();
-		panel.setBackground(SystemColor.controlShadow);
+		panel.setBackground(SystemColor.WHITE);
 		panel.setForeground(UIManager.getColor("Button.highlight"));
 		panel.setBounds(0, 10, 1360, 719);
 		contentPane.add(panel);
@@ -301,6 +301,11 @@ public class VisualPrincipal extends JFrame {
 		});
 		mnGraficos.add(mntmFacMes);
 		
+		JLabel lblNewLabel = new JLabel("New label");
+		Image i = new ImageIcon(this.getClass().getResource("/tri.png")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(i));
+		lblNewLabel.setBounds(0, 10, 1360, 719);
+		panel.add(lblNewLabel);
 		//JLabel lblNewLabel = new JLabel("");
 		//Image ima = new ImageIcon(this.getClass().getResource("/Tele.jpg")).getImage();
 		//lblNewLabel.setIcon(new ImageIcon(ima));
