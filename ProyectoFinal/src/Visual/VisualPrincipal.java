@@ -63,6 +63,7 @@ public class VisualPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VisualPrincipal() {
+		setBackground(SystemColor.scrollbar);
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -94,32 +95,32 @@ public class VisualPrincipal extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
 			}
 		});
 		dm= getToolkit().getScreenSize();
-		setTitle("Telefonia e Internet Tricom RD...");
+		setTitle(" Tricom");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.setSize(dm.width,dm.height);///
 		//setBounds(100, 100, 438, 309);
 		contentPane = new JPanel();
-		contentPane.setForeground(UIManager.getColor("Button.light"));
+		contentPane.setForeground(SystemColor.controlHighlight);
 		contentPane.setBackground(UIManager.getColor("Button.light"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		Panel panel = new Panel();
-		panel.setForeground(UIManager.getColor("Button.light"));
-		panel.setBounds(0, 10, 1045, 553);
+		panel.setBackground(SystemColor.controlShadow);
+		panel.setForeground(UIManager.getColor("Button.highlight"));
+		panel.setBounds(0, 10, 1360, 719);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setForeground(UIManager.getColor("Button.light"));
-		menuBar.setBackground(UIManager.getColor("Button.light"));
+		menuBar.setBackground(SystemColor.control);
 		menuBar.setToolTipText("Empleado");
-		menuBar.setBounds(0, 0, 410, 21);
+		menuBar.setBounds(0, 0, 1360, 21);
 		panel.add(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Cliente");

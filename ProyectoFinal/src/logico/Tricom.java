@@ -286,13 +286,13 @@ public void insertarPlan(Plan aux){
 	public Factura modeloFactura() {
 	
 		Factura factura_Aux= new Factura(" ", 1, 0, getFechaInicio() ,
-				getFechavencimiento(), 0, 0);
+				getFechavencimiento(), 0, 0,0);
 	return factura_Aux;
 	}
 	public static String getFechaInicio() {
 		Calendar fecha =  new GregorianCalendar();
-		return String.valueOf((fecha.get(Calendar.MONTH)+1)+"-"+fecha.get(Calendar.DAY_OF_MONTH)+
-				"-"+fecha.get(Calendar.YEAR));
+		return String.valueOf(fecha.get(Calendar.DAY_OF_MONTH)+"/"+(fecha.get(Calendar.MONTH)+1)+"/"
+				+fecha.get(Calendar.YEAR));
 	}
 	private static String getFechavencimiento() {
 		Calendar fecha =  new GregorianCalendar();
@@ -420,6 +420,20 @@ public void insertarPlan(Plan aux){
 				
 			}
 		}
+		return fact;
+
+	}
+	public ArrayList<Factura> buscarFacturasActivasByCedulaClinteYContrato(int code,int codeContr){//
+
+		ArrayList<Factura> fact = new ArrayList<Factura>();
+		for (Factura factura : misFacturas) {
+			
+			if (factura.getCodiCliente()==code &&factura.getSinPagar()==true&&factura.getCodigoContrato()==codeContr) {
+				fact.add(factura);
+				
+			}
+		}
+		
 		return fact;
 
 	}

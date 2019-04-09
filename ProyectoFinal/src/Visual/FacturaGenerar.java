@@ -51,6 +51,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseWheelListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.MouseWheelEvent;
 import com.toedter.calendar.JDateChooser;
@@ -156,7 +157,7 @@ public class FacturaGenerar extends JDialog {
 
 		//int  m=(int) datofila[t.getSelectedColumn()][0];
 			setResizable(false);
-			setBounds(5, 59, 612, 548);
+			setBounds(5, 59, 620, 548);
 		//setBounds(100, 100, 612, 548);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
@@ -288,19 +289,7 @@ public class FacturaGenerar extends JDialog {
 				@Override
 				public void mouseEntered(MouseEvent e) {
 				//	JOptionPane.showConfirmDialog(null, "mmmmmg");
-					int codigo=-1,row=0;
-					if(Tricom.getInstance().getMiPlan().size()>=1 ) 
-					{
-						 row= t.getSelectedRow();	
-					}
-				
-					//int column=t.getSelectedColumn();
-					if(Tricom.getInstance().getMiPlan().size()>=1&&(row != -1) ) {
-						codigo =(int) t.getValueAt(row, 2);
-					}
-					
-					
-					lblTotalApagat.setText(String.valueOf(Tricom.getInstance().calcularCostopordode(codigo)));
+
 				}
 				@Override
 				public void mouseExited(MouseEvent e) {
@@ -329,7 +318,7 @@ public class FacturaGenerar extends JDialog {
 			JPanel panel_2 = new JPanel();
 			panel_2.setBackground(Color.WHITE);
 			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Facturas Emitidas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_2.setBounds(338, 219, 238, 141);
+			panel_2.setBounds(338, 219, 256, 141);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			scrollPaneCarrito.addMouseListener(new MouseAdapter() {
@@ -337,7 +326,7 @@ public class FacturaGenerar extends JDialog {
 			});
 			
 			
-			scrollPaneCarrito.setBounds(10, 21, 218, 109);
+			scrollPaneCarrito.setBounds(10, 21, 236, 109);
 			panel_2.add(scrollPaneCarrito);
 			
 			JButton btnNewButton_1 = new JButton("Facturar");
@@ -362,9 +351,9 @@ public class FacturaGenerar extends JDialog {
 					}
 					 
 					 Date m =dateChooser.getDate();
-					 int dia;
-					 int mes;
-					 int an;
+					 int dia=0;
+					 int mes=0;
+					 int an=1;
 					if(m!=null) {
 						  dia=dateChooser.getDate().getDate();
 						  mes= dateChooser.getDate().getMonth()+1;
@@ -379,8 +368,6 @@ public class FacturaGenerar extends JDialog {
 				
 					
 				//	JOptionPane.showConfirmDialog(null, dia+" "+mes+" "+an);
-			Factura factura_Aux= new Factura(" ", 1, 0, labelFechaInicio.getText() ,
-					String.valueOf(dia+"-"+mes+"-"+an), 0, 0);
 
 					
 				//JOptionPane.showConfirmDialog(null, codigo);
@@ -397,33 +384,74 @@ public class FacturaGenerar extends JDialog {
 				//control
 				cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
 				nuevoContrato=Tricom.getInstance().findContratoByCode(codigo);
-				if(codigo!=-1 && nuevoContrato.getEstado()&&Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null)
+				if(codigo!=-1 && nuevoContrato.getEstado()&&Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null&& nuevoContrato!=null)
 				{
-					factura_Aux.setCodiFactura(Tricom.getFacturacionCod());
+					Factura factura_Aux= new Factura(" ", 1, 0, labelFechaInicio.getText() ,
+							String.valueOf(dia+"/"+mes+"/"+an), 0, 0,nuevoContrato.getCodigoDeContrato());
+	
 
 						
 					//	JOptionPane.showMessageDialog(null, " Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
 
 						 
 						if(cliente.getMiscontract().indexOf(nuevoContrato)!=-1) {
+							String fechaPasa="";
+							ArrayList<Factura> fac=null;
+							fac=Tricom.getInstance().buscarFacturasActivasByCedulaClinteYContrato(cliente.getCodigo_cliente(), nuevoContrato.getCodigoDeContrato());
+							int cantidadFactura = 0;
+							if(fac!=null&&fac.size()!=0) {
+							cantidadFactura=fac.size();	
+							}
+							if(cantidadFactura >=1) {
+								cantidadFactura=cantidadFactura-1;
+								fechaPasa=fac.get(cantidadFactura).getFechaDevencimiento();
+							}else {
+								fechaPasa="01/1/1800";
+							}
+							SimpleDateFormat forma =new SimpleDateFormat("dd/MM/yyyy");
+							Date ultimaFecha = null;
+							try {
+								ultimaFecha = forma.parse(fechaPasa);
+								 int diaa=ultimaFecha.getDate();
+								 int mess=ultimaFecha.getMonth()+2;
+								 int ann=ultimaFecha.getYear()+1900;
+								fechaPasa=diaa+"/"+mess+"/"+ann;
+								ultimaFecha = forma.parse(fechaPasa);
 
-							if(Tricom.getInstance().generarFactura2(cliente, nuevoContrato,factura_Aux )) {
+								
+							} catch (ParseException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							//menor que 0 si es despues
+							//mayor que cero si es antes
+							//cero si es igual
+							if(ultimaFecha!=null&&m!=null)		
+							if(ultimaFecha.compareTo(m)<=-1) {
+								JOptionPane.showConfirmDialog(null,ultimaFecha.compareTo(m) );
+								if(fac.size()!=0)
+								JOptionPane.showConfirmDialog(null, fac.get(cantidadFactura).getFechaDevencimiento());
+								factura_Aux.setCodiFactura(Tricom.getFacturacionCod());
+								Tricom.getInstance().generarFactura2(cliente, nuevoContrato,factura_Aux );
 								JOptionPane.showMessageDialog(null, "Factura realizada", null, JOptionPane.INFORMATION_MESSAGE, null);
 						//	Tricom.setFacturacionCod();//aumentar code Factura
+
+								datofilaCa=llenararregloFactura();
+								 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
+								t2.setModel(model2);
 							}else {
 								JOptionPane.showMessageDialog(null, "No se pudo realizar factura", null, JOptionPane.INFORMATION_MESSAGE, null);
 							}
 							
-
+							ultimaFecha = null;
 
 						}else{
 							JOptionPane.showMessageDialog(null, "No Encontradoff", null, JOptionPane.INFORMATION_MESSAGE, null);
 						}
-						
+						if(m==null){
+							JOptionPane.showMessageDialog(null, "LLenar factrua", null, JOptionPane.INFORMATION_MESSAGE, null);
+						}
 					
-					datofilaCa=llenararregloFactura();
-					 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
-					t2.setModel(model2);
 				}
 				if(nuevoContrato!=null)
 				if(nuevoContrato.getEstado()==false) {
@@ -531,8 +559,7 @@ public class FacturaGenerar extends JDialog {
 							++i;
 							
 							//JOptionPane.showConfirmDialog(null, cliente.getCedula());
-
-				
+		
 			}
 	
 		//JOptionPane.showConfirmDialog(null, "mm");

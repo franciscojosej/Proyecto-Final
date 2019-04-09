@@ -19,6 +19,7 @@ public class Factura implements Serializable {
 
 	private float precioBase;
 	private float totalA_Pagar;
+	private int codigoContrato;
 	
 	
 	
@@ -30,7 +31,7 @@ public class Factura implements Serializable {
 
 
 public Factura( String nombreCliente, int codiCliente, float recargo, String fechaEmicion,
-			String fechaDevencimiento, float precioBase, float totalA_Pagar) {
+			String fechaDevencimiento, float precioBase, float totalA_Pagar,int codigoContrato) {
 		super();
 		this.nombreCliente = nombreCliente;
 		this.codiCliente = codiCliente;
@@ -40,6 +41,7 @@ public Factura( String nombreCliente, int codiCliente, float recargo, String fec
 		this.sinPagar = true;
 		this.precioBase = precioBase;
 		this.totalA_Pagar = totalA_Pagar;
+		this.codigoContrato=codigoContrato;
 		
 	}
 
@@ -48,6 +50,14 @@ public Factura( String nombreCliente, int codiCliente, float recargo, String fec
 
 	public int getCodiFactura() {
 		return codiFactura;
+	}
+
+	public int getCodigoContrato() {
+		return codigoContrato;
+	}
+
+	public void setCodigoContrato(int codigoContrato) {
+		this.codigoContrato = codigoContrato;
 	}
 
 	public void setCodiFactura(int codiFactura) {

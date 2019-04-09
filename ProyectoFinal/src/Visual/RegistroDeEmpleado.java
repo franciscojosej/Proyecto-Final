@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import java.awt.SystemColor;
 
 public class RegistroDeEmpleado extends JDialog {
 	
@@ -61,19 +62,20 @@ public class RegistroDeEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistroDeEmpleado() {
+		setForeground(SystemColor.controlShadow);
 		setResizable(false);
 		setBounds(5, 59, 504, 500);
 	//	setBounds(100, 100, 504, 500);
 	
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(Color.WHITE);
+		contentPanel.setBackground(SystemColor.controlHighlight);
 		contentPanel.setToolTipText(" Datos Del Empleado");
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);//null
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(Color.WHITE);
+			panel.setBackground(SystemColor.controlHighlight);
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos Del Empleado", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel.setBounds(10, 11, 468, 338);
 		//	panel.setBounds(5, 50, 468, 338);
@@ -147,7 +149,7 @@ public class RegistroDeEmpleado extends JDialog {
 			}
 			
 			 cbxSexo = new JComboBox();
-			cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino", ""}));
+			cbxSexo.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Masculino", "Femenino"}));
 			cbxSexo.setBounds(228, 195, 158, 20);
 			panel.add(cbxSexo);
 			
@@ -177,14 +179,14 @@ public class RegistroDeEmpleado extends JDialog {
 		}
 		{
 			JPanel panel_1 = new JPanel();
-			panel_1.setBackground(Color.WHITE);
+			panel_1.setBackground(SystemColor.controlHighlight);
 			panel_1.setBounds(10, 360, 468, 53);
 			contentPanel.add(panel_1);
 			panel_1.setBorder(new TitledBorder(null, "Tipo De Empleado", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 			panel_1.setLayout(null);
 			{
 				 rdbtnAdministrativo = new JRadioButton("Administrativo");
-				 rdbtnAdministrativo.setBackground(Color.WHITE);
+				 rdbtnAdministrativo.setBackground(SystemColor.controlHighlight);
 				 rdbtnAdministrativo.addActionListener(new ActionListener() {
 				 	public void actionPerformed(ActionEvent e) {
 						if(	rdbtnAdministrativo.isSelected()	) {
@@ -200,7 +202,7 @@ public class RegistroDeEmpleado extends JDialog {
 			}
 			{
 				 rdbtnComercial = new JRadioButton("Comercial");
-				 rdbtnComercial.setBackground(Color.WHITE);
+				 rdbtnComercial.setBackground(SystemColor.controlHighlight);
 				 rdbtnComercial.addActionListener(new ActionListener() {
 				 	public void actionPerformed(ActionEvent e) {
 						if(rdbtnComercial.isSelected()) {
@@ -218,6 +220,7 @@ public class RegistroDeEmpleado extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(SystemColor.controlHighlight);
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
