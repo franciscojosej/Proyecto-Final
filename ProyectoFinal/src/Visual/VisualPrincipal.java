@@ -137,7 +137,7 @@ public class VisualPrincipal extends JFrame {
 			    RegCliente = new RegistroDeClientes (Clien);
 			  //  RegCliente.setLocation(5, 5);
 			    RegCliente.setModal(true);
-			  // RegCliente.setLocationRelativeTo(mnNewMenu );
+			   RegCliente.setLocationRelativeTo(null );
 			    RegCliente.setVisible(true);
 			    
 			
@@ -173,7 +173,7 @@ public class VisualPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				RegistroDeEmpleado RegEmpleado = new RegistroDeEmpleado();
 				RegEmpleado.setModal(true);
-				//RegEmpleado.setLocationRelativeTo(null);
+				RegEmpleado.setLocationRelativeTo(null);
 				RegEmpleado.setVisible(true);
 			}
 		});
@@ -204,7 +204,7 @@ public class VisualPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CrearPlanes CrePlanes = new CrearPlanes();
 				CrePlanes.setModal(true);
-				//CrePlanes.setLocationRelativeTo(null);
+				CrePlanes.setLocationRelativeTo(null);
 				CrePlanes.setVisible(true);
 			}
 				
@@ -240,7 +240,7 @@ public class VisualPrincipal extends JFrame {
 				ContratoVisual contratar = new ContratoVisual();
 				
 				contratar.setModal(true);
-				//contratar.setLocationRelativeTo(null);
+				contratar.setLocationRelativeTo(null);
 				contratar.setVisible(true);
 				
 			}
@@ -259,7 +259,7 @@ public class VisualPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				FacturaGenerar factu = new FacturaGenerar();
 				factu.setModal(true);
-			//	factu.setLocationRelativeTo(null);
+				factu.setLocationRelativeTo(null);
 				factu.setVisible(true);
 				
 			}

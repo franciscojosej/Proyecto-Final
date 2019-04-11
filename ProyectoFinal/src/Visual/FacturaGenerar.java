@@ -55,6 +55,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.MouseWheelEvent;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.MouseMotionAdapter;
 
 public class FacturaGenerar extends JDialog {
 
@@ -68,8 +69,10 @@ public class FacturaGenerar extends JDialog {
 	private ArrayList<Plan> nuevoPlan=null;
 	private  Object[][] datofila=llenararregloCarrito();	
 	private  Object[][] datofilaCa=llenararregloFactura();	
+	private JLabel lblFotico;
+	private JLabel lblErrorBusqueda;
 	
-	private static String columnNombre[] = {"Nombre","Servicio","x"};
+	private static String columnNombre[] = {"Nombre","Servicio","Codigo"};
 	private static String columnNombreFacturas[] = {"Codigo","Fecha","%","Costo"};
 	
 	final Class[] columnClass = new Class[] {
@@ -189,7 +192,7 @@ public class FacturaGenerar extends JDialog {
 				JPanel panel_1 = new JPanel();
 				panel_1.setBackground(Color.WHITE);
 				panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Información del Cliente", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_1.setBounds(22, 80, 541, 141);
+				panel_1.setBounds(10, 80, 598, 141);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
@@ -198,6 +201,17 @@ public class FacturaGenerar extends JDialog {
 					panel_1.add(Cedula);
 				}
 				{
+					texCedulaCleinte.addMouseMotionListener(new MouseMotionAdapter() {
+						@Override
+						public void mouseMoved(MouseEvent e) {
+							
+								datofilaCa=llenararregloFactura();
+								 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
+								t2.setModel(model2);
+							
+
+						}
+					});
 					
 					texCedulaCleinte.setBounds(10, 47, 171, 20);
 					panel_1.add(texCedulaCleinte);
@@ -211,14 +225,20 @@ public class FacturaGenerar extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						
 						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) {
-							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
-						
+							//JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+							lblFotico.setVisible(false);
+							lblErrorBusqueda.setVisible(true);
+							
+							textNombre.setText("");
 						}
 
 						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) {
 							cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
-							JOptionPane.showMessageDialog(null, "Cliente Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
-						
+							//JOptionPane.showMessageDialog(null, "Cliente Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
+							lblFotico.setVisible(true);
+							lblErrorBusqueda.setVisible(false);
+							
+							textNombre.setText(cliente.getNombre());
 
 							datofila=llenararregloCarrito();
 							 model= new DefaultTableModel(datofila,  columnNombre);
@@ -237,15 +257,24 @@ public class FacturaGenerar extends JDialog {
 				panel_1.add(lblNewLabel_2);
 				
 				textNombre = new JTextField();
+				textNombre.setEditable(false);
 				textNombre.setBounds(10, 103, 171, 20);
 				panel_1.add(textNombre);
 				textNombre.setColumns(10);
 				
-				JLabel lblNewLabel_1 = new JLabel("");
+				 lblFotico = new JLabel("");
 				Image fotico = new ImageIcon(this.getClass().getResource("/cli.png")).getImage();
-				lblNewLabel_1.setIcon(new ImageIcon(fotico));
-				lblNewLabel_1.setBounds(394, 5, 108, 125);
-				panel_1.add(lblNewLabel_1);
+				lblFotico.setIcon(new ImageIcon(fotico));
+				lblFotico.setVisible(false);
+				lblFotico.setBounds(447, 7, 108, 125);
+				panel_1.add(lblFotico);
+				
+				 lblErrorBusqueda = new JLabel("");
+				Image erroBusque = new ImageIcon(this.getClass().getResource("/erorBusq.png")).getImage();
+				lblErrorBusqueda.setIcon(new ImageIcon(erroBusque));
+				lblErrorBusqueda.setVisible(false);
+				lblErrorBusqueda.setBounds(435, 11, 120, 121);
+				panel_1.add(lblErrorBusqueda);
 			}
 			
 			JPanel panelPlanesDisponibles = new JPanel();
@@ -339,7 +368,7 @@ public class FacturaGenerar extends JDialog {
 					if(tam>=1&&(row != -1) ) {
 						
 						codigo = (int) t2.getValueAt(row, 0);
-						JOptionPane.showConfirmDialog(null, codigo);
+						//JOptionPane.showConfirmDialog(null, codigo);
 					}
 					Factura fac = Tricom.getInstance().buscarFacturasByCode(codigo);
 					if(fac!=null&&row!=-1) {
@@ -364,13 +393,11 @@ public class FacturaGenerar extends JDialog {
 					JOptionPane.showConfirmDialog(null, fac.getCodiFactura());
 				 
 					}
-					datofilaCa=llenararregloFactura();
-					 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
-					t2.setModel(model2);
+
 					
 				}
 			});
-			btnNewButton_2.setBounds(223, 308, 111, 20);
+			btnNewButton_2.setBounds(217, 247, 111, 20);
 			panel.add(btnNewButton_2);
 		}
 		{

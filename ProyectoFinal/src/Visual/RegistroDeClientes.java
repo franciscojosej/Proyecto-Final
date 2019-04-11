@@ -47,6 +47,8 @@ public class RegistroDeClientes extends JDialog {
 	private JPanel buttonPane;
 	private JComboBox comboBox;
 	private JLabel lblCodeCli;
+	private JLabel lblCheck;
+	private JLabel lblError;
 
 	/**
 	 * Launch the application. 
@@ -160,6 +162,22 @@ public class RegistroDeClientes extends JDialog {
 			panel.add(lblCodeCli);
 		}
 		{
+		 lblCheck = new JLabel("");
+			Image imga = new ImageIcon(this.getClass().getResource("/check.png")).getImage();
+			lblCheck .setIcon(new ImageIcon(imga));
+		     lblCheck.setVisible(false);
+			lblCheck.setBounds(33, 209, 105, 113);
+			panel.add(lblCheck);
+		}
+		
+		lblError = new JLabel("");
+		Image foticof = new ImageIcon(this.getClass().getResource("/erorBusq.png")).getImage();
+		lblError.setIcon(new ImageIcon(foticof));
+		lblError.setVisible(false);
+		
+		lblError.setBounds(20, 190, 139, 137);
+		panel.add(lblError);
+		{
 		 buttonPane = new JPanel();
 			buttonPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -181,10 +199,15 @@ public class RegistroDeClientes extends JDialog {
 							 Tricom.getInstance().insertarCliente(g);
 						
 						// txtCodigo.setText("C-" + (Tricom.ClienteCod+1));
-						JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
-						clear();
+						//JOptionPane.showMessageDialog(null, "Cliente registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+							 lblCheck.setVisible(true);
+							 lblError.setVisible(false);
+							 
+							 clear();
 						}else{
-							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+							 lblCheck.setVisible(false);
+							 lblError.setVisible(true);
+							//JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
 						}
 					}
 					
@@ -236,5 +259,4 @@ private void clear() {
 	comboBox.setSelectedIndex(0);
 	
 }
-
 }
