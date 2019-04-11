@@ -247,6 +247,22 @@ public class VisualPrincipal extends JFrame {
 		});
 		mnContrato.add(mntmContrato);
 		
+		JMenuItem mntmlistaDeContratos = new JMenuItem("Lista De Contratos");
+		Image picture = new ImageIcon(this.getClass().getResource("/list.png")).getImage();
+		mntmlistaDeContratos.setIcon(new ImageIcon(picture));
+		mntmlistaDeContratos.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				ListarContrato ListContratos = new ListarContrato();
+				ListContratos.setModal(true);
+				ListContratos.setLocationRelativeTo(null);
+				ListContratos.setVisible(true);
+				
+				
+			}
+		});
+		mnContrato.add(mntmlistaDeContratos);
+		
 		JMenu mnFacturar = new JMenu("Facturas");
 		mnFacturar.setForeground(Color.BLACK);
 		mnNewMenu.setForeground(Color.BLACK);
@@ -276,7 +292,23 @@ public class VisualPrincipal extends JFrame {
 		mntmgenerarFactura.setIcon(new ImageIcon(pictu));
 		mnFacturar.add(mntmgenerarFactura);
 		
+		JMenuItem mntmlistaDeFacturas = new JMenuItem("Lista De Facturas");
+		Image f = new ImageIcon(this.getClass().getResource("/list.png")).getImage();
+		mntmlistaDeFacturas.setIcon(new ImageIcon(f));
+		mntmlistaDeFacturas.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				ListarFactura ListFact = new ListarFactura();
+				ListFact.setModal(true);
+				ListFact.setLocationRelativeTo(null);
+				ListFact.setVisible(true);
+				
+			}
+		});
+		mnFacturar.add(mntmlistaDeFacturas);
+		
 		JMenu mnGraficos = new JMenu("Gráficos");
+		mnGraficos.setForeground(Color.BLACK);
 		menuBar.add(mnGraficos);
 		
 		JMenuItem mntmMasUsado = new JMenuItem("Mas Usado");

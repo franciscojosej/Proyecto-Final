@@ -421,16 +421,7 @@ public class ContratoVisual extends JDialog {
 			});
 			btnNewButton_1.setBounds(245, 256, 130, 20);
 			panel.add(btnNewButton_1);
-			
-			JButton btnNewButton_2 = new JButton("Borrar");
 			Image imag = new ImageIcon(this.getClass().getResource("/del.png")).getImage();
-			btnNewButton_2.setIcon(new ImageIcon(imag));
-			btnNewButton_2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
-			btnNewButton_2.setBounds(245, 305, 130, 20);
-			panel.add(btnNewButton_2);
 			
 			JLabel lbllabel = new JLabel("Precio Total a Pagar:");
 			lbllabel.setBounds(345, 406, 169, 14);

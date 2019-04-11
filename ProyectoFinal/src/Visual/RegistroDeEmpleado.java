@@ -184,6 +184,13 @@ public class RegistroDeEmpleado extends JDialog {
 				lblCheck.setBounds(228, 44, 118, 115);
 				panel.add(lblCheck);
 			}
+			{
+				JLabel lblEmployee = new JLabel("");
+				Image f = new ImageIcon(this.getClass().getResource("/employee.png")).getImage();
+				lblEmployee.setIcon(new ImageIcon(f));
+				lblEmployee.setBounds(10, 23, 86, 80);
+				panel.add(lblEmployee);
+			}
 		}
 		
 		{
