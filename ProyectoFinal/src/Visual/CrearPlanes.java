@@ -329,20 +329,20 @@ public class CrearPlanes extends JDialog {
 								velocidad_conexion=5;
 							}
 							if(cbxData.getSelectedIndex()==2) {
-								velocidad_conexion=15;
+								velocidad_conexion=10;
 							}
 							
 							if(cbxData.getSelectedIndex()==3) {
-								velocidad_conexion=50;
+								velocidad_conexion=20;
 							}
 							if(cbxData.getSelectedIndex()==4) {
-								velocidad_conexion=100;
+								velocidad_conexion=40;
 							}
 							if(cbxData.getSelectedIndex()==5) {
-								velocidad_conexion=1000;
+								velocidad_conexion=80;
 							}
 							if(cbxData.getSelectedIndex()==6) {
-								velocidad_conexion=5000;
+								velocidad_conexion=120;
 							}
 							
 							
@@ -358,16 +358,16 @@ public class CrearPlanes extends JDialog {
 								}	
 							
 						if(cbxCanales.getSelectedIndex()==1) {
-							cantidadCanales=200;
-							}
-						if(cbxCanales.getSelectedIndex()==2) {
-							cantidadCanales=300;
-							}	
-						if(cbxCanales.getSelectedIndex()==3) {
 							cantidadCanales=100;
 							}
+						if(cbxCanales.getSelectedIndex()==2) {
+							cantidadCanales=200;
+							}	
+						if(cbxCanales.getSelectedIndex()==3) {
+							cantidadCanales=75;
+							}
 						if(cbxCanales.getSelectedIndex()==4) {
-							cantidadCanales=400;
+							cantidadCanales=250;
 							}
 							aux2 = new CableTV(codigo, nombre, cantidadCanales);
 							
@@ -384,13 +384,13 @@ public class CrearPlanes extends JDialog {
 								minutos=100;
 							}		
 							if(cbxMinutos.getSelectedIndex()==3) {
-								minutos=300;
+								minutos=200;
 							}
 							if(cbxMinutos.getSelectedIndex()==4) {
-								minutos=1000;
+								minutos=400;
 							}
 							if(cbxMinutos.getSelectedIndex()==5) {
-								minutos=2000;
+								minutos=800;
 							}							
 							aux3 = new Celular(codigo, nombre, minutos);
 						
