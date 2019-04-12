@@ -114,7 +114,7 @@ public class login extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Control.getInstance().confirmLogin(textField.getText(),textField_1.getText())){
-					 run();				
+					// run();				
 					VisualPrincipal frame = new VisualPrincipal();
 					dispose();
 					frame.setVisible(true);

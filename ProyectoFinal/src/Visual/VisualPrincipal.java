@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import logico.Cliente;
 import logico.Control;
+
 import logico.Factura;
 import logico.Tricom;
 
@@ -22,14 +23,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
@@ -48,12 +53,46 @@ public class VisualPrincipal extends JFrame {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				FileInputStream empresaExistente;//primero veo si exite primer cach
+				ObjectInputStream empEntrada;
+				
+				FileOutputStream empresaNoExiste ;
+				ObjectOutputStream crearDatol;
+				try {
+					 empresaExistente=new FileInputStream("tricom.dat");
+					 empEntrada= new ObjectInputStream( empresaExistente);
+					 Tricom tem= (Tricom) empEntrada.readObject();
+					 tem.init();
+					
+					 Tricom.setTricom(tem);
+					// JOptionPane.showConfirmDialog(null,Tricom.getInstance().getClieod());
+					 Tricom.ClienteCod= Tricom.getInstance().getClieod();
+					 Tricom.ContratoCod=Tricom.getInstance().getContd();
+					 Tricom.FacturacionCod=Tricom.getInstance().getFactuCod();
+					 Tricom.PlanesCod=Tricom.getInstance().getPlanCod();
+					 Tricom.EmpleadoCod= Tricom.getInstance().getEmpCod();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+					try {
+						empresaNoExiste=new FileOutputStream("tricom.dat");
+						crearDatol= new ObjectOutputStream(empresaNoExiste);
+						crearDatol.writeObject(Tricom.getInstance());
+					} catch (Exception e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					
+				} 
+				
+				
 				try {
 					VisualPrincipal frame = new VisualPrincipal();
 					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (Exception e5) {
+					e5.printStackTrace();
 				}
+				
 			}
 		});
 	}
@@ -68,26 +107,13 @@ public class VisualPrincipal extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				FileOutputStream empresa3;
-				ObjectOutputStream empresaWrite2;
-				try {
-					empresa3 = new  FileOutputStream("miTricom.dat");
-					empresaWrite2 = new ObjectOutputStream(empresa3);
-					empresaWrite2.writeObject(Tricom.getInstance());
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				FileOutputStream empresa2;
+			
+				FileOutputStream tricom;
 				ObjectOutputStream empresaWrite;
 				try {
-					empresa2 = new  FileOutputStream("empresa.dat");
-					empresaWrite = new ObjectOutputStream(empresa2);
-					empresaWrite.writeObject(Control.getInstance());
+					 tricom = new  FileOutputStream("tricom.dat");
+					empresaWrite = new ObjectOutputStream(tricom);
+					empresaWrite.writeObject(Tricom.getInstance());
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -95,6 +121,7 @@ public class VisualPrincipal extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+
 			}
 		});
 		dm= getToolkit().getScreenSize();

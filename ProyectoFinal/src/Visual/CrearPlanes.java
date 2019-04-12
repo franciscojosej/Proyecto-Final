@@ -444,6 +444,7 @@ public class CrearPlanes extends JDialog {
 						//	JOptionPane.showMessageDialog(null, "Plan registrado satisfactoriamente", 
 							//		null, JOptionPane.INFORMATION_MESSAGE, null);
 							++Tricom.PlanesCod;
+							Tricom.getInstance().setPlanCod(Tricom.PlanesCod);
 							
 						}else {
 							 	aux =null;

@@ -1,9 +1,13 @@
 package logico;
 
+import java.io.Serializable;
 
+public abstract class Plan implements Serializable{
 
-public abstract class Plan {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int codigo;
 	private String nombre;
 	

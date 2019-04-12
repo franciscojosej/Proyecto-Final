@@ -37,6 +37,12 @@ public class Tricom implements Serializable{
 	
 	
 	private static Tricom tricom=null;
+	
+	private   int factuCod ;
+	private   int planCod ;
+	private   int empCod ;
+	private   int contd ;
+	private   int clieod;
 
 	
 
@@ -55,14 +61,25 @@ public class Tricom implements Serializable{
 		EmpleadoCod = 0;
 		PlanesCod = 0;
 		FacturacionCod = 0;
+		
+		factuCod=0 ;
+		 planCod=0 ;
+		 empCod =0;
+		contd =0;
+		 clieod=0;
+
+		
 	}
 	
 	public static Tricom getInstance(){
 		 if(tricom == null){
 			 tricom = new Tricom();
+
 		 }
+		
 		 return tricom;
 	 }
+
 
 
 
@@ -70,7 +87,7 @@ public class Tricom implements Serializable{
 		return ClienteCod;
 	}
 
-	public static void setClienteCod(int clienteCod) {
+	public void setClienteCod(int clienteCod) {
 		ClienteCod = clienteCod;
 	}
 
@@ -128,6 +145,9 @@ public class Tricom implements Serializable{
 	public void insertarCliente(Cliente client){
 		
 		++ClienteCod;
+
+		 clieod=ClienteCod;
+		
 	//	client.setCodigo_cliente(ClienteCod);
 		miCliente.add(client);
 		
@@ -135,7 +155,9 @@ public class Tricom implements Serializable{
 	
 	
 public void insertarPlan(Plan aux){
-		
+
+	//planCod=PlanesCod ;
+//no se esta utilizando
 	
 		//++PlanesCod;
 		aux.setCodigo(PlanesCod);
@@ -145,7 +167,10 @@ public void insertarPlan(Plan aux){
 	
 	
 	public void insertarContrato(Contrato contra){
+
+		 //no esta haciendo nada
 		++ContratoCod;
+		contd=ContratoCod ;
 		//contra.setCodigoDeContrato(String.valueOf(ContratoCod));
 		misContrato.add(contra);
 		
@@ -153,12 +178,17 @@ public void insertarPlan(Plan aux){
 	}
 	
 	public void insertarFactura(Factura fact){
+		
+		
 		FacturacionCod++;
+		factuCod=FacturacionCod ;
 		fact.setCodiFactura(FacturacionCod);
 		misFacturas.add(fact);	
 	}
 	public void insertarEmpleado(Empleado nuevoEmpleado) {
+		
 		EmpleadoCod++;
+		empCod=EmpleadoCod;
 		nuevoEmpleado.setCodigo_empleado(String.valueOf(EmpleadoCod));
 		MiPersonal.add(nuevoEmpleado);
 	}
@@ -186,6 +216,10 @@ public void insertarPlan(Plan aux){
 	public static void setTricom(Tricom tricom) {
 		Tricom.tricom = tricom;
 	}
+	public void init() {
+		 
+		 //tricom.setClienteCod(Tricom.getInstance().clienteCod);
+	}
 
 	public void CargarDatosCliente(Cliente cli){
 		int i=0;
@@ -203,6 +237,46 @@ public void insertarPlan(Plan aux){
 		}
 	}
 	
+	public int getFactuCod() {
+		return factuCod;
+	}
+
+	public void setFactuCod(int factuCod) {
+		this.factuCod = factuCod;
+	}
+
+	public int getPlanCod() {
+		return planCod;
+	}
+
+	public void setPlanCod(int planCod) {
+		this.planCod = planCod;
+	}
+
+	public int getEmpCod() {
+		return empCod;
+	}
+
+	public void setEmpCod(int empCod) {
+		this.empCod = empCod;
+	}
+
+	public int getContd() {
+		return contd;
+	}
+
+	public void setContd(int contd) {
+		this.contd = contd;
+	}
+
+	public int getClieod() {
+		return clieod;
+	}
+
+	public void setClieod(int clieod) {
+		this.clieod = clieod;
+	}
+
 	public void borrarCliente(Cliente cliente){
 		miCliente.remove(cliente);
 		ClienteCod--;

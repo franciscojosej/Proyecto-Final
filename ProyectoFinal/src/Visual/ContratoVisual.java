@@ -407,7 +407,11 @@ public class ContratoVisual extends JDialog {
 							Tricom.getInstance().getMiCliente().get(Tricom.getInstance()
 									.getMiCliente().indexOf(cliente)).agrregarcontrato(nuevoContrato);
 							++Tricom.ContratoCod;
+							Tricom.getInstance().setContd(Tricom.ContratoCod);
+							
+							lblCodidoContrato.setText("C"+"-"+(Tricom.ContratoCod+1));
 
+							
 							datofilaCa=llenararregloCarrito();
 							model2= new DefaultTableModel(datofilaCa,  columnNombre);
 							t2.setModel(model2);
