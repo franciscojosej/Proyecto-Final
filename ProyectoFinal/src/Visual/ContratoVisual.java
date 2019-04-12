@@ -207,6 +207,10 @@ public class ContratoVisual extends JDialog {
 						
 						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) {
 							//JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+							RegistroDeClientes cli = new RegistroDeClientes(null);
+							cli.setModal(true);
+							cli.setVisible(true);
+							cli.setLocationRelativeTo(null);
 							lblError.setVisible(true);
 							lblUsuario.setVisible(false);
 							textNombre.setText("");
@@ -240,7 +244,6 @@ public class ContratoVisual extends JDialog {
 				
 				textNombre = new JTextField();
 				textNombre.setForeground(SystemColor.textHighlight);
-				textNombre.setEnabled(false);
 				textNombre.setEditable(false);
 				textNombre.setBounds(10, 103, 171, 20);
 				panel_1.add(textNombre);

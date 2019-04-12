@@ -22,8 +22,12 @@ import logico.Control;
 import logico.Internet;
 import logico.Plan;
 import logico.Tricom;
+import javax.swing.JLabel;
 
 public class GraCircular extends JFrame{
+	private JLabel lblinter;
+	private JLabel lbltele;
+	private JLabel lblCalb;
     /**
 	 * 
 	 */
@@ -81,6 +85,8 @@ public class GraCircular extends JFrame{
 		data.setValue("Telefono", celular);
         data.setValue("Internet", internet);
         data.setValue("TV", TV);
+        
+
  
         // Creando el Grafico
         JFreeChart chart = ChartFactory.createPieChart(
@@ -89,10 +95,29 @@ public class GraCircular extends JFrame{
          true, 
          true, 
          false);
+        panel.setLayout(null);
  
         // Crear el Panel del Grafico con ChartPanel
         ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setBounds(52, 5, 680, 420);
         panel.add(chartPanel);
+        
+        lblinter = new JLabel("New label");
+        lblinter.setBounds(52, 510, 113, 14);
+        panel.add(lblinter);
+
+       lbltele = new JLabel("New label");
+        lbltele.setBounds(79, 461, 98, 14);
+        panel.add(lbltele);
+        
+
+        lblCalb = new JLabel("New label");
+        lblCalb.setBounds(52, 486, 98, 14);
+        panel.add(lblCalb);
+        
+        lblCalb.setText("Telefono: "+celular);
+        lblinter.setText("Internet: "+ internet);
+        lbltele.setText("TV: "+ TV);
     }
     
     //public static void main(String args[]){

@@ -28,8 +28,8 @@ import java.awt.event.ActionEvent;
 public class login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textUsuario;
+	private JTextField textContrase;
 
 	/**
 	 * Launch the application.
@@ -46,6 +46,9 @@ public class login extends JFrame {
 					empresaRead = new ObjectInputStream(empresa);
 					Control temp = (Control)empresaRead.readObject();
 					Control.setControl(temp);
+					if(Control.getInstance().getMisUsers().get(0).getUserName().equalsIgnoreCase("Admin")) {
+						Control.getInstance().getMisUsers().remove(0);
+					}
 				} catch (FileNotFoundException e) {
 					try {
 						empresa2 = new  FileOutputStream("empresa.dat");
@@ -91,29 +94,30 @@ public class login extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(39, 39, 46, 14);
+		lblUsuario.setBounds(39, 39, 72, 14);
 		panel.add(lblUsuario);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setBounds(39, 98, 105, 14);
 		panel.add(lblContrasea);
 		
-		textField = new JTextField();
-		textField.setBounds(39, 64, 191, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		textUsuario = new JTextField();
+		textUsuario.setBounds(39, 64, 191, 20);
+		panel.add(textUsuario);
+		textUsuario.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(39, 128, 191, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		textContrase = new JTextField();
+		textContrase.setBounds(39, 128, 191, 20);
+		panel.add(textContrase);
+		textContrase.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
 		Image imag = new ImageIcon(this.getClass().getResource("/ok.png")).getImage();
 		btnLogin.setIcon(new ImageIcon(imag));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Control.getInstance().confirmLogin(textField.getText(),textField_1.getText())){
+				if(Control.getInstance().confirmLogin(textUsuario.getText()
+						,textContrase.getText())){
 					// run();				
 					VisualPrincipal frame = new VisualPrincipal();
 					dispose();

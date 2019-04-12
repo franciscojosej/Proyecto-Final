@@ -62,7 +62,6 @@ public class FacturaGenerar extends JDialog {
 
 	private static final String Contra = null;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCodigo;
 	private JTextField texCedulaCleinte=new JTextField();;
 	private JTextField textNombre;
 	private Cliente cliente;
@@ -72,6 +71,7 @@ public class FacturaGenerar extends JDialog {
 	private  Object[][] datofilaCa=llenararregloFactura();	
 	private JLabel lblFotico;
 	private JLabel lblErrorBusqueda;
+	private JLabel lblCodigo;
 	
 	private static String columnNombre[] = {"Nombre","Servicio","Codigo"};
 	private static String columnNombreFacturas[] = {"Codigo","Fecha","%","Costo"};
@@ -175,20 +175,7 @@ public class FacturaGenerar extends JDialog {
 				panel.add(lblNewLabel);
 			}
 			
-			{
-				
-				
 
-				txtCodigo = new JTextField();
-				txtCodigo.setEditable(false);
-				txtCodigo.setBounds(10, 56, 50, 20);
-				if(Contra == null) {
-					
-					 txtCodigo.setText("C-" + (Tricom.FacturacionCod+1));
-				}
-				panel.add(txtCodigo);
-				txtCodigo.setColumns(10);
-			}
 			{
 				JPanel panel_1 = new JPanel();
 				panel_1.setBackground(Color.WHITE);
@@ -408,6 +395,11 @@ public class FacturaGenerar extends JDialog {
 			});
 			btnNewButton_2.setBounds(231, 247, 111, 20);
 			panel.add(btnNewButton_2);
+			
+			 lblCodigo = new JLabel("");
+			 lblCodigo.setText("F-"+(Tricom.FacturacionCod+1));
+			lblCodigo.setBounds(20, 53, 46, 14);
+			panel.add(lblCodigo);
 		}
 		{
 			JPanel buttonPane = new JPanel();

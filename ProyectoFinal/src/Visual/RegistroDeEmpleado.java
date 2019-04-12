@@ -272,7 +272,7 @@ public class RegistroDeEmpleado extends JDialog {
 									" ", " ", " ", " ", (float)2.3,	" ", (float)2.2,1, 1, Tricom.getFechaInicio(),	" ");
 						}
 						User user = new User(cargo,textUsuario.getText(),
-								txtPassword.getPassword().toString() );
+								String.copyValueOf(txtPassword.getPassword()) );
 						
 						if((rdbtnAdministrativo.isSelected()||rdbtnComercial.isSelected())&&!textUsuario.getText().equalsIgnoreCase("")&&
 								!txtPassword.getPassword().toString().equalsIgnoreCase("")&&!textCedula.getText().equalsIgnoreCase("")

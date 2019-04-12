@@ -44,6 +44,7 @@ public class VisualPrincipal extends JFrame {
 	private JPanel contentPane;
 	protected RegistroDeClientes RegCliente;
 	private Dimension dm;
+private	JMenu mnFacturar = new JMenu("Facturas");
 	
 
 	
@@ -53,38 +54,7 @@ public class VisualPrincipal extends JFrame {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				FileInputStream empresaExistente;//primero veo si exite primer cach
-				ObjectInputStream empEntrada;
-				
-				FileOutputStream empresaNoExiste ;
-				ObjectOutputStream crearDatol;
-				try {
-					 empresaExistente=new FileInputStream("tricom.dat");
-					 empEntrada= new ObjectInputStream( empresaExistente);
-					 Tricom tem= (Tricom) empEntrada.readObject();
-					 tem.init();
-					
-					 Tricom.setTricom(tem);
-					// JOptionPane.showConfirmDialog(null,Tricom.getInstance().getClieod());
-					 Tricom.ClienteCod= Tricom.getInstance().getClieod();
-					 Tricom.ContratoCod=Tricom.getInstance().getContd();
-					 Tricom.FacturacionCod=Tricom.getInstance().getFactuCod();
-					 Tricom.PlanesCod=Tricom.getInstance().getPlanCod();
-					 Tricom.EmpleadoCod= Tricom.getInstance().getEmpCod();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					//e1.printStackTrace();
-					try {
-						empresaNoExiste=new FileOutputStream("tricom.dat");
-						crearDatol= new ObjectOutputStream(empresaNoExiste);
-						crearDatol.writeObject(Tricom.getInstance());
-					} catch (Exception e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-					
-				} 
-				
+
 				
 				try {
 					VisualPrincipal frame = new VisualPrincipal();
@@ -102,6 +72,38 @@ public class VisualPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VisualPrincipal() {
+		FileInputStream empresaExistente;//primero veo si exite primer cach
+		ObjectInputStream empEntrada;
+		
+		FileOutputStream empresaNoExiste ;
+		ObjectOutputStream crearDatol;
+		try {
+			 empresaExistente=new FileInputStream("tricom.dat");
+			 empEntrada= new ObjectInputStream( empresaExistente);
+			 Tricom tem= (Tricom) empEntrada.readObject();
+			// tem.init();
+			
+			 Tricom.setTricom(tem);
+			// JOptionPane.showConfirmDialog(null,Tricom.getInstance().getClieod());
+			 Tricom.ClienteCod= Tricom.getInstance().getClieod();
+			 Tricom.ContratoCod=Tricom.getInstance().getContd();
+			 Tricom.FacturacionCod=Tricom.getInstance().getFactuCod();
+			 Tricom.PlanesCod=Tricom.getInstance().getPlanCod();
+			 Tricom.EmpleadoCod= Tricom.getInstance().getEmpCod();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			//e1.printStackTrace();
+			try {
+				empresaNoExiste=new FileOutputStream("tricom.dat");
+				crearDatol= new ObjectOutputStream(empresaNoExiste);
+				crearDatol.writeObject(Tricom.getInstance());
+			} catch (Exception e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
+		} 
+		
 		setBackground(SystemColor.scrollbar);
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {
@@ -121,6 +123,18 @@ public class VisualPrincipal extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				FileOutputStream user;
+				ObjectOutputStream empresaW;
+	
+				try {
+					user = new  FileOutputStream("empresa.dat");
+					empresaW = new ObjectOutputStream(user);
+					empresaW.writeObject(Control.getInstance());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 
 			}
 		});
@@ -196,6 +210,9 @@ public class VisualPrincipal extends JFrame {
 		JMenuItem mntmRegistroDeEmpleado = new JMenuItem("Registro");
 		Image image = new ImageIcon(this.getClass().getResource("/RegCliente.png")).getImage();
 		mntmRegistroDeEmpleado.setIcon(new ImageIcon(image));
+		if(Control.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrativo")){
+			mntmRegistroDeEmpleado.setEnabled(false);
+		}
 		mntmRegistroDeEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistroDeEmpleado RegEmpleado = new RegistroDeEmpleado();
@@ -290,7 +307,9 @@ public class VisualPrincipal extends JFrame {
 		});
 		mnContrato.add(mntmlistaDeContratos);
 		
-		JMenu mnFacturar = new JMenu("Facturas");
+		
+
+		
 		mnFacturar.setForeground(Color.BLACK);
 		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnFacturar);
@@ -298,6 +317,7 @@ public class VisualPrincipal extends JFrame {
 		JMenuItem mntmfacturar = new JMenuItem("Facturar");
 		Image pict = new ImageIcon(this.getClass().getResource("/add.png")).getImage();
 		mntmfacturar.setIcon(new ImageIcon(pict));
+
 		mntmfacturar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FacturaGenerar factu = new FacturaGenerar();
@@ -310,6 +330,9 @@ public class VisualPrincipal extends JFrame {
 		mnFacturar.add(mntmfacturar);
 		
 		JMenuItem mntmgenerarFactura = new JMenuItem("Generar Factura");
+		if(Control.getInstance().getLoginUser().getTipo().equalsIgnoreCase("Administrativo")){
+			mntmgenerarFactura.setEnabled(false);
+		}
 		mntmgenerarFactura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Tricom.getInstance().generaFacturaAutomatico();

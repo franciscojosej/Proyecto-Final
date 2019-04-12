@@ -41,11 +41,11 @@ public class Control implements Serializable{
 		Control.control = control;
 	}
 
-	public static User getLoginUser() {
+	public User getLoginUser() {
 		return loginUser;
 	}
 
-	public static void setLoginUser(User loginUser) {
+	public  void setLoginUser(User loginUser) {
 		Control.loginUser = loginUser;
 	}
 
@@ -66,7 +66,7 @@ public class Control implements Serializable{
 	public boolean confirmLogin(String text, String text2) {
 		boolean login = false;
 		for (User user : misUsers) {
-			if(user.getUserName().equals(text)){
+			if(user.getUserName().equals(text)&&user.getPass().equalsIgnoreCase(text2)){
 				loginUser = user;
 				login = true;
 			}
