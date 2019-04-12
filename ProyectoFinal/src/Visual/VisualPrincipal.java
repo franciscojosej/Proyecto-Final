@@ -49,7 +49,7 @@ private	JMenu mnFacturar = new JMenu("Facturas");
 
 	
 	  //Launch the application.
-	
+	/*
 	public static void main(String[] args) {
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -57,7 +57,7 @@ private	JMenu mnFacturar = new JMenu("Facturas");
 
 				
 				try {
-					VisualPrincipal frame = new VisualPrincipal();
+					login frame = new login();
 					frame.setVisible(true);
 				} catch (Exception e5) {
 					e5.printStackTrace();
@@ -66,7 +66,7 @@ private	JMenu mnFacturar = new JMenu("Facturas");
 			}
 		});
 	}
-
+*/
 	 
 	/**
 	 * Create the frame.
@@ -290,22 +290,7 @@ private	JMenu mnFacturar = new JMenu("Facturas");
 			}
 		});
 		mnContrato.add(mntmContrato);
-		
-		JMenuItem mntmlistaDeContratos = new JMenuItem("Lista De Contratos");
 		Image picture = new ImageIcon(this.getClass().getResource("/list.png")).getImage();
-		mntmlistaDeContratos.setIcon(new ImageIcon(picture));
-		mntmlistaDeContratos.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				ListarContrato ListContratos = new ListarContrato();
-				ListContratos.setModal(true);
-				ListContratos.setLocationRelativeTo(null);
-				ListContratos.setVisible(true);
-				
-				
-			}
-		});
-		mnContrato.add(mntmlistaDeContratos);
 		
 		
 
@@ -341,21 +326,17 @@ private	JMenu mnFacturar = new JMenu("Facturas");
 		Image pictu = new ImageIcon(this.getClass().getResource("/fact.png")).getImage();
 		mntmgenerarFactura.setIcon(new ImageIcon(pictu));
 		mnFacturar.add(mntmgenerarFactura);
-		
-		JMenuItem mntmlistaDeFacturas = new JMenuItem("Lista De Facturas");
 		Image f = new ImageIcon(this.getClass().getResource("/list.png")).getImage();
-		mntmlistaDeFacturas.setIcon(new ImageIcon(f));
-		mntmlistaDeFacturas.addActionListener(new ActionListener() {
-
+		
+		JMenuItem mntmGenerar = new JMenuItem("Generar");
+		mntmGenerar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarFactura ListFact = new ListarFactura();
-				ListFact.setModal(true);
-				ListFact.setLocationRelativeTo(null);
-				ListFact.setVisible(true);
-				
+				FacturaTxt f = new FacturaTxt();
+				f.setModal(true);
+				f.setVisible(true);
 			}
 		});
-		mnFacturar.add(mntmlistaDeFacturas);
+		mnFacturar.add(mntmGenerar);
 		
 		JMenu mnGraficos = new JMenu("Gráficos");
 		mnGraficos.setForeground(Color.BLACK);

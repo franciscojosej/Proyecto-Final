@@ -210,7 +210,7 @@ public class ContratoVisual extends JDialog {
 							RegistroDeClientes cli = new RegistroDeClientes(null);
 							cli.setModal(true);
 							cli.setVisible(true);
-							cli.setLocationRelativeTo(null);
+							cli.setLocationRelativeTo(null);		
 							lblError.setVisible(true);
 							lblUsuario.setVisible(false);
 							textNombre.setText("");
@@ -433,14 +433,6 @@ public class ContratoVisual extends JDialog {
 			JLabel lbllabel = new JLabel("Precio Total a Pagar:");
 			lbllabel.setBounds(345, 406, 169, 14);
 			panel.add(lbllabel,BorderLayout.CENTER);
-			
-			JLabel lblNewLabel_4 = new JLabel("Fecha De Inicio:");
-			lblNewLabel_4.setBounds(23, 381, 150, 14);
-			panel.add(lblNewLabel_4);
-			
-			JLabel lblFechaDeCulminacion = new JLabel("Fecha De Culminacion:");
-			lblFechaDeCulminacion.setBounds(23, 406, 150, 14);
-			panel.add(lblFechaDeCulminacion);
 			
 			JLabel labelFechaInicio = new JLabel("");
 			labelFechaInicio.setBounds(155, 381, 81, 14);

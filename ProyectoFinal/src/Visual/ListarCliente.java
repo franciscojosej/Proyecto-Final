@@ -42,7 +42,6 @@ public class ListarCliente extends JDialog {
 	private static JTable tableLista;
 	private static  DefaultTableModel tableModel;
 	private static Object[] fila;
-	private static JButton btnUpdate;
 	private static JButton btnDelete;
 	private int code;
 	private Cliente clie;
@@ -74,7 +73,7 @@ public class ListarCliente extends JDialog {
 				
 			
 				if(tableLista.getSelectedRow()>=0){
-					btnUpdate.setEnabled(true);
+				//	btnUpdate.setEnabled(true);
 					int index = tableLista.getSelectedRow();
 					code = (int)tableLista.getModel().getValueAt(index, 0);
 					
@@ -99,28 +98,6 @@ public class ListarCliente extends JDialog {
 				dispose();
 			}
 		});
-		
-		btnUpdate = new JButton("Modificar");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegistroDeClientes mod = new RegistroDeClientes(clie);
-				mod.setModal(true);
-				mod.setLocationRelativeTo(null);
-				mod.setVisible(true);
-			}
-		});
-		
-		
-		
-		JButton btnDelete_1 = new JButton("Eliminar");
-		btnDelete_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		buttonPane.add(btnDelete_1);
-		buttonPane.add(btnUpdate);
-		btnUpdate.setEnabled(false);
 		cancelButton.setActionCommand("Delete");
 		buttonPane.add(cancelButton);
 		

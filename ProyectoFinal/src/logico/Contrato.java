@@ -58,7 +58,7 @@ public class Contrato implements Serializable {
 		
 		
 		if(FacturasEmitidas==0) {
-			setEstado(true);
+		//	setEstado(true);
 		}
 		if(FacturasEmitidas!=0)
 		FacturasEmitidas--;

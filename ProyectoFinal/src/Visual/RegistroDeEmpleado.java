@@ -276,7 +276,7 @@ public class RegistroDeEmpleado extends JDialog {
 						
 						if((rdbtnAdministrativo.isSelected()||rdbtnComercial.isSelected())&&!textUsuario.getText().equalsIgnoreCase("")&&
 								!txtPassword.getPassword().toString().equalsIgnoreCase("")&&!textCedula.getText().equalsIgnoreCase("")
-								&&!txtNombre.getText().equalsIgnoreCase("")&&!textTelefono.getText().equalsIgnoreCase("")) {
+								&&!txtNombre.getText().equalsIgnoreCase("")&&!textTelefono.getText().equalsIgnoreCase("")&&cbxSexo.getSelectedIndex()!=0) {
 							 Control.getInstance().regUser(user);
 							 Tricom.getInstance().insertarEmpleado(nuevoEmpleado);
 							// JOptionPane.showMessageDialog(null, "Empleado registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);

@@ -42,7 +42,6 @@ public class ListarEmpleados extends JDialog {
 	private static JTable tableLista;
 	private static  DefaultTableModel tableModel;
 	private static Object[] fila;
-	private static JButton btnUpdate;
 	private static JButton btnDelete;
 	private int code;
 	private Empleado worker;
@@ -74,7 +73,7 @@ public class ListarEmpleados extends JDialog {
 				
 			
 				if(tableLista.getSelectedRow()>=0){
-					btnUpdate.setEnabled(true);
+					//btnUpdate.setEnabled(true);
 					int index = tableLista.getSelectedRow();
 					code = (int)tableLista.getModel().getValueAt(index, 0);
 					
@@ -104,28 +103,6 @@ public class ListarEmpleados extends JDialog {
 						dispose();
 					}
 				});
-				
-				btnUpdate = new JButton("Modificar");
-				btnUpdate.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						RegistroDeEmpleado mod = new RegistroDeEmpleado();
-						mod.setModal(true);
-						mod.setLocationRelativeTo(null);
-						mod.setVisible(true);
-					}
-				});
-				
-				
-				
-				JButton btnDelete = new JButton("Eliminar");
-				btnDelete.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-					}
-				});
-				buttonPane.add(btnDelete);
-				buttonPane.add(btnUpdate);
-				btnUpdate.setEnabled(false);
 				cancelButton.setActionCommand("Delete");
 				buttonPane.add(cancelButton);
 			}

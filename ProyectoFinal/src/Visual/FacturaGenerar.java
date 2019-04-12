@@ -382,7 +382,6 @@ public class FacturaGenerar extends JDialog {
 					Tricom.getInstance().getMiCliente().get(parte).getMiscontract().get(codeContrato).reducirFacturasEmitidas();
 							
 	
-
 				//	JOptionPane.showConfirmDialog(null, fac.getCodiFactura());
 					datofilaCa=llenararregloFactura();
 					 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
