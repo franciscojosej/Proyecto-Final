@@ -313,7 +313,13 @@ public void insertarPlan(Plan aux){
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					dia=fechaVieja.getDate();
+					if((fechaVieja.getDate()-1)!=0) {
+						dia=fechaVieja.getDate()-1;
+					}else {
+						dia=fechaVieja.getDate();
+					}
+				
+					
 					mes= fechaVieja.getMonth()+2;
 					anno= fechaVieja.getYear()+1900;
 					fechaPasa=dia+"-"+mes+"-"+anno;
@@ -362,7 +368,7 @@ public void insertarPlan(Plan aux){
 					e.printStackTrace();
 				}
 				if(fechaSiguiente!=null&&fechaActual!=null)
-				if(contrato_Aux.getEstado()&&fechaSiguiente.before(fechaActual)) {
+				if(contrato_Aux.getEstado()&&fechaSiguiente.before(fechaActual)&&!fechaSiguiente.equals(fechaActual)&&fechaSiguiente.getMonth()!=fechaActual.getMonth()) {
 					//contrato_Aux.getFacturasEmitidas()<4 &&
 					cliente_Aux.getMiscontract().get(cliente_Aux.getMiscontract()
 							.indexOf(contrato_Aux)).setFacturasEmitidas();//aumento la cantidad de facturas emitidas
