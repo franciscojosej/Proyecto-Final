@@ -1,5 +1,6 @@
 package logico;
 
+import java.awt.JobAttributes;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,8 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
-
+import javax.swing.JOptionPane;
 
 import logico.Factura;
 
@@ -283,6 +283,7 @@ public void insertarPlan(Plan aux){
 				}
 	return registrad0;
 	}
+	@SuppressWarnings("deprecation")
 	public void generaFacturaAutomatico() {
 		Factura auxFa=null;
 		float recargo=0;
@@ -298,7 +299,7 @@ public void insertarPlan(Plan aux){
 				ArrayList<Factura> fac=null;
 				fac=Tricom.getInstance().buscarFacturasActivasByCedulaClinteYContrato(cliente_Aux.getCodigo_cliente(), contrato_Aux.getCodigoDeContrato());
 				int cantidadFactura = 0;
-				if(fac!=null&&fac.size()!=0) {
+				if(fac!=null) {
 				cantidadFactura=fac.size();	
 				}
 				if(cantidadFactura >=1) {
@@ -314,17 +315,22 @@ public void insertarPlan(Plan aux){
 						e.printStackTrace();
 					}
 					if((fechaVieja.getDate()-1)!=0) {
-						dia=fechaVieja.getDate()-1;
+						dia=fechaVieja.getDate();
 					}else {
 						dia=fechaVieja.getDate();
 					}
 				
 					
 					mes= fechaVieja.getMonth()+2;
+					if(mes==13) {
+						mes=1;
+					}
 					anno= fechaVieja.getYear()+1900;
 					fechaPasa=dia+"-"+mes+"-"+anno;
 					 try {
 						fechaSiguiente=forma.parse(fechaPasa);
+						fechaSiguiente.setMinutes(fechaSiguiente.getMinutes()-10);;
+						
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -343,7 +349,7 @@ public void insertarPlan(Plan aux){
 					SimpleDateFormat form =new SimpleDateFormat("dd-MM-yyyy");
 					
 					try {
-						fechaSiguiente=form.parse("02-01-1900");
+						fechaSiguiente=form.parse("02-09-1999");
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -363,21 +369,26 @@ public void insertarPlan(Plan aux){
 				String aux=dia+"-"+mes+"-"+anno;
 				try {
 					fechaActual=formaActual.parse(aux);
+					
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				JOptionPane.showConfirmDialog(null, fechaActual.toString());
+				JOptionPane.showConfirmDialog(null, fechaSiguiente.toString());
 				if(fechaSiguiente!=null&&fechaActual!=null)
-				if(contrato_Aux.getEstado()&&fechaSiguiente.before(fechaActual)&&!fechaSiguiente.equals(fechaActual)&&fechaSiguiente.getMonth()!=fechaActual.getMonth()) {
+				if(contrato_Aux.getEstado()&&(fechaSiguiente.before(fechaActual))) {
+
 					//contrato_Aux.getFacturasEmitidas()<4 &&
 					cliente_Aux.getMiscontract().get(cliente_Aux.getMiscontract()
 							.indexOf(contrato_Aux)).setFacturasEmitidas();//aumento la cantidad de facturas emitidas
 					
-					
+					auxFa.setCodigoContrato(contrato_Aux.getCodigoDeContrato());
 					
 					auxFa.setNombreCliente(cliente_Aux.getNombre());
 					auxFa.setCodiCliente(cliente_Aux.getCodigo_cliente());
 					auxFa.setPrecioBase(contrato_Aux.getPrecioDelPlan());
+					
 					if(contrato_Aux.getFacturasEmitidas()==1) {
 						//recargo=(float) ((contrato_Aux.getPrecioDelPlan())*0.1);
 					}
@@ -564,7 +575,7 @@ public void insertarPlan(Plan aux){
 			
 			if (factura.getCodiFactura()==code) {
 				d=factura;
-				break;
+				
 			}
 		}
 		

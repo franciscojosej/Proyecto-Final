@@ -66,10 +66,8 @@ public class FacturaGenerar extends JDialog {
 	private Cliente cliente;
 	private Contrato nuevoContrato;
 	private ArrayList<Plan> nuevoPlan=null;
-	private JLabel  lblTotalApagat = new JLabel("0.0");
 	private  Object[][] datofila=llenararregloCarrito();	
 	private  Object[][] datofilaCa=llenararregloFactura();	
-	private JDateChooser dateChooser = new JDateChooser();
 	
 	private static String columnNombre[] = {"Nombre","Servicio","x"};
 	private static String columnNombreFacturas[] = {"Codigo","Fecha","%","Costo"};
@@ -114,10 +112,9 @@ public class FacturaGenerar extends JDialog {
 	private JScrollPane scrollPaneCarrito = new JScrollPane(t2);
 	//private Runnable label =new  PrecioL(lblTotalApagat, t);//:)
 	
-	PrecioL tarea = new PrecioL(lblTotalApagat, t);
+//	PrecioL tarea = new PrecioL(lblTotalApagat, t);
     Timer temporizador = new Timer();
     Integer segundos = 1;
-    private  JLabel labelFechaInicio = new JLabel("");
    
 	
 
@@ -145,19 +142,13 @@ public class FacturaGenerar extends JDialog {
 		
 	//	hilo.start();
 			
-		
-			try {
-				 temporizador.scheduleAtFixedRate(tarea, 0, 1000*segundos);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
+
 
 	//	t.setDefaultRenderer(Object.class, new MiRender());
 
 		//int  m=(int) datofila[t.getSelectedColumn()][0];
 			setResizable(false);
-			setBounds(5, 59, 620, 548);
+			setBounds(5, 59, 634, 548);
 		//setBounds(100, 100, 612, 548);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
@@ -277,7 +268,7 @@ public class FacturaGenerar extends JDialog {
 					}
 					
 					
-					lblTotalApagat.setText(String.valueOf(Tricom.getInstance().calcularCostopordode(codigo)));
+				//	lblTotalApagat.setText(String.valueOf(Tricom.getInstance().calcularCostopordode(codigo)));
 					
 				}
 			});
@@ -306,7 +297,7 @@ public class FacturaGenerar extends JDialog {
 					}
 					
 					
-					lblTotalApagat.setText(String.valueOf(Tricom.getInstance().calcularCostopordode(codigo)));
+				//	lblTotalApagat.setText(String.valueOf(Tricom.getInstance().calcularCostopordode(codigo)));
 				}
 			});
 			
@@ -318,7 +309,7 @@ public class FacturaGenerar extends JDialog {
 			JPanel panel_2 = new JPanel();
 			panel_2.setBackground(Color.WHITE);
 			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Facturas Emitidas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_2.setBounds(338, 219, 256, 141);
+			panel_2.setBounds(338, 219, 270, 141);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			scrollPaneCarrito.addMouseListener(new MouseAdapter() {
@@ -326,149 +317,9 @@ public class FacturaGenerar extends JDialog {
 			});
 			
 			
-			scrollPaneCarrito.setBounds(10, 21, 236, 109);
+			scrollPaneCarrito.setBounds(10, 21, 250, 109);
 			panel_2.add(scrollPaneCarrito);
-			
-			JButton btnNewButton_1 = new JButton("Facturar");
 			Image im = new ImageIcon(this.getClass().getResource("/bil.png")).getImage();
-			btnNewButton_1.setIcon(new ImageIcon(im));
-			btnNewButton_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					/*
-					int codigo=-1,row=0;
-					if(Tricom.getInstance().getMiPlan().size()>=1 ) 
-					{
-						 row= t.getSelectedRow();	
-					}
-					int tam=0;
-				
-					//int column=t.getSelectedColumn();
-					Cliente cli = Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
-					if(cli!=null) {
-						tam=cli.getMiscontract().size();
-					}
-					if(tam>=1&&(row != -1) ) {
-						codigo =(int) t.getValueAt(row, 2);
-					}
-					 
-					 Date m =dateChooser.getDate();
-					 int dia=0;
-					 int mes=0;
-					 int an=1;
-					if(m!=null) {
-						  dia=dateChooser.getDate().getDate();
-						  mes= dateChooser.getDate().getMonth()+1;
-						 an=m.getYear()+1900;
-					}else {
-						 dia=0;
-					 mes= 0;
-					an=0;
-					}
-
-			
-				
-					
-				//	JOptionPane.showConfirmDialog(null, dia+" "+mes+" "+an);
-
-					
-				//JOptionPane.showConfirmDialog(null, codigo);
-				
-				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null||
-						texCedulaCleinte.getText().equalsIgnoreCase("")&&textNombre.getText().equalsIgnoreCase("")) {
-					JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
-				
-				}
-				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) 
-				{
-					JOptionPane.showMessageDialog(null, "Cliente no encontrado", null, JOptionPane.ERROR_MESSAGE, null);
-				}
-				//control
-				cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
-				nuevoContrato=Tricom.getInstance().findContratoByCode(codigo);
-				if(codigo!=-1 && nuevoContrato.getEstado()&&Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null&& nuevoContrato!=null)
-				{
-					Factura factura_Aux= new Factura(" ", 1, 0, labelFechaInicio.getText() ,
-							String.valueOf(dia+"/"+mes+"/"+an), 0, 0,nuevoContrato.getCodigoDeContrato());
-	
-
-						
-					//	JOptionPane.showMessageDialog(null, " Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
-
-						 
-						if(cliente.getMiscontract().indexOf(nuevoContrato)!=-1) {
-							String fechaPasa="";
-							ArrayList<Factura> fac=null;
-							fac=Tricom.getInstance().buscarFacturasActivasByCedulaClinteYContrato(cliente.getCodigo_cliente(), nuevoContrato.getCodigoDeContrato());
-							int cantidadFactura = 0;
-							if(fac!=null&&fac.size()!=0) {
-							cantidadFactura=fac.size();	
-							}
-							if(cantidadFactura >=1) {
-								cantidadFactura=cantidadFactura-1;
-								fechaPasa=fac.get(cantidadFactura).getFechaDevencimiento();
-							}else {
-								fechaPasa="01/1/1800";
-							}
-							SimpleDateFormat forma =new SimpleDateFormat("dd/MM/yyyy");
-							Date ultimaFecha = null;
-							try {
-								ultimaFecha = forma.parse(fechaPasa);
-								 int diaa=ultimaFecha.getDate();
-								 int mess=ultimaFecha.getMonth()+2;
-								 int ann=ultimaFecha.getYear()+1900;
-								fechaPasa=diaa+"/"+mess+"/"+ann;
-								ultimaFecha = forma.parse(fechaPasa);
-
-								
-							} catch (ParseException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							
-							//menor que 0 si es despues
-							//mayor que cero si es antes
-							//cero si es igual
-							if(ultimaFecha!=null&&m!=null	)	
-							if(ultimaFecha.compareTo(m)<=-1) {
-								JOptionPane.showConfirmDialog(null,ultimaFecha.compareTo(m) );
-								if(fac.size()!=0)
-								JOptionPane.showConfirmDialog(null, fac.get(cantidadFactura).getFechaDevencimiento());
-								factura_Aux.setCodiFactura(Tricom.getFacturacionCod());
-								Tricom.getInstance().generarFactura2(cliente, nuevoContrato,factura_Aux );
-								JOptionPane.showMessageDialog(null, "Factura realizada", null, JOptionPane.INFORMATION_MESSAGE, null);
-						//	Tricom.setFacturacionCod();//aumentar code Factura
-
-								datofilaCa=llenararregloFactura();
-								 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
-								t2.setModel(model2);
-							}else {
-								JOptionPane.showMessageDialog(null, "No se pudo realizar factura", null, JOptionPane.INFORMATION_MESSAGE, null);
-							}
-							
-							ultimaFecha = null;
-
-						}else{
-							JOptionPane.showMessageDialog(null, "No Encontradoff", null, JOptionPane.INFORMATION_MESSAGE, null);
-						}
-						if(m==null){
-							JOptionPane.showMessageDialog(null, "LLenar factrua", null, JOptionPane.INFORMATION_MESSAGE, null);
-						}
-					
-				}
-				if(nuevoContrato!=null)
-				if(nuevoContrato.getEstado()==false) {
-					JOptionPane.showMessageDialog(null, "ContraroCancelado", null, JOptionPane.ERROR_MESSAGE, null);
-				}
-				
-					*/
-					datofilaCa=llenararregloFactura();
-					 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
-					t2.setModel(model2);
-				}
-			});
-			btnNewButton_1.setBounds(223, 257, 111, 20);
-			panel.add(btnNewButton_1);
 			
 			JButton btnNewButton_2 = new JButton("Pagar");
 			Image foto = new ImageIcon(this.getClass().getResource("/pay.png")).getImage();
@@ -486,67 +337,41 @@ public class FacturaGenerar extends JDialog {
 				tam= Tricom.getInstance().getMisFacturas().size();
 
 					if(tam>=1&&(row != -1) ) {
-						JOptionPane.showConfirmDialog(null, codigo);
+						
 						codigo = (int) t2.getValueAt(row, 0);
 						JOptionPane.showConfirmDialog(null, codigo);
 					}
-					Factura cli = Tricom.getInstance().buscarFacturasByCode(codigo);
-					if(cli!=null) {
-						
-				 int index=Tricom.getInstance().getMisFacturas().indexOf(cli);
-				 if(index>=0) {
-					  Tricom.getInstance().getMisFacturas().get(index).setSinPagar(false);
-				 }
-				 int codeC= Tricom.getInstance().getMisFacturas().get(index).getCodigoContrato();
-				
-				 Contrato  nuevCon= Tricom.getInstance().findContratoByCode(codeC);
-				 if(codeC!=-1)
-				 if(nuevCon!=null) {
-					int indexCon= Tricom.getInstance().getMisContrato().indexOf(nuevCon);
+					Factura fac = Tricom.getInstance().buscarFacturasByCode(codigo);
+					if(fac!=null&&row!=-1) {
+					int lugar=Tricom.getInstance().getMisFacturas().indexOf(fac);
+					Tricom.getInstance().getMisFacturas().get(lugar).setSinPagar(false);
 					
-					Tricom.getInstance().getMisContrato().get(indexCon).reducirFacturasEmitidas();
-				 }
+					Cliente cli= Tricom.getInstance().BuscarByCodigo(fac.getCodiCliente());
+					Contrato strato =null;
+					for (Contrato cc : cli.getMiscontract()) {
+						if(cc.getCodigoDeContrato()==fac.getCodigoContrato()) {
+							strato=cc;
+						}
+					}
 				
+					int parte =Tricom.getInstance().getMiCliente().indexOf(cli);
+				
+					int 	codeContrato=Tricom.getInstance().getMiCliente().get(parte).getMiscontract().indexOf(strato);
+					Tricom.getInstance().getMiCliente().get(parte).getMiscontract().get(codeContrato).reducirFacturasEmitidas();
+							
+	
+
+					JOptionPane.showConfirmDialog(null, fac.getCodiFactura());
+				 
+					}
 					datofilaCa=llenararregloFactura();
 					 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
 					t2.setModel(model2);
-					JOptionPane.showConfirmDialog(null, "paga");
-				 
-					}
-					
 					
 				}
 			});
 			btnNewButton_2.setBounds(223, 308, 111, 20);
 			panel.add(btnNewButton_2);
-			
-			JLabel lbllabel = new JLabel("Precio Total a Pagar:");
-			lbllabel.setBounds(295, 406, 169, 14);
-			panel.add(lbllabel,BorderLayout.CENTER);
-			
-			JLabel lblNewLabel_4 = new JLabel("Fecha De Inicio:");
-			lblNewLabel_4.setBounds(23, 381, 150, 14);
-			panel.add(lblNewLabel_4);
-			
-			JLabel lblFechaDeCulminacion = new JLabel("Fecha De Culminacion:");
-			lblFechaDeCulminacion.setBounds(23, 406, 138, 14);
-			panel.add(lblFechaDeCulminacion);
-			
-			labelFechaInicio.setText(Tricom.getFechaInicio());
-			labelFechaInicio.setBounds(155, 381, 81, 14);
-			panel.add(labelFechaInicio);
-			
-			
-			lblTotalApagat.setBounds(416, 406, 81, 14);
-			panel.add(lblTotalApagat);
-			dateChooser.getCalendarButton().addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
-			
-			
-			dateChooser.setBounds(168, 405, 104, 20);
-			panel.add(dateChooser);
 		}
 		{
 			JPanel buttonPane = new JPanel();
