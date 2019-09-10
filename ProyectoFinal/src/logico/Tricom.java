@@ -289,7 +289,11 @@ public void insertarPlan(Plan aux){
 
 			for (Cliente cliente_Aux : miCliente) {
 			for (Contrato contrato_Aux : cliente_Aux.getMiscontract()) {
-				
+				Date fechaInicia = new Date();
+				int dia=0;
+				int mes=0;
+				int anno=0;
+				Date fechaSiguiente =null;
 				String fechaPasa="";
 				ArrayList<Factura> fac=null;
 				fac=Tricom.getInstance().buscarFacturasActivasByCedulaClinteYContrato(cliente_Aux.getCodigo_cliente(), contrato_Aux.getCodigoDeContrato());
@@ -300,56 +304,70 @@ public void insertarPlan(Plan aux){
 				if(cantidadFactura >=1) {
 					cantidadFactura=cantidadFactura-1;
 					fechaPasa=fac.get(cantidadFactura).getFechaDevencimiento();
-				}else {
-					fechaPasa="01-1-1800";
-				}
-				
-				SimpleDateFormat forma =new SimpleDateFormat("dd-MM-yyyy");
-				Date ultimaFecha = null;
-				try {
-					ultimaFecha = forma.parse(fechaPasa);
-					 int diaa=ultimaFecha.getDate();
-					 int mess=ultimaFecha.getMonth()+2;
-					 int ann=ultimaFecha.getYear()+1900;
-					fechaPasa=diaa+"-"+mess+"-"+ann;
-					ultimaFecha = forma.parse(fechaPasa);
+					Date fechaVieja=null;
+					SimpleDateFormat forma =new SimpleDateFormat("dd-MM-yyyy");
 
+					try {
+						fechaVieja=forma.parse(fechaPasa);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					dia=fechaVieja.getDate();
+					mes= fechaVieja.getMonth()+2;
+					anno= fechaVieja.getYear()+1900;
+					fechaPasa=dia+"-"+mes+"-"+anno;
+					 try {
+						fechaSiguiente=forma.parse(fechaPasa);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+						auxFa= new Factura(" ", 1, 0, "" ,
+								fechaPasa, 0, 0,0);
 					
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				}else {
+					dia=fechaInicia.getDate();
+					mes= fechaInicia.getMonth()+1;
+					anno= fechaInicia.getYear()+1900;
+					fechaPasa=dia+"-"+mes+"-"+anno;
+					auxFa= new Factura(" ", 1, 0, "" ,
+							fechaPasa, 0, 0,0);
+					SimpleDateFormat form =new SimpleDateFormat("dd-MM-yyyy");
+					
+					try {
+						fechaSiguiente=form.parse("02-01-1900");
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				
-				//menor que 0 si es despues
-				//mayor que cero si es antes
-				//cero si es igual
-				Date m1 =new Date();//dateChooser.getDate();
-				SimpleDateFormat forma2 =new SimpleDateFormat("dd-MM-yyyy");
-				 int dia=0;
-				 int mes=0;
-				 int an=1;
-				if(m1!=null) {
-					  dia=m1.getDate();
-					  mes= m1.getMonth()+1;
-					 an=m1.getYear()+1900;
-				}
-				Date m=null;
+				
+				
+				//modeloFactura();//se Cargan fecha de inicio y fecha de pago
+				//if(ultimaFecha!=null&&m!=null	)	
+				//&&ultimaFecha.compareTo(m)<=-1
+				Date fechaActual = new Date();
+				SimpleDateFormat formaActual =new SimpleDateFormat("dd-MM-yyyy");
+				dia=fechaActual.getDate();
+				mes=fechaActual.getMonth()+1;
+				anno=fechaActual.getYear()+1900;
+				String aux=dia+"-"+mes+"-"+anno;
 				try {
-					String fecha =dia+"-"+mes+"-"+an;
-					m = forma.parse(fecha);
+					fechaActual=formaActual.parse(aux);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				//if(ultimaFecha!=null&&m!=null	)	
-				if(contrato_Aux.getEstado()&&ultimaFecha.compareTo(m)<=-1) {
+				if(fechaSiguiente!=null&&fechaActual!=null)
+				if(contrato_Aux.getEstado()&&fechaSiguiente.before(fechaActual)) {
 					//contrato_Aux.getFacturasEmitidas()<4 &&
 					cliente_Aux.getMiscontract().get(cliente_Aux.getMiscontract()
 							.indexOf(contrato_Aux)).setFacturasEmitidas();//aumento la cantidad de facturas emitidas
 					
-					auxFa= new Factura(" ", 1, 0, getFechaInicio() ,
-							fechaPasa, 0, 0,0);//modeloFactura();//se Cargan fecha de inicio y fecha de pago
+					
 					
 					auxFa.setNombreCliente(cliente_Aux.getNombre());
 					auxFa.setCodiCliente(cliente_Aux.getCodigo_cliente());
