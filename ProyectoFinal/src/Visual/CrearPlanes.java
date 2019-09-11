@@ -107,7 +107,7 @@ public class CrearPlanes extends JDialog {
 			JPanel panel_1 = new JPanel();
 			panel_1.setBackground(Color.WHITE);
 			panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tipo De Servicio", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_1.setBounds(35, 155, 379, 97);
+			panel_1.setBounds(10, 155, 443, 97);
 			panel.add(panel_1);
 			panel_1.setLayout(null);
 			
@@ -139,7 +139,7 @@ public class CrearPlanes extends JDialog {
 					
 				}
 			});
-			rdbtnInternet.setBounds(6, 39, 109, 23);
+			rdbtnInternet.setBounds(27, 39, 109, 23);
 			panel_1.add(rdbtnInternet);
 			
 			 rdbtnTelevicion = new JRadioButton("Televisi\u00F3n.");
@@ -171,7 +171,7 @@ public class CrearPlanes extends JDialog {
 					
 				}
 			});
-			rdbtnTelevicion.setBounds(127, 39, 109, 23);
+			rdbtnTelevicion.setBounds(163, 39, 109, 23);
 			panel_1.add(rdbtnTelevicion);
 			
 			 rdbtnTelefono = new JRadioButton("Tel\u00E9fono.");
@@ -203,12 +203,12 @@ public class CrearPlanes extends JDialog {
 
 				}
 			});
-			rdbtnTelefono.setBounds(249, 39, 109, 23);
+			rdbtnTelefono.setBounds(299, 39, 109, 23);
 			panel_1.add(rdbtnTelefono);
 			
 			panelData = new JPanel();
 			panelData.setBackground(Color.WHITE);
-			panelData.setBounds(0, 263, 137, 69);
+			panelData.setBounds(14, 263, 137, 69);
 			panel.add(panelData);
 			panelData.setLayout(null);
 			
@@ -224,7 +224,7 @@ public class CrearPlanes extends JDialog {
 		      
 		       panelMinutos = new JPanel();
 		       panelMinutos.setBackground(Color.WHITE);
-		       panelMinutos.setBounds(310, 263, 137, 69);
+		       panelMinutos.setBounds(316, 263, 137, 69);
 		       panel.add(panelMinutos);
 		       panelMinutos.setLayout(null);
 		       
@@ -240,7 +240,7 @@ public class CrearPlanes extends JDialog {
 		       
 		       panelCanales = new JPanel();
 		       panelCanales.setBackground(Color.WHITE);
-		       panelCanales.setBounds(155, 263, 137, 69);
+		       panelCanales.setBounds(165, 263, 137, 69);
 		       panel.add(panelCanales);
 		       panelCanales.setLayout(null);
 		       
@@ -308,7 +308,8 @@ public class CrearPlanes extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 
 						
-						if(!textNombre.getText().equalsIgnoreCase("") ){
+						if(!textNombre.getText().equalsIgnoreCase("")
+								&&Tricom.getInstance().buscarPlanesEnContratosBynombre(textNombre.getText())==null ){
 		
 
 						
@@ -317,7 +318,7 @@ public class CrearPlanes extends JDialog {
 						
 						int codigo = Tricom.PlanesCod;
 						
-						
+
 						
 						if(rdbtnInternet.isSelected()){
 							int velocidad_conexion =0;
@@ -419,6 +420,7 @@ public class CrearPlanes extends JDialog {
 
 						if(num==0)
 								 {
+							
 
 							
 							if(aux!=null) {
@@ -453,7 +455,11 @@ public class CrearPlanes extends JDialog {
 						
 						clear();
 						}else{
+							if(textNombre.getText().equalsIgnoreCase(""))
 							JOptionPane.showMessageDialog(null, "Verifique los campos", null, JOptionPane.ERROR_MESSAGE, null);
+						if(Tricom.getInstance().buscarPlanesEnContratosBynombre(textNombre.getText())!=null) {
+							JOptionPane.showMessageDialog(null, "Nombre Invalido", null, JOptionPane.ERROR_MESSAGE, null);
+						}
 						}
 
 						 

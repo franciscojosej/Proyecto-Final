@@ -45,6 +45,8 @@ public class RegistroDeEmpleado extends JDialog {
 	private JRadioButton rdbtnComercial;
 	private JComboBox cbxSexo ;
 	private JLabel lbCodeEmpl ;
+	private JLabel lblRegistrado ;
+	private JLabel lblCheck;
 	/**
 	 * Launch the application.
 	 */
@@ -158,16 +160,30 @@ public class RegistroDeEmpleado extends JDialog {
 			panel.add(lblNewLabel_5);
 			
 			{
-				JLabel lblNewLabel_6 = new JLabel("");
 				Image img = new ImageIcon(this.getClass().getResource("/Empleados.png")).getImage();
-				lblNewLabel_6.setIcon(new ImageIcon(img));
-				lblNewLabel_6.setBounds(260, 26, 151, 133);
-				panel.add(lblNewLabel_6);
 			}
 			
 			 lbCodeEmpl = new JLabel("E"+"-"+(Tricom.EmpleadoCod+1));
 			lbCodeEmpl.setBounds(20, 139, 46, 14);
 			panel.add(lbCodeEmpl);
+			{
+				 lblRegistrado = new JLabel("");
+					Image imgaa = new ImageIcon(this.getClass().getResource("/erorBusq.png")).getImage();
+					lblRegistrado .setIcon(new ImageIcon(imgaa));
+					lblRegistrado .setVisible(false);
+					 
+					lblRegistrado .setBounds(211, 53, 158, 106);
+				panel.add(lblRegistrado);
+			}
+			{
+				 lblCheck = new JLabel("");
+					Image i = new ImageIcon(this.getClass().getResource("/check.png")).getImage();
+					 lblCheck .setIcon(new ImageIcon(i));
+					 lblCheck .setVisible(false);
+				 
+				lblCheck.setBounds(228, 44, 118, 115);
+				panel.add(lblCheck);
+			}
 		}
 		
 		{
@@ -256,10 +272,15 @@ public class RegistroDeEmpleado extends JDialog {
 								&&!txtNombre.getText().equalsIgnoreCase("")&&!textTelefono.getText().equalsIgnoreCase("")) {
 							 Control.getInstance().regUser(user);
 							 Tricom.getInstance().insertarEmpleado(nuevoEmpleado);
-							 JOptionPane.showMessageDialog(null, "Empleado registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+							// JOptionPane.showMessageDialog(null, "Empleado registrado exitosamente", null, JOptionPane.INFORMATION_MESSAGE, null);
+								lblRegistrado .setVisible(false);
+								 lblCheck .setVisible(true);
+							 
 							 clear();
 						}else {
-							JOptionPane.showMessageDialog(null, "Verifique que todos los campos", null, JOptionPane.ERROR_MESSAGE, null);
+							//JOptionPane.showMessageDialog(null, "Verifique que todos los campos", null, JOptionPane.ERROR_MESSAGE, null);
+							lblRegistrado .setVisible(true);
+							 lblCheck .setVisible(false);
 						}
 						
 						

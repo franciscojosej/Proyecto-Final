@@ -374,8 +374,8 @@ public void insertarPlan(Plan aux){
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				JOptionPane.showConfirmDialog(null, fechaActual.toString());
-				JOptionPane.showConfirmDialog(null, fechaSiguiente.toString());
+				//JOptionPane.showConfirmDialog(null, fechaActual.toString());
+				///JOptionPane.showConfirmDialog(null, fechaSiguiente.toString());
 				if(fechaSiguiente!=null&&fechaActual!=null)
 				if(contrato_Aux.getEstado()&&(fechaSiguiente.before(fechaActual))) {
 
@@ -600,6 +600,17 @@ public void insertarPlan(Plan aux){
 		cont.add(contract);
 		}
 		return cont;
+	}
+	public Plan buscarPlanesEnContratosBynombre(String name){
+		Plan paux= null;
+		for(Plan p : miPlan) {
+			if(p.getNombre().equalsIgnoreCase(name)) {
+				paux=p;
+				break;
+			}
+		}
+	
+		return paux;
 	}
 	
 	public ArrayList<Plan> buscarPlanes(int code){

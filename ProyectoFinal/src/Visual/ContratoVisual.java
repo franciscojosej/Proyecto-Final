@@ -50,6 +50,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
+import java.awt.SystemColor;
 
 public class ContratoVisual extends JDialog {
 
@@ -63,8 +64,10 @@ public class ContratoVisual extends JDialog {
 	private JLabel  lblTotalApagat = new JLabel("0.0");
 	private  Object[][] datofila=llenararreglo();	
 	private  Object[][] datofilaCa=llenararregloCarrito();	
+	private JLabel lblError;
+	private JLabel lblUsuario;
 	
-	private static String columnNombre[] = {"Nombre","Servicio","x"};
+	private static String columnNombre[] = {"Nombre","Servicio","Codigo"};
 
 	
 	final Class[] columnClass = new Class[] {
@@ -203,13 +206,20 @@ public class ContratoVisual extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						
 						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) {
-							JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
-						
+							//JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+							lblError.setVisible(true);
+							lblUsuario.setVisible(false);
+							textNombre.setText("");
+
 						}
 
 						if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) {
 							cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
-							JOptionPane.showMessageDialog(null, "Cliente Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
+							//JOptionPane.showMessageDialog(null, "Cliente Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
+							textNombre.setText(cliente.getNombre());
+							lblError.setVisible(false);
+							lblUsuario.setVisible(true);
+							
 							datofilaCa=llenararregloCarrito();
 							 model= new DefaultTableModel(datofilaCa,  columnNombre);
 							t2.setModel(model);
@@ -229,15 +239,27 @@ public class ContratoVisual extends JDialog {
 				panel_1.add(lblNewLabel_2);
 				
 				textNombre = new JTextField();
+				textNombre.setForeground(SystemColor.textHighlight);
+				textNombre.setEnabled(false);
+				textNombre.setEditable(false);
 				textNombre.setBounds(10, 103, 171, 20);
 				panel_1.add(textNombre);
 				textNombre.setColumns(10);
 				
-				JLabel lblNewLabel_1 = new JLabel("");
+			    lblUsuario = new JLabel("");
 				Image fotico = new ImageIcon(this.getClass().getResource("/cli.png")).getImage();
-				lblNewLabel_1.setIcon(new ImageIcon(fotico));
-				lblNewLabel_1.setBounds(460, 11, 108, 125);
-				panel_1.add(lblNewLabel_1);
+				lblUsuario.setIcon(new ImageIcon(fotico));
+				lblUsuario.setBounds(437, 11, 108, 125);
+				panel_1.add(lblUsuario);
+				
+				 lblError = new JLabel("");
+				Image fot = new ImageIcon(this.getClass().getResource("/erorBusq.png")).getImage();
+				 lblError.setIcon(new ImageIcon(fot));
+				 lblError.setVisible(false);
+				
+				 lblError.setBounds(427, 11, 141, 112);
+				
+				panel_1.add(lblError);
 				
 				
 			}
@@ -351,10 +373,14 @@ public class ContratoVisual extends JDialog {
 				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null||
 						texCedulaCleinte.getText().equalsIgnoreCase("")&&textNombre.getText().equalsIgnoreCase("")) {
 					JOptionPane.showMessageDialog(null, "Verifique que todos los campos esten llenos", null, JOptionPane.ERROR_MESSAGE, null);
+					lblError.setVisible(true);
+					lblUsuario.setVisible(false);
 				}
 				if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())==null) 
 				{
-					JOptionPane.showMessageDialog(null, "Cliente no encontrado", null, JOptionPane.ERROR_MESSAGE, null);
+					//JOptionPane.showMessageDialog(null, "Cliente no encontrado", null, JOptionPane.ERROR_MESSAGE, null);
+					lblError.setVisible(true);
+					lblUsuario.setVisible(false);
 				}
 				
 				if(Tricom.getInstance().getMiPlan().size()>=1&&codigo!=-1)
@@ -362,7 +388,8 @@ public class ContratoVisual extends JDialog {
 					if(Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText())!=null) 
 					{
 						cliente=Tricom.getInstance().BuscarByCedula(texCedulaCleinte.getText());
-						
+						lblError.setVisible(false);
+						lblUsuario.setVisible(true);
 					//	JOptionPane.showMessageDialog(null, " Encontrado", null, JOptionPane.INFORMATION_MESSAGE, null);
 						int  num= JOptionPane.showConfirmDialog(null, "Costo Del Plan: "+Tricom.getInstance().calcularCostopordode(codigo), 
 								"Crear", JOptionPane.YES_NO_OPTION);

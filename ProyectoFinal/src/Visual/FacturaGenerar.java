@@ -56,6 +56,7 @@ import java.text.SimpleDateFormat;
 import java.awt.event.MouseWheelEvent;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.SystemColor;
 
 public class FacturaGenerar extends JDialog {
 
@@ -151,7 +152,7 @@ public class FacturaGenerar extends JDialog {
 
 		//int  m=(int) datofila[t.getSelectedColumn()][0];
 			setResizable(false);
-			setBounds(5, 59, 634, 548);
+			setBounds(5, 59, 648, 548);
 		//setBounds(100, 100, 612, 548);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
@@ -192,7 +193,7 @@ public class FacturaGenerar extends JDialog {
 				JPanel panel_1 = new JPanel();
 				panel_1.setBackground(Color.WHITE);
 				panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Información del Cliente", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_1.setBounds(10, 80, 598, 141);
+				panel_1.setBounds(10, 80, 612, 141);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
@@ -205,10 +206,7 @@ public class FacturaGenerar extends JDialog {
 						@Override
 						public void mouseMoved(MouseEvent e) {
 							
-								datofilaCa=llenararregloFactura();
-								 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
-								t2.setModel(model2);
-							
+
 
 						}
 					});
@@ -239,6 +237,11 @@ public class FacturaGenerar extends JDialog {
 							lblErrorBusqueda.setVisible(false);
 							
 							textNombre.setText(cliente.getNombre());
+							
+							datofilaCa=llenararregloFactura();
+							 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
+							t2.setModel(model2);
+						
 
 							datofila=llenararregloCarrito();
 							 model= new DefaultTableModel(datofila,  columnNombre);
@@ -257,6 +260,7 @@ public class FacturaGenerar extends JDialog {
 				panel_1.add(lblNewLabel_2);
 				
 				textNombre = new JTextField();
+				textNombre.setForeground(SystemColor.textHighlight);
 				textNombre.setEditable(false);
 				textNombre.setBounds(10, 103, 171, 20);
 				panel_1.add(textNombre);
@@ -338,7 +342,7 @@ public class FacturaGenerar extends JDialog {
 			JPanel panel_2 = new JPanel();
 			panel_2.setBackground(Color.WHITE);
 			panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Facturas Emitidas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_2.setBounds(338, 219, 270, 141);
+			panel_2.setBounds(352, 219, 270, 141);
 			panel.add(panel_2);
 			panel_2.setLayout(null);
 			scrollPaneCarrito.addMouseListener(new MouseAdapter() {
@@ -377,7 +381,9 @@ public class FacturaGenerar extends JDialog {
 					
 					Cliente cli= Tricom.getInstance().BuscarByCodigo(fac.getCodiCliente());
 					Contrato strato =null;
+					if(cli!=null)
 					for (Contrato cc : cli.getMiscontract()) {
+						textNombre.setText(cli.getNombre());
 						if(cc.getCodigoDeContrato()==fac.getCodigoContrato()) {
 							strato=cc;
 						}
@@ -390,14 +396,17 @@ public class FacturaGenerar extends JDialog {
 							
 	
 
-					JOptionPane.showConfirmDialog(null, fac.getCodiFactura());
-				 
+				//	JOptionPane.showConfirmDialog(null, fac.getCodiFactura());
+					datofilaCa=llenararregloFactura();
+					 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
+					t2.setModel(model2);
+				
 					}
 
 					
 				}
 			});
-			btnNewButton_2.setBounds(217, 247, 111, 20);
+			btnNewButton_2.setBounds(231, 247, 111, 20);
 			panel.add(btnNewButton_2);
 		}
 		{
