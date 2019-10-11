@@ -1,10 +1,11 @@
 package logico;
 
 import java.io.Serializable;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 
@@ -282,6 +283,101 @@ public void insertarPlan(Plan aux){
 				}
 	return registrad0;
 	}
+	public void generaFacturaAutomatico() {
+		Factura auxFa=null;
+		float recargo=0;
+
+			for (Cliente cliente_Aux : miCliente) {
+			for (Contrato contrato_Aux : cliente_Aux.getMiscontract()) {
+				
+				String fechaPasa="";
+				ArrayList<Factura> fac=null;
+				fac=Tricom.getInstance().buscarFacturasActivasByCedulaClinteYContrato(cliente_Aux.getCodigo_cliente(), contrato_Aux.getCodigoDeContrato());
+				int cantidadFactura = 0;
+				if(fac!=null&&fac.size()!=0) {
+				cantidadFactura=fac.size();	
+				}
+				if(cantidadFactura >=1) {
+					cantidadFactura=cantidadFactura-1;
+					fechaPasa=fac.get(cantidadFactura).getFechaDevencimiento();
+				}else {
+					fechaPasa="01-1-1800";
+				}
+				
+				SimpleDateFormat forma =new SimpleDateFormat("dd-MM-yyyy");
+				Date ultimaFecha = null;
+				try {
+					ultimaFecha = forma.parse(fechaPasa);
+					 int diaa=ultimaFecha.getDate();
+					 int mess=ultimaFecha.getMonth()+2;
+					 int ann=ultimaFecha.getYear()+1900;
+					fechaPasa=diaa+"-"+mess+"-"+ann;
+					ultimaFecha = forma.parse(fechaPasa);
+
+					
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				//menor que 0 si es despues
+				//mayor que cero si es antes
+				//cero si es igual
+				Date m1 =new Date();//dateChooser.getDate();
+				SimpleDateFormat forma2 =new SimpleDateFormat("dd-MM-yyyy");
+				 int dia=0;
+				 int mes=0;
+				 int an=1;
+				if(m1!=null) {
+					  dia=m1.getDate();
+					  mes= m1.getMonth()+1;
+					 an=m1.getYear()+1900;
+				}
+				Date m=null;
+				try {
+					String fecha =dia+"-"+mes+"-"+an;
+					m = forma.parse(fecha);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				//if(ultimaFecha!=null&&m!=null	)	
+				if(contrato_Aux.getEstado()&&ultimaFecha.compareTo(m)<=-1) {
+					//contrato_Aux.getFacturasEmitidas()<4 &&
+					cliente_Aux.getMiscontract().get(cliente_Aux.getMiscontract()
+							.indexOf(contrato_Aux)).setFacturasEmitidas();//aumento la cantidad de facturas emitidas
+					
+					auxFa= new Factura(" ", 1, 0, getFechaInicio() ,
+							fechaPasa, 0, 0,0);//modeloFactura();//se Cargan fecha de inicio y fecha de pago
+					
+					auxFa.setNombreCliente(cliente_Aux.getNombre());
+					auxFa.setCodiCliente(cliente_Aux.getCodigo_cliente());
+					auxFa.setPrecioBase(contrato_Aux.getPrecioDelPlan());
+					if(contrato_Aux.getFacturasEmitidas()==1) {
+						//recargo=(float) ((contrato_Aux.getPrecioDelPlan())*0.1);
+					}
+					if(contrato_Aux.getFacturasEmitidas()==2) {
+						recargo=(float) ((contrato_Aux.getPrecioDelPlan())*0.1);
+					}
+					if(contrato_Aux.getFacturasEmitidas()==3) {
+						recargo=(float) ((contrato_Aux.getPrecioDelPlan())*0.2);
+					}
+					if(contrato_Aux.getFacturasEmitidas()==4) {
+						recargo=(float) ((contrato_Aux.getPrecioDelPlan())*0.3);
+					}
+					auxFa.setRecargo(recargo);
+					auxFa.setTotalA_Pagar(recargo+contrato_Aux.getPrecioDelPlan());
+					insertarFactura(auxFa);
+					
+				} 
+					
+			}
+			
+			
+		}
+		
+	}
 	
 	public Factura modeloFactura() {
 	
@@ -291,7 +387,7 @@ public void insertarPlan(Plan aux){
 	}
 	public static String getFechaInicio() {
 		Calendar fecha =  new GregorianCalendar();
-		return String.valueOf(fecha.get(Calendar.DAY_OF_MONTH)+"/"+(fecha.get(Calendar.MONTH)+1)+"/"
+		return String.valueOf(fecha.get(Calendar.DAY_OF_MONTH)+"-"+(fecha.get(Calendar.MONTH)+1)+"-"
 				+fecha.get(Calendar.YEAR));
 	}
 	private static String getFechavencimiento() {

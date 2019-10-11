@@ -334,6 +334,8 @@ public class FacturaGenerar extends JDialog {
 			btnNewButton_1.setIcon(new ImageIcon(im));
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					/*
 					int codigo=-1,row=0;
 					if(Tricom.getInstance().getMiPlan().size()>=1 ) 
 					{
@@ -423,10 +425,11 @@ public class FacturaGenerar extends JDialog {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
+							
 							//menor que 0 si es despues
 							//mayor que cero si es antes
 							//cero si es igual
-							if(ultimaFecha!=null&&m!=null)		
+							if(ultimaFecha!=null&&m!=null	)	
 							if(ultimaFecha.compareTo(m)<=-1) {
 								JOptionPane.showConfirmDialog(null,ultimaFecha.compareTo(m) );
 								if(fac.size()!=0)
@@ -458,7 +461,10 @@ public class FacturaGenerar extends JDialog {
 					JOptionPane.showMessageDialog(null, "ContraroCancelado", null, JOptionPane.ERROR_MESSAGE, null);
 				}
 				
-					
+					*/
+					datofilaCa=llenararregloFactura();
+					 model2= new DefaultTableModel(datofilaCa,  columnNombreFacturas);
+					t2.setModel(model2);
 				}
 			});
 			btnNewButton_1.setBounds(223, 257, 111, 20);

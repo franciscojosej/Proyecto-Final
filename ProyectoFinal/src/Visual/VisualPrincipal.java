@@ -267,6 +267,11 @@ public class VisualPrincipal extends JFrame {
 		mnFacturar.add(mntmfacturar);
 		
 		JMenuItem mntmgenerarFactura = new JMenuItem("Generar Factura");
+		mntmgenerarFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Tricom.getInstance().generaFacturaAutomatico();
+			}
+		});
 		Image pictu = new ImageIcon(this.getClass().getResource("/fact.png")).getImage();
 		mntmgenerarFactura.setIcon(new ImageIcon(pictu));
 		mnFacturar.add(mntmgenerarFactura);
